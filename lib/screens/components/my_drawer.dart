@@ -1,6 +1,11 @@
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
+import 'package:estore/constants/text_style.dart';
+import 'package:estore/screens/dashboard/history_screen.dart';
 import 'package:estore/screens/dashboard/home_screen.dart';
+import 'package:estore/screens/dashboard/notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,10 +40,11 @@ class _MyDrawerState extends State<MyDrawer> {
         padding: EdgeInsets.all(0),
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text("Bushra Ansari"),
+
+            accountName: AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
             accountEmail: Row(
               children: const [
-                Text("bushra@xyz.com"),
+                AutoSizeText("bushra@xyz.com"),
                 // Switch(value: attendence, onChanged: (value) {setState(){
                 //   attendence =value;
                 // }}),
@@ -49,54 +55,54 @@ class _MyDrawerState extends State<MyDrawer> {
                 backgroundImage: ExactAssetImage(ImagesPath.accountPicture),),
           ),
           ListTile(
-            title:const Text("Orders"),
-            leading:const Icon(Icons.shopping_cart),
+            title: AutoSizeText("Orders", style: kSemiBold(blackColor)),
+            leading:const Icon(Icons.add_shopping_cart),
             onTap: () => Navigator.pop(context),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: Text("Notification"),
+            title: AutoSizeText("Notification", style: kSemiBold(blackColor)),
             leading: Icon(Icons.notifications_active_outlined),
-            onTap: () => Navigator.pushNamed(context, '/Dashboard'),
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationScreen())),
             //    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: Text("History"),
-            leading: Icon(Icons.info),
-            onTap: () => Navigator.pushNamed(context, '/Notification'),
+            title: AutoSizeText("History", style: kSemiBold(blackColor)),
+            leading: Icon(Icons.history),
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>PurchaseHistory())),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
-          const ListTile(
-            title: Text("Application Preferences"),
+           ListTile(
+            title: AutoSizeText("Application Preferences", style: kBold(blackColor,16.0)),
           ),
           ListTile(
-            title: Text("Help/Support"),
-            leading: Icon(Icons.help),
+            title: AutoSizeText("Help/Support", style: kSemiBold(blackColor)),
+            leading: Icon(Icons.help_outline),
             onTap: () => Navigator.pushNamed(context, '/LocationPage'),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: Text("Settings"),
+            title: AutoSizeText("Settings", style: kSemiBold(blackColor)),
             leading: Icon(Icons.settings),
             //  onTap: () => Navigator.pushNamed(context, '/Settings'),
             onTap: () => Navigator.push(
                 context, MaterialPageRoute(builder: (context) =>HomeScreen())),
           ),
           ListTile(
-            title: Text("Language"),
+            title: AutoSizeText("Language", style: kSemiBold(blackColor)),
             leading: Icon(Icons.language),
             onTap: () => Navigator.pushNamed(context, '/Help'),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: const Text("Dark Mode"),
-            leading: Icon(Icons.track_changes),
+            title:  AutoSizeText("Dark Mode", style: kSemiBold(blackColor)),
+            leading: const Icon(Icons.track_changes),
             onTap: () => Navigator.pushNamed(context, '/Help'),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-              title: const Text("SignOut"),
-              leading: Icon(Icons.logout),
+              title:  AutoSizeText("SignOut", style: kSemiBold(blackColor)),
+              leading: const Icon(Icons.logout),
               onTap: ()
               async {
                 // SharedPreferences prefs = await SharedPreferences.getInstance();

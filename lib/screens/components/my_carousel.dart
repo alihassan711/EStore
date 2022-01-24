@@ -30,7 +30,7 @@ class MyCarouselSlider extends StatelessWidget {
 
       //Slider Container properties
       options: CarouselOptions(
-        height: 200.0,
+        height: MediaQuery.of(context).size.height*0.25,
         enlargeCenterPage: true,
         autoPlay: true,
         aspectRatio: 16 / 9,

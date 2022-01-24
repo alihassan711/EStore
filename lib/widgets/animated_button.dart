@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/strings.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,7 +29,7 @@ class _MyBlinkingButtonState extends State<MyBlinkingButton>
       opacity: _animationController!,
       child: MaterialButton(
         onPressed: widget.onPress,
-        child:  Text(Constants.addNewProduct),
+        child:  AutoSizeText(Constants.addNewProduct),
         color: Colors.green,
       ),
     );

@@ -7,7 +7,7 @@ class IconBtn extends StatelessWidget {
   Icon? icon;
   double? iconSize;
 
-  IconBtn({this.onPress,this.color,this.icon,});
+  IconBtn({this.onPress,this.color,this.icon, this.iconSize,});
 
   @override
   Widget build(BuildContext context) {

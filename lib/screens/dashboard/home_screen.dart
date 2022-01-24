@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
@@ -12,89 +13,100 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: white,
-        elevation: 0.0,
-        actions: [
-          IconBtn(
-            icon: const Icon(Icons.search,color: black,),
-            onPress: () {},
-            color: black,
-          ),
-          IconBtn(
-            icon: const Icon(Icons.notifications_active_outlined,color: black,),
-            onPress: () {},
-            color: black,
-          ),
-        ],
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      drawer: MyDrawer(),
-      body: ListView(
-        children: [
-         Column(crossAxisAlignment: CrossAxisAlignment.start,
-          children:  [
-            MyCarouselSlider(),
-            SizedBox(height: 10,),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MyContainer(txt: "My Product",img: ImagesPath.iconOrder),
-                MyContainer(txt: "My Product",img: ImagesPath.iconOrder),
-                MyContainer(txt: "My Product",img: ImagesPath.iconOrder),
-                MyContainer(txt: "My Product",img: ImagesPath.iconOrder),
-                MyContainer(txt: "My Product",img: ImagesPath.iconOrder),
-              ],
-            ),
-            SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(left: 18.0),
-              child: Text("Featured Categories",style: black14f5()),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                height: 180,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15)),
-                child: ListView.builder(scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                    itemBuilder: (BuildContext context,index){
-                    return MyProductContainer(txt: "Categories",img: ImagesPath.p3,);
-                    }
+    double height = MediaQuery.of(context).size.height;
+    return SingleChildScrollView(
+     // shrinkWrap: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const MyCarouselSlider(),
+              const SizedBox(
+                height: 5,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height*0.18,
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        MyContainer(txt: "Top Categories", img: ImagesPath.category),
+                        MyContainer(txt: "Brands", img: ImagesPath.brand),
+                        MyContainer(txt: "Top Sellers", img: ImagesPath.top),
+                        MyContainer(txt: "Today Deals", img: ImagesPath.today),
+                        MyContainer(txt: "Flash Side", img: ImagesPath.flash),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ),
-            SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(left: 18.0),
-              child: Text("Featured Products",style: black14f5()),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                height: 300,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15)),
-                child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio:0.6,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20),
-                    itemCount: 10,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return MyProductContainer(txt: "Categories",img: ImagesPath.p2,);
-                    }),
+              // const SizedBox(
+              //   height: 8,
+              // ),
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: AutoSizeText("Featured Categories", style: kSemiBold(blackColor)),
               ),
-            ),
-          ],
-        ),
-        ],
-      ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  height: height*0.3,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                     // physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, index) {
+                        return MyProductContainer(
+                          txt: "Jewelery &\n Watches",
+                          img: ImagesPath.jewelery,
+                        );
+                      }),
+                ),
+              ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Text("Featured Products", style: kSemiBold(blackColor)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                 // height: MediaQuery.of(context).size.height*0.35,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:
+                           SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: MediaQuery.of(context).size.width /
+                                (MediaQuery.of(context).size.height*0.8),
+                          ),
+                      itemCount: 10,
+                      itemBuilder: (BuildContext ctx, index) {
+                        return MyProductContainerg(
+                          txt: "Categories",
+                          img: ImagesPath.watch,
+                          color: "pacific_cube",
+                          price: ("\$888.00"),
+                        );
+                      }),
+                ),
+              ),
+            ],
+          ),
     );
   }
 }
