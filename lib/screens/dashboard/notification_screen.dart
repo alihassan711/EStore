@@ -16,7 +16,7 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  bool isNotifications = false;
+  bool isNotifications = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar:
@@ -49,8 +49,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
      )):
      Column(
       children:  [
-        ListTile(leading: Icon(Icons.notifications_active_outlined),
-        title: AutoSizeText("Notifications",style: kBold(blackColor,20.0),),
+        ListTile(leading: Icon(Icons.notifications_active_outlined,color: blackColor,),
+        title: AutoSizeText("Notifications",style: kBold(blackColor,16.0),),
         ),
         SizedBox(height: 12,),
         Expanded(
@@ -58,39 +58,42 @@ class _NotificationScreenState extends State<NotificationScreen> {
             itemCount: 12,
             itemBuilder: (BuildContext context, index ){
               return
-                Card(
-                elevation: 1,
-                //color: Colors.blue.shade100,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.all(0),
-                      decoration: BoxDecoration(
-                        // color: Colors.blue.shade200,
-                          shape: BoxShape.rectangle,
-                          borderRadius:
-                          const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            bottomLeft:
-                            Radius.circular(4.0),
-                          ),
-                          image: DecorationImage(
-                              image: ExactAssetImage(ImagesPath.accountPicture),
-                              fit: BoxFit.cover)),
-                      width: 80,
-                      height: 73,
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: ListTile(
-                        title: AutoSizeText("Order Assign You"),
-                        subtitle: AutoSizeText("2019-12-18"),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                  child: Card(
+                  elevation: 1,
+                  //color: Colors.blue.shade100,
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.all(0),
+                        decoration: BoxDecoration(
+                          // color: Colors.blue.shade200,
+                            shape: BoxShape.rectangle,
+                            borderRadius:
+                            const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              bottomLeft:
+                              Radius.circular(4.0),
+                            ),
+                            image: DecorationImage(
+                                image: ExactAssetImage(ImagesPath.accountPicture),
+                                fit: BoxFit.cover)),
+                        width: 80,
+                        height: 73,
                       ),
-                    ),
-                    //const Icon(Icons.arrow_forward_ios, color: Colors.blue),
-                  ],
-                ),
-              );
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: ListTile(
+                          title: AutoSizeText("Order Assign You"),
+                          subtitle: AutoSizeText("2019-12-18"),
+                        ),
+                      ),
+                      //const Icon(Icons.arrow_forward_ios, color: Colors.blue),
+                    ],
+                  ),
+              ),
+                );
             },
           ),
         )

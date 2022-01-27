@@ -5,7 +5,6 @@ import 'package:estore/widgets/history_card.dart';
 import 'package:flutter/material.dart';
 class PurchaseHistory extends StatefulWidget {
   const PurchaseHistory({Key? key}) : super(key: key);
-
   @override
   _PurchaseHistoryState createState() => _PurchaseHistoryState();
 }
@@ -28,7 +27,7 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
             child: ListView.builder(
                 itemCount: 12,
                 itemBuilder: (BuildContext context, index){
-                  return HistoryCard();
+                  return const HistoryCard();
                 }
             ),
           )

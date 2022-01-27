@@ -4,10 +4,13 @@ import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/screens/dashboard/history_screen.dart';
-import 'package:estore/screens/dashboard/home_screen.dart';
+import 'package:estore/screens/dashboard/language_screen.dart';
 import 'package:estore/screens/dashboard/notification_screen.dart';
+import 'package:estore/screens/dashboard/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../main.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -18,7 +21,7 @@ class _MyDrawerState extends State<MyDrawer> {
   Timer? timer;
   bool? flag = false;
   String? userName = "";
-
+  bool? _isdark = false;
   SharedPreferences? _preferences;
   @override
   void initState() {
@@ -39,20 +42,22 @@ class _MyDrawerState extends State<MyDrawer> {
       child: ListView(
         padding: EdgeInsets.all(0),
         children: [
-          UserAccountsDrawerHeader(
-
-            accountName: AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
-            accountEmail: Row(
-              children: const [
-                AutoSizeText("bushra@xyz.com"),
-                // Switch(value: attendence, onChanged: (value) {setState(){
-                //   attendence =value;
-                // }}),
-              ],
+          Container(
+            height: 200,
+            child: UserAccountsDrawerHeader(
+              accountName: AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
+              accountEmail: Row(
+                children: const [
+                  AutoSizeText("bushra@xyz.com"),
+                  // Switch(value: attendence, onChanged: (value) {setState(){
+                  //   attendence =value;
+                  // }}),
+                ],
+              ),
+              currentAccountPicture: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: ExactAssetImage(ImagesPath.accountPicture),),
             ),
-            currentAccountPicture: CircleAvatar(
-                radius: 50,
-                backgroundImage: ExactAssetImage(ImagesPath.accountPicture),),
           ),
           ListTile(
             title: AutoSizeText("Orders", style: kSemiBold(blackColor)),
@@ -86,18 +91,28 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(Icons.settings),
             //  onTap: () => Navigator.pushNamed(context, '/Settings'),
             onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) =>HomeScreen())),
+                context, MaterialPageRoute(builder: (context) =>SettingsScreen())),
           ),
           ListTile(
             title: AutoSizeText("Language", style: kSemiBold(blackColor)),
             leading: Icon(Icons.language),
-            onTap: () => Navigator.pushNamed(context, '/Help'),
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>LanguageScreen())),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title:  AutoSizeText("Dark Mode", style: kSemiBold(blackColor)),
+            title:
+            AutoSizeText("Dark Mode", style: kSemiBold(blackColor)),
             leading: const Icon(Icons.track_changes),
-            onTap: () => Navigator.pushNamed(context, '/Help'),
+            onTap: () {
+              setState(() {
+                _isdark = !_isdark!;
+              });
+              MyApp.of(context)!.changeTheme(
+                _isdark!?
+                  ThemeMode.light
+                    :ThemeMode.dark!
+              );
+    }
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
