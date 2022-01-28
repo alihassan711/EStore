@@ -3,7 +3,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
-import 'package:estore/widgets/my_container.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,9 +22,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-      AppBar(
-        title: AutoSizeText("Settings",style: kBold(kIconColorGreen,20.0),),
+      appBar: AppBar(
+        title: AutoSizeText(
+          "Settings",
+          style: kBold(kIconColorGreen, 20.0),
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -40,14 +41,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
                   children: [
-                    Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AutoSizeText("Abdul Manan",style: kBold(blackColor, 16.0),),
-                        SizedBox(height: 5,),
-                        AutoSizeText("bushra12@gmail.com",style: kNormalBlack(blackColor),),
+                        AutoSizeText(
+                          "Abdul Manan",
+                          style: kBold(blackColor, 16.0),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        AutoSizeText(
+                          "bushra12@gmail.com",
+                          style: kNormalBlack(blackColor),
+                        ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     GestureDetector(
                       onTap: () => showBottomSheet(),
                       child: Container(
@@ -55,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           width: 70,
                           child: Container(
                             decoration: BoxDecoration(
-                              //borderRadius: BorderRadius.circular(60),
+                                //borderRadius: BorderRadius.circular(60),
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     image: ExactAssetImage(
@@ -64,7 +74,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     fit: BoxFit.cover)),
                           )),
                     ),
-
                   ],
                 ),
               ),
@@ -73,7 +82,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 borderRadius: BorderRadius.circular(5.0),
                 child: Container(
                   // height: 100.0,
-                  margin: const EdgeInsets.only(bottom: 6.0,top: 6.0), //Same as `blurRadius` i guess
+                  margin: const EdgeInsets.only(
+                      bottom: 6.0, top: 6.0), //Same as `blurRadius` i guess
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
                     color: Colors.white,
@@ -92,51 +102,99 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.person),
-                            SizedBox(width: 12,),
-                            AutoSizeText("Profile Settings",style: kBold(blackColor, 16.0),),
-                            Spacer(),
-                            AutoSizeText("Edit",style: kBold(blackColor, 16.0),)
+                            const Icon(Icons.person),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            AutoSizeText(
+                              "Profile Settings",
+                              style: kBold(blackColor, 16.0),
+                            ),
+                            const Spacer(),
+                            AutoSizeText(
+                              "Edit",
+                              style: kBold(blackColor, 16.0),
+                            )
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         Row(
                           children: [
-                            AutoSizeText("Full name",style: kBold(blackColor,12.0),),
-                            Spacer(),
-                            AutoSizeText("Abdul Mana",style: kNormalBlack(blackColor),)
+                            AutoSizeText(
+                              "Full name",
+                              style: kBold(blackColor, 12.0),
+                            ),
+                            const Spacer(),
+                            AutoSizeText(
+                              "Abdul Mana",
+                              style: kNormalBlack(blackColor),
+                            )
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         Row(
                           children: [
-                            AutoSizeText("Email",style: kBold(blackColor, 12.0),),
-                            Spacer(),
-                            AutoSizeText("abdul23@xyz.com",style: kNormalBlack(blackColor),)
+                            AutoSizeText(
+                              "Email",
+                              style: kBold(blackColor, 12.0),
+                            ),
+                            const Spacer(),
+                            AutoSizeText(
+                              "abdul23@xyz.com",
+                              style: kNormalBlack(blackColor),
+                            )
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         Row(
                           children: [
-                            AutoSizeText("Phone",style: kBold(blackColor, 12.0),),
-                            Spacer(),
-                            AutoSizeText("+9123323442",style: kNormalBlack(blackColor),)
+                            AutoSizeText(
+                              "Phone",
+                              style: kBold(blackColor, 12.0),
+                            ),
+                            const Spacer(),
+                            AutoSizeText(
+                              "+9123323442",
+                              style: kNormalBlack(blackColor),
+                            )
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         Row(
                           children: [
-                            AutoSizeText("Address",style: kBold(blackColor, 12.0),),
-                            Spacer(),
-                            AutoSizeText("289 carporaings s1",style: kNormalBlack(blackColor),)
+                            AutoSizeText(
+                              "Address",
+                              style: kBold(blackColor, 12.0),
+                            ),
+                            const Spacer(),
+                            AutoSizeText(
+                              "289 carporaings s1",
+                              style: kNormalBlack(blackColor),
+                            )
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         Row(
                           children: [
-                            AutoSizeText("About",style: kBold(blackColor, 12.0),),
-                            Spacer(),
-                            AutoSizeText("contact the developers",style: kNormalBlack(blackColor),)
+                            AutoSizeText(
+                              "About",
+                              style: kBold(blackColor, 12.0),
+                            ),
+                            const Spacer(),
+                            AutoSizeText(
+                              "contact the developers",
+                              style: kNormalBlack(blackColor),
+                            )
                           ],
                         ),
                       ],
@@ -149,7 +207,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 borderRadius: BorderRadius.circular(5.0),
                 child: Container(
                   // height: 100.0,
-                  margin: const EdgeInsets.only(bottom: 6.0,top: 6.0), //Same as `blurRadius` i guess
+                  margin: const EdgeInsets.only(
+                      bottom: 6.0, top: 6.0), //Same as `blurRadius` i guess
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
                     color: Colors.white,
@@ -168,42 +227,66 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.settings),
-                            SizedBox(width: 12,),
-                            AutoSizeText("App Settings",style: kBold(blackColor, 16.0),),
+                            const Icon(Icons.settings),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            AutoSizeText(
+                              "App Settings",
+                              style: kBold(blackColor, 16.0),
+                            ),
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         Row(
                           children: [
-                            Icon(Icons.translate),
-                            SizedBox(width: 12,),
-                            AutoSizeText("Language",style: kBold(blackColor, 16.0),),
-                            Spacer(),
-                            AutoSizeText("English",style: kNormalBlack(blackColor),)
+                            const Icon(Icons.translate),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            AutoSizeText(
+                              "Language",
+                              style: kBold(blackColor, 16.0),
+                            ),
+                            const Spacer(),
+                            AutoSizeText(
+                              "English",
+                              style: kNormalBlack(blackColor),
+                            )
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         Row(
                           children: [
-                            Icon(Icons.person),
-                            SizedBox(width: 12,),
-                            AutoSizeText("Help & Support",style: kBold(blackColor, 16.0),),
+                            const Icon(Icons.person),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            AutoSizeText(
+                              "Help & Support",
+                              style: kBold(blackColor, 16.0),
+                            ),
                           ],
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(
+                          height: 12,
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-
             ],
           ),
         ),
       ),
     );
   }
+
   showBottomSheet() {
     showModalBottomSheet(
         context: context,
@@ -212,7 +295,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.folder,
                 ),
                 title: const Text('Select Photo'),
@@ -222,22 +305,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               kIsWeb
-                  ? SizedBox()
-                  : SizedBox(
-                height: 10,
-              ),
+                  ? const SizedBox()
+                  : const SizedBox(
+                      height: 10,
+                    ),
               kIsWeb
                   ? SizedBox()
                   : ListTile(
-                leading: Icon(
-                  Icons.camera,
-                ),
-                title: const Text('Take Photo'),
-                onTap: () async {
-                  await cameraImage();
-                  Navigator.pop(context);
-                },
-              ),
+                      leading: const Icon(
+                        Icons.camera,
+                      ),
+                      title: const Text('Take Photo'),
+                      onTap: () async {
+                        await cameraImage();
+                        Navigator.pop(context);
+                      },
+                    ),
             ],
           );
         });
@@ -256,7 +339,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           // print("file path is :   ${_file.path}");
         });
       } else {
-        Text("No file selected");
+        const Text("No file selected");
       }
     }
     // WEB
@@ -270,10 +353,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           webImage = f;
         });
       } else {
-        Text("No file selected for web");
+        const Text("No file selected for web");
       }
     } else {
-      Text("image error");
+      const Text("image error");
     }
   }
 
@@ -302,7 +385,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _file = galleryImage;
     }
     setState(() {
-     // imgError = false;
+      // imgError = false;
     });
   }
 }

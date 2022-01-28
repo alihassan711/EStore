@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 
 class NoNotificationContainer extends StatelessWidget {
   String? icon;
-  String? txt,btnText;
+  String? txt, btnText;
   Function()? onPress;
 
-   NoNotificationContainer({this.icon,this.txt,this.onPress,this.btnText,Key? key}) : super(key: key);
+  NoNotificationContainer(
+      {this.icon, this.txt, this.onPress, this.btnText, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +20,23 @@ class NoNotificationContainer extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: Colors.grey[200],
-            radius: MediaQuery.of(context).size.height*0.12,
-            child: Container(
-              height: MediaQuery.of(context).size.height*0.9,
+            radius: MediaQuery.of(context).size.height * 0.12,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.9,
               child: Image.asset(icon!),
             ),
           ),
-          SizedBox(height: 12,),
-          AutoSizeText(txt!,style: kSemiBold(blackColor),maxLines: 2,),
-          SizedBox(height: 12,),
+          const SizedBox(
+            height: 12,
+          ),
+          AutoSizeText(
+            txt!,
+            style: kSemiBold(blackColor),
+            maxLines: 2,
+          ),
+          const SizedBox(
+            height: 12,
+          ),
           ElevatedBtn(
             color: kIconColorRed,
             onPress: onPress,

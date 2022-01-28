@@ -6,8 +6,8 @@ import 'package:estore/localization/language_constants.dart';
 import 'package:estore/model/language.dart';
 import 'package:estore/widgets/iconbtn.dart';
 import 'package:flutter/material.dart';
+import '../../../main.dart';
 
-import '../../main.dart';
 class LanguageScreen extends StatefulWidget {
   const LanguageScreen({Key? key}) : super(key: key);
 
@@ -21,12 +21,15 @@ class _LanguageScreenState extends State<LanguageScreen> {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-      AppBar(
-        title: AutoSizeText("Languages",style: kBold(kIconColorGreen,20.0),),
+      appBar: AppBar(
+        title: AutoSizeText(
+          "Languages",
+          style: kBold(kIconColorGreen, 20.0),
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -80,45 +83,39 @@ class _LanguageScreenState extends State<LanguageScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 12.0,right: 12.0),
-              child: Row(mainAxisAlignment: MainAxisAlignment.start,
+              padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Icon(Icons.translate,size: 30,),
-                  const SizedBox(width: 14,),
-                  Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  const Icon(
+                    Icons.translate,
+                    size: 30,
+                  ),
+                  const SizedBox(
+                    width: 14,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AutoSizeText("App Language",style: kBold(blackColor,16.0),),
-                      const SizedBox(height: 10,),
-                      AutoSizeText("Select your own preffered Language",style: kNormalBlack(blackColor),)
+                      AutoSizeText(
+                        "App Language",
+                        style: kBold(blackColor, 16.0),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      AutoSizeText(
+                        "Select your own preffered Language",
+                        style: kNormalBlack(blackColor),
+                      )
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(height: 14,),
-           Card(
-             elevation: 1.0,
-             child: Padding(
-               padding: const EdgeInsets.all(5.0),
-               child: Row(
-                 children: [
-                   CircleAvatar(
-                     backgroundColor: whiteColor,
-                     radius: 30,
-                     backgroundImage: ExactAssetImage(ImagesPath.pak,),
-                   ),
-                   SizedBox(width: 14,),
-                   Column(
-                     children: [
-                       AutoSizeText("Urdu",style: kBold(blackColor,16.0),),
-                       SizedBox(height: 5,),
-                       AutoSizeText("Urdu",style: kNormalBlack(blackColor),),
-                     ],
-                   ),
-                 ],
-               ),
-             ),
-           ),
+            const SizedBox(
+              height: 14,
+            ),
             Card(
               elevation: 1.0,
               child: Padding(
@@ -128,14 +125,26 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     CircleAvatar(
                       backgroundColor: whiteColor,
                       radius: 30,
-                      backgroundImage: ExactAssetImage(ImagesPath.saudia,),
+                      backgroundImage: ExactAssetImage(
+                        ImagesPath.pak,
+                      ),
                     ),
-                    SizedBox(width: 14,),
+                    const SizedBox(
+                      width: 14,
+                    ),
                     Column(
                       children: [
-                        AutoSizeText("Arabicُ",style: kBold(blackColor,16.0),),
-                        SizedBox(height: 5,),
-                        AutoSizeText("اَلْعَرَبِيَّة",style: kNormalBlack(blackColor),),
+                        AutoSizeText(
+                          "Urdu",
+                          style: kBold(blackColor, 16.0),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        AutoSizeText(
+                          "Urdu",
+                          style: kNormalBlack(blackColor),
+                        ),
                       ],
                     ),
                   ],
@@ -151,14 +160,61 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     CircleAvatar(
                       backgroundColor: whiteColor,
                       radius: 30,
-                      backgroundImage: ExactAssetImage(ImagesPath.usa,),
+                      backgroundImage: ExactAssetImage(
+                        ImagesPath.saudia,
+                      ),
                     ),
-                    SizedBox(width: 14,),
+                    const SizedBox(
+                      width: 14,
+                    ),
                     Column(
                       children: [
-                        AutoSizeText("English",style: kBold(blackColor,16.0),),
-                        SizedBox(height: 5,),
-                        AutoSizeText("English",style: kNormalBlack(blackColor),),
+                        AutoSizeText(
+                          "Arabicُ",
+                          style: kBold(blackColor, 16.0),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        AutoSizeText(
+                          "اَلْعَرَبِيَّة",
+                          style: kNormalBlack(blackColor),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              elevation: 1.0,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: whiteColor,
+                      radius: 30,
+                      backgroundImage: ExactAssetImage(
+                        ImagesPath.usa,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 14,
+                    ),
+                    Column(
+                      children: [
+                        AutoSizeText(
+                          "English",
+                          style: kBold(blackColor, 16.0),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        AutoSizeText(
+                          "English",
+                          style: kNormalBlack(blackColor),
+                        ),
                       ],
                     ),
                   ],

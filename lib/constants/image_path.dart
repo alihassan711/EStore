@@ -2,7 +2,7 @@ class  ImagesPath {
   static String p3 = 'assets/productimages/p3.jpg';
   static String p5 = 'assets/productimages/p5.jpg';
   static String accountPicture = 'assets/images/account.jpg';
-
+  static String burgerMeal = 'assets/icons/burger.png';
   static String iconOrder = 'assets/icons/catgoriespng.png';
   static String p2 = 'assets/productimages/p2.png';
   static String watch = 'assets/productimages/watch.png';
@@ -19,4 +19,5 @@ class  ImagesPath {
   static String pak = 'assets/icons/paf.png';
   static String saudia = 'assets/icons/saudia.png';
   static String usa = 'assets/icons/usa.png';
+  static String introCarttIcon = 'assets/icons/intro_cart_icon.png';
 }

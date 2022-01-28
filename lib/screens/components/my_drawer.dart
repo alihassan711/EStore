@@ -3,13 +3,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
-import 'package:estore/screens/dashboard/history_screen.dart';
-import 'package:estore/screens/dashboard/language_screen.dart';
-import 'package:estore/screens/dashboard/notification_screen.dart';
+import 'package:estore/screens/dashboard/drawer/history_screen.dart';
+import 'package:estore/screens/dashboard/drawer/language_screen.dart';
+import 'package:estore/screens/dashboard/drawer/my_order_screen.dart';
+import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../main.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -40,12 +40,13 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        padding: EdgeInsets.all(0),
+        padding: const EdgeInsets.all(0),
         children: [
-          Container(
+          SizedBox(
             height: 200,
             child: UserAccountsDrawerHeader(
-              accountName: AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
+              accountName:
+                  AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
               accountEmail: Row(
                 children: const [
                   AutoSizeText("bushra@xyz.com"),
@@ -55,71 +56,76 @@ class _MyDrawerState extends State<MyDrawer> {
                 ],
               ),
               currentAccountPicture: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: ExactAssetImage(ImagesPath.accountPicture),),
+                radius: 50,
+                backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
+              ),
             ),
           ),
           ListTile(
-            title: AutoSizeText("Orders", style: kSemiBold(blackColor)),
-            leading:const Icon(Icons.add_shopping_cart),
-            onTap: () => Navigator.pop(context),
-            //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
-          ),
+              title: AutoSizeText("Orders", style: kSemiBold(blackColor)),
+              leading: const Icon(Icons.add_shopping_cart),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyOrderScreen()));
+              }
+              //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
+              ),
           ListTile(
             title: AutoSizeText("Notification", style: kSemiBold(blackColor)),
-            leading: Icon(Icons.notifications_active_outlined),
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationScreen())),
+            leading: const Icon(Icons.notifications_active_outlined),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => NotificationScreen())),
             //    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
             title: AutoSizeText("History", style: kSemiBold(blackColor)),
-            leading: Icon(Icons.history),
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>PurchaseHistory())),
+            leading: const Icon(Icons.history),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PurchaseHistory())),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
-           ListTile(
-            title: AutoSizeText("Application Preferences", style: kBold(blackColor,16.0)),
+          ListTile(
+            title: AutoSizeText("Application Preferences",
+                style: kBold(blackColor, 16.0)),
           ),
           ListTile(
             title: AutoSizeText("Help/Support", style: kSemiBold(blackColor)),
-            leading: Icon(Icons.help_outline),
+            leading: const Icon(Icons.help_outline),
             onTap: () => Navigator.pushNamed(context, '/LocationPage'),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
             title: AutoSizeText("Settings", style: kSemiBold(blackColor)),
-            leading: Icon(Icons.settings),
+            leading: const Icon(Icons.settings),
             //  onTap: () => Navigator.pushNamed(context, '/Settings'),
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) =>SettingsScreen())),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SettingsScreen())),
           ),
           ListTile(
             title: AutoSizeText("Language", style: kSemiBold(blackColor)),
-            leading: Icon(Icons.language),
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>LanguageScreen())),
+            leading: const Icon(Icons.language),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const LanguageScreen())),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title:
-            AutoSizeText("Dark Mode", style: kSemiBold(blackColor)),
-            leading: const Icon(Icons.track_changes),
-            onTap: () {
-              setState(() {
-                _isdark = !_isdark!;
-              });
-              MyApp.of(context)!.changeTheme(
-                _isdark!?
-                  ThemeMode.light
-                    :ThemeMode.dark!
-              );
-    }
-            //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
-          ),
+              title: AutoSizeText("Dark Mode", style: kSemiBold(blackColor)),
+              leading: const Icon(Icons.track_changes),
+              onTap: () {
+                setState(() {
+                  _isdark = !_isdark!;
+                });
+                MyApp.of(context)!
+                    .changeTheme(_isdark! ? ThemeMode.light : ThemeMode.dark);
+              }
+              //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
+              ),
           ListTile(
-              title:  AutoSizeText("SignOut", style: kSemiBold(blackColor)),
+              title: AutoSizeText("SignOut", style: kSemiBold(blackColor)),
               leading: const Icon(Icons.logout),
-              onTap: ()
-              async {
+              onTap: () async {
                 // SharedPreferences prefs = await SharedPreferences.getInstance();
                 // prefs.remove('email');
                 // prefs.remove('password');

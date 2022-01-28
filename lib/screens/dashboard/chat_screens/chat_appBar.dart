@@ -1,7 +1,6 @@
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
-import 'package:estore/widgets/iconbtn.dart';
 import 'package:flutter/material.dart';
 
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,7 +10,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
     var textHeading =
         TextStyle(color: kDeepBlue, fontSize: 20); // Text style for the name
     var textStyle =
-        TextStyle(color: kDeepBlue); // Text style for everything else
+        const TextStyle(color: kDeepBlue); // Text style for everything else
 
     double width =
         MediaQuery.of(context).size.width; // calculate the screen width

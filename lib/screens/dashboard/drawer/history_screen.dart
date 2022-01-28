@@ -3,6 +3,7 @@ import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/widgets/history_card.dart';
 import 'package:flutter/material.dart';
+
 class PurchaseHistory extends StatefulWidget {
   const PurchaseHistory({Key? key}) : super(key: key);
   @override
@@ -16,7 +17,9 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        title: AutoSizeText("Purchase History",style: kBold(kIconColorRed,20.0),
+        title: AutoSizeText(
+          "Purchase History",
+          style: kBold(kIconColorRed, 20.0),
         ),
         centerTitle: true,
         iconTheme: const IconThemeData(color: blackColor),
@@ -26,10 +29,9 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
           Expanded(
             child: ListView.builder(
                 itemCount: 12,
-                itemBuilder: (BuildContext context, index){
+                itemBuilder: (BuildContext context, index) {
                   return const HistoryCard();
-                }
-            ),
+                }),
           )
         ],
       ),

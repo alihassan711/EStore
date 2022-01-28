@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class ChatItemWidget extends StatelessWidget{
   var index;
 
-  ChatItemWidget(this.index);
+  ChatItemWidget(this.index, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class ChatItemWidget extends StatelessWidget{
                     child: Text(
                       DateFormat('dd MMM kk:mm')
                           .format(DateTime.fromMillisecondsSinceEpoch(1565888474278)),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: kGrey,
                           fontSize: 12.0,
                           fontStyle: FontStyle.normal),
@@ -73,7 +73,7 @@ class ChatItemWidget extends StatelessWidget{
               child: Text(
                 DateFormat('dd MMM kk:mm')
                     .format(DateTime.fromMillisecondsSinceEpoch(1565888474278)),
-                style: TextStyle(
+                style: const TextStyle(
                     color: kGrey,
                     fontSize: 12.0,
                     fontStyle: FontStyle.normal),

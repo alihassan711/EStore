@@ -5,6 +5,8 @@ class InputWidget extends StatelessWidget {
 
   final TextEditingController textEditingController = new TextEditingController();
 
+   InputWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,7 +14,7 @@ class InputWidget extends StatelessWidget {
         children: <Widget>[
           Material(
             child:  Container(
-              margin:  EdgeInsets.symmetric(horizontal: 1.0),
+              margin:  const EdgeInsets.symmetric(horizontal: 1.0),
               child:  IconButton(
                 onPressed: () {  },
                 icon:  const Icon(Icons.face),

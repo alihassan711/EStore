@@ -1,14 +1,12 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:estore/constants/color.dart';
-import 'package:estore/constants/text_style.dart';
+import 'package:estore/screens/chat_screen.dart';
 import 'package:estore/screens/components/my_drawer.dart';
 import 'package:estore/screens/dashboard/home_screen.dart';
 import 'package:estore/screens/dashboard/profile_screen.dart';
 import 'package:estore/widgets/iconbtn.dart';
 import 'package:flutter/material.dart';
-
-import 'chat_screens/conversation_page.dart';
+import 'cart_screem.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -22,62 +20,54 @@ class _MainScreenState extends State<MainScreen> {
 
   final pages = [
     const HomeScreen(),
-    ConversationPage(),
+    const ChatScreen(),
     const HomeScreen(),
-    const HomeScreen(),
+    const MyCartScreen(),
     const UserProfile(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return pageIndex == 1?
-    Scaffold(
-        body: DoubleBackToCloseApp(
-            snackBar: const SnackBar(
-              content: Text('Tap back again to leave'),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: whiteColor,
+        elevation: 0.0,
+        actions: [
+          IconBtn(
+            icon: const Icon(
+              Icons.search,
+              color: blackColor,
             ),
-            child: ConversationPage()))
-        :
-     Scaffold(
-     appBar: AppBar(
-       backgroundColor: whiteColor,
-       elevation: 0.0,
-       actions: [
-         IconBtn(
-           icon: const Icon(
-             Icons.search,
-             color: blackColor,
-           ),
-           onPress: () {},
-           color: blackColor,
-         ),
-         IconBtn(
-           icon: const Icon(
-             Icons.notifications_active_outlined,
-             color: blackColor,
-           ),
-           onPress: () {},
-           color: blackColor,
-         ),
-       ],
-       iconTheme: const IconThemeData(color: blackColor),
-     ),
-     drawer: MyDrawer(),
-     body: DoubleBackToCloseApp(
-         snackBar: const SnackBar(
-           content: Text('Tap back again to leave'),
-         ),
-         child: pages[pageIndex]),
-     bottomNavigationBar: buildMyNavBar(context),
+            onPress: () {},
+            color: blackColor,
+          ),
+          IconBtn(
+            icon: const Icon(
+              Icons.notifications_active_outlined,
+              color: blackColor,
+            ),
+            onPress: () {},
+            color: blackColor,
+          ),
+        ],
+        iconTheme: const IconThemeData(color: blackColor),
+      ),
+      drawer: MyDrawer(),
+      body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            content: Text('Tap back again to leave'),
+          ),
+          child: pages[pageIndex]),
+      bottomNavigationBar: buildMyNavBar(context),
     );
   }
 
   Container buildMyNavBar(BuildContext context) {
     return Container(
       //height: MediaQuery.of(context).size.height*0.14,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         // color: Theme.of(context).primaryColor,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
@@ -88,9 +78,9 @@ class _MainScreenState extends State<MainScreen> {
           IconBtn(
             //  enableFeedback: false,
             onPress: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder)=>ConversationPage()));
+              //Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder)=>ChatScreen()));
               setState(() {
-                //pageIndex = 1;
+                pageIndex = 1;
               });
             },
             icon: pageIndex == 1

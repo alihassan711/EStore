@@ -1,13 +1,14 @@
 import 'package:estore/localization/demo_localization.dart';
-import 'package:estore/screens/dashboard/main_page.dart';
+import 'package:estore/screens/walkthrough/intro_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'localization/language_constants.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
+
 class MyApp extends StatefulWidget {
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
@@ -33,7 +34,7 @@ class _MyAppState extends State<MyApp> {
   void didChangeDependencies() {
     getLocale().then((locale) {
       setState(() {
-        this._locale = locale;
+        _locale = locale;
       });
     });
     super.didChangeDependencies();
@@ -44,51 +45,48 @@ class _MyAppState extends State<MyApp> {
     // SharedPreferences.setMockInitialValues({});
     super.initState();
   }
+
   ThemeMode _themeMode = ThemeMode.system;
   @override
   Widget build(BuildContext context) {
     return OverlaySupport.global(
-      child:  this._locale == null
-              ? Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-              : MaterialApp(
-            debugShowCheckedModeBanner: false,
-        theme: ThemeData(),
-        darkTheme: ThemeData.dark(),
-        themeMode: _themeMode,
-            title: "Flutter Localization Demo",
-            locale: _locale,
-            supportedLocales: const [
-              Locale("en", "US"),
-              Locale("ur", "PK"),
-            ],
-            localizationsDelegates: const [
-              DemoLocalization.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            localeResolutionCallback: (locale, supportedLocales) {
-              for (var supportedLocale in supportedLocales) {
-                if (supportedLocale.languageCode ==
-                    locale!.languageCode &&
-                    supportedLocale.countryCode == locale.countryCode) {
-                  return supportedLocale;
-                }
-              }
-              return supportedLocales.first;
-            },
-            home:  MainScreen(),
-          )
-    );
+        child: _locale == null
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(),
+                darkTheme: ThemeData.dark(),
+                themeMode: _themeMode,
+                title: "Flutter Localization Demo",
+                locale: _locale,
+                supportedLocales: const [
+                  Locale("en", "US"),
+                  Locale("ur", "PK"),
+                ],
+                localizationsDelegates: const [
+                  DemoLocalization.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                localeResolutionCallback: (locale, supportedLocales) {
+                  for (var supportedLocale in supportedLocales) {
+                    if (supportedLocale.languageCode == locale!.languageCode &&
+                        supportedLocale.countryCode == locale.countryCode) {
+                      return supportedLocale;
+                    }
+                  }
+                  return supportedLocales.first;
+                },
+                home: const IntroScreen(),
+              ));
   }
+
   void changeTheme(ThemeMode themeMode) {
     setState(() {
       _themeMode = themeMode;
     });
   }
 }
-
