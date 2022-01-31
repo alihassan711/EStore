@@ -1,9 +1,11 @@
+import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:introduction_screen/introduction_screen.dart';
-
+import 'package:intro_slider/intro_slider.dart';
+import 'package:intro_slider/slide_object.dart';
+/*
 class IntroScreen extends StatefulWidget {
   const IntroScreen({Key? key}) : super(key: key);
 
@@ -161,6 +163,171 @@ class _OnBoardingPageState extends State<IntroScreen> {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
       ),
+    );
+  }
+}
+*/
+
+class IntroScreen extends StatefulWidget {
+  IntroScreen({Key? key}) : super(key: key);
+
+  @override
+  IntroScreenState createState() => new IntroScreenState();
+}
+
+// ------------------ Custom config ------------------
+class IntroScreenState extends State<IntroScreen> {
+  List<Slide> slides = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    slides.add(
+      Slide(
+        title:
+            "A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE",
+        maxLineTitle: 2,
+        styleTitle: const TextStyle(
+          color: Colors.white,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'RobotoMono',
+        ),
+        description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,",
+        styleDescription: const TextStyle(
+          color: Colors.white,
+          fontSize: 20.0,
+          fontStyle: FontStyle.italic,
+          fontFamily: 'Raleway',
+        ),
+        marginDescription: const EdgeInsets.only(
+            left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+        centerWidget: const Text("Replace this with a custom widget",
+            style: TextStyle(color: Colors.white)),
+        backgroundImage: ImagesPath.burgerMeal,
+        directionColorBegin: Alignment.topLeft,
+        directionColorEnd: Alignment.bottomRight,
+        onCenterItemPress: () {},
+      ),
+    );
+    slides.add(
+      Slide(
+        title: "CITY",
+        styleTitle: const TextStyle(
+            color: Color(0xff7FFFD4),
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'RobotoMono'),
+        description:
+            "Ye indulgence unreserved connection alteration appearance",
+        styleDescription: const TextStyle(
+            color: Color(0xff7FFFD4),
+            fontSize: 20.0,
+            fontStyle: FontStyle.italic,
+            fontFamily: 'Raleway'),
+        backgroundImage: ImagesPath.burgerMeal,
+        directionColorBegin: Alignment.topRight,
+        directionColorEnd: Alignment.bottomLeft,
+      ),
+    );
+    slides.add(
+      Slide(
+        title: "BEACH",
+        styleTitle: const TextStyle(
+            color: Color(0xffFFDAB9),
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'RobotoMono'),
+        description:
+            "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
+        styleDescription: const TextStyle(
+            color: Color(0xffFFDAB9),
+            fontSize: 20.0,
+            fontStyle: FontStyle.italic,
+            fontFamily: 'Raleway'),
+        backgroundImage:  ImagesPath.intro1,
+        directionColorBegin: Alignment.topCenter,
+        directionColorEnd: Alignment.bottomCenter,
+        maxLineTextDescription: 3,
+      ),
+    );
+  }
+
+  void onDonePress() {
+    // Do what you want
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MainScreen()),
+    );
+  }
+
+  void onNextPress() {
+    print("onNextPress caught");
+  }
+
+  Widget renderNextBtn() {
+    return const Icon(
+      Icons.navigate_next,
+      color: whiteColor,
+      size: 20.0,
+    );
+  }
+
+  Widget renderDoneBtn() {
+    return const Icon(
+      Icons.done,
+      color: whiteColor,
+      size: 20.0,
+    );
+  }
+
+  Widget renderSkipBtn() {
+    return const Icon(
+      Icons.skip_next,
+      color: whiteColor,
+      size: 20.0,
+    );
+  }
+
+  ButtonStyle myButtonStyle() {
+    return ButtonStyle(
+      shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+      backgroundColor:
+          MaterialStateProperty.all(kIconColorGreen),
+      overlayColor: MaterialStateProperty.all<Color>(const Color(0x33FFA8B0)),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IntroSlider(
+      // List slides
+      slides: slides,
+      // Skip button
+      renderSkipBtn: renderSkipBtn(),
+      skipButtonStyle: myButtonStyle(),
+
+      // Next button
+      renderNextBtn: renderNextBtn(),
+      onNextPress: onNextPress,
+      nextButtonStyle: myButtonStyle(),
+
+      // Done button
+      renderDoneBtn: renderDoneBtn(),
+      onDonePress: onDonePress,
+      doneButtonStyle: myButtonStyle(),
+
+      // Dot indicator
+      colorDot: kGrey,
+      colorActiveDot: kIconColorGreen,
+      sizeDot: 10.0,
+      // Show or hide status bar
+      hideStatusBar: true,
+      backgroundColorAllSlides: Colors.grey,
+      // Scrollbar
+      //verticalScrollbarBehavior: scrollbarBehavior.SHOW_ALWAYS,
     );
   }
 }

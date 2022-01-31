@@ -77,7 +77,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
               ),
-
               ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
                 child: Container(
@@ -233,7 +232,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             AutoSizeText(
                               "App Settings",
-                              style: kBold(blackColor, 16.0),
+                              style: kBold(blackColor, 14.0),
                             ),
                           ],
                         ),
@@ -248,7 +247,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             AutoSizeText(
                               "Language",
-                              style: kBold(blackColor, 16.0),
+                              style: kBold(blackColor, 14.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
@@ -268,12 +267,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             AutoSizeText(
                               "Help & Support",
-                              style: kBold(blackColor, 16.0),
+                              style: kBold(blackColor, 14.0),
                             ),
                           ],
-                        ),
-                        const SizedBox(
-                          height: 12,
                         ),
                       ],
                     ),

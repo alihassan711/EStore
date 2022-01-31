@@ -42,14 +42,14 @@ class CartCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,crossAxisAlignment: CrossAxisAlignment.start,
+           mainAxisAlignment: MainAxisAlignment.spaceEvenly,crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.13,
-                  width: MediaQuery.of(context).size.width * 0.23,
+                  height: MediaQuery.of(context).size.height * 0.11,
+                  width: MediaQuery.of(context).size.width * 0.21,
                   decoration: BoxDecoration(
                       color: blackColor,
                       borderRadius: BorderRadius.circular(14),
@@ -64,7 +64,7 @@ class CartCard extends StatelessWidget {
                   children: [
                     AutoSizeText(
                       titleText!,
-                      style: kBold(blackColor, 14.0),
+                      style: kBold(blackColor, 13.0),
                     ),
                     const SizedBox(
                       height: 12,
@@ -75,7 +75,7 @@ class CartCard extends StatelessWidget {
                         children: [
                           AutoSizeText(
                             "\$$itemPrice",
-                            style: kBold(kIconColorRed, 16.0),
+                            style: kBold(kIconColorRed, 14.0),
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.3,
@@ -83,15 +83,15 @@ class CartCard extends StatelessWidget {
                           GestureDetector(
                             onTap: onPressDecrease,
                             child: Container(
-                                height: 25,
-                                width: 25,
+                                height: 20,
+                                width: 20,
                                 decoration: const BoxDecoration(
                                     color: kIconColorRed,
                                     shape: BoxShape.circle),
                                 child: const Icon(
                                   Icons.remove,
                                   color: whiteColor,
-                                  size: 25,
+                                  size: 14,
                                 )),
                           ),
                           const SizedBox(
@@ -107,13 +107,13 @@ class CartCard extends StatelessWidget {
                           GestureDetector(
                             onTap: onPressIncrease,
                             child: Container(
-                                height: 25,
-                                width: 25,
+                                height: 20,
+                                width: 20,
                                 decoration: const BoxDecoration(
                                     color: kIconColorGreen,
                                     shape: BoxShape.circle),
                                 child: const Icon(
-                                  Icons.add,
+                                  Icons.add,size: 14,
                                   color: whiteColor,
                                 )),
                           ),

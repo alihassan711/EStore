@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
-import 'package:estore/screens/components/my_drawer.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/utils/no_notification.dart';
 import 'package:estore/widgets/iconbtn.dart';
@@ -41,7 +40,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ],
           iconTheme: const IconThemeData(color: blackColor),
         ),
-        drawer: MyDrawer(),
+      //  drawer: MyDrawer(),
         body: isNotifications == false
             ? Center(
                 child: NoNotificationContainer(

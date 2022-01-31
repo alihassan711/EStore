@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
                   }
                   return supportedLocales.first;
                 },
-                home: const IntroScreen(),
+                home:  IntroScreen(),
               ));
   }
 

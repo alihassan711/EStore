@@ -33,9 +33,12 @@ class HistoryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AutoSizeText(
-                "2021-02-12",
-                style: kBold(kIconColorRed, 16.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                child: AutoSizeText(
+                  "2021-02-12",
+                  style: kBold(kIconColorRed, 16.0),
+                ),
               ),
               const SizedBox(
                 height: 12,

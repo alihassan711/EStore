@@ -19,10 +19,10 @@ class MyContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CircleAvatar(
-              backgroundColor: Colors.grey[200],
-              radius: MediaQuery.of(context).size.height * 0.04,
+              backgroundColor: Colors.grey[100],
+              radius: MediaQuery.of(context).size.height * 0.035,
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.07,
+                height: MediaQuery.of(context).size.height * 0.06,
                 child: Image.asset(
                   img!,
                   fit: BoxFit.fill,
@@ -30,9 +30,12 @@ class MyContainer extends StatelessWidget {
               ),
             ),
             //SizedBox(height: 8,),
-            Text(
-              txt!,
-              style: kNormalBlack(blackColor),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+              child: Text(
+                txt!,
+                style: kNormalBlack(blackColor),
+              ),
             ),
           ],
         ),
@@ -58,15 +61,15 @@ class MyProfileContainer extends StatelessWidget {
           child: Column(
             children: [
               CircleAvatar(
-                backgroundColor: Colors.grey[200],
-                radius: MediaQuery.of(context).size.height * 0.04,
+                backgroundColor: Colors.grey[100],
+                radius: MediaQuery.of(context).size.height * 0.03,
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.07,
                   child: icon,
                 ),
               ),
               const SizedBox(
-                height: 8,
+                height: 5,
               ),
               Text(
                 txt!,
@@ -88,40 +91,29 @@ class MyProductContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      child: Center(
-        child: Container(
-          // height: MediaQuery.of(context).size.height*0.3,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            img!,
+            height: MediaQuery.of(context).size.height*0.12,
+            width:  MediaQuery.of(context).size.width*0.12,
+            fit: BoxFit.cover,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-                child: Image.asset(
-                  img!,
-                  height: 110,
-                  width: 80,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              // Container(
-              //   height: MediaQuery.of(context).size.height*0.12,
-              //   width: MediaQuery.of(context).size.width*0.18,
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(14),
-              //     image: DecorationImage(image: ExactAssetImage(img!),fit: BoxFit.fill)
-              //   ),
-              //  // child: Image.asset(img!),
-              // ),
-              const SizedBox(
-                height: 0,
-              ),
-              AutoSizeText(txt!),
-            ],
+          // Container(
+          //   height: MediaQuery.of(context).size.height*0.12,
+          //   width: MediaQuery.of(context).size.width*0.18,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(14),
+          //     image: DecorationImage(image: ExactAssetImage(img!),fit: BoxFit.fill)
+          //   ),
+          //  // child: Image.asset(img!),
+          // ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6.0,left: 6.0,right: 6.0),
+            child: AutoSizeText(txt!),
           ),
-        ),
+        ],
       ),
     );
   }

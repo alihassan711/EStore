@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/screens/dashboard/drawer/help_support_screen.dart';
 import 'package:estore/screens/dashboard/drawer/history_screen.dart';
 import 'package:estore/screens/dashboard/drawer/language_screen.dart';
 import 'package:estore/screens/dashboard/drawer/my_order_screen.dart';
@@ -39,26 +40,27 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+
       child: ListView(
         padding: const EdgeInsets.all(0),
         children: [
-          SizedBox(
-            height: 200,
-            child: UserAccountsDrawerHeader(
-              accountName:
-                  AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
-              accountEmail: Row(
-                children: const [
-                  AutoSizeText("bushra@xyz.com"),
-                  // Switch(value: attendence, onChanged: (value) {setState(){
-                  //   attendence =value;
-                  // }}),
-                ],
-              ),
-              currentAccountPicture: CircleAvatar(
-                radius: 50,
-                backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
-              ),
+          UserAccountsDrawerHeader(
+            decoration: const BoxDecoration(
+              color: kIconColorGreen,
+            ),
+            accountName:
+                AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
+            accountEmail: Row(
+              children: const [
+                AutoSizeText("bushra@xyz.com"),
+                // Switch(value: attendence, onChanged: (value) {setState(){
+                //   attendence =value;
+                // }}),
+              ],
+            ),
+            currentAccountPicture: CircleAvatar(
+              radius: 50,
+              backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
             ),
           ),
           ListTile(
@@ -91,7 +93,10 @@ class _MyDrawerState extends State<MyDrawer> {
           ListTile(
             title: AutoSizeText("Help/Support", style: kSemiBold(blackColor)),
             leading: const Icon(Icons.help_outline),
-            onTap: () => Navigator.pushNamed(context, '/LocationPage'),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const HelpScreen())),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(

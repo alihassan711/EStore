@@ -30,7 +30,7 @@ class UserProfile extends StatelessWidget {
             text: "Check Balance",
             color: kIconColorGreen,
             btnTxtSize: 12,
-            circularSize: 20.0,
+            circularSize: 14.0,
             txtColor: whiteColor,
           ),
           const SizedBox(height: 14,),
@@ -53,9 +53,9 @@ class UserProfile extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("14",style: kBold(blackColor, 14.0),),
+                  AutoSizeText("14",style: kBold(blackColor, 14.0),),
                   const SizedBox(height: 5,),
-                  Text("Ordered",style: kNormalBlack(blackColor),),
+                  AutoSizeText("Ordered",style: kNormalBlack(blackColor),),
                 ],
               ),
             ],
@@ -85,28 +85,28 @@ class UserProfile extends StatelessWidget {
                       onTap: (){print("Order");},
                       child: MyProfileContainer(
                         txt: "Order",
-                        icon: const Icon(Icons.list,size:35,color:kIconColorGreen ,),
+                        icon: const Icon(Icons.list,size:28,color:kIconColorGreen ,),
                       ),
                     ),
                     InkWell(
                       onTap: (){print("Profile");},
                       child: MyProfileContainer(
                         txt: "Profile",
-                        icon:const Icon(Icons.person,size:35,color: kIconColorBlue,),
+                        icon:const Icon(Icons.person,size:28,color: kIconColorBlue,),
                       ),
                     ),
                     InkWell(
                       onTap: (){print("Address");},
                       child: MyProfileContainer(
                         txt: "Address",
-                        icon:const Icon(Icons.location_on,size:35,color: kIconColorYellow,),
+                        icon:const Icon(Icons.location_on,size:28,color: kIconColorYellow,),
                       ),
                     ),
                     InkWell(
                       onTap: (){print("Message");},
                       child: MyProfileContainer(
                         txt: "Message",
-                        icon:const Icon(Icons.message,size:35,color: kIconColorRed,),
+                        icon:const Icon(Icons.message,size:28,color: kIconColorRed,),
                       ),
                     ),
                   ],
@@ -115,18 +115,20 @@ class UserProfile extends StatelessWidget {
             ),
           ),
          // SizedBox(height: 12,),
-          const ListTile(
-            title: AutoSizeText("Notifications"),
-            leading: CircleAvatar(
+           ListTile(
+            title: AutoSizeText("Notifications",style: kBold(blackColor,12.0),),
+            leading: const CircleAvatar(
+              radius: 17,
               backgroundColor: kIconColorYellow,
-              child: Icon(Icons.notification_important,color: whiteColor,),
+              child: Icon(Icons.notification_important,color: whiteColor,size: 20,),
             ),
           ),
-          const ListTile(
-            title: AutoSizeText("Purchase History"),
-            leading: CircleAvatar(
+           ListTile(
+            title: AutoSizeText("Purchase History",style: kBold(blackColor,12.0),),
+            leading: const CircleAvatar(
+              radius: 17,
               backgroundColor: kIconColorGreen,
-              child: Icon(Icons.ballot,color: whiteColor,),
+              child: Icon(Icons.ballot,color: whiteColor,size: 20,),
             ),
           ),
         ],

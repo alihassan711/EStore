@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             Container(
-              height: height * 0.3,
+              height: height * 0.2,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(12)),
               child: ListView.builder(

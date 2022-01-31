@@ -35,8 +35,8 @@ class NotificationCard extends StatelessWidget {
                     image: DecorationImage(
                         image: ExactAssetImage(ImagesPath.accountPicture),
                         fit: BoxFit.cover)),
-                width: 80,
-                height: 73,
+                width: 70,
+                height: 65,
               ),
               const SizedBox(width: 10),
               const Expanded(

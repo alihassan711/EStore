@@ -59,33 +59,36 @@ class _MyCartScreenState extends State<MyCartScreen> {
           ),
           Expanded(
             flex: 2,
-            child: Column(
-              children: [
-                _container("SubTotal", subTotal),
-                _container("DisCount", disCount),
-                _container("Delivery Charges", deliveryCharges),
-                _container("Order Total", orderTotal),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              child: Column(
+                children: [
+                  _container("SubTotal", subTotal,14.0),
+                  _container("DisCount", disCount,14.0),
+                  _container("Delivery Charges", deliveryCharges,14.0),
+                  _container("Order Total", orderTotal,14.0),
+                ],
+              ),
             ),
           ),
           ElevatedBtn(
             color: kIconColorRed,
             btnTxtSize: 14,
             text: "Proceed To Cart <Out>",
-            circularSize: 12,
+            circularSize: 10,
             txtColor: whiteColor,
             onPress: () {
               setState(() {});
               print("proceed order");
             },
-            btnWidth: 300,
+          //  btnWidth: 200,
           ),
         ],
       ),
     );
   }
 
-  Widget _container(titleText, price) {
+  Widget _container(titleText, price,textSize,) {
     return Padding(
       padding: const EdgeInsets.all(
         8.0,
@@ -99,7 +102,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
           ),
           Text(
             "\$$price",
-            style: kBold(blackColor, 14.0),
+            style: kBold(blackColor, textSize),
           ),
         ],
       ),

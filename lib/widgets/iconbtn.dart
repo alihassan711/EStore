@@ -19,7 +19,7 @@ class IconBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPress,
-      icon: icon!,
+      icon: icon!,color: color,
     );
   }
 }

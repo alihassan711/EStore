@@ -21,27 +21,27 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: AutoSizeText(
-            "Messages",
-            style: kBold(kIconColorRed, 20.0),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          actions: [
-            IconBtn(
-              icon: const Icon(
-                Icons.message,
-                color: blackColor,
-              ),
-              onPress: () {},
-              color: blackColor,
-            ),
-          ],
-          iconTheme: const IconThemeData(color: blackColor),
-        ),
-        drawer: MyDrawer(),
+        // appBar: AppBar(
+        //   title: AutoSizeText(
+        //     "Messages",
+        //     style: kBold(kIconColorRed, 20.0),
+        //   ),
+        //   centerTitle: true,
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0.0,
+        //   actions: [
+        //     IconBtn(
+        //       icon: const Icon(
+        //         Icons.message,
+        //         color: blackColor,
+        //       ),
+        //       onPress: () {},
+        //       color: blackColor,
+        //     ),
+        //   ],
+        //   iconTheme: const IconThemeData(color: blackColor),
+        // ),
+      //  drawer: MyDrawer(),
         body: isNotifications == false
             ? Center(
                 child: NoNotificationContainer(
