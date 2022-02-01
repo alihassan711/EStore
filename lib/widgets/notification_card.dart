@@ -24,6 +24,7 @@ class NotificationCard extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
+                height: 75,width: 70,
                 margin: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
                     // color: Colors.blue.shade200,
@@ -35,8 +36,6 @@ class NotificationCard extends StatelessWidget {
                     image: DecorationImage(
                         image: ExactAssetImage(ImagesPath.accountPicture),
                         fit: BoxFit.cover)),
-                width: 70,
-                height: 65,
               ),
               const SizedBox(width: 10),
               const Expanded(

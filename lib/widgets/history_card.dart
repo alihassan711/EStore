@@ -21,14 +21,14 @@ class HistoryCard extends StatelessWidget {
             BoxShadow(
               color: whiteColor,
               spreadRadius: 7.0,
-              blurRadius: 10.0,
+              blurRadius: 8.0,
             ),
           ],
         ),
         // height: 240,
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +85,7 @@ class HistoryCard extends StatelessWidget {
                     width: 12,
                   ),
                   CircleAvatar(
-                    radius: 10,
+                    radius: 8.0,
                     backgroundColor: whiteColor,
                     backgroundImage: ExactAssetImage(ImagesPath.right),
                   ),

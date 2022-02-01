@@ -11,3 +11,5 @@ TextStyle kNormalBlack(Color color) {
 TextStyle kBold(Color color,size) {
   return  TextStyle(fontSize: size, color: color,fontWeight: FontWeight.bold);
 }
+EdgeInsetsGeometry screenMargin() =>
+    const EdgeInsets.symmetric(horizontal: 15.0);

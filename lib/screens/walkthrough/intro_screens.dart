@@ -182,7 +182,6 @@ class IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
     super.initState();
-
     slides.add(
       Slide(
         title:
@@ -203,7 +202,7 @@ class IntroScreenState extends State<IntroScreen> {
           fontFamily: 'Raleway',
         ),
         marginDescription: const EdgeInsets.only(
-            left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+            left: 20.0, right: 20.0, top: 20.0, bottom: 90.0),
         centerWidget: const Text("Replace this with a custom widget",
             style: TextStyle(color: Colors.white)),
         backgroundImage: ImagesPath.burgerMeal,
@@ -214,43 +213,60 @@ class IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       Slide(
-        title: "CITY",
+        title:
+        "A VERY Tasty Burger and pizza. You Only order the meal we bring it in a moment.",
+        maxLineTitle: 2,
         styleTitle: const TextStyle(
-            color: Color(0xff7FFFD4),
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
+          color: Colors.white,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'RobotoMono',
+        ),
         description:
-            "Ye indulgence unreserved connection alteration appearance",
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,",
         styleDescription: const TextStyle(
-            color: Color(0xff7FFFD4),
-            fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
-        backgroundImage: ImagesPath.burgerMeal,
-        directionColorBegin: Alignment.topRight,
-        directionColorEnd: Alignment.bottomLeft,
+          color: Color(0xff7FFFD4),
+          fontSize: 20.0,
+          fontStyle: FontStyle.italic,
+          fontFamily: 'Raleway',
+        ),
+        marginDescription: const EdgeInsets.only(
+            left: 20.0, right: 20.0, top: 20.0, bottom: 90.0),
+        centerWidget: const Text("Replace this with a custom widget",
+            style: TextStyle(color: Colors.white)),
+        backgroundImage: ImagesPath.burger,
+        directionColorBegin: Alignment.topLeft,
+        directionColorEnd: Alignment.bottomRight,
+        onCenterItemPress: () {},
       ),
     );
     slides.add(
       Slide(
-        title: "BEACH",
+        title:
+        "A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE",
+        maxLineTitle: 2,
         styleTitle: const TextStyle(
-            color: Color(0xffFFDAB9),
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
+          color: Colors.white,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'RobotoMono',
+        ),
         description:
-            "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,",
         styleDescription: const TextStyle(
-            color: Color(0xffFFDAB9),
-            fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
-        backgroundImage:  ImagesPath.intro1,
-        directionColorBegin: Alignment.topCenter,
-        directionColorEnd: Alignment.bottomCenter,
-        maxLineTextDescription: 3,
+          color: Color(0xffFFDAB9),
+          fontSize: 20.0,
+          fontStyle: FontStyle.italic,
+          fontFamily: 'Raleway',
+        ),
+        marginDescription: const EdgeInsets.only(
+            left: 20.0, right: 20.0, top: 20.0, bottom: 90.0),
+        centerWidget: const Text("Replace this with a custom widget",
+            style: TextStyle(color: Colors.white)),
+        backgroundImage: ImagesPath.intro1,
+        directionColorBegin: Alignment.topLeft,
+        directionColorEnd: Alignment.bottomRight,
+        onCenterItemPress: () {},
       ),
     );
   }

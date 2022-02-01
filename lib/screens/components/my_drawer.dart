@@ -116,14 +116,17 @@ class _MyDrawerState extends State<MyDrawer> {
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-              title: AutoSizeText("Dark Mode", style: kSemiBold(blackColor)),
+              title:_isdark!?
+                 AutoSizeText("Dark Mode", style: kSemiBold(blackColor))
+                  :
+              AutoSizeText("Light Mode", style: kSemiBold(whiteColor)),
               leading: const Icon(Icons.track_changes),
               onTap: () {
                 setState(() {
                   _isdark = !_isdark!;
                 });
                 MyApp.of(context)!
-                    .changeTheme(_isdark! ? ThemeMode.light : ThemeMode.dark);
+                    .changeTheme(_isdark! ? ThemeMode.dark : ThemeMode.light );
               }
               //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
               ),

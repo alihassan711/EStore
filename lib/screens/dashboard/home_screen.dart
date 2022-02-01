@@ -53,12 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 10,
             ),
-            AutoSizeText("Featured Categories", style: kSemiBold(blackColor)),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+              child: AutoSizeText("Featured Categories", style: kSemiBold(blackColor)),
+            ),
             const SizedBox(
               height: 10,
             ),
             Container(
-              height: height * 0.2,
+              height: 160,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(12)),
               child: ListView.builder(
@@ -79,7 +82,10 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 18,
             ),
-            Text("Featured Products", style: kSemiBold(blackColor)),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+              child: Text("Featured Products", style: kSemiBold(blackColor)),
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -91,9 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: MediaQuery.of(context).size.width /
-                        (MediaQuery.of(context).size.height * 0.8),
+                    crossAxisCount: 3,
+                    childAspectRatio:
+                    MediaQuery.of(context).size.width /
+                        (MediaQuery.of(context).size.height * 0.94),
                   ),
                   itemCount: 10,
                   itemBuilder: (BuildContext ctx, index) {

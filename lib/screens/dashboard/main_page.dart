@@ -3,6 +3,7 @@ import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/screens/chat_screen.dart';
 import 'package:estore/screens/components/my_drawer.dart';
+import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/home_screen.dart';
 import 'package:estore/screens/dashboard/profile_screen.dart';
 import 'package:estore/widgets/iconbtn.dart';
@@ -48,7 +49,10 @@ class _MainScreenState extends State<MainScreen> {
               Icons.notifications_active_outlined,
               color: blackColor,
             ),
-            onPress: () {},
+            onPress: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => const NotificationScreen()));
+            },
             color: blackColor,
           ),
         ],
@@ -68,115 +72,127 @@ class _MainScreenState extends State<MainScreen> {
     return Container(
       //height: MediaQuery.of(context).size.height*0.14,
       decoration: const BoxDecoration(
-       // color: kGrey,
+        // color: Colors.black87,
         // color: Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
+       // borderRadius: BorderRadius.only(
+          //topLeft: Radius.circular(20),
+          //topRight: Radius.circular(20),
+      //  ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(2.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            InkWell(
-              onTap: () {
+            IconBtn(
+              //enableFeedback: false,
+              onPress: () {
                 setState(() {
                   pageIndex = 1;
                 });
               },
-              child: Container(
-                height:pageIndex == 1? 38:28,
-                width: pageIndex == 1? 38:28,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: ExactAssetImage(ImagesPath.message),
-                      fit: BoxFit.fill),
-                ),
+              icon: pageIndex == 1
+                  ? const Icon(
+                Icons.message,
+                color: kIconColorGreen,
+                size: 30,
+              )
+                  : const Icon(
+                Icons.message,
+                color: kGrey,
+                size: 30,
               ),
             ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  pageIndex = 2;
-                });
-              },
-              child: Container(
-                height:pageIndex ==2? 40:30,
-                width: pageIndex ==2? 40:30,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: ExactAssetImage(ImagesPath.favourite),
-                      fit: BoxFit.fill),
-                ),
-              ),
-            ),
-            // IconBtn(
-            //   //enableFeedback: false,
-            //   onPress: () {
+            // InkWell(
+            //   onTap: () {
             //     setState(() {
             //       pageIndex = 2;
             //     });
             //   },
-            //   icon: pageIndex == 2
-            //       ? const Icon(
-            //           Icons.favorite,
-            //           color: kIconColorRed,
-            //           size: 30,
-            //         )
-            //       : const Icon(
-            //           Icons.favorite_border,
-            //           color: blackColor,
-            //           size: 25,
-            //         ),
+            //   child: Container(
+            //     height:pageIndex ==2? 40:30,
+            //     width: pageIndex ==2? 40:30,
+            //     decoration: BoxDecoration(
+            //       image: DecorationImage(
+            //           image: ExactAssetImage(ImagesPath.favourite),
+            //           fit: BoxFit.fill),
+            //     ),
+            //   ),
             // ),
-            InkWell(
-              onTap: () {
+            IconBtn(
+              //enableFeedback: false,
+              onPress: () {
+                setState(() {
+                  pageIndex = 2;
+                });
+              },
+              icon: pageIndex == 2
+                  ? const Icon(
+                      Icons.favorite,
+                      color: kIconColorRed,
+                      size: 30,
+                    )
+                  : const Icon(
+                      Icons.favorite_border,
+                      color: kGrey,
+                      size: 30,
+                    ),
+            ),
+            IconBtn(
+              //enableFeedback: false,
+              onPress: () {
                 setState(() {
                   pageIndex = 0;
                 });
               },
-              child: Container(
-                height:pageIndex == 0? 40:30,
-                width: pageIndex == 0? 40:30,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: ExactAssetImage(ImagesPath.home),
-                      fit: BoxFit.fill),
-                ),
+              icon: pageIndex == 0
+                  ? const Icon(
+                Icons.home,
+                color: kIconColorRed,
+                size: 30,
+              )
+                  : const Icon(
+                Icons.home,
+                color: kGrey,
+                size: 30,
               ),
             ),
-            InkWell(
-              onTap: () {
+            IconBtn(
+              //enableFeedback: false,
+              onPress: () {
                 setState(() {
                   pageIndex = 3;
                 });
               },
-              child: Container(
-                height:pageIndex ==3? 40:30,
-                width: pageIndex ==3? 40:30,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: ExactAssetImage(ImagesPath.cart),
-                      fit: BoxFit.fill),
-                ),
+              icon: pageIndex == 3
+                  ? const Icon(
+                Icons.shopping_cart,
+                color: blackColor,
+                size: 30,
+              )
+                  : const Icon(
+                Icons.shopping_cart,
+                color: kGrey,
+                size: 30,
               ),
             ),
-            InkWell(
-              onTap: () {
+            IconBtn(
+              //enableFeedback: false,
+              onPress: () {
                 setState(() {
                   pageIndex = 4;
                 });
               },
-              child: Container(
-                height:pageIndex ==4? 40:30,
-                width: pageIndex ==4? 40:30,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: ExactAssetImage(ImagesPath.profile),
-                      fit: BoxFit.fill),
-                ),
+              icon: pageIndex == 4
+                  ? const Icon(
+                Icons.person,
+                color: kIconColorBlue,
+                size: 30,
+              )
+                  : const Icon(
+                Icons.person,
+                color: kGrey,
+                size: 30,
               ),
             ),
           ],

@@ -2,9 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/screens/dashboard/drawer/history_screen.dart';
+import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/utils/elevated_button.dart';
 import 'package:estore/widgets/my_container.dart';
 import 'package:flutter/material.dart';
+
+import 'chat_screens/conversation_page.dart';
+import 'drawer/my_order_screen.dart';
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
 
@@ -30,8 +35,10 @@ class UserProfile extends StatelessWidget {
             text: "Check Balance",
             color: kIconColorGreen,
             btnTxtSize: 12,
-            circularSize: 14.0,
+            circularSize: 10.0,
             txtColor: whiteColor,
+            btnWidth: 175,
+            btnHeight: 40,
           ),
           const SizedBox(height: 14,),
           Row(
@@ -61,7 +68,7 @@ class UserProfile extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 14.0,right: 14.0,top: 12,bottom: 12),
+            padding: const EdgeInsets.only(left: 12.0,right: 12.0,top: 10,bottom: 10),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5.0),
               child: Container(
@@ -74,7 +81,7 @@ class UserProfile extends StatelessWidget {
                     BoxShadow(
                       color: Colors.grey,
                       offset: Offset(0.0, 1.0), //(x,y)
-                      blurRadius: 6.0,
+                      blurRadius: 1.0,
                     ),
                   ],
                 ),
@@ -82,10 +89,13 @@ class UserProfile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     InkWell(
-                      onTap: (){print("Order");},
+                      onTap: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (ctx) => const MyOrderScreen()));
+                       },
                       child: MyProfileContainer(
                         txt: "Order",
-                        icon: const Icon(Icons.list,size:28,color:kIconColorGreen ,),
+                        icon: const Icon(Icons.list,size:28,color:kIconColorRed ,),
                       ),
                     ),
                     InkWell(
@@ -103,10 +113,13 @@ class UserProfile extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: (){print("Message");},
+                      onTap: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (ctx) => const ConversationPage()));
+                        print("Message");},
                       child: MyProfileContainer(
                         txt: "Message",
-                        icon:const Icon(Icons.message,size:28,color: kIconColorRed,),
+                        icon:const Icon(Icons.message,size:28,color: kIconColorGreen,),
                       ),
                     ),
                   ],
@@ -116,6 +129,10 @@ class UserProfile extends StatelessWidget {
           ),
          // SizedBox(height: 12,),
            ListTile(
+             onTap: (){
+               Navigator.push(context,
+                   MaterialPageRoute(builder: (ctx) => const NotificationScreen()));
+             },
             title: AutoSizeText("Notifications",style: kBold(blackColor,12.0),),
             leading: const CircleAvatar(
               radius: 17,
@@ -130,6 +147,10 @@ class UserProfile extends StatelessWidget {
               backgroundColor: kIconColorGreen,
               child: Icon(Icons.ballot,color: whiteColor,size: 20,),
             ),
+             onTap: (){
+               Navigator.push(context,
+                   MaterialPageRoute(builder: (ctx) => const PurchaseHistory()));
+             },
           ),
         ],
       ),

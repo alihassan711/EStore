@@ -90,7 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       BoxShadow(
                         color: Colors.grey,
                         offset: Offset(0.0, 1.0), //(x,y)
-                        blurRadius: 6.0,
+                        blurRadius: 5.0,
                       ),
                     ],
                   ),
@@ -107,12 +107,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             AutoSizeText(
                               "Profile Settings",
-                              style: kBold(blackColor, 16.0),
+                              style: kBold(blackColor, 14.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
                               "Edit",
-                              style: kBold(blackColor, 16.0),
+                              style: kBold(blackColor, 14.0),
                             )
                           ],
                         ),
@@ -215,7 +215,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       BoxShadow(
                         color: Colors.grey,
                         offset: Offset(0.0, 1.0), //(x,y)
-                        blurRadius: 6.0,
+                        blurRadius: 5.0,
                       ),
                     ],
                   ),
@@ -232,7 +232,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             AutoSizeText(
                               "App Settings",
-                              style: kBold(blackColor, 14.0),
+                              style: kBold(blackColor, 13.0),
                             ),
                           ],
                         ),
@@ -247,7 +247,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             AutoSizeText(
                               "Language",
-                              style: kBold(blackColor, 14.0),
+                              style: kBold(blackColor, 13.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
@@ -267,7 +267,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             AutoSizeText(
                               "Help & Support",
-                              style: kBold(blackColor, 14.0),
+                              style: kBold(blackColor, 13.0),
                             ),
                           ],
                         ),

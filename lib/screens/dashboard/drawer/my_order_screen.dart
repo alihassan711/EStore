@@ -33,7 +33,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                 itemBuilder: (BuildContext context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(
-                        top: 8.0, bottom: 8, right: 5, left: 5),
+                        top: 5.0, bottom: 5.0, right: 10.0, left: 10.0),
                     child: OrderCard(
                       img: ImagesPath.p5,
                       price: "150",

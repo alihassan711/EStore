@@ -21,7 +21,7 @@ class FavouriteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(5),
         boxShadow: const [
           BoxShadow(
             color: Colors.black45,
@@ -29,78 +29,84 @@ class FavouriteCard extends StatelessWidget {
           BoxShadow(
             color: whiteColor,
             spreadRadius: 7.0,
-            blurRadius: 10.0,
+            blurRadius: 8.0,
           ),
         ],
       ),
       // height: 240,
       width: MediaQuery.of(context).size.width,
-      child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.12,
-              width: MediaQuery.of(context).size.width * 0.2,
-              decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(14),
-                  image: DecorationImage(
-                      image: ExactAssetImage(img!), fit: BoxFit.fill)),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AutoSizeText(
-                  titleText!,
-                  style: kBold(blackColor, 13.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 78,width: 70,
+           // height: MediaQuery.of(context).size.height * 0.125,
+           // width: MediaQuery.of(context).size.width * 0.2,
+            decoration: BoxDecoration(
+                color: whiteColor,
+                shape: BoxShape.rectangle,
+                borderRadius:
+                const BorderRadius.only(
+                  topLeft: Radius.circular(5.0),
+                  bottomLeft:
+                  Radius.circular(5.0),
                 ),
-                const SizedBox(
-                  height: 5,
+                image: DecorationImage(
+                    image: ExactAssetImage(img!), fit: BoxFit.fill)),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 10.0,),
+              Text(
+                titleText!,
+                style: kBold(blackColor, 12.0),
+              ),
+              const SizedBox(
+                height: 2,
+              ),
+              Text(
+                brandName!,
+                style: kBold(kGrey, 10.0),
+              ),
+              const SizedBox(
+                height: 2,
+              ),
+              const IconTheme(
+                data: IconThemeData(
+                  color: Colors.amber,
+                  size: 20,
                 ),
-                AutoSizeText(
-                  brandName!,
-                  style: kNormalBlack(blackColor),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                IconTheme(
-                  data: IconThemeData(
-                    color: Colors.amber,
-                    size: 20,
-                  ),
-                  child: StarDisplay(value: 3),
-                ),
-               // StarDisplay(),
-                const SizedBox(
-                  height: 5,
-                ),
-                AutoSizeText(
-                 "\$$itemPrice",
-                  style: kBold(blackColor, 13.0),
-                ),
-              ],
-            ),
-            const Spacer(),
-            Column(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  color: Colors.red,
-                  icon: const Icon(Icons.favorite),
-                  iconSize: 25.0,
-                ),
-              ],
-            ),
-          ],
-        ),
+                child: StarDisplay(value: 3),
+              ),
+             // StarDisplay(),
+              const SizedBox(
+                height: 2,
+              ),
+              Text(
+               "\$$itemPrice",
+                style: kBold(blackColor, 13.0),
+              ),
+              SizedBox(height: 2.0,),
+            ],
+          ),
+          const Spacer(),
+          Column(
+            children: [
+              IconButton(
+                onPressed: () {},
+                color: Colors.red,
+                icon: const Icon(Icons.favorite),
+                iconSize: 25.0,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

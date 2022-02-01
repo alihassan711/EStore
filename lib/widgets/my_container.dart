@@ -19,14 +19,18 @@ class MyContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CircleAvatar(
-              backgroundColor: Colors.grey[100],
+              backgroundColor: Colors.grey[200],
               radius: MediaQuery.of(context).size.height * 0.035,
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.06,
-                child: Image.asset(
-                  img!,
-                  fit: BoxFit.fill,
+              child: Container(
+               // height:40,
+               // width: 40,
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: ExactAssetImage(img!),fit: BoxFit.fill)
                 ),
+                // child: Image.asset(
+                //   img!,
+                //   fit: BoxFit.fill,
+                // ),
               ),
             ),
             //SizedBox(height: 8,),
@@ -61,7 +65,7 @@ class MyProfileContainer extends StatelessWidget {
           child: Column(
             children: [
               CircleAvatar(
-                backgroundColor: Colors.grey[100],
+                backgroundColor: Colors.grey[200],
                 radius: MediaQuery.of(context).size.height * 0.03,
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.07,
@@ -90,14 +94,14 @@ class MyProductContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      elevation: 2,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
             img!,
-            height: MediaQuery.of(context).size.height*0.12,
-            width:  MediaQuery.of(context).size.width*0.12,
+            height: 110,
+            width:  110,
             fit: BoxFit.cover,
           ),
           // Container(
@@ -128,52 +132,58 @@ class MyProductContainerg extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.only(right: 6.0),
-      child: Card(
-        elevation: 2,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            //image: DecorationImage(image: ExactAssetImage(img!),fit: BoxFit.fill)
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: height * 0.2,
-                  width: width * 0.3,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      image: DecorationImage(
-                          image: ExactAssetImage(img!), fit: BoxFit.fill)),
-                  // child: Image.asset(img!),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                AutoSizeText(
+    return Card(
+      elevation: 2,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          //image: DecorationImage(image: ExactAssetImage(img!),fit: BoxFit.fill)
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    image: DecorationImage(
+                        image: ExactAssetImage(img!), fit: BoxFit.fill)),
+                // child: Image.asset(img!),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                child: AutoSizeText(
                   txt!,
                   style: kNormalBlack(blackColor),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                AutoSizeText(
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                child: AutoSizeText(
                   color!,
                   style: kNormalBlack(blackColor),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                AutoSizeText(
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                child: AutoSizeText(
                   price!,
                   style: kNormalBlack(kIconColorRed),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

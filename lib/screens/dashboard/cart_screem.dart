@@ -30,8 +30,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 itemCount: 2,
                 itemBuilder: (BuildContext context, index) {
                   return Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8.0, bottom: 8, right: 5, left: 5),
+                    padding: const EdgeInsets.only(left: 10.0,right: 10.0,bottom: 5.0,top: 5.0),
                     child: CartCard(
                       img: ImagesPath.p5,
                       itemPrice: itemPrice,
@@ -72,10 +71,12 @@ class _MyCartScreenState extends State<MyCartScreen> {
             ),
           ),
           ElevatedBtn(
+            btnHeight: 45,
+            btnWidth: 300,
             color: kIconColorRed,
             btnTxtSize: 14,
-            text: "Proceed To Cart <Out>",
-            circularSize: 10,
+            text: "Proceed To Cart",
+            circularSize: 8,
             txtColor: whiteColor,
             onPress: () {
               setState(() {});
@@ -83,6 +84,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
             },
           //  btnWidth: 200,
           ),
+          SizedBox(height: 5,),
         ],
       ),
     );

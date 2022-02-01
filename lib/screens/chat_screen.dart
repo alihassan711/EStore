@@ -2,10 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
-import 'package:estore/screens/components/my_drawer.dart';
 import 'package:estore/screens/dashboard/chat_screens/conversation_page.dart';
 import 'package:estore/utils/no_notification.dart';
-import 'package:estore/widgets/iconbtn.dart';
 import 'package:estore/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
 
@@ -57,16 +55,16 @@ class _ChatScreenState extends State<ChatScreen> {
               ))
             : Column(
                 children: [
-                  ListTile(
-                    leading: Icon(
-                      Icons.notifications_active_outlined,
-                      color: blackColor,
-                    ),
-                    title: AutoSizeText(
-                      "Messages",
-                      style: kBold(blackColor, 16.0),
-                    ),
-                  ),
+                  // ListTile(
+                  //   leading: Icon(
+                  //     Icons.notifications_active_outlined,
+                  //     color: blackColor,
+                  //   ),
+                  //   title: AutoSizeText(
+                  //     "Messages",
+                  //     style: kBold(blackColor, 16.0),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 12,
                   ),

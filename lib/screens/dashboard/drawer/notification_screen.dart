@@ -16,7 +16,12 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  bool isNotifications = true;
+  bool? isNotifications;
+  @override
+  initState() {
+    super.initState();
+   isNotifications = true;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +39,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 Icons.notifications_active_outlined,
                 color: blackColor,
               ),
-              onPress: () {},
+              onPress: () {
+                Navigator.push(context, MaterialPageRoute(builder: (builder)=>const NotificationScreen()));
+              },
               color: blackColor,
             ),
           ],
@@ -46,7 +53,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: NoNotificationContainer(
                 onPress: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => MainScreen()));
+                      MaterialPageRoute(builder: (context) => const MainScreen()));
                 },
                 icon: ImagesPath.notification,
                 btnText: "Go To HomeScreen",
@@ -54,19 +61,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ))
             : Column(
                 children: [
-                  ListTile(
-                    leading: const Icon(
-                      Icons.notifications_active_outlined,
-                      color: blackColor,
-                    ),
-                    title: AutoSizeText(
-                      "Notifications",
-                      style: kBold(blackColor, 16.0),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
+                  // ListTile(
+                  //   leading: const Icon(
+                  //     Icons.notifications_active_outlined,
+                  //     color: blackColor,
+                  //   ),
+                  //   title: AutoSizeText(
+                  //     "Notifications",
+                  //     style: kBold(blackColor, 16.0),
+                  //   ),
+                  // ),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
                   Expanded(
                     child: ListView.builder(
                       itemCount: 12,

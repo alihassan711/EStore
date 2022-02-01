@@ -6,12 +6,12 @@ class  ImagesPath {
   static String iconOrder = 'assets/icons/catgoriespng.png';
   static String p2 = 'assets/productimages/p2.png';
   static String watch = 'assets/productimages/watch.png';
-  static String burger = 'assets/productimages/burg.jpg';
-  static String brand = 'assets/icons/brand.png';
+  static String burger = 'assets/productimages/brger.jpg';
+  static String brand = 'assets/icons/brndsiconpng.png';
   static String category = 'assets/icons/catgory.png';
   static String flash = 'assets/icons/flashside.png';
   static String today = 'assets/icons/today.png';
-  static String top = 'assets/icons/top.png';
+  static String top = 'assets/icons/bes.png';
   static String car = 'assets/icons/carpng.png';
   static String notification = 'assets/icons/notification.png';
   static String jewelery = 'assets/icons/jewleryicon.png';

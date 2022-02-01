@@ -20,7 +20,7 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         boxShadow: const [
           BoxShadow(
             color: Colors.black45,
@@ -34,79 +34,86 @@ class OrderCard extends StatelessWidget {
       ),
       // height: 240,
       width: MediaQuery.of(context).size.width,
-      child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.width * 0.25,
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0,right: 8.0,top: 8.0),
+                child: Container(
+                  height: 90,width: 90,
                   decoration: BoxDecoration(
                       color: blackColor,
-                      borderRadius: BorderRadius.circular(14),
+                      shape: BoxShape.rectangle,
+                      borderRadius:  BorderRadius.circular(
+                       10.0
+                       // bottomLeft: Radius.circular(10.0),
+                      ),
                       image: DecorationImage(
                           image: ExactAssetImage(img!), fit: BoxFit.fill)),
                 ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AutoSizeText(
-                      titleText!,
-                      style: kBold(blackColor, 14.0),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    titleText!,
+                    style: kBold(blackColor, 13.0),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  AutoSizeText(
+                    "Order Proceed ${orderProceedDate!}",
+                    style: kNormalBlack(
+                      blackColor,
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    AutoSizeText(
-                      "Order Proceed ${orderProceedDate!}",
-                      style: kNormalBlack(
-                        blackColor,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    AutoSizeText(
-                      "\$$price",
-                      style: kBold(kIconColorRed, 16.0),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedBtn(
-                  onPress: onPress,
-                  color: kIconColorGreen,
-                  txtColor: whiteColor,
-                  circularSize: 10,
-                  text: "  ReOrder  ",
-                  btnTxtSize: 12,
-                ),
-                ElevatedBtn(
-                  onPress: onPress,
-                  color: kIconColorBlue,
-                  txtColor: whiteColor,
-                  circularSize: 10,
-                  text: "Rate Order",
-                  btnTxtSize: 12,
-                ),
-              ],
-            )
-          ],
-        ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  AutoSizeText(
+                    "\$$price",
+                    style: kBold(kIconColorRed, 14.0),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedBtn(
+                onPress: onPress,
+                color: kIconColorGreen,
+                txtColor: whiteColor,
+                circularSize: 5,
+                text: "ReOrder",
+                btnTxtSize: 12,
+                btnWidth: 140,
+
+              ),
+              ElevatedBtn(
+                onPress: onPress,
+                color: kIconColorBlue,
+                txtColor: whiteColor,
+                circularSize: 5,
+                text: "Rate Order",
+                btnTxtSize: 12,
+                btnWidth: 140,
+              ),
+            ],
+          ),
+         const SizedBox(height: 5.0,),
+        ],
       ),
     );
   }
