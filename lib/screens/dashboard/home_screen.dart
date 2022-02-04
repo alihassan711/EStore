@@ -2,7 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
+import 'package:estore/model/product_model.dart';
 import 'package:estore/screens/components/my_carousel.dart';
+import 'package:estore/services/apis_services.dart';
 import 'package:estore/widgets/my_container.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +16,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ApiServices _apiServices = ApiServices();
+  late  Future<List<Products>> futureProducts;
+
+  @override
+  void initState() {
+    super.initState();
+setState(() {
+  futureProducts = _apiServices.getAllProducts();
+});
+
+  }
   @override
   Widget build(BuildContext context) {
+    futureProducts;
     double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       // shrinkWrap: true,
@@ -37,11 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       MyContainer(
-                          txt: "Top Categories", img: ImagesPath.category),
-                      MyContainer(txt: "Brands", img: ImagesPath.brand),
-                      MyContainer(txt: "Top Sellers", img: ImagesPath.top),
-                      MyContainer(txt: "Today Deals", img: ImagesPath.today),
-                      MyContainer(txt: "Flash Side", img: ImagesPath.flash),
+                          txt:getTranslated(context, "top_categories").toString(),img: ImagesPath.category),
+                      MyContainer(txt: getTranslated(context, "brand").toString(), img: ImagesPath.brand),
+                      MyContainer(txt: getTranslated(context, "top_sellers").toString(), img: ImagesPath.top),
+                      MyContainer(txt: getTranslated(context, "today_deals").toString(), img: ImagesPath.today),
+                      MyContainer(txt: getTranslated(context, "flash_side").toString(), img: ImagesPath.flash),
                     ],
                   ),
                 ],
@@ -55,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 5.0,right: 5.0),
-              child: AutoSizeText("Featured Categories", style: kSemiBold(blackColor)),
+              child: AutoSizeText(getTranslated(context, "featured_categories").toString(), style: kBold(blackColor,14.0)),
             ),
             const SizedBox(
               height: 10,
@@ -84,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 5.0,right: 5.0),
-              child: Text("Featured Products", style: kSemiBold(blackColor)),
+              child: Text(getTranslated(context, "featured_product").toString(), style: kBold(blackColor,14.0)),
             ),
             const SizedBox(
               height: 10,
@@ -93,24 +108,32 @@ class _HomeScreenState extends State<HomeScreen> {
               // height: MediaQuery.of(context).size.height*0.35,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(15)),
-              child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio:
-                    MediaQuery.of(context).size.width /
-                        (MediaQuery.of(context).size.height * 0.94),
-                  ),
-                  itemCount: 10,
-                  itemBuilder: (BuildContext ctx, index) {
-                    return MyProductContainerg(
-                      txt: "Categories",
-                      img: ImagesPath.watch,
-                      color: "pacific_cube",
-                      price: ("\$888.00"),
-                    );
-                  }),
+              child: FutureBuilder(
+                future: futureProducts,
+    builder: (BuildContext context, AsyncSnapshot snapshot) {
+    if(snapshot.hasData){
+                return GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio:
+                      MediaQuery.of(context).size.width /
+                          (MediaQuery.of(context).size.height * 0.94),
+                    ),
+                    itemCount: 1,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return MyProductContainerg(
+                       // txt:snapshot.data.name,
+                        //"Categories",
+                        img: ImagesPath.watch,
+                        color: "pacific_cube",
+                       // price: snapshot.data.price,
+                      );
+                    });}
+                return const CircularProgressIndicator();
+                }
+              ),
             ),
           ],
         ),

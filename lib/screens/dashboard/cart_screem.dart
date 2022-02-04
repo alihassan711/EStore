@@ -1,6 +1,7 @@
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
 import 'package:estore/utils/elevated_button.dart';
 import 'package:estore/widgets/cart_card.dart';
 import 'package:flutter/material.dart';
@@ -57,15 +58,15 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 }),
           ),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0,right: 8.0),
               child: Column(
                 children: [
-                  _container("SubTotal", subTotal,14.0),
-                  _container("DisCount", disCount,14.0),
-                  _container("Delivery Charges", deliveryCharges,14.0),
-                  _container("Order Total", orderTotal,14.0),
+                  _container(getTranslated(context, "sub_total").toString(), subTotal,14.0),
+                  _container(getTranslated(context, "discount").toString(), disCount,14.0),
+                  _container(getTranslated(context, "delivery_charges").toString(), deliveryCharges,14.0),
+                  _container(getTranslated(context, "order_total").toString(), orderTotal,14.0),
                 ],
               ),
             ),
@@ -75,7 +76,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
             btnWidth: 300,
             color: kIconColorRed,
             btnTxtSize: 14,
-            text: "Proceed To Cart",
+            text:getTranslated(context, "order_proceed").toString(),
             circularSize: 8,
             txtColor: whiteColor,
             onPress: () {

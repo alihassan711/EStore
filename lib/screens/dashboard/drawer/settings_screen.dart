@@ -3,6 +3,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
+import 'package:estore/screens/dashboard/drawer/help_support_screen.dart';
+import 'package:estore/screens/dashboard/drawer/language_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
-          "Settings",
+          getTranslated(context, "settings").toString(),
           style: kBold(kIconColorGreen, 20.0),
         ),
         centerTitle: true,
@@ -95,7 +98,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ],
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -106,12 +109,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               width: 12,
                             ),
                             AutoSizeText(
-                              "Profile Settings",
+                                getTranslated(context, "profile_settings").toString(),
                               style: kBold(blackColor, 14.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
-                              "Edit",
+                              getTranslated(context, "edit").toString(),
                               style: kBold(blackColor, 14.0),
                             )
                           ],
@@ -122,7 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              "Full name",
+                              getTranslated(context, "name").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
@@ -138,12 +141,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              "Email",
+                              getTranslated(context, "email").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
-                              "abdul23@xyz.com",
+                              "abdul1234@xyz.com",
                               style: kNormalBlack(blackColor),
                             )
                           ],
@@ -154,7 +157,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              "Phone",
+                            getTranslated(context, "phone").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
@@ -170,7 +173,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              "Address",
+                              getTranslated(context, "address").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
@@ -186,7 +189,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              "About",
+                              getTranslated(context, "about").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
@@ -231,7 +234,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               width: 12,
                             ),
                             AutoSizeText(
-                              "App Settings",
+                              getTranslated(context, "app_settings").toString(),
                               style: kBold(blackColor, 13.0),
                             ),
                           ],
@@ -239,37 +242,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const SizedBox(
                           height: 12,
                         ),
-                        Row(
-                          children: [
-                            const Icon(Icons.translate),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            AutoSizeText(
-                              "Language",
-                              style: kBold(blackColor, 13.0),
-                            ),
-                            const Spacer(),
-                            AutoSizeText(
-                              "English",
-                              style: kNormalBlack(blackColor),
-                            )
-                          ],
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LanguageScreen()));
+                          },
+                          child: Row(
+                            children: [
+                              const Icon(Icons.translate),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              AutoSizeText(
+                                  getTranslated(context, "language").toString(),
+                                style: kBold(blackColor, 13.0),
+                              ),
+                              const Spacer(),
+                              AutoSizeText(
+                                getTranslated(context, "english").toString(),
+                                style: kNormalBlack(blackColor),
+                              )
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 12,
                         ),
-                        Row(
-                          children: [
-                            const Icon(Icons.person),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            AutoSizeText(
-                              "Help & Support",
-                              style: kBold(blackColor, 13.0),
-                            ),
-                          ],
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HelpScreen()));
+                          },
+                          child: Row(
+                            children: [
+                              const Icon(Icons.person),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              AutoSizeText(
+                                getTranslated(context, "help_support").toString(),
+                                style: kBold(blackColor, 13.0),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

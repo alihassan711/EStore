@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
 import 'package:flutter/material.dart';
 
 class HistoryCard extends StatelessWidget {
@@ -34,7 +35,7 @@ class HistoryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                 child: AutoSizeText(
                   "2021-02-12",
                   style: kBold(kIconColorRed, 16.0),
@@ -78,7 +79,7 @@ class HistoryCard extends StatelessWidget {
                     width: 16,
                   ),
                   Text(
-                    "Payment Status -Paid",
+                    getTranslated(context, "payment_status").toString(),
                     style: kBold(blackColor, 12.0),
                   ),
                   const SizedBox(
@@ -105,7 +106,7 @@ class HistoryCard extends StatelessWidget {
                     width: 16,
                   ),
                   AutoSizeText(
-                    "Delivery Status -Order Placed",
+                    getTranslated(context, "delivery_status").toString(),
                     style: kBold(blackColor, 12.0),
                   ),
                 ],

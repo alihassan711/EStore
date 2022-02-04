@@ -3,12 +3,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/dashboard/drawer/help_support_screen.dart';
 import 'package:estore/screens/dashboard/drawer/history_screen.dart';
 import 'package:estore/screens/dashboard/drawer/language_screen.dart';
 import 'package:estore/screens/dashboard/drawer/my_order_screen.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
-import 'package:estore/screens/dashboard/settings_screen.dart';
+import 'package:estore/screens/dashboard/drawer/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../main.dart';
@@ -52,7 +53,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
             accountEmail: Row(
               children: const [
-                AutoSizeText("bushra@xyz.com"),
+                AutoSizeText("bushra1223@xyz.com"),
                 // Switch(value: attendence, onChanged: (value) {setState(){
                 //   attendence =value;
                 // }}),
@@ -64,7 +65,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           ListTile(
-              title: AutoSizeText("Orders", style: kSemiBold(blackColor)),
+              title: AutoSizeText(getTranslated(context, "order").toString(), style: kSemiBold(blackColor)),
               leading: const Icon(Icons.add_shopping_cart),
               onTap: () {
                 Navigator.push(context,
@@ -73,14 +74,14 @@ class _MyDrawerState extends State<MyDrawer> {
               //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
               ),
           ListTile(
-            title: AutoSizeText("Notification", style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "notification").toString(), style: kSemiBold(blackColor)),
             leading: const Icon(Icons.notifications_active_outlined),
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => NotificationScreen())),
             //    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: AutoSizeText("History", style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "history").toString(), style: kSemiBold(blackColor)),
             leading: const Icon(Icons.history),
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => PurchaseHistory())),
@@ -91,7 +92,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 style: kBold(blackColor, 16.0)),
           ),
           ListTile(
-            title: AutoSizeText("Help/Support", style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "help_support").toString(), style: kSemiBold(blackColor)),
             leading: const Icon(Icons.help_outline),
             onTap: () => Navigator.push(
                 context,
@@ -107,7 +108,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 MaterialPageRoute(builder: (context) => SettingsScreen())),
           ),
           ListTile(
-            title: AutoSizeText("Language", style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "language").toString(), style: kSemiBold(blackColor)),
             leading: const Icon(Icons.language),
             onTap: () => Navigator.push(
                 context,
@@ -116,10 +117,10 @@ class _MyDrawerState extends State<MyDrawer> {
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-              title:_isdark!?
-                 AutoSizeText("Dark Mode", style: kSemiBold(blackColor))
+              title:_isdark! == false?
+                 AutoSizeText(getTranslated(context, "dark_mode").toString(), style: kSemiBold(blackColor))
                   :
-              AutoSizeText("Light Mode", style: kSemiBold(whiteColor)),
+              AutoSizeText(getTranslated(context, "light_mode").toString(), style: kSemiBold(whiteColor)),
               leading: const Icon(Icons.track_changes),
               onTap: () {
                 setState(() {
@@ -131,7 +132,7 @@ class _MyDrawerState extends State<MyDrawer> {
               //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
               ),
           ListTile(
-              title: AutoSizeText("SignOut", style: kSemiBold(blackColor)),
+              title: AutoSizeText(getTranslated(context, "sign_out").toString(), style: kSemiBold(blackColor)),
               leading: const Icon(Icons.logout),
               onTap: () async {
                 // SharedPreferences prefs = await SharedPreferences.getInstance();

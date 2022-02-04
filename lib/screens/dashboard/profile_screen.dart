@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/dashboard/drawer/history_screen.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/utils/elevated_button.dart';
@@ -32,7 +33,7 @@ class UserProfile extends StatelessWidget {
             onPress: (){
 
             },
-            text: "Check Balance",
+            text: getTranslated(context, "check_Balance").toString(),
             color: kIconColorGreen,
             btnTxtSize: 12,
             circularSize: 10.0,
@@ -48,21 +49,21 @@ class UserProfile extends StatelessWidget {
                 children: [
                   Text("72",style: kBold(blackColor, 14.0),),
                   const SizedBox(height: 5,),
-                  Text("In yor cart",style: kNormalBlack(blackColor),),
+                  Text(getTranslated(context, "in_your_cart").toString(),style: kNormalBlack(blackColor),),
                 ],
               ),
               Column(
                 children: [
                   Text("12",style: kBold(blackColor, 14.0),),
                   const SizedBox(height: 5,),
-                  Text("In yor wish list",style: kNormalBlack(blackColor),),
+                  Text(getTranslated(context, "in_your_wish_list").toString(),style: kNormalBlack(blackColor),),
                 ],
               ),
               Column(
                 children: [
                   AutoSizeText("14",style: kBold(blackColor, 14.0),),
                   const SizedBox(height: 5,),
-                  AutoSizeText("Ordered",style: kNormalBlack(blackColor),),
+                  AutoSizeText(getTranslated(context, "ordered").toString(),style: kNormalBlack(blackColor),),
                 ],
               ),
             ],
@@ -94,31 +95,31 @@ class UserProfile extends StatelessWidget {
                             MaterialPageRoute(builder: (ctx) => const MyOrderScreen()));
                        },
                       child: MyProfileContainer(
-                        txt: "Order",
+                        txt:getTranslated(context, "order").toString(),
                         icon: const Icon(Icons.list,size:28,color:kIconColorRed ,),
                       ),
                     ),
                     InkWell(
                       onTap: (){print("Profile");},
                       child: MyProfileContainer(
-                        txt: "Profile",
+                        txt:getTranslated(context, "profile").toString(),
                         icon:const Icon(Icons.person,size:28,color: kIconColorBlue,),
                       ),
                     ),
                     InkWell(
                       onTap: (){print("Address");},
                       child: MyProfileContainer(
-                        txt: "Address",
+                        txt: getTranslated(context, "address").toString(),
                         icon:const Icon(Icons.location_on,size:28,color: kIconColorYellow,),
                       ),
                     ),
                     InkWell(
                       onTap: (){
-                        Navigator.push(context,
+                        Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (ctx) => const ConversationPage()));
                         print("Message");},
                       child: MyProfileContainer(
-                        txt: "Message",
+                        txt: getTranslated(context, "message").toString(),
                         icon:const Icon(Icons.message,size:28,color: kIconColorGreen,),
                       ),
                     ),
@@ -133,7 +134,7 @@ class UserProfile extends StatelessWidget {
                Navigator.push(context,
                    MaterialPageRoute(builder: (ctx) => const NotificationScreen()));
              },
-            title: AutoSizeText("Notifications",style: kBold(blackColor,12.0),),
+            title: AutoSizeText(getTranslated(context, "notification").toString(),style: kBold(blackColor,12.0),),
             leading: const CircleAvatar(
               radius: 17,
               backgroundColor: kIconColorYellow,
@@ -141,7 +142,7 @@ class UserProfile extends StatelessWidget {
             ),
           ),
            ListTile(
-            title: AutoSizeText("Purchase History",style: kBold(blackColor,12.0),),
+            title: AutoSizeText(getTranslated(context, "purchase_history").toString(),style: kBold(blackColor,12.0),),
             leading: const CircleAvatar(
               radius: 17,
               backgroundColor: kIconColorGreen,

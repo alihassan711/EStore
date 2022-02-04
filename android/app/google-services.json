@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "122212942455",
+    "project_id": "estore-5b850",
+    "storage_bucket": "estore-5b850.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122212942455:android:d1b14b2de33dc1d3e7bc72",
+        "android_client_info": {
+          "package_name": "com.example.estore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122212942455-2teahaci3u5dts49hpm6d8gi3j3kk6nf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.estore",
+            "certificate_hash": "723ef48556ea24ab6e15b19ef07b12a9d020b432"
+          }
+        },
+        {
+          "client_id": "122212942455-rf99gqi72896r665lbsbh3q59t60ck0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMI022-7pnIFYLgcJziQDO2PrU8fneaOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122212942455-rf99gqi72896r665lbsbh3q59t60ck0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

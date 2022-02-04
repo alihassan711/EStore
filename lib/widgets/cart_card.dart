@@ -73,7 +73,7 @@ class CartCard extends StatelessWidget {
                     height: 12,
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.6,
+                    width: MediaQuery.of(context).size.width * 0.66,
                     child: Row(
                       children: [
                         AutoSizeText(

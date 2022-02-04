@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
 import 'package:estore/utils/elevated_button.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +57,7 @@ class OrderCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: 20,
+                width: 12,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +70,7 @@ class OrderCard extends StatelessWidget {
                     height: 8,
                   ),
                   AutoSizeText(
-                    "Order Proceed ${orderProceedDate!}",
+    getTranslated(context, "order_proceed").toString(),
                     style: kNormalBlack(
                       blackColor,
                     ),
@@ -96,7 +97,7 @@ class OrderCard extends StatelessWidget {
                 color: kIconColorGreen,
                 txtColor: whiteColor,
                 circularSize: 5,
-                text: "ReOrder",
+                text: getTranslated(context, "re_order").toString(),
                 btnTxtSize: 12,
                 btnWidth: 140,
 
@@ -106,7 +107,7 @@ class OrderCard extends StatelessWidget {
                 color: kIconColorBlue,
                 txtColor: whiteColor,
                 circularSize: 5,
-                text: "Rate Order",
+                text: getTranslated(context, "rate_order").toString(),
                 btnTxtSize: 12,
                 btnWidth: 140,
               ),

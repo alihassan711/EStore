@@ -2,13 +2,6 @@
 // import 'dart:io';
 // import 'package:flutter/material.dart';
 // import 'package:flutter/src/widgets/framework.dart';
-// import 'package:reuseabledata/constants/urls.dart';
-// import 'package:reuseabledata/model/album_model.dart';
-// import 'package:reuseabledata/model/api_error_handling.dart';
-// import 'package:reuseabledata/model/category_model.dart';
-// import 'package:reuseabledata/model/offer_model.dart';
-// import 'package:reuseabledata/model/product_model.dart';
-// import 'package:reuseabledata/model/user_model.dart';
 // import 'package:http/http.dart' as http;
 //
 // class ApiServices {
@@ -353,3 +346,91 @@
 //     ));
 //   }
 // }
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:estore/model/all_categories_model.dart';
+import 'package:estore/utils/urls.dart';
+import 'package:http/http.dart' as http;
+import 'package:estore/model/product_model.dart';
+import 'package:http/http.dart';
+Products globalUserData = Products();
+class ApiServices {
+//   static Future<List<dynamic>> getAllProducts() async {
+// //final uri = Uri.http(authority, '/user/getSingleUser', queryParameters);
+//     final response = await http.get(Uri.parse(Urls.allProducts));
+//     print(response.body);
+//     print("Status Code ====> ${response.statusCode}");
+//     globalUserData = Products.fromJson(json.decode(response.body));
+//     return Products.fromJson(json.decode(response.body));
+//   }
+
+  // Future<Products> getAllProducts() async {
+  //   final response = await http
+  //       .get(Uri.parse(Urls.allProducts));
+  //
+  //   if (response.statusCode == 200) {
+  //     // If the server did return a 200 OK response,
+  //     // then parse the JSON.
+  //     print("status code ===> ${response.statusCode}");
+  //     print("body ===> ${response.body}");
+  //     return Products.fromJson(jsonDecode(response.body));
+  //   } else {
+  //     // If the server did not return a 200 OK response,
+  //     // then throw an exception.
+  //     throw Exception('Failed to load album');
+  //   }
+  // }
+  // static Future<List<CategoryModel>> getShopProducts() async {
+  //   List<CategoryModel> allCategories = [];
+  //   try {
+  //     final response = await http.get(Uri.parse(Urls.allCategories));
+  //     if (response.statusCode == 200) {
+  //       allCategories = categoryModelFromJson(json.decode((response.body)));
+  //     } else {
+  //       return [];
+  //     }
+  //   } on SocketException {
+  //     print("No Internet connection");
+  //   }
+  //   return allCategories;
+  // }
+
+  Future<List<Products>> getAllProducts() async {
+    List<Products> _slider = [];
+    final response = await http.get(Uri.parse(Urls.allProducts));
+    if (response.statusCode == 200) {
+      _slider = Products.fromJson(json.decode(response.body)["data"]) as List<Products>;
+      return _slider;
+    } else {
+      return [];
+    }
+  }
+
+  Future<Products> getProducts() async {
+      final response = await http
+          .get(Uri.parse(Urls.allProducts));
+      if (response.statusCode == 200) {
+        // If the server did return a 200 OK response,
+        // then parse the JSON.
+        print("status code ===> ${response.statusCode}");
+        print("body ===> ${response.body}");
+        return Products.fromJson(jsonDecode(response.body));
+      } else {
+        // If the server did not return a 200 OK response,
+        // then throw an exception.
+        throw Exception('Failed to load album');
+      }
+    }
+
+  Future<List<CategoryModel>> getAllCategories() async {
+    List<CategoryModel> _slider = [];
+    final response = await http.get(Uri.parse(Urls.allProducts));
+    if (response.statusCode == 200) {
+      _slider = categoryModelFromJson(json.decode(response.body)["data"]);
+      return _slider;
+    } else {
+      return [];
+    }
+  }
+}

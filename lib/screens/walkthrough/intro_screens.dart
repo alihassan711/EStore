@@ -1,6 +1,7 @@
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
+import 'package:estore/screens/onboarding/sign_in_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
@@ -273,9 +274,9 @@ class IntroScreenState extends State<IntroScreen> {
 
   void onDonePress() {
     // Do what you want
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const MainScreen()),
+      MaterialPageRoute(builder: (context) =>  SignInScreen()),
     );
   }
 

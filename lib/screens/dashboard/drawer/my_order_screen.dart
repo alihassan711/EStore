@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
 import 'package:estore/widgets/orders_card.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         title: AutoSizeText(
-          "My Orders",
+            getTranslated(context, "my_order").toString(),
           style: kBold(kIconColorRed, 20.0),
         ),
         centerTitle: true,

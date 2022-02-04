@@ -33,7 +33,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       img: ImagesPath.burger,
                       itemPrice: itemPrice,
                       titleText: "Chickn Burger",
-                      brandName: "McDonald",
+                      brandName: "Mcdonald",
                     ),
                   );
                 }),
