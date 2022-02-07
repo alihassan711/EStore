@@ -88,8 +88,8 @@ class MyProfileContainer extends StatelessWidget {
 }
 
 class MyProductContainer extends StatelessWidget {
-  String? txt, img;
-  MyProductContainer({this.txt, this.img, Key? key}) : super(key: key);
+  String? txt,id, img;
+  MyProductContainer({this.txt,this.id, this.img, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +115,13 @@ class MyProductContainer extends StatelessWidget {
           // ),
           Padding(
             padding: const EdgeInsets.only(bottom: 6.0,left: 6.0,right: 6.0),
-            child: AutoSizeText(txt!),
+            child: Column(
+              children: [
+                AutoSizeText("Name: $txt"),
+                SizedBox(height: 5,),
+                AutoSizeText("Id: $id"),
+              ],
+            ),
           ),
         ],
       ),
@@ -124,8 +130,8 @@ class MyProductContainer extends StatelessWidget {
 }
 
 class MyProductContainerg extends StatelessWidget {
-  String? txt, img, color, price;
-  MyProductContainerg({this.txt, this.img, this.color, this.price, Key? key})
+  String? txt, img, price;
+  MyProductContainerg({this.txt, this.img,this.price, Key? key})
       : super(key: key);
 
   @override
@@ -145,7 +151,7 @@ class MyProductContainerg extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 100,
+                height: 85,
                 width: 100,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
@@ -163,23 +169,23 @@ class MyProductContainerg extends StatelessWidget {
                   style: kNormalBlack(blackColor),
                 ),
               ),
+              // const SizedBox(
+              //   height: 5,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              //   child: AutoSizeText(
+              //       txt!,
+              //     style: kNormalBlack(blackColor),
+              //   ),
+              // ),
               const SizedBox(
                 height: 5,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0,right: 8.0),
                 child: AutoSizeText(
-                  color!,
-                  style: kNormalBlack(blackColor),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-                child: AutoSizeText(
-                  price!,
+                  "price $price",
                   style: kNormalBlack(kIconColorRed),
                 ),
               ),

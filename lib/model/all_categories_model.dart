@@ -1,7 +1,6 @@
 List<CategoryModel> categoryModelFromJson(List<dynamic> str) =>
     List<CategoryModel>.from((str).map((x) => CategoryModel.fromJson(x)));
 
-
 class CategoryModel {
   CategoryModel({
     this.id,

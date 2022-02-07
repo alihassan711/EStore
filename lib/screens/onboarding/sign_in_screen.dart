@@ -1,10 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/model/language.dart';
+import 'package:estore/screens/dashboard/home_screen.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/screens/onboarding/signup_btns_screen.dart';
+import 'package:estore/services/apis_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../main.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -13,6 +17,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  ApiServices _repository = ApiServices();
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
@@ -178,10 +183,14 @@ class _SignInScreenState extends State<SignInScreen> {
                         fontSize: 18.0),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MainScreen()));
+                    Navigator.pushReplacement(context,  MaterialPageRoute(
+                        builder: (_) => BlocProvider(
+                            create: (BuildContext context) =>
+                                CategoryCubit(repository: _repository),
+                            child: const MainScreen(
+                              // form: args.toString(),
+                            ))))
+                   ;
                   },
                 ),
               )),

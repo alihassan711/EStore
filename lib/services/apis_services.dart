@@ -354,7 +354,6 @@ import 'package:estore/utils/urls.dart';
 import 'package:http/http.dart' as http;
 import 'package:estore/model/product_model.dart';
 import 'package:http/http.dart';
-Products globalUserData = Products();
 class ApiServices {
 //   static Future<List<dynamic>> getAllProducts() async {
 // //final uri = Uri.http(authority, '/user/getSingleUser', queryParameters);
@@ -396,39 +395,39 @@ class ApiServices {
   //   return allCategories;
   // }
 
-  Future<List<Products>> getAllProducts() async {
-    List<Products> _slider = [];
+  // Future<List<Products>> getAllProducts() async {
+  //   List<Products> _slider = [];
+  //   final response = await http.get(Uri.parse(Urls.allProducts));
+  //   if (response.statusCode == 200) {
+  //     print("status code ===> ${response.statusCode}");
+  //     print("body ===> ${response.body}");
+  //     _slider = json.decode(response.body);
+  //     return _slider;
+  //   } else {
+  //     return [];
+  //   }
+  // }
+  Future<List<ProductModel>> getAllProducts() async {
+    List<ProductModel> category = [];
     final response = await http.get(Uri.parse(Urls.allProducts));
     if (response.statusCode == 200) {
-      _slider = Products.fromJson(json.decode(response.body)["data"]) as List<Products>;
-      return _slider;
+      print("status code ===> ${response.statusCode}");
+      print("product body ===> ${response.body}");
+      category = productModelFromJson(json.decode(response.body)["ret_view_array"]["products"]["data"]);
+      return category;
     } else {
       return [];
     }
   }
-
-  Future<Products> getProducts() async {
-      final response = await http
-          .get(Uri.parse(Urls.allProducts));
-      if (response.statusCode == 200) {
-        // If the server did return a 200 OK response,
-        // then parse the JSON.
-        print("status code ===> ${response.statusCode}");
-        print("body ===> ${response.body}");
-        return Products.fromJson(jsonDecode(response.body));
-      } else {
-        // If the server did not return a 200 OK response,
-        // then throw an exception.
-        throw Exception('Failed to load album');
-      }
-    }
-
+//products
   Future<List<CategoryModel>> getAllCategories() async {
-    List<CategoryModel> _slider = [];
-    final response = await http.get(Uri.parse(Urls.allProducts));
+    List<CategoryModel> category = [];
+    final response = await http.get(Uri.parse(Urls.allCategories));
     if (response.statusCode == 200) {
-      _slider = categoryModelFromJson(json.decode(response.body)["data"]);
-      return _slider;
+      print("status code ===> ${response.statusCode}");
+      print("category body ===> ${response.body}");
+      category = categoryModelFromJson(json.decode(response.body)["categories"]);
+      return category;
     } else {
       return [];
     }
