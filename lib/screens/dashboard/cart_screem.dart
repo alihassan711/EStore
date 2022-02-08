@@ -6,6 +6,8 @@ import 'package:estore/utils/elevated_button.dart';
 import 'package:estore/widgets/cart_card.dart';
 import 'package:flutter/material.dart';
 
+import 'location_screen.dart';
+
 class MyCartScreen extends StatefulWidget {
   const MyCartScreen({Key? key}) : super(key: key);
   @override
@@ -81,6 +83,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
             txtColor: whiteColor,
             onPress: () {
               setState(() {});
+             // Navigator.push(context, MaterialPageRoute(builder: (builder)=>MyLocation()));
               print("proceed order");
             },
           //  btnWidth: 200,

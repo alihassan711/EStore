@@ -157,6 +157,7 @@
   "light_mode": "لائٹ موڈ",
   "order_proceed": "آرڈر آگے بڑھائیں",
   "urdu": "اردو",
+  "languages": "زبانیں",
   "arabic": "عربی",
   "app_settings": "ایپ کی ترتیب",
   "english": "انگریزی",
@@ -181,6 +182,11 @@
   "google_sign_in": "گوگل کے ساتھ سائن ان کریں",
   "apple_sign_in": "ایپل کے ساتھ سائن ان کریں",
   "phone_sign_in": "فون کے ساتھ سائن ان کریں",
-  "email_sign_in": "ای میل کے ساتھ سائن ان کریں"
-
+  "email_sign_in": "ای میل کے ساتھ سائن ان کریں",
+  "accessories": "لوازمات",
+  "Add_to_cart": "ٹوکری میں شامل کریں",
+  "price": "قیمت",
+  "please_select_color": "براہ کرم رنگ منتخب کریں۔",
+  "please_select_size": "براہ کرم سائز منتخب کریں۔",
+  "application_preferences": "درخواست کی ترجیحات"
 }

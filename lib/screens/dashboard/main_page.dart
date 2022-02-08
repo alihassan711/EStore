@@ -2,6 +2,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
+import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/chat_screen.dart';
 import 'package:estore/screens/components/my_drawer.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
@@ -26,28 +27,51 @@ class _MainScreenState extends State<MainScreen> {
   int pageIndex = 0;
 
   final pages = [
- const HomeScreen(),
+    const HomeScreen(),
     const ChatScreen(),
     const FavouriteScreen(),
     const MyCartScreen(),
     const UserProfile(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: whiteColor,
         elevation: 0.0,
+        toolbarHeight: 60.0,
+        // title:
+        /*
+         TextField(
+          cursorColor: Colors.white,
+          decoration: InputDecoration(
+              hintText:getTranslated(context, 'search').toString(),
+              border: InputBorder.none,
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.search),
+                color: const Color.fromRGBO(93, 25, 72, 1),
+                onPressed: () {
+                },
+              )),
+          style: const TextStyle(color: blackColor, fontSize: 15.0),
+           onSaved: (value) {
+             onSearchTextChanged(value!);
+           },
+           onChanged: (String value) async {
+             onSearchTextChanged(value);
+           },
+
+        ),
+        */
         actions: [
-          IconBtn(
-            icon: const Icon(
-              Icons.search,
-              color: blackColor,
-            ),
-            onPress: () {},
-            color: blackColor,
-          ),
+          // IconBtn(
+          //   icon: const Icon(
+          //     Icons.search,
+          //     color: blackColor,
+          //   ),
+          //   onPress: () {},
+          //   color: blackColor,
+          // ),
           IconBtn(
             icon: const Icon(
               Icons.notifications_active_outlined,
@@ -55,7 +79,8 @@ class _MainScreenState extends State<MainScreen> {
             ),
             onPress: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (ctx) => const NotificationScreen()));
+                  MaterialPageRoute(
+                      builder: (ctx) => const NotificationScreen()));
             },
             color: blackColor,
           ),
@@ -64,8 +89,8 @@ class _MainScreenState extends State<MainScreen> {
       ),
       drawer: MyDrawer(),
       body: DoubleBackToCloseApp(
-          snackBar: const SnackBar(
-            content: Text('Tap back again to leave'),
+          snackBar: SnackBar(
+            content: Text(getTranslated(context, 'exit_app').toString(),),
           ),
           child: pages[pageIndex]),
       bottomNavigationBar: buildMyNavBar(context),
@@ -78,10 +103,10 @@ class _MainScreenState extends State<MainScreen> {
       decoration: const BoxDecoration(
         // color: Colors.black87,
         // color: Theme.of(context).primaryColor,
-       // borderRadius: BorderRadius.only(
-          //topLeft: Radius.circular(20),
-          //topRight: Radius.circular(20),
-      //  ),
+        // borderRadius: BorderRadius.only(
+        //topLeft: Radius.circular(20),
+        //topRight: Radius.circular(20),
+        //  ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -132,15 +157,15 @@ class _MainScreenState extends State<MainScreen> {
               },
               icon: pageIndex == 2
                   ? const Icon(
-                      Icons.favorite,
-                      color: kIconColorRed,
-                      size: 30,
-                    )
+                Icons.favorite,
+                color: kIconColorRed,
+                size: 30,
+              )
                   : const Icon(
-                      Icons.favorite_border,
-                      color: kGrey,
-                      size: 30,
-                    ),
+                Icons.favorite_border,
+                color: kGrey,
+                size: 30,
+              ),
             ),
             IconBtn(
               //enableFeedback: false,
@@ -204,4 +229,19 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
+/*
+  onSearchTextChanged(String text) async {
+    if (text.length == 0) {
+      userSearch = false;
+    } else {
+      userSearch = true;
+      _userSearchList = await _list
+          .where((element) =>
+          element.uniqname!.toLowerCase().startsWith(text.toLowerCase()))
+          .toList();
+    }
+    setState(() {});
+  }
+
+   */
 }

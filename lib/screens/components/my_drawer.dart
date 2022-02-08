@@ -88,7 +88,7 @@ class _MyDrawerState extends State<MyDrawer> {
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: AutoSizeText("Application Preferences",
+            title: AutoSizeText(getTranslated(context, "application_preferences").toString(),
                 style: kBold(blackColor, 16.0)),
           ),
           ListTile(
@@ -101,7 +101,7 @@ class _MyDrawerState extends State<MyDrawer> {
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: AutoSizeText("Settings", style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "settings").toString(), style: kSemiBold(blackColor)),
             leading: const Icon(Icons.settings),
             //  onTap: () => Navigator.pushNamed(context, '/Settings'),
             onTap: () => Navigator.push(context,
@@ -117,7 +117,7 @@ class _MyDrawerState extends State<MyDrawer> {
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-              title:_isdark! == false?
+              title:_isdark!?
                  AutoSizeText(getTranslated(context, "dark_mode").toString(), style: kSemiBold(blackColor))
                   :
               AutoSizeText(getTranslated(context, "light_mode").toString(), style: kSemiBold(whiteColor)),
@@ -157,7 +157,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 //     MaterialPageRoute(builder: (context) {
                 //       return SignIn();
                 //     }));
-              })
+              }),
         ],
       ),
     );

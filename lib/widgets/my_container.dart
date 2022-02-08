@@ -185,7 +185,7 @@ class MyProductContainerg extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0,right: 8.0),
                 child: AutoSizeText(
-                  "price $price",
+                  "$price",
                   style: kNormalBlack(kIconColorRed),
                 ),
               ),

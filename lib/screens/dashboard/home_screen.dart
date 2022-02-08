@@ -6,8 +6,9 @@ import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/model/all_categories_model.dart';
+import 'package:estore/model/product_model.dart';
 import 'package:estore/screens/components/my_carousel.dart';
-import 'package:estore/screens/dashboard/product_detail_screen.dart';
+import 'package:estore/screens/dashboard/products/product_detail_screen.dart';
 import 'package:estore/widgets/my_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool userSearch = false;
+  List<ProductModel> _userSearchList = [];
+  List<ProductModel> _list = [];
+
   late Future<List<CategoryModel>> category;
 
   @override
@@ -201,14 +206,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                           ProductDetailScreen(name: users[index].name.toString(),)));
+                                           ProductDetailScreen(name: users[index].name.toString(),price: users[index].price.toString(),description:users[index].description.toString(),)));
                             },
                             child: MyProductContainerg(
                               // txt:snapshot.data.name,
                               //"Categories",
-                              img: ImagesPath.watch,
+                              img:ImagesPath.watch,
+                              //users[index].image.toString(),
                               txt: users[index].name.toString(),
-                              price: users[index].price.toString(),
+                              price: "${getTranslated(context, 'price').toString()}: ${users[index].price.toString()}",
                               // price: snapshot.data.price,
                             ),
                           );
@@ -304,4 +310,16 @@ class _HomeScreenState extends State<HomeScreen> {
   //     });
   //   }
   // }
+  onSearchTextChanged(String text) async {
+    if (text.length == 0) {
+      userSearch = false;
+    } else {
+      userSearch = true;
+      _userSearchList = await _list
+          .where((element) =>
+          element.uniqname!.toLowerCase().startsWith(text.toLowerCase()))
+          .toList();
+    }
+    setState(() {});
+  }
 }

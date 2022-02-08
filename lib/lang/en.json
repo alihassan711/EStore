@@ -29,6 +29,7 @@
   "light_mode": "Light Mode",
   "order_proceed": "Proceed Order",
   "urdu": "Urdu",
+  "languages": "Languages",
   "arabic": "Arabic",
   "english": "English",
   "app_language": "App Language",
@@ -81,11 +82,16 @@
   "exit_msg": "Are you sure you want to exit from application?",
   "shop_here": "Shop Here",
   "help": "Help",
-
   "facebook_sign_in": "Sign in with FaceBook",
   "google_sign_in": "Sign in with Google",
   "apple_sign_in": "Sign in with Apple",
   "phone_sign_in": "Sign in with Phone",
-  "email_sign_in": "Sign in with Email"
+  "email_sign_in": "Sign in with Email",
+  "accessories": "Accessories",
+  "Add_to_cart": "Add To Cart",
+  "price": "Price",
+  "please_select_color": "Please Select Color",
+  "please_select_size": "Please Select Size",
+  "application_preferences": "Please Select Size"
 }
 

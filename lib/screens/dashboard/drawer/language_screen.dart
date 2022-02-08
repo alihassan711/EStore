@@ -27,7 +27,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
-          "Languages",
+            getTranslated(context, "languages").toString(),
           style: kBold(kIconColorGreen, 20.0),
         ),
         centerTitle: true,
@@ -98,14 +98,14 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        "App Language",
+                        getTranslated(context, "app_language").toString(),
                         style: kBold(blackColor, 16.0),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       AutoSizeText(
-                        "Select your own preffered Language",
+                        getTranslated(context, "select_own_language").toString(),
                         style: kNormalBlack(blackColor),
                       )
                     ],
@@ -116,108 +116,123 @@ class _LanguageScreenState extends State<LanguageScreen> {
             const SizedBox(
               height: 14,
             ),
-            Card(
-              elevation: 1.0,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: whiteColor,
-                      radius: 30,
-                      backgroundImage: ExactAssetImage(
-                        ImagesPath.pak,
+            GestureDetector(
+              onTap: (){
+                print("Urdu");
+              },
+              child: Card(
+                elevation: 1.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: whiteColor,
+                        radius: 30,
+                        backgroundImage: ExactAssetImage(
+                          ImagesPath.pak,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 14,
-                    ),
-                    Column(
-                      children: [
-                        AutoSizeText(
-                          "Urdu",
-                          style: kBold(blackColor, 16.0),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        AutoSizeText(
-                          "Urdu",
-                          style: kNormalBlack(blackColor),
-                        ),
-                      ],
-                    ),
-                  ],
+                      const SizedBox(
+                        width: 14,
+                      ),
+                      Column(
+                        children: [
+                          AutoSizeText(
+                            getTranslated(context, "urdu").toString(),
+                            style: kBold(blackColor, 16.0),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          AutoSizeText(
+                            getTranslated(context, "urdu").toString(),
+                            style: kNormalBlack(blackColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            Card(
-              elevation: 1.0,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: whiteColor,
-                      radius: 30,
-                      backgroundImage: ExactAssetImage(
-                        ImagesPath.saudia,
+            GestureDetector(
+              onTap: (){
+                print("Arabic");
+              },
+              child: Card(
+                elevation: 1.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: whiteColor,
+                        radius: 30,
+                        backgroundImage: ExactAssetImage(
+                          ImagesPath.saudia,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 14,
-                    ),
-                    Column(
-                      children: [
-                        AutoSizeText(
-                          "Arabicُ",
-                          style: kBold(blackColor, 16.0),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        AutoSizeText(
-                          "اَلْعَرَبِيَّة",
-                          style: kNormalBlack(blackColor),
-                        ),
-                      ],
-                    ),
-                  ],
+                      const SizedBox(
+                        width: 14,
+                      ),
+                      Column(
+                        children: [
+                          AutoSizeText(
+                            getTranslated(context, "arabic").toString(),
+                            style: kBold(blackColor, 16.0),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          AutoSizeText(
+                            "اَلْعَرَبِيَّة",
+                            style: kNormalBlack(blackColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            Card(
-              elevation: 1.0,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: whiteColor,
-                      radius: 30,
-                      backgroundImage: ExactAssetImage(
-                        ImagesPath.usa,
+            GestureDetector(
+              onTap: (){
+                print("english");
+              },
+              child: Card(
+                elevation: 1.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: whiteColor,
+                        radius: 30,
+                        backgroundImage: ExactAssetImage(
+                          ImagesPath.usa,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 14,
-                    ),
-                    Column(
-                      children: [
-                        AutoSizeText(
-                          "English",
-                          style: kBold(blackColor, 16.0),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        AutoSizeText(
-                          "English",
-                          style: kNormalBlack(blackColor),
-                        ),
-                      ],
-                    ),
-                  ],
+                      const SizedBox(
+                        width: 14,
+                      ),
+                      Column(
+                        children: [
+                          AutoSizeText(
+                            getTranslated(context, "english").toString(),
+                            style: kBold(blackColor, 16.0),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          AutoSizeText(
+                            getTranslated(context, "english").toString(),
+                            style: kNormalBlack(blackColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

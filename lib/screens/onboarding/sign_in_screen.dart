@@ -189,8 +189,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 CategoryCubit(repository: _repository),
                             child: const MainScreen(
                               // form: args.toString(),
-                            ))))
-                   ;
+                            ))));
                   },
                 ),
               )),

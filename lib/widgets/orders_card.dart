@@ -99,7 +99,7 @@ class OrderCard extends StatelessWidget {
                 circularSize: 5,
                 text: getTranslated(context, "re_order").toString(),
                 btnTxtSize: 12,
-                btnWidth: 140,
+               // btnWidth: 140,
 
               ),
               ElevatedBtn(
@@ -109,7 +109,7 @@ class OrderCard extends StatelessWidget {
                 circularSize: 5,
                 text: getTranslated(context, "rate_order").toString(),
                 btnTxtSize: 12,
-                btnWidth: 140,
+                btnWidth: 150,
               ),
             ],
           ),

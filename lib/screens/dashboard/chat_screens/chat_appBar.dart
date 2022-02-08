@@ -1,5 +1,6 @@
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
+import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +22,8 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: <Widget>[
           IconButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MainScreen()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) =>  NotificationScreen()));
             },
             icon: const Icon(
               Icons.arrow_back,

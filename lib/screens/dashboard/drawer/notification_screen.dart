@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/utils/no_notification.dart';
 import 'package:estore/widgets/iconbtn.dart';
@@ -27,7 +28,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
         appBar: AppBar(
           title: AutoSizeText(
-            "Notifications",
+              getTranslated(context, "notification").toString(),
             style: kBold(kIconColorRed, 20.0),
           ),
           centerTitle: true,
