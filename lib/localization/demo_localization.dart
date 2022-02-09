@@ -36,12 +36,12 @@ class _DemoLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'ur'].contains(locale.languageCode);
+    return ['en', 'ur', 'ar'].contains(locale.languageCode);
   }
 
   @override
   Future<DemoLocalization> load(Locale locale) async {
-    DemoLocalization localization = new DemoLocalization(locale);
+    DemoLocalization localization =  DemoLocalization(locale);
     await localization.load();
     return localization;
   }

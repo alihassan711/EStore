@@ -127,7 +127,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   _isdark = !_isdark!;
                 });
                 MyApp.of(context)!
-                    .changeTheme(_isdark! ? ThemeMode.dark : ThemeMode.light );
+                    .changeTheme(!_isdark! ? ThemeMode.dark : ThemeMode.light );
               }
               //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
               ),

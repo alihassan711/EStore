@@ -9,7 +9,8 @@ class Urls {
   static const String allProducts = "$baseUrl/api/all_products";
   static const String allCategories = "$baseUrl/api/all_categories";
   static const String singleProducts = "$baseUrl/api/product/hilal-bake-time-marble-cake-box";
-  static const String singleCategories = "$baseUrl/api/category/Breakfast Muffins/117";
+ // static const String singleCategories = "$baseUrl/api/category/Breakfast Muffins/117";
+  static const String singleCategories = "$baseUrl/api/category/Breakfast Muffins/2";
  // static const String tracking = "$baseUrl/Account/SaveTracdking";
  // static const String products = "$baseUrl/Products/GetProductList";
  // static const String invoice = "$baseUrl/Invoice/INVOICE_BY_CUS_CODE?cus_code=610";

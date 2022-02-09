@@ -70,17 +70,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     child: Center(
                       child: Container(
                         height: 200,
-                        width: 180,
+                        width: 200,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
-                                image: ExactAssetImage(ImagesPath.watch),
+                                image: NetworkImage(widget.img.toString()),
                                 fit: BoxFit.fill)),
                       ),
                     ),
                   ),
                 ),
                 Positioned(
-                    top: 35,
+                    top: 20,
                     right: 20,
                     child: AutoSizeText(
                       "\$ ${widget.price}",

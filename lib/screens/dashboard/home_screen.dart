@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/bloc/category/category_state.dart';
 import 'package:estore/constants/color.dart';
@@ -30,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {}
   @override
   Widget build(BuildContext context) {
+    final mqHeight = MediaQuery.of(context).size.height;
+    final mqWidth = MediaQuery.of(context).size.width;
     BlocProvider.of<CategoryCubit>(context).getCategories();
     return SingleChildScrollView(
       // shrinkWrap: true,
@@ -72,244 +73,199 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            // const SizedBox(
-            //   height: 8,
+            const SizedBox(
+              height: 10,
+            ),
+            // ListView.builder( // outer ListView
+            //   shrinkWrap: true,
+            //   itemCount: 4,
+            //   itemBuilder: (_, index) {
+            //     return Column(
+            //       children: [
+            //         Container(
+            //           color: Colors.blue,
+            //           alignment: Alignment.center,
+            //           child: Text('Header $index'),
+            //         ),
+            //         ListView.builder( // inner ListView
+            //           shrinkWrap: true, // 1st add
+            //           physics: ClampingScrollPhysics(), // 2nd add
+            //           itemCount: 10,
+            //           itemBuilder: (_, index) => ListTile(title: Text('Item $index')),
+            //         )
+            //       ],
+            //     );
+            //   },
             // ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-              child: AutoSizeText(
-                  getTranslated(context, "featured_categories").toString(),
-                  style: kBold(blackColor, 14.0)),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 165,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
-              child: BlocBuilder<CategoryCubit, CategoryState>(
-                builder: (context, state) {
-                  if (state is InitialState) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is LoadingState) {
-                    return const Center(
-                      child: Text("Loading..."),
-                    );
-                  } else if (state is ErrorState) {
-                    return const Center(
-                      child: Text("Something went wrong"),
-                    );
-                  } else if (state is LoadedState) {
-                    final List users = state.order;
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        // physics: NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: users.length,
-                        itemBuilder: (BuildContext context, index) {
-                          return MyProductContainer(
-                            txt: users[index].name.toString(),
-                            id: users[index].id.toString(),
-                            // "Jewelery &\n Watches",
-                            img: ImagesPath.jewelery,
-                          );
-                        });
-                  } else {
-                    return Center(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Loading....',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w100, fontSize: 20),
-                        ),
-                        Text(
-                          'check your internet connection!....',
-                          style:
-                              TextStyle(color: Colors.redAccent, fontSize: 10),
-                        )
-                      ],
-                    ));
-                  }
-                },
-              ),
-              /*
-              ListView.builder(
-                  shrinkWrap: true,
-                  // physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categoryData.length,
-                  itemBuilder: (BuildContext context, index) {
-                    return MyProductContainer(
-                      txt: categoryData[index].name.toString(),
-                     id: categoryData[index].id.toString(),
-                     // "Jewelery &\n Watches",
-                      img: ImagesPath.jewelery,
-                    );
-                  }),
-              */
-            ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            const SizedBox(
-              height: 18,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-              child: Text(getTranslated(context, "featured_product").toString(),
-                  style: kBold(blackColor, 14.0)),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 200,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
-              child: BlocBuilder<CategoryCubit, CategoryState>(
-                builder: (context, state) {
-                  if (state is InitialState) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is LoadingState) {
-                    return const Center(
-                      child: Text("Loading..."),
-                    );
-                  } else if (state is ErrorState) {
-                    return const Center(
-                      child: Text("Something went wrong"),
-                    );
-                  } else if (state is LoadedState) {
-                    final List users = state.product;
-                    return GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: MediaQuery.of(context).size.width /
-                              (MediaQuery.of(context).size.height * 0.94),
-                        ),
-                        itemCount: users.length,
-                        itemBuilder: (BuildContext ctx, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                           ProductDetailScreen(name: users[index].name.toString(),price: users[index].price.toString(),description:users[index].description.toString(),)));
-                            },
-                            child: MyProductContainerg(
-                              // txt:snapshot.data.name,
-                              //"Categories",
-                              img:ImagesPath.watch,
-                              //users[index].image.toString(),
-                              txt: users[index].name.toString(),
-                              price: "${getTranslated(context, 'price').toString()}: ${users[index].price.toString()}",
-                              // price: snapshot.data.price,
+
+            BlocBuilder<CategoryCubit, CategoryState>(
+              builder: (context, state) {
+                if (state is InitialState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is LoadingState) {
+                  return const Center(
+                    child: Text("Loading..."),
+                  );
+                } else if (state is ErrorState) {
+                  return const Center(
+                    child: Text("Something went wrong"),
+                  );
+                } else if (state is LoadedState) {
+                  final List<CategoryModel> users = state.order;
+                  return ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: users.length,
+                      itemBuilder: (BuildContext ctx, index) {
+                        return Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5.0, right: 5.0),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                        users[2].products![0].image.toString(),
+                                      ))),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      child: Text(users[index].name.toString(),
+                                          //  getTranslated(context, "featured_product").toString(),
+                                          style: kBold(blackColor, 14.0)),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          );
-                        });
-                  } else {
-                    return Center(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Loading....',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w100, fontSize: 20),
-                        ),
-                        Text(
-                          'check your internet connection!....',
-                          style:
-                              TextStyle(color: Colors.redAccent, fontSize: 10),
-                        )
-                      ],
-                    ));
-                  }
-                },
-              ),
-              /*
-              ListView.builder(
-                  shrinkWrap: true,
-                  // physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categoryData.length,
-                  itemBuilder: (BuildContext context, index) {
-                    return MyProductContainer(
-                      txt: categoryData[index].name.toString(),
-                     id: categoryData[index].id.toString(),
-                     // "Jewelery &\n Watches",
-                      img: ImagesPath.jewelery,
-                    );
-                  }),
-              */
-            ),
-            /*
-            Container(
-              // height: MediaQuery.of(context).size.height*0.35,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(15)),
-              child: FutureBuilder(
-                future: _apiServices.getAllProducts(),
-    builder: (BuildContext context, AsyncSnapshot snapshot) {
-    if(snapshot.hasData){
-                return
-                  GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio:
-                      MediaQuery.of(context).size.width /
-                          (MediaQuery.of(context).size.height * 0.94),
-                    ),
-                    itemCount: 1,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return MyProductContainerg(
-                       // txt:snapshot.data.name,
-                        //"Categories",
-                        img: ImagesPath.watch,
-                        txt: "pacific_cube",
-                       // price: snapshot.data.price,
-                      );
-                    });}
-    //print(snapshot.data[0]['ret_view_array']['products']['id']);
-                return const CircularProgressIndicator();
+                            SizedBox(height: 10,),
+                            users[index].products!.length >0 ?
+                            Positioned(
+                                top: mqHeight / 4.5,
+                                left: 0.0,
+                                right: 0.0,
+                                bottom: 0.0,
+                                child: SizedBox(
+                                  height: 170,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true, // 1st add
+                                      physics:
+                                          ClampingScrollPhysics(), // 2nd add
+                                      itemCount:  users[index].products!.length,
+                                      itemBuilder: (BuildContext ctx, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProductDetailScreen(
+                                                          name: users[2]
+                                                              .products![0]
+                                                              .name
+                                                              .toString(),
+                                                          price: users[2]
+                                                              .products![0]
+                                                              .breakingPrices![
+                                                                  0]
+                                                              .price
+                                                              .toString(),
+                                                          description: users[2]
+                                                              .products![0]
+                                                              .description
+                                                              .toString(),
+                                                          img: users[2]
+                                                              .products![0]
+                                                              .image
+                                                              .toString(),
+                                                        )));
+                                          },
+                                          child: MyProductContainerg(
+                                            img: users[2]
+                                                .products![0]
+                                                .image
+                                                .toString(),
+                                            txt: users[2].products![0].name,
+                                            price:
+                                                "${getTranslated(context, 'price').toString()}: ${users[2].products![0].breakingPrices![0].price}",
+                                          ),
+                                        );
+                                      }),
+                                ))
+                                :
+                                SizedBox(),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) =>
+                            //                 ProductDetailScreen(
+                            //                   name: users[2]
+                            //                       .products![0]
+                            //                       .name
+                            //                       .toString(),
+                            //                   price: users[2]
+                            //                       .products![0]
+                            //                       .breakingPrices![0]
+                            //                       .price
+                            //                       .toString(),
+                            //                   description: users[2]
+                            //                       .products![0]
+                            //                       .description
+                            //                       .toString(),
+                            //                   img: users[2]
+                            //                       .products![0]
+                            //                       .image
+                            //                       .toString(),
+                            //                 )));
+                            //   },
+                            //   child: MyProductContainerg(
+                            //     img: users[2].products![0].image.toString(),
+                            //     txt: users[2].products![0].name,
+                            //     price:
+                            //         "${getTranslated(context, 'price').toString()}: ${users[2].products![0].breakingPrices![0].price}",
+                            //   ),
+                            // ),
+                          ],
+                        );
+                      });
+                } else {
+                  return Center(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Loading....',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w100, fontSize: 20),
+                      ),
+                      Text(
+                        'check your internet connection!....',
+                        style: TextStyle(color: Colors.redAccent, fontSize: 10),
+                      )
+                    ],
+                  ));
                 }
-              ),
+              },
             ),
-            */
           ],
         ),
       ),
     );
   }
-  // List<CategoryModel> categoryData = [];
-  //
-  // void fetch_category_products() async {
-  //   try {
-  //     setState(() {
-  //       //isLoading = true;
-  //     });
-  //     categoryData = await _apiServices.getAllCategories();
-  //     print("Category Data===> ${categoryData[0].id}");
-  //   } finally {
-  //     setState(() {
-  //      // isLoading = false;
-  //     });
-  //   }
-  // }
+
   onSearchTextChanged(String text) async {
     if (text.length == 0) {
       userSearch = false;
@@ -317,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
       userSearch = true;
       _userSearchList = await _list
           .where((element) =>
-          element.uniqname!.toLowerCase().startsWith(text.toLowerCase()))
+              element.uniqname!.toLowerCase().startsWith(text.toLowerCase()))
           .toList();
     }
     setState(() {});

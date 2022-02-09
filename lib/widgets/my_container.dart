@@ -147,16 +147,16 @@ class MyProductContainerg extends StatelessWidget {
         ),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 85,
-                width: 100,
+                height: 110,
+                width: 120,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
                     image: DecorationImage(
-                        image: ExactAssetImage(img!), fit: BoxFit.fill)),
+                        image: NetworkImage(img!), fit: BoxFit.fill)),
                 // child: Image.asset(img!),
               ),
               const SizedBox(
@@ -183,7 +183,7 @@ class MyProductContainerg extends StatelessWidget {
                 height: 5,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                padding: const EdgeInsets.only(left: 8.0,right: 8.0,bottom: 5.0),
                 child: AutoSizeText(
                   "$price",
                   style: kNormalBlack(kIconColorRed),

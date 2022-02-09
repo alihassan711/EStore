@@ -347,13 +347,11 @@
 //   }
 // }
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:estore/model/all_categories_model.dart';
 import 'package:estore/utils/urls.dart';
 import 'package:http/http.dart' as http;
 import 'package:estore/model/product_model.dart';
-import 'package:http/http.dart';
+
 class ApiServices {
 //   static Future<List<dynamic>> getAllProducts() async {
 // //final uri = Uri.http(authority, '/user/getSingleUser', queryParameters);
@@ -408,13 +406,13 @@ class ApiServices {
   //   }
   // }
   Future<List<ProductModel>> getAllProducts() async {
-    List<ProductModel> category = [];
+    List<ProductModel> products = [];
     final response = await http.get(Uri.parse(Urls.allProducts));
     if (response.statusCode == 200) {
       print("status code ===> ${response.statusCode}");
       print("product body ===> ${response.body}");
-      category = productModelFromJson(json.decode(response.body)["ret_view_array"]["products"]["data"]);
-      return category;
+      products = productModelFromJson(json.decode(response.body)["ret_view_array"]["products"]["data"]);
+      return products;
     } else {
       return [];
     }
@@ -432,4 +430,18 @@ class ApiServices {
       return [];
     }
   }
+  // Future<SingleCategoryModel> fetchAlbum() async {
+  //   final response = await http
+  //       .get(Uri.parse(Urls.singleCategories));
+  //   if (response.statusCode == 200) {
+  //     // If the server did return a 200 OK response,
+  //     // then parse the JSON.
+  //     return SingleCategoryModel.fromJson(jsonDecode(response.body));
+  //   } else {
+  //     // If the server did not return a 200 OK response,
+  //     // then throw an exception.
+  //     throw Exception('Failed to load album');
+  //   }
+  // }
+
 }
