@@ -67,6 +67,8 @@ dependencies:
   #flutter_login_facebook: ^1.2.0
   #flutter_facebook_auth: ^4.0.1
   font_awesome_flutter:
+  flutter_cart:
+  badges:
   fluttertoast:
   flutter_localizations:
     sdk: flutter

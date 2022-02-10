@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/bloc/category/category_state.dart';
 import 'package:estore/constants/color.dart';
@@ -8,6 +9,7 @@ import 'package:estore/model/all_categories_model.dart';
 import 'package:estore/model/product_model.dart';
 import 'package:estore/screens/components/my_carousel.dart';
 import 'package:estore/screens/dashboard/products/product_detail_screen.dart';
+import 'package:estore/services/apis_services.dart';
 import 'package:estore/widgets/my_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ApiServices _repository = ApiServices();
   bool userSearch = false;
   List<ProductModel> _userSearchList = [];
   List<ProductModel> _list = [];
@@ -97,7 +100,6 @@ class _HomeScreenState extends State<HomeScreen> {
             //     );
             //   },
             // ),
-
             BlocBuilder<CategoryCubit, CategoryState>(
               builder: (context, state) {
                 if (state is InitialState) {
@@ -114,12 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 } else if (state is LoadedState) {
                   final List<CategoryModel> users = state.order;
-                  return ListView.builder(
+                  return ListView.builder(    //outer builder
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: users.length,
                       itemBuilder: (BuildContext ctx, index) {
-                        return Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               child: Padding(
@@ -127,13 +130,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     left: 5.0, right: 5.0),
                                 child: Row(
                                   children: [
+                                    //users[index].products![0].image.toString() != null?
                                     Container(
                                       height: 40,
                                       width: 30,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: NetworkImage(
-                                        users[2].products![0].image.toString(),
+                                        users[index].products![0].image.toString()
                                       ))),
                                     ),
                                     const SizedBox(
@@ -148,28 +152,41 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10,),
-                            users[index].products!.length >0 ?
-                            Positioned(
-                                top: mqHeight / 4.5,
-                                left: 0.0,
-                                right: 0.0,
-                                bottom: 0.0,
-                                child: SizedBox(
-                                  height: 170,
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      shrinkWrap: true, // 1st add
-                                      physics:
-                                          ClampingScrollPhysics(), // 2nd add
-                                      itemCount:  users[index].products!.length,
-                                      itemBuilder: (BuildContext ctx, index) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            users[index].products!.length > 0
+                                ? Positioned(
+                                    top: mqHeight / 4.5,
+                                    left: 0.0,
+                                    right: 0.0,
+                                    bottom: 0.0,
+                                    child: SizedBox(
+                                      height: 170,
+                                      child: ListView.builder(    //inner builder
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true, // 1st add
+                                          physics:
+                                              ClampingScrollPhysics(), // 2nd add
+                                          itemCount:
+                                              users[index].products!.length,
+                                          itemBuilder:
+                                              (BuildContext ctx, rdx) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(context,  MaterialPageRoute(
+                                                    builder: (_) => BlocProvider(
+                                                        create: (BuildContext context) =>
+                                                            CategoryCubit(repository: _repository),
+                                                        child:   ProductDetailScreen(
+                                                          img: users[index].products![rdx].image.toString(),
+                                                          price: users[index].products![rdx].breakingPrices![0].price,
+                                                          description:users[index].products![rdx].description ,
+                                                          name: users[index].products![rdx].name,
+                                                          id: users[index].products![rdx].id,
+                                                          // form: args.toString(),
+                                                        ))));
+                                                /*
                                                         ProductDetailScreen(
                                                           name: users[2]
                                                               .products![0]
@@ -190,21 +207,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .image
                                                               .toString(),
                                                         )));
-                                          },
-                                          child: MyProductContainerg(
-                                            img: users[2]
-                                                .products![0]
-                                                .image
-                                                .toString(),
-                                            txt: users[2].products![0].name,
-                                            price:
-                                                "${getTranslated(context, 'price').toString()}: ${users[2].products![0].breakingPrices![0].price}",
-                                          ),
-                                        );
-                                      }),
-                                ))
-                                :
-                                SizedBox(),
+                                            */
+                                              },
+                                              child: MyProductContainerg(
+                                                img: users[index]
+                                                    .products![rdx]
+                                                    .image
+                                                    .toString(),
+                                                txt: users[index].products![rdx].name,
+                                                price:
+                                                    "${getTranslated(context, 'price').toString()}: ${users[index].products![rdx].id}",
+                                              ),
+                                            );
+                                          }),
+                                    ))
+                                : const SizedBox(child: Center(child: AutoSizeText("No Product Found"),),),
                             // GestureDetector(
                             //   onTap: () {
                             //     Navigator.push(

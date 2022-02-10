@@ -107,11 +107,13 @@ class _AllProductsState extends State<AllProducts> {
                   itemBuilder: (BuildContext ctx, index) {
                     return GestureDetector(
                       onTap: () {
+                        /*
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
                                     ProductDetailScreen(name: users[index].name.toString(),price: users[index].price.toString(),description:users[index].description.toString(),)));
+                        */
                       },
                       child: MyProductContainerg(
                         // txt:snapshot.data.name,

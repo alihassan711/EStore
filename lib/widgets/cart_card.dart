@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class CartCard extends StatelessWidget {
   String? titleText, orderProceedDate, img;
-  int? itemPrice, totalItems;
+  int? itemPrice, quantity;
   Function()? onPress;
   Function()? onPressIncrease;
   Function()? onPressDecrease;
@@ -13,7 +13,7 @@ class CartCard extends StatelessWidget {
       {this.titleText,
       this.orderProceedDate,
       this.itemPrice,
-      this.totalItems,
+      this.quantity,
       this.img,
       this.onPress,
       this.onPressIncrease,
@@ -99,7 +99,7 @@ class CartCard extends StatelessWidget {
                           width: 10,
                         ),
                         AutoSizeText(
-                          totalItems!.toString(),
+                          quantity!.toString(),
                           style: kBold(blackColor, 16.0),
                         ),
                         const SizedBox(

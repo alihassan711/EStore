@@ -1,3 +1,4 @@
+/*
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
@@ -265,6 +266,467 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+*/
+import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:badges/badges.dart';
+import 'package:estore/bloc/category/category_cubit.dart';
+import 'package:estore/bloc/category/category_state.dart';
+import 'package:estore/constants/color.dart';
+import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
+import 'package:estore/model/all_categories_model.dart';
+import 'package:estore/utils/elevated_button.dart';
+import 'package:estore/widgets/my_button.dart';
+import 'package:estore/widgets/my_text_field.dart';
+import 'package:estore/widgets/star_display_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cart/flutter_cart.dart';
+
+class ProductDetailScreen extends StatefulWidget {
+  String? img, name, description;
+  int? price,id;
+  ProductDetailScreen(
+      {this.img, this.name, this.price, this.description,this.id, Key? key})
+      : super(key: key);
+
+  @override
+  _ProductDetailScreenState createState() => _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  var cart = FlutterCart();
+  final quantaty = TextEditingController();
+  final Col = Colors.grey;
+  int _counter = 0;
+  int? item = 0, unitprice;
+  //bool showElevatedButtonBadge = true;
+  Widget _shoppingCartBadge() {
+    return Badge(
+      position: BadgePosition.topEnd(top: -4, end: 3),
+      animationDuration: const Duration(milliseconds: 300),
+      animationType: BadgeAnimationType.slide,
+      badgeContent: Text(
+        cart.cartItem.length.toString(),
+        //  _counter.toString(),
+        style: const TextStyle(color: Colors.white),
+      ),
+      child: IconButton(
+          icon: const Icon(
+            Icons.shopping_cart,
+            color: Colors.black,
+            size: 20,
+          ),
+          onPressed: () {}),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    BlocProvider.of<CategoryCubit>(context).getCategories();
+    return Material(
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: whiteColor,
+            elevation: 0.0,
+            title: TabBar(
+              tabs: [
+                const Tab(
+                  icon: Text(
+                    "Products",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+                Tab(
+                  icon: _shoppingCartBadge(),
+                ),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              // backgroundColor: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10.0, right: 10.0, top: 8.0, bottom: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: [
+                        Card(
+                          //elevation: 2.0,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.35,
+                            // width: 300,
+                            child: Center(
+                              child: Container(
+                                height: 200,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                        image:
+                                            NetworkImage(widget.img.toString()),
+                                        fit: BoxFit.fill)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                            top: 20,
+                            right: 20,
+                            child: AutoSizeText(
+                              "\$ ${widget.price}",
+                              style: kBold(kIconColorGreen, 16.0),
+                            )),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AutoSizeText(
+                            widget.name.toString(),
+                            style: kBold(blackColor, 14.0),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const IconTheme(
+                            data: IconThemeData(
+                              color: Colors.amber,
+                              size: 20,
+                            ),
+                            child: StarDisplay(value: 3),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          AutoSizeText(
+                            widget.description.toString(),
+                            maxLines: 5,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Container(
+                          alignment: Alignment.bottomCenter,
+                          child: ElevatedBtn(
+                            color: kIconColorGreen,
+                            circularSize: 12,
+                            btnHeight: 50.0,
+                            onPress: () {
+                              setState(() {
+                                quantaty.clear();
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return SimpleDialog(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 4),
+                                          child: MyTextField(
+                                              const Icon(
+                                                  Icons.add_shopping_cart),
+                                              textInputType:
+                                                  TextInputType.number,
+                                              labelText: "Quantaty",
+                                              obscure: false,
+                                              textEditingController: quantaty),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8),
+                                          child: MyButton(
+                                            lable: "ok",
+                                            onTap: () => {
+                                              setState(() {
+                                                //item =  int.parse(quantaty.text);
+                                                cart.addToCart(
+                                                  productId:
+                                                   widget.id,
+                                                  unitPrice: widget.price,
+                                                  productName:widget.name,
+                                                  quantity: item =
+                                                      int.parse(quantaty.text),
+                                                );
+                                                _counter++;
+                                                print(_counter);
+                                              }),
+                                              Navigator.pop(context, true)
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                                //  unitprice= ProductsList[index].iteM_SALE_RATE;
+                                item = item! + 1;
+                                print(item.toString());
+                                print(widget.price);
+                              });
+                              print("//////////////////" +
+                                  cart.cartItem.length.toString());
+                            },
+                            txtColor: whiteColor,
+                            text: getTranslated(context, "Add_to_cart")
+                                .toString(),
+                            btnTxtSize: 14.0,
+                            btnWidth: MediaQuery.of(context).size.width,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Column(
+                children: [
+                  if (cart.cartItem.isEmpty)
+                    const Center(child: Text("Noting added in cart"))
+                  else
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: cart.cartItem.length.toInt(),
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(
+                                cart.cartItem[index].productName.toString()),
+                            //CircleAvatar(//  backgroundImage: NetworkImage(asyncSnapshot.data[index].picture + asyncSnapshot.data[index].index.toString() + ".jpg"),),
+                            subtitle: Text(
+                              "Quantity: " +
+                                  cart.cartItem[index].quantity.toString() +
+                                  " unit price Rs: " +
+                                  cart.cartItem[index].unitPrice.toString() +
+                                  "\n total Rs =  " +
+                                  (cart.cartItem[index].quantity *
+                                          cart.cartItem[index].unitPrice)
+                                      .toString(),
+                            ),
+                            trailing: Container(
+                              height: 20,
+                              width: 70,
+                              child: Row(
+                                // mainAxisAlignment:
+                                //     MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onLongPress: () {
+                                      setState(() {
+                                        cart.deleteItemFromCart(index);
+                                        if (_counter > 0) {
+                                          setState(() {
+                                            _counter--;
+                                          });
+                                        }
+                                        // cart.decrementItemFromCart(index);
+                                      });
+                                    },
+                                    onTap: () {
+                                      setState(() {
+                                        cart.decrementItemFromCart(index);
+                                      });
+                                    },
+                                    child:Container(
+                                        height: 17,
+                                        width: 17,
+                                        decoration: const BoxDecoration(
+                                            color: kIconColorRed,
+                                            shape: BoxShape.circle),
+                                        child: const Icon(
+                                          Icons.remove,
+                                          color: whiteColor,
+                                          size: 14,
+                                        )),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onLongPress: () {
+                                      setState(() {
+                                        cart.deleteItemFromCart(index);
+                                        if (_counter > 0) {
+                                          setState(() {
+                                            _counter++;
+                                          });
+                                        }
+                                        // cart.decrementItemFromCart(index);
+                                      });
+                                    },
+                                    onTap: () {
+                                      setState(() {
+                                        cart.incrementItemToCart(index);
+                                      });
+                                    },
+                                    child: Container(
+                                        height: 17,
+                                        width: 17,
+                                        decoration: const BoxDecoration(
+                                            color: kIconColorGreen,
+                                            shape: BoxShape.circle),
+                                        child: const Icon(
+                                          Icons.add,size: 14,
+                                          color: whiteColor,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  Card(
+                    child: Expanded(
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(14),
+                              bottomLeft: Radius.circular(14),
+                            ),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              width: MediaQuery.of(context).size.width * 0.44,
+                              color: Colors.white,
+                              child: Center(
+                                  child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: MyButton(
+                                      lable: "CheckOut",
+                                      onTap: () {},
+                                    ),
+                                  )
+                                ],
+                              )),
+                            ),
+                          ),
+                          const VerticalDivider(
+                            width: 1.0,
+                            color: Colors.black,
+                            thickness: 1.0,
+                          ),
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(10),
+                                bottomRight: Radius.circular(10)),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              width: MediaQuery.of(context).size.width * 0.44,
+                              color: Colors.white,
+                              child: Center(
+                                  child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Subtotal :"),
+                                      Text(cart.getTotalAmount().toString()),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      Text("Discount :"),
+                                      Text("0.00"),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Grand total :"),
+                                      Text(
+                                        cart.getTotalAmount().toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //
+                    // Row(
+                    //   children: [
+                    //     SizedBox(width: 4),
+                    //     MyButton(lable: "CheckOut",onTap: (){},),
+                    //     Expanded(
+                    //       child: Column(
+                    //         children: [
+                    //
+                    //
+                    //           Text("Subtotal Rs= " +
+                    //               cart.getTotalAmount().toString()),
+                    //           Text("Discount = 0"
+                    //           ),
+                    //           Text("Grand total = Rs" +
+                    //               cart.getTotalAmount().toString()),
+                    //
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    //
+                  )
+                ],
+              ),
+
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget setupAlertDialoadContainer() {
+    return Container(
+      height: 300.0, // Change as per your requirement
+      width: 300.0, // Change as per your requirement
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          return const ListTile(
+            title: Text(''),
+          );
+        },
       ),
     );
   }

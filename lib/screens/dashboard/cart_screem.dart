@@ -37,7 +37,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                     child: CartCard(
                       img: ImagesPath.p5,
                       itemPrice: itemPrice,
-                      totalItems: totalItems,
+                      quantity: totalItems,
                       onPressDecrease: () {
                         setState(() {
                           if(totalItems > 0) {
