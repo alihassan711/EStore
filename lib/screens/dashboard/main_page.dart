@@ -1,7 +1,5 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
-import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
-import 'package:estore/constants/image_path.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/chat_screen.dart';
 import 'package:estore/screens/components/my_drawer.dart';
@@ -11,7 +9,6 @@ import 'package:estore/screens/dashboard/profile_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/widgets/iconbtn.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cart_screem.dart';
 import 'favourite_screen.dart';
 

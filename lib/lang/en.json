@@ -92,6 +92,8 @@
   "price": "Price",
   "please_select_color": "Please Select Color",
   "please_select_size": "Please Select Size",
-  "application_preferences": "Please Select Size"
+  "application_preferences": "Please Select Size",
+  "ok": "Ok",
+  "quantity": "Quantity"
 }
 

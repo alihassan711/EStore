@@ -92,6 +92,8 @@
   "price": "السعر",
   "please_select_color": "يرجى الاختيار اللون",
   "please_select_size": "يرجى تحديد حجم",
-  "application_preferences": "يرجى تحديد حجم"
+  "application_preferences": "يرجى تحديد حجم",
+  "ok": "موافق",
+  "quantity": "كمية"
 }
 

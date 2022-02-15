@@ -188,5 +188,7 @@
   "price": "قیمت",
   "please_select_color": "براہ کرم رنگ منتخب کریں۔",
   "please_select_size": "براہ کرم سائز منتخب کریں۔",
-  "application_preferences": "درخواست کی ترجیحات"
+  "application_preferences": "درخواست کی ترجیحات",
+  "ok": "ٹھیک ہے",
+  "quantity": "Quantity"
 }

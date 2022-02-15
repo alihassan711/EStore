@@ -271,15 +271,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 }
 */
-import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:badges/badges.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
-import 'package:estore/bloc/category/category_state.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
-import 'package:estore/model/all_categories_model.dart';
 import 'package:estore/utils/elevated_button.dart';
 import 'package:estore/widgets/my_button.dart';
 import 'package:estore/widgets/my_text_field.dart';
@@ -395,36 +392,34 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AutoSizeText(
-                            widget.name.toString(),
-                            style: kBold(blackColor, 14.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          widget.name.toString(),
+                          style: kBold(blackColor, 14.0),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const IconTheme(
+                          data: IconThemeData(
+                            color: Colors.amber,
+                            size: 20,
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const IconTheme(
-                            data: IconThemeData(
-                              color: Colors.amber,
-                              size: 20,
-                            ),
-                            child: StarDisplay(value: 3),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          AutoSizeText(
-                            widget.description.toString(),
-                            maxLines: 5,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                        ],
-                      ),
+                          child: StarDisplay(value: 3),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        AutoSizeText(
+                          widget.description.toString(),
+                          maxLines: 5,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
                     ),
                     Expanded(
                       child: Center(
@@ -450,7 +445,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                                   Icons.add_shopping_cart),
                                               textInputType:
                                                   TextInputType.number,
-                                              labelText: "Quantaty",
+                                              labelText: getTranslated(context, "quantity").toString(),
                                               obscure: false,
                                               textEditingController: quantaty),
                                         ),
@@ -458,7 +453,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8),
                                           child: MyButton(
-                                            lable: "ok",
+                                            lable: getTranslated(context, "ok").toString(),
                                             onTap: () => {
                                               setState(() {
                                                 //item =  int.parse(quantaty.text);
@@ -508,6 +503,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const Center(child: Text("Noting added in cart"))
                   else
                     Expanded(
+                      flex: 5,
                       child: ListView.builder(
                         itemCount: cart.cartItem.length.toInt(),
                         itemBuilder: (context, index) {
@@ -563,17 +559,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   ),
                                   SizedBox(width: 10,),
                                   GestureDetector(
-                                    onLongPress: () {
-                                      setState(() {
-                                        cart.deleteItemFromCart(index);
-                                        if (_counter > 0) {
-                                          setState(() {
-                                            _counter++;
-                                          });
-                                        }
-                                        // cart.decrementItemFromCart(index);
-                                      });
-                                    },
+                                    // onLongPress: () {
+                                    //   setState(() {
+                                    //     cart.deleteItemFromCart(index);
+                                    //     if (_counter > 0) {
+                                    //       setState(() {
+                                    //         _counter++;
+                                    //       });
+                                    //     }
+                                    //     // cart.decrementItemFromCart(index);
+                                    //   });
+                                    // },
                                     onTap: () {
                                       setState(() {
                                         cart.incrementItemToCart(index);
@@ -597,6 +593,37 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         },
                       ),
                     ),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                      child: Column(
+                        children: [
+                          _container(getTranslated(context, "sub_total").toString(), cart.getTotalAmount().toString(),12.0),
+                          _container(getTranslated(context, "discount").toString(), 34.00,12.0),
+                          _container(getTranslated(context, "delivery_charges").toString(), 0.00,12.0),
+                          _container(getTranslated(context, "order_total").toString(), cart.getTotalAmount().toString(),14.0),
+                        ],
+                      ),
+                    ),
+                  ),
+                  ElevatedBtn(
+                    btnHeight: 45,
+                    btnWidth: 300,
+                    color: kIconColorRed,
+                    btnTxtSize: 14,
+                    text:getTranslated(context, "order_proceed").toString(),
+                    circularSize: 8,
+                    txtColor: whiteColor,
+                    onPress: () {
+                      setState(() {});
+                      // Navigator.push(context, MaterialPageRoute(builder: (builder)=>MyLocation()));
+                      print("proceed order");
+                    },
+                    //  btnWidth: 200,
+                  ),
+                  SizedBox(height: 5,),
+                  /*
                   Card(
                     child: Expanded(
                       child: Row(
@@ -618,7 +645,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   Expanded(
                                     child: MyButton(
                                       lable: "CheckOut",
-                                      onTap: () {},
+                                      onTap: () {
+                                        print("check out");
+                                      },
                                     ),
                                   )
                                 ],
@@ -647,16 +676,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Subtotal :"),
+                                      Text(getTranslated(context, "sub_total").toString(),),
                                       Text(cart.getTotalAmount().toString()),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: const [
-                                      Text("Discount :"),
-                                      Text("0.00"),
+                                    children:  [
+                                      Text(getTranslated(context, "discount").toString()),
+                                      const Text("0.00"),
                                     ],
                                   ),
                                   Row(
@@ -666,7 +695,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                       Text("Grand total :"),
                                       Text(
                                         cart.getTotalAmount().toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
@@ -703,7 +732,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     //   ],
                     // ),
                     //
-                  )
+                  )  */
                 ],
               ),
 
@@ -714,19 +743,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
     );
   }
-
-  Widget setupAlertDialoadContainer() {
-    return Container(
-      height: 300.0, // Change as per your requirement
-      width: 300.0, // Change as per your requirement
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int index) {
-          return const ListTile(
-            title: Text(''),
-          );
-        },
+  Widget _container(titleText, price,textSize,) {
+    return Padding(
+      padding: const EdgeInsets.all(
+        8.0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            titleText,
+            style: kSemiBold(Colors.black45),
+          ),
+          Text(
+            "\$$price",
+            style: kBold(blackColor, textSize),
+          ),
+        ],
       ),
     );
   }

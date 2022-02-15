@@ -7,6 +7,7 @@ class Urls {
   // static const String baseUrl = IpConfig.Url;
   //https://api.imho-tech.com/api/Account/SalesManLogin?email=Salesman@email.com&password=salesman
   static const String allProducts = "$baseUrl/api/all_products";
+  static const String addOrder = "$baseUrl/shopcheckout";
   static const String allCategories = "$baseUrl/api/all_categories";
   static const String singleProducts = "$baseUrl/api/product/hilal-bake-time-marble-cake-box";
  // static const String singleCategories = "$baseUrl/api/category/Breakfast Muffins/117";
