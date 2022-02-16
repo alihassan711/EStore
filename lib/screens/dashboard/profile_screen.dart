@@ -1,19 +1,22 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:estore/bloc/orderhistory/order_history_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/dashboard/drawer/history_screen.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
+import 'package:estore/services/apis_services.dart';
 import 'package:estore/utils/elevated_button.dart';
 import 'package:estore/widgets/my_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'chat_screens/conversation_page.dart';
 import 'drawer/my_order_screen.dart';
 class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
-
+   UserProfile({Key? key}) : super(key: key);
+  ApiServices _repository = ApiServices();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -149,8 +152,11 @@ class UserProfile extends StatelessWidget {
               child: Icon(Icons.ballot,color: whiteColor,size: 20,),
             ),
              onTap: (){
-               Navigator.push(context,
-                   MaterialPageRoute(builder: (ctx) => const PurchaseHistory()));
+               Navigator.pushReplacement(context,  MaterialPageRoute(
+                   builder: (_) => BlocProvider(
+                       create: (BuildContext context) =>
+                           OrderHistoryCubit(repository: _repository),
+                       child: const PurchaseHistory())));
              },
           ),
         ],

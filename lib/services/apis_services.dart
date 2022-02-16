@@ -348,12 +348,17 @@
 // }
 import 'dart:convert';
 import 'package:estore/model/all_categories_model.dart';
+import 'package:estore/model/order_history_model.dart';
 import 'package:estore/utils/urls.dart';
+import 'package:flutter_cart/flutter_cart.dart';
 import 'package:http/http.dart' as http;
 import 'package:estore/model/product_model.dart';
-
+var cart = FlutterCart();
 class ApiServices {
-//   static Future<List<dynamic>> getAllProducts() async {
+  static var authtoken =
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjUzNTdhYzM1MTZhNTZhMDI1ZGQ4MDRlYTVkZDg2OTk4ZTgxNjg4MjFhMzFhYjU5YzcwZThlODI5MTQxYjIzODg5NWRjYTY3OTVjY2Q1NTAwIn0.eyJhdWQiOiIzIiwianRpIjoiNTM1N2FjMzUxNmE1NmEwMjVkZDgwNGVhNWRkODY5OThlODE2ODgyMWEzMWFiNTljNzBlOGU4MjkxNDFiMjM4ODk1ZGNhNjc5NWNjZDU1MDAiLCJpYXQiOjE2NDUwMzA0NTQsIm5iZiI6MTY0NTAzMDQ1NCwiZXhwIjoxNjc2NTY2NDU0LCJzdWIiOiIyMyIsInNjb3BlcyI6W119.lw0vONMaPWixPrTj618eGpJdW-92g0ZuURNCnFZcH5daijqVZROY-62qI6M9yBV_l0hSr9NEXqBWmGHITUD4MjbXza1-mEB1enpChPvzI9lOtdUkqr1fpcX4NRDlVrT7TRoLJX3-UcvIXp2CelbygY_8n717uYq-Q6OUhCBRHm-5N5pqKKeUBWLIlsXU72rWBsWucAXy5CqQhF5euj9lN3cZCSmSBo2DCQWg7QruDCKDD13mR6Narrzs7C6FkQwc7bVYxV048IkulIm2J35rEkc1WhHfXcuAcRhyGwZA-hUnZVvvo5WKVVKgfISQhhOfzAqs6xJqj6Zof0ZdWuHciFW6OaOsv27AnxZO24OqU7RxQfJWSvYmDLGWlu8Ya6h0rKNt4uaq-XI8jeN0W2K0t_4iFOx93SpYxKpZcY7rnVLU_uILKJsrTCBKoHsUfuiK-RfXDxLphXzPq8QGHb6GTe_n3dnvZ50Cl02hcqE9Ig9xruc0_G2m1R1H5Yr0ilH1-sDZg1vbaWnJ2Hv9NhCzAwYJTjMeXl1rdMHITbqZeg9SAHB8RueUwseYGcxRaOdynWaKC17a9GKejVhV0BKu2VWmlE1JTRSzfxKNXQdtxzPGrsnzMbRCnPixS6xpuaUsHSzLFudb33lXyupZF6x_e6DKFbTPIt_O3ZfWPEo3qsY";
+
+  //   static Future<List<dynamic>> getAllProducts() async {
 // //final uri = Uri.http(authority, '/user/getSingleUser', queryParameters);
 //     final response = await http.get(Uri.parse(Urls.allProducts));
 //     print(response.body);
@@ -406,30 +411,61 @@ class ApiServices {
   //   }
   // }
   Future<List<ProductModel>> getAllProducts() async {
+
     List<ProductModel> products = [];
     final response = await http.get(Uri.parse(Urls.allProducts));
     if (response.statusCode == 200) {
-      print("status code ===> ${response.statusCode}");
-      print("product body ===> ${response.body}");
-      products = productModelFromJson(json.decode(response.body)["ret_view_array"]["products"]["data"]);
+      //  print("status code ===> ${response.statusCode}");
+      // print("product body ===> ${response.body}");
+      products = productModelFromJson(
+          json.decode(response.body)["ret_view_array"]["products"]["data"]);
       return products;
     } else {
       return [];
     }
   }
+
 //products
   Future<List<CategoryModel>> getAllCategories() async {
     List<CategoryModel> category = [];
     final response = await http.get(Uri.parse(Urls.allCategories));
     if (response.statusCode == 200) {
-      print("status code ===> ${response.statusCode}");
-      print("category body ===> ${response.body}");
-      category = categoryModelFromJson(json.decode(response.body)["categories"]);
+      //  print("status code ===> ${response.statusCode}");
+      //  print("category body ===> ${response.body}");
+      category =
+          categoryModelFromJson(json.decode(response.body)["categories"]);
       return category;
     } else {
       return [];
     }
   }
+  Future<List<OrderHistoryModel>> getOrderHistory() async {
+    List<OrderHistoryModel> category = [];
+    final response = await http.get(Uri.parse(Urls.orderHistory), headers: _setHeaders(),);
+    if (response.statusCode == 200) {
+       print("status code ===> ${response.statusCode}");
+       print("category body ===> ${response.body}");
+      category =
+          orderHistoryModelFromJson(json.decode(response.body)["orders"]);
+      return category;
+    } else {
+      return [];
+    }
+  }
+  Future<List<OrderHistoryModel>> getFavouriteProducts() async {
+    List<OrderHistoryModel> category = [];
+    final response = await http.get(Uri.parse(Urls.favourites), headers: _setHeaders(),);
+    if (response.statusCode == 200) {
+      print("status code ===> ${response.statusCode}");
+      print("category body ===> ${response.body}");
+      category =
+          orderHistoryModelFromJson(json.decode(response.body)["favourite"]);
+      return category;
+    } else {
+      return [];
+    }
+  }
+
   // Future<SingleCategoryModel> fetchAlbum() async {
   //   final response = await http
   //       .get(Uri.parse(Urls.singleCategories));
@@ -443,6 +479,108 @@ class ApiServices {
   //     throw Exception('Failed to load album');
   //   }
   // }
+  /*
+  Future<bool> addOrder(
+  {
+    List<dynamic>? productImages,
+  productId,productName,unitPrice,quantity,totalPrice
+}
+      ) async {
+    var body = jsonEncode({
+      "payment_method": "paypal",
+      "note": "how",
+      "phone": "0237069975",
+      "city": "Lahore",
+      "country": "Pakistan",
+      "state": "Punjab",
+      "address": "caw-b",
+      "total_amount": totalPrice,
+      "orderItems":
+      [
+        {"product_id": productId, "name": productName, "unitPrice": unitPrice, "qty": quantity}
+      ]
+    });
+    //  print(body);
+    final response = await http.post(
+      (Uri.parse(Urls.addOrder)),
+      headers: _setHeaders(),
+      body: body,
+    );
+    try {print(authtoken);
+    print("post order heasders ===>   ${response.headers}");
+      if (response.statusCode == 200) {
+        print(response.body);
+        print('Successfully order posted');
+        return true;
+      } else {
+        print("post order Response ===>   ${response.statusCode}");
+        return false;
+      }
+    } catch (e) {
+      throw Exception('Failed to add data');
+    }
+  }
+*/
+
+   Future<bool> postProduct({
+      List? products,totalPrice}) async {
+
+    var productData = {
+        "payment_method": "Cash",
+        "note": "how",
+        "phone": "0237069975",
+        "city": "Lahore",
+        "country": "Pakistan",
+        "state": "Punjab",
+        "address": "caw-b",
+        "total_amount": totalPrice,
+        "orderItems": products
+      };
+    var jsonString = json.encode(productData);
+    print(jsonString);
 
 
+    final response = await http.post(
+        Uri.parse(Urls.addOrder),
+        body: jsonString,
+        headers: _setHeaders()
+    );
+    print(response.statusCode);
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+  static Future<bool> addFavouriteProduct({productId}) async {
+    final response = await http.post(Uri.parse(Urls.favourites),
+        body: json.encode({
+          "product_id": productId,
+        }),
+        headers: _setHeaders());
+    print(response.body);
+    if (response.statusCode == 200) {
+      print("Product Added as favourite");
+      return true;
+    } else {
+      print("favourite  ===> ${response.statusCode}");
+      return false;
+    }
+  }
+
+
+  static _setHeaders() => {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        'Authorization': 'Bearer ${authtoken}',
+      };
+  static _setHeaderss() => {
+    "Accept": "application/json",
+    "content-type": "application/json",
+    //'Authorization': 'Bearer ${authtoken}',
+  };
 }

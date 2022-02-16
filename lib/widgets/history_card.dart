@@ -6,7 +6,8 @@ import 'package:estore/localization/language_constants.dart';
 import 'package:flutter/material.dart';
 
 class HistoryCard extends StatelessWidget {
-  const HistoryCard({Key? key}) : super(key: key);
+  String? name,createddate,price;
+   HistoryCard({this.name,this.createddate,this.price,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class HistoryCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                 child: AutoSizeText(
-                  "2021-02-12",
+                  createddate!,
                   style: kBold(kIconColorRed, 16.0),
                 ),
               ),
@@ -47,7 +48,7 @@ class HistoryCard extends StatelessWidget {
               Row(
                 children: [
                   const Icon(
-                    Icons.add_to_drive,
+                    Icons.person,
                     size: 25,
                     color: blackColor,
                   ),
@@ -55,12 +56,12 @@ class HistoryCard extends StatelessWidget {
                     width: 16,
                   ),
                   AutoSizeText(
-                    "12-02-2022",
+                    name!,
                     style: kBold(blackColor, 12.0),
                   ),
                   const Spacer(),
                   AutoSizeText(
-                    "\$7214.00",
+                    "\$$price",
                     style: kBold(kIconColorRed, 16.0),
                   ),
                 ],

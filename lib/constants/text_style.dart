@@ -19,16 +19,16 @@ EdgeInsetsGeometry screenMargin() =>
 InputBorder focusBorder() =>  const OutlineInputBorder(
     borderSide: BorderSide(color: kIconColorGreen, width: 2.0),
     borderRadius: BorderRadius.all(
-      Radius.circular(20.0),
+      Radius.circular(10.0),
     ));
 
 InputBorder errorBorder() =>  const OutlineInputBorder(
     borderSide: BorderSide(color: kIconColorRed, width: 1.0),
     borderRadius: BorderRadius.all(
-      Radius.circular(20.0),
+      Radius.circular(10.0),
     ));
 
 InputBorder border() => OutlineInputBorder(
-  borderRadius: BorderRadius.circular(20),
+  borderRadius: BorderRadius.circular(10),
   borderSide:  const BorderSide(color: blackColor, width: 1.0),
 );

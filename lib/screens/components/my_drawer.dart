@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:estore/bloc/orderhistory/order_history_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
@@ -10,7 +11,9 @@ import 'package:estore/screens/dashboard/drawer/language_screen.dart';
 import 'package:estore/screens/dashboard/drawer/my_order_screen.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/drawer/settings_screen.dart';
+import 'package:estore/services/apis_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../main.dart';
 
@@ -20,6 +23,7 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+  ApiServices _repository = ApiServices();
   Timer? timer;
   bool? flag = false;
   String? userName = "";
@@ -83,8 +87,11 @@ class _MyDrawerState extends State<MyDrawer> {
           ListTile(
             title: AutoSizeText(getTranslated(context, "history").toString(), style: kSemiBold(blackColor)),
             leading: const Icon(Icons.history),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PurchaseHistory())),
+            onTap: () =>  Navigator.push(context,  MaterialPageRoute(
+                builder: (_) => BlocProvider(
+                    create: (BuildContext context) =>
+                        OrderHistoryCubit(repository: _repository),
+                    child: const PurchaseHistory()))),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
@@ -117,10 +124,8 @@ class _MyDrawerState extends State<MyDrawer> {
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-              title:_isdark!?
-                 AutoSizeText(getTranslated(context, "dark_mode").toString(), style: kSemiBold(blackColor))
-                  :
-              AutoSizeText(getTranslated(context, "light_mode").toString(), style: kSemiBold(whiteColor)),
+              title:
+                 AutoSizeText(getTranslated(context, "dark_mode").toString(), style: kSemiBold(blackColor)),
               leading: const Icon(Icons.track_changes),
               onTap: () {
                 setState(() {

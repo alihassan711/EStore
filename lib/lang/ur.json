@@ -190,5 +190,9 @@
   "please_select_size": "براہ کرم سائز منتخب کریں۔",
   "application_preferences": "درخواست کی ترجیحات",
   "ok": "ٹھیک ہے",
-  "quantity": "Quantity"
+  "first_name": "پہلا نام",
+  "last_name": "آخری نام",
+  "first_name_required": "پہلا نام درکار ہے۔",
+  "last_name_required": "آخری نام درکار ہے۔",
+  "phone_required": "فون درکار ہے"
 }

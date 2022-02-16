@@ -8,6 +8,7 @@ import 'package:estore/screens/dashboard/home_screen.dart';
 import 'package:estore/screens/dashboard/profile_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/widgets/iconbtn.dart';
+import 'package:estore/widgets/shoping_cart.dart';
 import 'package:flutter/material.dart';
 import 'cart_screem.dart';
 import 'favourite_screen.dart';
@@ -28,8 +29,16 @@ class _MainScreenState extends State<MainScreen> {
     const ChatScreen(),
     const FavouriteScreen(),
     const MyCartScreen(),
-    const UserProfile(),
+     UserProfile(),
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    setState(() {
+      cart.cartItem.length;
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,14 +70,6 @@ class _MainScreenState extends State<MainScreen> {
         ),
         */
         actions: [
-          // IconBtn(
-          //   icon: const Icon(
-          //     Icons.search,
-          //     color: blackColor,
-          //   ),
-          //   onPress: () {},
-          //   color: blackColor,
-          // ),
           IconBtn(
             icon: const Icon(
               Icons.notifications_active_outlined,
@@ -80,6 +81,13 @@ class _MainScreenState extends State<MainScreen> {
                       builder: (ctx) => const NotificationScreen()));
             },
             color: blackColor,
+          ),
+          ShoppingCartWidget(item:cart.cartItem.length.toString(),
+            onPress: (){
+              setState(() {
+                cart.cartItem.length;
+              });
+            },
           ),
         ],
         iconTheme: const IconThemeData(color: blackColor),

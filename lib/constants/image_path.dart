@@ -6,7 +6,7 @@ class  ImagesPath {
   static String iconOrder = 'assets/icons/catgoriespng.png';
   static String p2 = 'assets/productimages/p2.png';
   static String watch = 'assets/productimages/watch.png';
-  static String burger = 'assets/productimages/brger.jpg';
+  static String burger = 'assets/productimages/productss.jpg';
   static String brand = 'assets/icons/brndsiconpng.png';
   static String category = 'assets/icons/catgory.png';
   static String flash = 'assets/icons/flashside.png';

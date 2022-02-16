@@ -7,7 +7,7 @@ abstract class CategoryState extends Equatable {}
 class InitialState extends CategoryState {
   @override
   List<CategoryModel> get props => [];
-  List<ProductModel> get propss => [];
+ // List<ProductModel> get propss => [];
 }
 
 class LoadingState extends CategoryState {

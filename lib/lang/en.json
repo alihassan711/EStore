@@ -94,6 +94,11 @@
   "please_select_size": "Please Select Size",
   "application_preferences": "Please Select Size",
   "ok": "Ok",
-  "quantity": "Quantity"
+  "quantity": "Quantity",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "first_name_required": "First Name Required",
+  "last_name_required": "Last Name Required",
+  "phone_required": "Phone Required"
 }
 

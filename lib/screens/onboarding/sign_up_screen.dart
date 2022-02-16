@@ -2,6 +2,8 @@ import 'dart:typed_data';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
+import 'package:estore/screens/onboarding/sign_in_screen.dart';
+import 'package:estore/services/auth_services.dart';
 import 'package:estore/utils/elevated_button.dart';
 import 'package:estore/utils/text_form_field.dart';
 import 'package:flutter/foundation.dart';
@@ -25,13 +27,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final ImagePicker picker = ImagePicker();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController imamName = TextEditingController();
-  TextEditingController address = TextEditingController();
+  TextEditingController firstName = TextEditingController();
+  TextEditingController lastName = TextEditingController();
+  TextEditingController phone = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
-  TextEditingController mosqueName = TextEditingController();
-  TextEditingController country = TextEditingController();
-  TextEditingController state = TextEditingController();
-  TextEditingController city = TextEditingController();
   bool? _passwordVisible = false;
   bool imgError = false;
 
@@ -60,55 +59,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: SafeArea(
               child: Column(
                 children: [
-                  GestureDetector(
-                    onTap: () => showBottomSheet(),
-                    child: webImage == null && file.path == ""
-                        ? Center(
-                      child: SizedBox(
-                          height: 130,
-                          width: 130,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              //borderRadius: BorderRadius.circular(60),
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: ExactAssetImage(
-                                      "assets/images/account.jpg",
-                                    ),
-                                    fit: BoxFit.fill)),
-                          )),
-                    )
-                        : Center(
-                        child: SizedBox(
-                          height: 130,
-                          width: 130,
-                          child: (kIsWeb)
-                              ? Container(
-                            decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(50),
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: MemoryImage(webImage!),
-                                    fit: BoxFit.fill)),
-                          )
-                              :  Container(
-                            // decoration: BoxDecoration(
-                            //   // borderRadius: BorderRadius.circular(40),
-                            //     shape: BoxShape.circle,
-                            //     image: DecorationImage(
-                            //         image: FileImage(File(file.path)),
-                            //         fit: BoxFit.fill)),
-                          ),
-                        )),
-                  ),
-                  imgError
-                      ? Text(
-                    getTranslated(context, "image_require").toString(),
-                    style: const TextStyle(color: kIconColorRed),
-                  )
-                      : const SizedBox(),
+                  // GestureDetector(
+                  //   onTap: () => showBottomSheet(),
+                  //   child: webImage == null && file.path == ""
+                  //       ? Center(
+                  //     child: SizedBox(
+                  //         height: 130,
+                  //         width: 130,
+                  //         child: Container(
+                  //           decoration: const BoxDecoration(
+                  //             //borderRadius: BorderRadius.circular(60),
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                   image: ExactAssetImage(
+                  //                     "assets/images/account.jpg",
+                  //                   ),
+                  //                   fit: BoxFit.fill)),
+                  //         )),
+                  //   )
+                  //       : Center(
+                  //       child: SizedBox(
+                  //         height: 130,
+                  //         width: 130,
+                  //         child: (kIsWeb)
+                  //             ? Container(
+                  //           decoration: BoxDecoration(
+                  //             // borderRadius: BorderRadius.circular(50),
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                   image: MemoryImage(webImage!),
+                  //                   fit: BoxFit.fill)),
+                  //         )
+                  //             :  Container(
+                  //           // decoration: BoxDecoration(
+                  //           //   // borderRadius: BorderRadius.circular(40),
+                  //           //     shape: BoxShape.circle,
+                  //           //     image: DecorationImage(
+                  //           //         image: FileImage(File(file.path)),
+                  //           //         fit: BoxFit.fill)),
+                  //         ),
+                  //       )),
+                  // ),
+                  // imgError
+                  //     ? Text(
+                  //   getTranslated(context, "image_require").toString(),
+                  //   style: const TextStyle(color: kIconColorRed),
+                  // )
+                  //     : const SizedBox(),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   SizedBox(
                     width: 300,
@@ -118,25 +117,71 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(getTranslated(context, "name").toString(),
+                          Text(getTranslated(context, "first_name").toString(),
                               style: kBold(blackColor,16.0)),
                           const SizedBox(
                             height: 5,
                           ),
                           TextFormFieldCustom(
-                            controller: imamName,
+                            controller: firstName,
                             isPhone: false,
                             isEmail: false,
                             isPass: false,
                             valid: (val) {
                               if (val.isEmpty) {
                                 return getTranslated(
-                                    context, "required_imam_name");
+                                    context, "first_name_required");
                               }
                               return null;
                             },
                             //labelText:getTranslated(context,"name"),
-                            hintText: getTranslated(context, "name",),
+                            hintText: getTranslated(context, "first_name",),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(getTranslated(context, "last_name").toString(),
+                              style: kBold(blackColor,16.0)),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          TextFormFieldCustom(
+                            controller: lastName,
+                            isPhone: false,
+                            isEmail: false,
+                            isPass: false,
+                            valid: (val) {
+                              if (val.isEmpty) {
+                                return getTranslated(
+                                    context, "last_name_required");
+                              }
+                              return null;
+                            },
+                            //labelText:getTranslated(context,"name"),
+                            hintText: getTranslated(context, "last_name",),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(getTranslated(context, "phone").toString(),
+                              style: kBold(blackColor,16.0)),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          TextFormFieldCustom(
+                            controller: phone,
+                            isPhone: true,
+                            isEmail: false,
+                            isPass: false,
+                            valid: (val) {
+                              if (val.isEmpty) {
+                                return getTranslated(
+                                    context, "phone_required");
+                              }
+                              return null;
+                            },
+                            //labelText:getTranslated(context,"name"),
+                            hintText: getTranslated(context, "phone",),
                           ),
                           const SizedBox(
                             height: 15,
@@ -165,30 +210,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           const SizedBox(
                             height: 18,
-                          ),
-
-                          Text(getTranslated(context, "address").toString(),
-                              style:kBold(blackColor, 16.0)),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormFieldCustom(
-                            controller: address,
-                            isPhone: false,
-                            isEmail: false,
-                            isPass: false,
-                            valid: (val) {
-                              if (val.isEmpty) {
-                                return getTranslated(
-                                    context, "address_required");
-                              }
-                              return null;
-                            },
-                            //labelText:getTranslated(context,"address"),
-                            hintText: getTranslated(context, "address"),
-                          ),
-                          const SizedBox(
-                            height: 15,
                           ),
                           Text(getTranslated(context, "password").toString(),
                               style: kBold(blackColor, 16.0)),
@@ -278,48 +299,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 : ElevatedBtn(color: kIconColorGreen,
                               circularSize: 12.0,
                               onPress: () async {
-                                // //print("web image data ???? ${webImage!.length}");
-                                // if (_formKey.currentState!.validate()) {
-                                //   await Services.signUp(
-                                //       kIsWeb ? webImage : _file,
-                                //       imamName.text,
-                                //       email.text,
-                                //       mosqueName.text,
-                                //       countryd,
-                                //       policy_holder,
-                                //       cityd,
-                                //       address.text,
-                                //       password.text,
-                                //       // latitude,
-                                //       // longitude,
-                                //       context);
-                                //   setState(() {
-                                //     _isPost = true;
-                                //   });
-                                //   image = null;
-                                //   imageCache!.clear();
-                                //   country.clear();
-                                //   state.clear();
-                                //   city.clear();
-                                //   mosqueName.clear();
-                                //   imamName.clear();
-                                //   address.clear();
-                                //   email.clear();
-                                //   password.clear();
-                                //   confirmPassword.clear();
-                                //   setState(() {
-                                //     _isPost = false;
-                                //   });
-                                //   Navigator.pushReplacement(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //           builder: (context) =>
-                                //               LogInScreen()));
-                                // } else if (_file == null) {
-                                //   setState(() {
-                                //     imgError = true;
-                                //   });
-                                // }
+                                //print("web image data ???? ${webImage!.length}");
+                                if (_formKey.currentState!.validate()) {
+                                  await AuthServices.registerUser(
+                                    email: email.text,
+                                    password: password.text,
+                                  firstName: firstName.text,
+                                  lastName: lastName.text,
+                                    phone: phone.text,
+                                  ).then((value) => Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SignInScreen())));
+                                  setState(() {
+                                    _isPost = true;
+                                  });
+                                  firstName.clear();
+                                  lastName.clear();
+                                  phone.clear();
+                                  email.clear();
+                                  password.clear();
+                                  confirmPassword.clear();
+                                  setState(() {
+                                    _isPost = false;
+                                  });
+
+                                }
                               },
                               text: getTranslated(context, "register"),
                             ),

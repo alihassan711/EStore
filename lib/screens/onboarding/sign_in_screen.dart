@@ -3,10 +3,10 @@ import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/model/language.dart';
-import 'package:estore/screens/dashboard/home_screen.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
-import 'package:estore/screens/onboarding/signup_btns_screen.dart';
+import 'package:estore/screens/onboarding/sign_up_screen.dart';
 import 'package:estore/services/apis_services.dart';
+import 'package:estore/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../main.dart';
@@ -17,6 +17,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   ApiServices _repository = ApiServices();
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
@@ -118,6 +120,7 @@ class _SignInScreenState extends State<SignInScreen> {
               elevation: 2.0,
               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
               child: TextField(
+                controller: email,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
                 decoration: InputDecoration(
@@ -146,6 +149,7 @@ class _SignInScreenState extends State<SignInScreen> {
               elevation: 2.0,
               borderRadius: BorderRadius.all(Radius.circular(30.0)),
               child: TextField(
+                controller: password,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
                 decoration: InputDecoration(
@@ -182,14 +186,21 @@ class _SignInScreenState extends State<SignInScreen> {
                         fontWeight: FontWeight.w700,
                         fontSize: 18.0),
                   ),
-                  onPressed: () {
+                  onPressed: () async{
+                    print(email.text);
+                    print(password.text);
+                    await AuthServices.logInUser(
+                      email:email.text,
+                      password: password.text,
+                    )
+                        .then((value) =>
                     Navigator.pushReplacement(context,  MaterialPageRoute(
                         builder: (_) => BlocProvider(
                             create: (BuildContext context) =>
                                 CategoryCubit(repository: _repository),
                             child: const MainScreen(
                               // form: args.toString(),
-                            ))));
+                            )))));
                   },
                 ),
               )),
@@ -213,10 +224,10 @@ class _SignInScreenState extends State<SignInScreen> {
           // ),
           TextButton(
               onPressed:() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>  SignInButtons()));
+                Navigator.pushReplacement(context,  MaterialPageRoute(
+                    builder: (_)=>  const SignUpScreen()
+                          // form: args.toString(),
+                        ));
               },
               child: AutoSizeText(
                 getTranslated(context, "create_newAccount").toString(),
