@@ -99,6 +99,7 @@
   "last_name": "Last Name",
   "first_name_required": "First Name Required",
   "last_name_required": "Last Name Required",
-  "phone_required": "Phone Required"
+  "phone_required": "Phone Required",
+  "edit_profile": "Edit Profile"
 }
 

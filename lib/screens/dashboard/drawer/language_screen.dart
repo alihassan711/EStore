@@ -39,7 +39,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
               Icons.notifications_active_outlined,
               color: blackColor,
             ),
-            onPress: () {},
+            onPress: () {
+
+            },
             color: blackColor,
           ),
           /*
@@ -118,7 +120,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             ),
             GestureDetector(
               onTap: (){
-                print("Urdu");
+                _changeLanguage( Language(2, "🇵🇰", "اردو", "ur"));
               },
               child: Card(
                 elevation: 1.0,
@@ -158,7 +160,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             ),
             GestureDetector(
               onTap: (){
-                print("Arabic");
+                _changeLanguage(Language(3, "🇸🇦", "اَلْعَرَبِيَّةُ‎", "ar"),);
               },
               child: Card(
                 elevation: 1.0,
@@ -198,7 +200,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             ),
             GestureDetector(
               onTap: (){
-                print("english");
+                _changeLanguage(Language(1, "🇺🇸", "English", "en"),);
               },
               child: Card(
                 elevation: 1.0,

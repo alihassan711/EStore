@@ -1,12 +1,20 @@
 import 'package:estore/localization/demo_localization.dart';
+import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/screens/walkthrough/intro_screens.dart';
+import 'package:estore/services/apis_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'bloc/category/category_cubit.dart';
 import 'localization/language_constants.dart';
 
+var token,firstName,lastName,email,password,phone;
+
 void main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -25,6 +33,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  ApiServices _repository = ApiServices();
   Locale? _locale;
   var email;
   setLocale(Locale locale) {
@@ -43,12 +52,13 @@ class _MyAppState extends State<MyApp> {
     super.didChangeDependencies();
   }
 
+
   @override
   void initState() {
     // SharedPreferences.setMockInitialValues({});
+    getPref();
     super.initState();
   }
-
   ThemeMode _themeMode = ThemeMode.system;
   @override
   Widget build(BuildContext context) {
@@ -84,7 +94,12 @@ class _MyAppState extends State<MyApp> {
                   }
                   return supportedLocales.first;
                 },
-                home:  IntroScreen(),
+                home: email == null? IntroScreen(): BlocProvider(
+                    create: (BuildContext context) =>
+                        CategoryCubit(repository: _repository),
+                    child:  MainScreen(index: 0,
+                      // form: args.toString(),
+                    ))
               ));
   }
 
@@ -92,5 +107,21 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _themeMode = themeMode;
     });
+  }
+
+  void getPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    email = prefs.getString('email');
+    token = prefs.getString('token');
+    firstName = prefs.getString('firstName');
+    lastName = prefs.getString('lastName');
+    password = prefs.getString('password');
+    phone = prefs.getString('phone');
+    print("email is in my app ====>  ${email}");
+    print("token is in my app ====>  ${token}");
+    print("firstName is in my app ====>  ${firstName}");
+    print("lastName is in my app ====>  ${lastName}");
+    print("password is in my app ====>  ${password}");
+    print("phone is in my app ====>  ${phone}");
   }
 }

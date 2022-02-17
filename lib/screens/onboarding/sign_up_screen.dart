@@ -307,11 +307,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   firstName: firstName.text,
                                   lastName: lastName.text,
                                     phone: phone.text,
-                                  ).then((value) => Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SignInScreen())));
+                                  )  .then((value) {
+                                    if(value){
+                                      Navigator.pushReplacement(context,  MaterialPageRoute(
+                                          builder: (_) => SignInScreen(
+                                                // form: args.toString(),
+                                              )));
+                                    }else{
+                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to register")));
+                                    }
+                                  }
+                                  );
                                   setState(() {
                                     _isPost = true;
                                   });

@@ -14,7 +14,8 @@ import 'cart_screem.dart';
 import 'favourite_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  int index ;
+   MainScreen({required this.index,Key? key}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -22,8 +23,16 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   ApiServices _repository = ApiServices();
-  int pageIndex = 0;
-
+  // pageIndexd(){
+  //   if(widget.index != null){
+  //     pageIndex == widget.index;
+  //   }
+  //   else{
+  //     setState(() {
+  //       pageIndex == 0;
+  //     });
+  //   }
+  // }
   final pages = [
     const HomeScreen(),
     const ChatScreen(),
@@ -34,6 +43,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    print("index  ==== > ${widget.index}");
     setState(() {
       cart.cartItem.length;
     });
@@ -97,7 +107,7 @@ class _MainScreenState extends State<MainScreen> {
           snackBar: SnackBar(
             content: Text(getTranslated(context, 'exit_app').toString(),),
           ),
-          child: pages[pageIndex]),
+          child: pages[widget.index]),
       bottomNavigationBar: buildMyNavBar(context),
     );
   }
@@ -122,10 +132,10 @@ class _MainScreenState extends State<MainScreen> {
               //enableFeedback: false,
               onPress: () {
                 setState(() {
-                  pageIndex = 1;
+                  widget.index = 1;
                 });
               },
-              icon: pageIndex == 1
+              icon: widget.index == 1
                   ? const Icon(
                 Icons.message,
                 color: kIconColorGreen,
@@ -157,10 +167,10 @@ class _MainScreenState extends State<MainScreen> {
               //enableFeedback: false,
               onPress: () {
                 setState(() {
-                  pageIndex = 2;
+                  widget.index = 2;
                 });
               },
-              icon: pageIndex == 2
+              icon: widget.index == 2
                   ? const Icon(
                 Icons.favorite,
                 color: kIconColorRed,
@@ -176,10 +186,10 @@ class _MainScreenState extends State<MainScreen> {
               //enableFeedback: false,
               onPress: () {
                 setState(() {
-                  pageIndex = 0;
+                  widget.index = 0;
                 });
               },
-              icon: pageIndex == 0
+              icon: widget.index == 0
                   ? const Icon(
                 Icons.home,
                 color: kIconColorRed,
@@ -195,10 +205,10 @@ class _MainScreenState extends State<MainScreen> {
               //enableFeedback: false,
               onPress: () {
                 setState(() {
-                  pageIndex = 3;
+                  widget.index = 3;
                 });
               },
-              icon: pageIndex == 3
+              icon: widget.index == 3
                   ? const Icon(
                 Icons.shopping_cart,
                 color: blackColor,
@@ -214,10 +224,10 @@ class _MainScreenState extends State<MainScreen> {
               //enableFeedback: false,
               onPress: () {
                 setState(() {
-                  pageIndex = 4;
+                  widget.index = 4;
                 });
               },
-              icon: pageIndex == 4
+              icon: widget.index == 4
                   ? const Icon(
                 Icons.person,
                 color: kIconColorBlue,

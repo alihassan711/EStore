@@ -9,6 +9,7 @@ import 'package:estore/services/apis_services.dart';
 import 'package:estore/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../main.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -24,7 +25,6 @@ class _SignInScreenState extends State<SignInScreen> {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               onChanged: (Language? language) {
                 _changeLanguage(language!);
+                print(language.name);
               },
               items: Language.languageList()
                   .map<DropdownMenuItem<Language>>(
@@ -149,6 +150,7 @@ class _SignInScreenState extends State<SignInScreen> {
               elevation: 2.0,
               borderRadius: BorderRadius.all(Radius.circular(30.0)),
               child: TextField(
+                obscureText: true,
                 controller: password,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
@@ -187,20 +189,39 @@ class _SignInScreenState extends State<SignInScreen> {
                         fontSize: 18.0),
                   ),
                   onPressed: () async{
+                    SharedPreferences _pref =
+                    await SharedPreferences.getInstance();
+                    // Navigator.pushReplacement(context,  MaterialPageRoute(
+                    //     builder: (_) => BlocProvider(
+                    //         create: (BuildContext context) =>
+                    //             CategoryCubit(repository: _repository),
+                    //         child:  MainScreen(index: 0,
+                    //           // form: args.toString(),
+                    //         ))));
                     print(email.text);
                     print(password.text);
+                    Map<String, dynamic>? resp =
                     await AuthServices.logInUser(
                       email:email.text,
                       password: password.text,
                     )
-                        .then((value) =>
-                    Navigator.pushReplacement(context,  MaterialPageRoute(
-                        builder: (_) => BlocProvider(
-                            create: (BuildContext context) =>
-                                CategoryCubit(repository: _repository),
-                            child: const MainScreen(
-                              // form: args.toString(),
-                            )))));
+                        .then((value) {
+                          if(value){
+                            Navigator.pushReplacement(context,  MaterialPageRoute(
+                                builder: (_) => BlocProvider(
+                                    create: (BuildContext context) =>
+                                        CategoryCubit(repository: _repository),
+                                    child:  MainScreen(index: 0,
+                                      // form: args.toString(),
+                                    ))));
+                            _pref.setString("email", email.text);
+                            _pref.setString("password", password.text);
+
+                          }else{
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid email or password")));
+                          }
+                    }
+                   );
                   },
                 ),
               )),
@@ -224,7 +245,7 @@ class _SignInScreenState extends State<SignInScreen> {
           // ),
           TextButton(
               onPressed:() {
-                Navigator.pushReplacement(context,  MaterialPageRoute(
+                Navigator.push(context,  MaterialPageRoute(
                     builder: (_)=>  const SignUpScreen()
                           // form: args.toString(),
                         ));

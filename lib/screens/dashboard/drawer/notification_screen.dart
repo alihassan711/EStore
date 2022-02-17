@@ -54,7 +54,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: NoNotificationContainer(
                 onPress: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => const MainScreen()));
+                      MaterialPageRoute(builder: (context) =>  MainScreen(index: 0,)));
                 },
                 icon: ImagesPath.notification,
                 btnText: "Go To HomeScreen",

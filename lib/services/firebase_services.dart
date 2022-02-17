@@ -86,7 +86,7 @@ class FireBaseServices{
       User? user = result.user;
       if (result != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MainScreen()));
+            context, MaterialPageRoute(builder: (context) => MainScreen(index: 0,)));
       } // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }

@@ -272,20 +272,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 }
 */
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:badges/badges.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
+import 'package:estore/screens/components/my_drawer.dart';
+import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
+import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/utils/elevated_button.dart';
-import 'package:estore/widgets/my_button.dart';
-import 'package:estore/widgets/my_text_field.dart';
+import 'package:estore/widgets/iconbtn.dart';
 import 'package:estore/widgets/shoping_cart.dart';
 import 'package:estore/widgets/star_display_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cart/flutter_cart.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   String? img, name, description;
@@ -315,25 +315,64 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           appBar: AppBar(
             backgroundColor: whiteColor,
             elevation: 0.0,
-            title: TabBar(
-              tabs: [
-                const Tab(
-                  icon: Text(
-                    "Products",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700),
-                  ),
+            toolbarHeight: 60.0,
+            // title:
+            /*
+         TextField(
+          cursorColor: Colors.white,
+          decoration: InputDecoration(
+              hintText:getTranslated(context, 'search').toString(),
+              border: InputBorder.none,
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.search),
+                color: const Color.fromRGBO(93, 25, 72, 1),
+                onPressed: () {
+                },
+              )),
+          style: const TextStyle(color: blackColor, fontSize: 15.0),
+           onSaved: (value) {
+             onSearchTextChanged(value!);
+           },
+           onChanged: (String value) async {
+             onSearchTextChanged(value);
+           },
+
+        ),
+        */
+            actions: [
+              IconBtn(
+                icon: const Icon(
+                  Icons.notifications_active_outlined,
+                  color: blackColor,
                 ),
-                Tab(
-                  icon: ShoppingCartWidget(item:  cart.cartItem.length.toString(),),
-                ),
-              ],
-            ),
+                onPress: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (ctx) => const NotificationScreen()));
+                },
+                color: blackColor,
+              ),
+              ShoppingCartWidget(item:cart.cartItem.length.toString(),
+                onPress: (){
+                  setState(() {
+                    cart.cartItem.length;
+                    Navigator.pushReplacement(context,  MaterialPageRoute(
+                        builder: (_) => BlocProvider(
+                            create: (BuildContext context) =>
+                                CategoryCubit(repository: _apiServices),
+                            child:  MainScreen(
+                              index: 3,
+                            ))));
+                  });
+                },
+              ),
+            ],
+            iconTheme: const IconThemeData(color: blackColor),
           ),
-          body: TabBarView(
-            children: [
+          drawer: MyDrawer(),
+          body:
+          //TabBarView(
+            //children: [
               // backgroundColor: Colors.white,
               Padding(
                 padding: const EdgeInsets.only(
@@ -348,7 +387,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           // width: 300,
                           child: Center(
                             child: Container(
-                              height: 200,
+                              height: MediaQuery.of(context).size.height,
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -488,6 +527,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 item = item! + 1;
                                 print(item.toString());
                                 print(widget.price);
+                                cart.cartItem.length == 0;
                               });
                               print("//////////////////" +
                                   cart.cartItem.length.toString());
@@ -504,7 +544,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ],
                 ),
               ),
-
+/*
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0,top: 5),
                 child: Column(
@@ -668,7 +708,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         }
                          _apiServices.postProduct(
                            totalPrice: cart.getTotalAmount().toString(),
-                        products:products);
+                        products:products) .then((value) {
+                           if(value){
+                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Order Posted Successfully")));
+                           }else{
+                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Order Fail to Post ")));
+                           }
+                         }
+                         );
                         //
                          setState(() {
                            _counter == 0;
@@ -685,8 +732,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ],
                 ),
               ),
-            ],
-          ),
+
+ */
+          //   ],
+          // ),
         ),
       ),
     );

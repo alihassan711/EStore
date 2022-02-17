@@ -12,6 +12,7 @@ import 'package:estore/screens/dashboard/drawer/my_order_screen.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/drawer/settings_screen.dart';
 import 'package:estore/services/apis_services.dart';
+import 'package:estore/utils/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,10 +55,10 @@ class _MyDrawerState extends State<MyDrawer> {
               color: kIconColorGreen,
             ),
             accountName:
-                AutoSizeText("Bushra Ansari", style: kSemiBold(whiteColor)),
+                AutoSizeText(globalUserData.userProfile == null? "name" : globalUserData.userProfile!.firstName.toString(), style: kSemiBold(whiteColor)),
             accountEmail: Row(
-              children: const [
-                AutoSizeText("bushra1223@xyz.com"),
+              children:  [
+                AutoSizeText(globalUserData.user == null ? "email" : globalUserData.user!.email.toString()),
                 // Switch(value: attendence, onChanged: (value) {setState(){
                 //   attendence =value;
                 // }}),
@@ -132,7 +133,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   _isdark = !_isdark!;
                 });
                 MyApp.of(context)!
-                    .changeTheme(!_isdark! ? ThemeMode.dark : ThemeMode.light );
+                    .changeTheme(_isdark! ? ThemeMode.dark : ThemeMode.light );
               }
               //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
               ),
@@ -140,28 +141,19 @@ class _MyDrawerState extends State<MyDrawer> {
               title: AutoSizeText(getTranslated(context, "sign_out").toString(), style: kSemiBold(blackColor)),
               leading: const Icon(Icons.logout),
               onTap: () async {
-                // SharedPreferences prefs = await SharedPreferences.getInstance();
-                // prefs.remove('email');
-                // prefs.remove('password');
-                // prefs.clear();
-                // ProgressDialog pd = ProgressDialog(context: context);
-                // pd.show(
-                //     max: 100,
-                //     msg: 'Logging  Out...',
-                //    // progressType: ProgressType.valuable,
-                //     backgroundColor: Colors.white,
-                //     progressValueColor: Theme.of(context).primaryColor,
-                //     progressBgColor: Colors.white70,
-                //     msgColor: Theme.of(context).primaryColor,
-                //     valueColor: Colors.white);
-                //
-                // await Future.delayed(const Duration(milliseconds: 3500), () {});
-                // //exit(0);
-                // pd.close();
-                // Navigator.pushReplacement(context,
-                //     MaterialPageRoute(builder: (context) {
-                //       return SignIn();
-                //     }));
+                SharedPreferences
+                    .getInstance()
+                    .then((_pref) {
+                  _pref.clear();
+                });
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('email');
+                prefs.remove('password');
+                prefs.remove('token');
+                prefs.remove('firstName');
+                prefs.remove('phone');
+                prefs.remove('lastName');
+                prefs.clear();
               }),
         ],
       ),

@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:estore/model/user_log_in_model.dart';
 import 'package:estore/utils/urls.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthServices {
   static var authtoken =
@@ -35,7 +37,21 @@ class AuthServices {
         headers: _setHeaderss());
     print(response.body);
     if (response.statusCode == 200) {
+      UserLogInModel userModel = UserLogInModel.fromJson(json.decode(response.body));
+      globalUserData = userModel;
+      SharedPreferences _pref =
+      await SharedPreferences.getInstance();
+      _pref.setString("email", userModel.user!.email.toString());
+      _pref.setString("token", userModel.user!.token.toString());
+      _pref.setString("firstName", userModel.userProfile!.firstName.toString());
+      _pref.setString("token", userModel.userProfile!.phone.toString());
+      _pref.setString("lastName", userModel.userProfile!.lastName.toString());
+      _pref.setString("password", password);
       print("User LogIn");
+      print("token =====>  ${globalUserData.user!.token}");
+      print("token =====>  ${globalUserData.userProfile!.firstName}");
+      // print("token =====>  ${globalUserData.user!.token}");
+      // print("token =====>  ${globalUserData.user!.token}");
       return true;
     } else {
       print("User LogIn status  ===> ${response.statusCode}");
@@ -51,6 +67,6 @@ class AuthServices {
    static _setHeaders() => {
      "Accept": "application/json",
      "content-type": "application/json",
-     'Authorization': 'Bearer ${authtoken}',
+     'Authorization': 'Bearer ${globalUserData.user!.token}',
    };
 }

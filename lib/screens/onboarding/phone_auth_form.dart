@@ -43,7 +43,7 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
       setState(() {
         isLoading = false;
       });
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MainScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MainScreen(index: 0,)));
     }
   }
 

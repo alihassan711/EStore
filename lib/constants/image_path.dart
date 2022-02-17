@@ -31,4 +31,6 @@ class  ImagesPath {
   static String intro2 = 'assets/introimages/intro2.png';
   static String intro3 = 'assets/introimages/intro3.png';
   static String intro4 = 'assets/introimages/intro4.jpg';
+  static String camera = 'assets/images/camera.svg';
+  static String gallery = 'assets/images/gallery.svg';
 }

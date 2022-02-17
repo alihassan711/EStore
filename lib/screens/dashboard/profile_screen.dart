@@ -6,17 +6,26 @@ import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/dashboard/drawer/history_screen.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
+import 'package:estore/screens/onboarding/edit_profile.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/utils/elevated_button.dart';
+import 'package:estore/utils/urls.dart';
 import 'package:estore/widgets/my_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'chat_screens/conversation_page.dart';
 import 'drawer/my_order_screen.dart';
-class UserProfile extends StatelessWidget {
+class UserProfile extends StatefulWidget {
    UserProfile({Key? key}) : super(key: key);
+
+  @override
+  State<UserProfile> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
   ApiServices _repository = ApiServices();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -28,15 +37,18 @@ class UserProfile extends StatelessWidget {
             backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
           ),
           const SizedBox(height: 14,),
-          AutoSizeText("Bushra Ansari",style: kBold(blackColor,12.0),),
+          AutoSizeText(globalUserData.userProfile == null? "name" : globalUserData.userProfile!.firstName.toString(),style: kBold(blackColor,12.0),),
           const  SizedBox(height: 8,),
-          AutoSizeText("bushraansari12@gmail.com",style: kNormalBlack(blackColor),),
+          AutoSizeText(globalUserData.user == null ? "email" : globalUserData.user!.email.toString()),
           const  SizedBox(height: 14,),
           ElevatedBtn(
             onPress: (){
-
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile( user: globalUserData,
+                  callback: () {
+                    setState(() {});
+                  })));
             },
-            text: getTranslated(context, "check_Balance").toString(),
+            text: getTranslated(context, "edit_profile").toString(),
             color: kIconColorGreen,
             btnTxtSize: 12,
             circularSize: 10.0,
@@ -50,7 +62,7 @@ class UserProfile extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Text("72",style: kBold(blackColor, 14.0),),
+                  Text(cart.cartItem.length.toString(),style: kBold(blackColor, 14.0),),
                   const SizedBox(height: 5,),
                   Text(getTranslated(context, "in_your_cart").toString(),style: kNormalBlack(blackColor),),
                 ],
@@ -64,7 +76,7 @@ class UserProfile extends StatelessWidget {
               ),
               Column(
                 children: [
-                  AutoSizeText("14",style: kBold(blackColor, 14.0),),
+                  AutoSizeText(globalCategoryModel.length.toString(),style: kBold(blackColor, 14.0),),
                   const SizedBox(height: 5,),
                   AutoSizeText(getTranslated(context, "ordered").toString(),style: kNormalBlack(blackColor),),
                 ],
