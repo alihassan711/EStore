@@ -130,8 +130,8 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                     InkWell(
                       onTap: (){
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (ctx) => const ConversationPage()));
+                        // Navigator.pushReplacement(context,
+                        //     MaterialPageRoute(builder: (ctx) => const ConversationPage()));
                         print("Message");},
                       child: MyProfileContainer(
                         txt: getTranslated(context, "message").toString(),

@@ -11,6 +11,7 @@ import 'package:estore/screens/dashboard/drawer/language_screen.dart';
 import 'package:estore/screens/dashboard/drawer/my_order_screen.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/drawer/settings_screen.dart';
+import 'package:estore/screens/onboarding/sign_in_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/utils/urls.dart';
 import 'package:flutter/material.dart';
@@ -128,33 +129,108 @@ class _MyDrawerState extends State<MyDrawer> {
               title:
                  AutoSizeText(getTranslated(context, "dark_mode").toString(), style: kSemiBold(blackColor)),
               leading: const Icon(Icons.track_changes),
-              onTap: () {
+              onTap: () async{
+                SharedPreferences prefs = await SharedPreferences.getInstance();
                 setState(() {
                   _isdark = !_isdark!;
                 });
+                prefs.setString("themeMode", _isdark.toString());
                 MyApp.of(context)!
-                    .changeTheme(_isdark! ? ThemeMode.dark : ThemeMode.light );
+                    .changeTheme(themeMode ?? ThemeMode.light );
               }
               //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
               ),
           ListTile(
-              title: AutoSizeText(getTranslated(context, "sign_out").toString(), style: kSemiBold(blackColor)),
-              leading: const Icon(Icons.logout),
-              onTap: () async {
-                SharedPreferences
-                    .getInstance()
-                    .then((_pref) {
-                  _pref.clear();
-                });
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('email');
-                prefs.remove('password');
-                prefs.remove('token');
-                prefs.remove('firstName');
-                prefs.remove('phone');
-                prefs.remove('lastName');
-                prefs.clear();
-              }),
+            onTap: () async {
+              await showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: Text(
+                      getTranslated(context,
+                          "log_out_msg")!,
+                      style: kSemiBold(blackColor),
+                    ),
+                    actions: [
+                      InkWell(
+                          onTap: () =>
+                              Navigator.of(
+                                  context)
+                                  .pop(),
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.only(
+                                left: 8.0,
+                                right: 8.0,
+                                bottom: 5),
+                            child: Text(
+                              getTranslated(
+                                  context, "no")!,
+                            ),
+                          )),
+                      InkWell(
+                          onTap: () async{
+                            Navigator.of(context)
+                                .pop();
+                            SharedPreferences
+                                .getInstance()
+                                .then((pref) {
+                              pref.clear();
+                            });
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.remove('email');
+                                  prefs.remove('password');
+                                  prefs.remove('token');
+                                  prefs.remove('firstName');
+                                  prefs.remove('phone');
+                                  prefs.remove('lastName');
+                                  prefs.clear();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder:
+                                        (context) =>
+                                        SignInScreen()));
+                          },
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.only(
+                                left: 8.0,
+                                right: 8.0,
+                                bottom: 5),
+                            child: Text(
+                              getTranslated(
+                                  context,
+                                  "yes")!,
+                            ),
+                          )),
+                    ],
+                  ));
+              // Navigator.pop(context);
+            },
+            title: Text(
+              getTranslated(context, "log_out")
+                  .toString(),
+              style: kBold(blackColor, 14.0),
+            ),
+          ),
+          // ListTile(
+          //     title: AutoSizeText(getTranslated(context, "sign_out").toString(), style: kSemiBold(blackColor)),
+          //     leading: const Icon(Icons.logout),
+          //     onTap: () async {
+          //       SharedPreferences
+          //           .getInstance()
+          //           .then((_pref) {
+          //         _pref.clear();
+          //       });
+          //       SharedPreferences prefs = await SharedPreferences.getInstance();
+          //       prefs.remove('email');
+          //       prefs.remove('password');
+          //       prefs.remove('token');
+          //       prefs.remove('firstName');
+          //       prefs.remove('phone');
+          //       prefs.remove('lastName');
+          //       prefs.clear();
+          //     }),
         ],
       ),
     );

@@ -32,8 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {}
   @override
   Widget build(BuildContext context) {
-    final mqHeight = MediaQuery.of(context).size.height;
-    final mqWidth = MediaQuery.of(context).size.width;
     BlocProvider.of<CategoryCubit>(context).getCategories();
     return SingleChildScrollView(
       // shrinkWrap: true,
@@ -43,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const MyCarouselSlider(),
+            /*
             const SizedBox(
               height: 10,
             ),
@@ -76,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            */
             const SizedBox(
               height: 10,
             ),
@@ -124,34 +124,37 @@ class _HomeScreenState extends State<HomeScreen> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                //users[index].products![0].image.toString() != null?
-                                Container(
-                                  height: 40,
-                                  width: 30,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                    users[index].products![0].image.toString()
-                                  ))),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  child: Text(users[index].name.toString(),
-                                      //  getTranslated(context, "featured_product").toString(),
-                                      style: kBold(blackColor, 14.0)),
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                              child: Row(
+                                children: [
+                                  //users[index].products![0].image.toString() != null?
+                                  Container(
+                                    height: 40,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                      users[index].products![0].image.toString()
+                                    ))),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    child: Text(users[index].name.toString(),
+                                        //  getTranslated(context, "featured_product").toString(),
+                                        style: kBold(blackColor, 14.0)),
+                                  ),
+                                ],
+                              ),
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 5.0,
                             ),
                             users[index].products!.length > 0 ?
                             SizedBox(
-                              height: 170,
+                              height: MediaQuery.of(context).size.height*0.25,
                               child: ListView.builder(    //inner builder
                                   scrollDirection: Axis.horizontal,
                                   shrinkWrap: true, // 1st add

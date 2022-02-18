@@ -39,7 +39,7 @@ class HistoryCard extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                 child: AutoSizeText(
                   createddate!,
-                  style: kBold(kIconColorRed, 16.0),
+                  style: kBold(kIconColorRed, 14.0),
                 ),
               ),
               const SizedBox(
@@ -62,7 +62,7 @@ class HistoryCard extends StatelessWidget {
                   const Spacer(),
                   AutoSizeText(
                     "\$$price",
-                    style: kBold(kIconColorRed, 16.0),
+                    style: kBold(kGrey, 16.0),
                   ),
                 ],
               ),
@@ -81,7 +81,7 @@ class HistoryCard extends StatelessWidget {
                   ),
                   Text(
                     getTranslated(context, "payment_status").toString(),
-                    style: kBold(blackColor, 12.0),
+                    style: kBold(kGrey, 12.0),
                   ),
                   const SizedBox(
                     width: 12,
@@ -108,7 +108,7 @@ class HistoryCard extends StatelessWidget {
                   ),
                   AutoSizeText(
                     getTranslated(context, "delivery_status").toString(),
-                    style: kBold(blackColor, 12.0),
+                    style: kBold(kGrey, 12.0),
                   ),
                 ],
               ),

@@ -6,12 +6,12 @@ class MyCarouselSlider extends StatelessWidget {
   const MyCarouselSlider({Key? key}) : super(key: key);
   Widget carouselContainer(img) {
     return Container(
-      margin: const EdgeInsets.all(6.0),
+      //margin: const EdgeInsets.all(6.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         image: DecorationImage(
           image: ExactAssetImage(img),
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
       ),
     );

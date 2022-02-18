@@ -1,25 +1,40 @@
 import 'package:estore/localization/demo_localization.dart';
-import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/screens/walkthrough/intro_screens.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'bloc/category/category_cubit.dart';
 import 'localization/language_constants.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-var token,firstName,lastName,email,password,phone;
-
+var token,firstName,lastName,email,password,phone,themeMode;
+var deviceToken;
 void main() async{
-
+ // FlutterNativeSplash.removeAfter(initialization);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  FirebaseMessaging.instance.getToken().then((value) {
+    deviceToken = value;
+  });
   runApp(MyApp());
 }
-
+void initialization(BuildContext context) async {
+  // This is where you can initialize the resources needed by your app while
+  // the splash screen is displayed.  Remove the following example because
+  // delaying the user experience is a bad design practice!
+  // ignore_for_file: avoid_print
+  print('ready in 3...');
+  await Future.delayed(const Duration(seconds: 1));
+  print('ready in 2...');
+  await Future.delayed(const Duration(seconds: 1));
+  print('ready in 1...');
+  await Future.delayed(const Duration(seconds: 1));
+  print('go!');
+}
 class MyApp extends StatefulWidget {
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
@@ -94,12 +109,15 @@ class _MyAppState extends State<MyApp> {
                   }
                   return supportedLocales.first;
                 },
-                home: email == null? IntroScreen(): BlocProvider(
-                    create: (BuildContext context) =>
-                        CategoryCubit(repository: _repository),
-                    child:  MainScreen(index: 0,
-                      // form: args.toString(),
-                    ))
+                home:
+                //email == null?
+                IntroScreen()
+               // : BlocProvider(
+               //      create: (BuildContext context) =>
+               //          CategoryCubit(repository: _repository),
+               //      child:  MainScreen(index: 0,
+               //        // form: args.toString(),
+               //      ))
               ));
   }
 
@@ -117,11 +135,14 @@ class _MyAppState extends State<MyApp> {
     lastName = prefs.getString('lastName');
     password = prefs.getString('password');
     phone = prefs.getString('phone');
-    print("email is in my app ====>  ${email}");
-    print("token is in my app ====>  ${token}");
-    print("firstName is in my app ====>  ${firstName}");
-    print("lastName is in my app ====>  ${lastName}");
-    print("password is in my app ====>  ${password}");
-    print("phone is in my app ====>  ${phone}");
+    themeMode = prefs.getString('themeMode');
+    print("email is in my app ====>  $email");
+    print("token is in my app ====>  $token");
+    print("firstName is in my app ====>  $firstName");
+    print("lastName is in my app ====>  $lastName");
+    print("password is in my app ====>  $password");
+    print("phone is in my app ====>  $phone");
+    print("deviceToken is in my app ====>  $deviceToken");
+    print("themeMode is in my app ====>  $themeMode");
   }
 }

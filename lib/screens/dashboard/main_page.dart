@@ -137,12 +137,12 @@ class _MainScreenState extends State<MainScreen> {
               },
               icon: widget.index == 1
                   ? const Icon(
-                Icons.message,
+                Icons.notification_important,
                 color: kIconColorGreen,
                 size: 30,
               )
                   : const Icon(
-                Icons.message,
+                Icons.notification_important,
                 color: kGrey,
                 size: 30,
               ),

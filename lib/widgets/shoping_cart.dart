@@ -9,13 +9,13 @@ class ShoppingCartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
       return Badge(
-        position: BadgePosition.topEnd(top: -2, end: 4),
+        position: BadgePosition.topEnd(top: 2, end: 5),
         animationDuration: const Duration(milliseconds: 300),
-        animationType: BadgeAnimationType.slide,
+        animationType: BadgeAnimationType.scale,
         badgeContent: Text(
           item,
           //  _counter.toString(),
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(fontSize: 10,color: Colors.white),
         ),
         child: IconButton(
             icon: const Icon(

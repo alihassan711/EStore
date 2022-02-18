@@ -14,8 +14,8 @@ class NotificationCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (fromChatPage) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (ctx) => ConversationPage()));
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (ctx) => ConversationPage()));
           }
         },
         child: Card(

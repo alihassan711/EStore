@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
+import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/model/language.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
@@ -18,6 +19,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  bool? _passwordVisible = false;
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   ApiServices _repository = ApiServices();
@@ -25,6 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,228 +70,228 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              ClipPath(
-                  clipper: WaveClipper2(),
+      body: Form(
+        key: _key,
+        child: ListView(
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                ClipPath(
+                    clipper: WaveClipper2(),
+                    child: Container(
+                      child: Column(),
+                      width: MediaQuery.of(context).size.width,
+                      height: 260,
+                      decoration: const BoxDecoration(
+                          color: Color.fromRGBO(132, 169, 172, 1.0)),
+                    )),
+                ClipPath(
+                  clipper: WaveClipper3(),
                   child: Container(
-                    child: Column(),
+                    child: Column(
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 35,
+                        ),
+                        const Icon(
+                          Icons.shopping_cart,
+                          color: Colors.white,
+                          size: 60.0,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          getTranslated(context, "shop_here").toString(),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 30.0),
+                        ),
+                      ],
+                    ),
                     width: MediaQuery.of(context).size.width,
                     height: 260,
                     decoration: const BoxDecoration(
-                        color: Color.fromRGBO(132, 169, 172, 1.0)),
-                  )),
-              ClipPath(
-                clipper: WaveClipper3(),
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 35,
-                      ),
-                      const Icon(
-                        Icons.shopping_cart,
-                        color: Colors.white,
-                        size: 60.0,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        getTranslated(context, "shop_here").toString(),
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 30.0),
-                      ),
-                    ],
+                        color: Color.fromRGBO(59, 105, 120, 1.0)),
                   ),
-                  width: MediaQuery.of(context).size.width,
-                  height: 260,
-                  decoration: const BoxDecoration(
-                      color: Color.fromRGBO(59, 105, 120, 1.0)),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
-            child: Material(
-              elevation: 2.0,
-              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-              child: TextField(
+              ],
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
                 controller: email,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "required_email");
+                  }
+                  if (!RegExp(email_RegExp).hasMatch(val)) {
+                    return getTranslated(context, "valid_email");
+                  }
+                  return null;
+                },
                 decoration: InputDecoration(
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
                   hintText: getTranslated(context, "email").toString(),
-                  prefixIcon: const Material(
-                    elevation: 0,
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    child: Icon(
-                      Icons.email,
-                      color: Color.fromRGBO(32, 64, 81, 1.0),
-                    ),
+                  prefixIcon: const Icon(
+                    Icons.email,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
-                  border: InputBorder.none,
+                  //border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 25.0, vertical: 13.0),
                 ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
-            child: Material(
-              elevation: 2.0,
-              borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              child: TextField(
-                obscureText: true,
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                obscureText: !_passwordVisible!,
                 controller: password,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "required_password");
+                  }
+                  if (val.length < 5) {
+                    return getTranslated(context, "valid_password");
+                  }
+                  return null;
+                },
                 decoration: InputDecoration(
-                    hintText: getTranslated(context, "password").toString(),
-                    prefixIcon: const Material(
-                      elevation: 0,
-                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                      child: Icon(
-                        Icons.lock,
-                        color: Color.fromRGBO(32, 64, 81, 1.0),
-                      ),
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
+                  hintText: getTranslated(context, "password").toString(),
+                  prefixIcon: const Icon(
+                    Icons.lock,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  // border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisible!
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: blackColor,
                     ),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 25.0, vertical: 13.0)),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisible = !_passwordVisible!;
+                      });
+                    },
+                  ),
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Color.fromRGBO(32, 64, 81, 1.0),
-                ),
-                child: TextButton(
-                  child: Text(
-                    getTranslated(context, "sign_in").toString(),
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18.0),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
-                  onPressed: () async{
-                    SharedPreferences _pref =
-                    await SharedPreferences.getInstance();
-                    // Navigator.pushReplacement(context,  MaterialPageRoute(
-                    //     builder: (_) => BlocProvider(
-                    //         create: (BuildContext context) =>
-                    //             CategoryCubit(repository: _repository),
-                    //         child:  MainScreen(index: 0,
-                    //           // form: args.toString(),
-                    //         ))));
-                    print(email.text);
-                    print(password.text);
-                    Map<String, dynamic>? resp =
-                    await AuthServices.logInUser(
-                      email:email.text,
-                      password: password.text,
-                    )
-                        .then((value) {
-                          if(value){
-                            Navigator.pushReplacement(context,  MaterialPageRoute(
-                                builder: (_) => BlocProvider(
-                                    create: (BuildContext context) =>
-                                        CategoryCubit(repository: _repository),
-                                    child:  MainScreen(index: 0,
-                                      // form: args.toString(),
-                                    ))));
+                  child: TextButton(
+                    child: Text(
+                      getTranslated(context, "sign_in").toString(),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18.0),
+                    ),
+                    onPressed: () async {
+                      if (_key.currentState!.validate()) {
+                        SharedPreferences _pref =
+                            await SharedPreferences.getInstance();
+                        // Navigator.pushReplacement(context,  MaterialPageRoute(
+                        //     builder: (_) => BlocProvider(
+                        //         create: (BuildContext context) =>
+                        //             CategoryCubit(repository: _repository),
+                        //         child:  MainScreen(index: 0,
+                        //           // form: args.toString(),
+                        //         ))));
+                        print(email.text);
+                        print(password.text);
+                        Map<String, dynamic>? resp =
+                            await AuthServices.logInUser(
+                          email: email.text,
+                          password: password.text,
+                        ).then((value) {
+                          if (value) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => BlocProvider(
+                                        create: (BuildContext context) =>
+                                            CategoryCubit(
+                                                repository: _repository),
+                                        child: MainScreen(
+                                          index: 0,
+                                          // form: args.toString(),
+                                        ))));
                             _pref.setString("email", email.text);
                             _pref.setString("password", password.text);
-
-                          }else{
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid email or password")));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(backgroundColor: kIconColorRed,
+                                    content:
+                                        Text("Invalid email or password",style: TextStyle(color: whiteColor),)));
                           }
-                    }
-                   );
-                  },
-                ),
-              )),
-          const SizedBox(height: 5),
-          Center(
-            child: Container(
-              child: TextButton(
-                child: Text(
-                  getTranslated(context, "forget_password").toString(),
-                  style: const TextStyle(
-                    color: kIconColorRed,
+                        });
+                      }
+                    },
                   ),
+                )),
+            const SizedBox(height: 5),
+            Center(
+              child: Container(
+                child: TextButton(
+                  child: Text(
+                    getTranslated(context, "forget_password").toString(),
+                    style: const TextStyle(
+                      color: kGrey,
+                    ),
+                  ),
+                  //  textColor: Colors.white,
+                  onPressed: () {},
                 ),
-                //  textColor: Colors.white,
-                onPressed: () {},
               ),
             ),
-          ),
-          // const SizedBox(
-          //   height: 10,
-          // ),
-          TextButton(
-              onPressed:() {
-                Navigator.push(context,  MaterialPageRoute(
-                    builder: (_)=>  const SignUpScreen()
-                          // form: args.toString(),
-                        ));
-              },
-              child: AutoSizeText(
-                getTranslated(context, "create_newAccount").toString(),
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 12,
-                    fontWeight: FontWeight.normal),
-              ),
-          ),
-          // InkWell(
-          //   onTap: () {
-          //     Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => const SignInButtons()));
-          //   },
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: <Widget>[
-          //       Text(
-          //         getTranslated(context, "create_newAccount").toString(),
-          //         style: const TextStyle(
-          //             color: Colors.black,
-          //             fontSize: 12,
-          //             fontWeight: FontWeight.normal),
-          //       ),
-          //       Text(getTranslated(context, "sign_up").toString(),
-          //           style: const TextStyle(
-          //               color: Color.fromRGBO(32, 64, 81, 1.0),
-          //               fontWeight: FontWeight.w500,
-          //               fontSize: 12,
-          //               decoration: TextDecoration.underline)),
-          //     ],
-          //   ),
-          // ),
-          const SizedBox(
-            height: 10,
-          ),
-        ],
+           Center(child:  GestureDetector(
+             onTap: () {
+               Navigator.push(
+                   context,
+                   MaterialPageRoute(builder: (_) => const SignUpScreen()
+                     // form: args.toString(),
+                   ));
+             },
+             child: AutoSizeText(
+               getTranslated(context, "create_newAccount").toString(),
+               style: const TextStyle(
+                   color: Colors.black,
+                   fontSize: 12,
+                   fontWeight: FontWeight.normal),
+             ),
+           ),),
+          ],
+        ),
       ),
     );
   }
