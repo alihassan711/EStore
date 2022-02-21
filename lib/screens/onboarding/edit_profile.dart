@@ -14,6 +14,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../localization/language_constants.dart';
+
 class EditProfile extends StatefulWidget {
   final UserLogInModel user;
   VoidCallback callback;
@@ -73,7 +75,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       Text(
-                        "Edit Profile",
+                          getTranslated(context, "edit_profile").toString(),
                         style: kBold(blackColor, 16.0)
                       ),
                       const SizedBox(),
@@ -173,6 +175,7 @@ class _EditProfileState extends State<EditProfile> {
                     return null;
                   },
                 ),
+                const SizedBox(height: 20.0),
                 TextFormField(
                   style: kSemiBold(blackColor),
                   controller: phoneController,
@@ -229,7 +232,7 @@ class _EditProfileState extends State<EditProfile> {
                   },
                   width: MediaQuery.of(context).size.width,
                   height: 45,
-                  text: "Save",
+                  text: getTranslated(context, 'save').toString() == null? "save":getTranslated(context, 'save').toString(),
                   borderRadius: 5,
                   textStyle: kBold(whiteColor, 14.0),
                   btnColor: kIconColorGreen,

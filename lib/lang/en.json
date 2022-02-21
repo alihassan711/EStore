@@ -32,6 +32,7 @@
   "languages": "Languages",
   "arabic": "Arabic",
   "english": "English",
+  "use_language": "English",
   "app_language": "App Language",
   "select_own_language": "Select your own preferred language",
   "contact_us": "Contact Us",
@@ -100,6 +101,11 @@
   "first_name_required": "First Name Required",
   "last_name_required": "Last Name Required",
   "phone_required": "Phone Required",
-  "edit_profile": "Edit Profile"
+  "edit_profile": "Edit Profile",
+  "valid_phone": "Please Enter Valid Phone Number",
+  "continue_shopping": "continue shopping",
+  "your_cart_empty": "your cart is empty",
+  "save": "save",
+  "log_out": "Sign Out"
 }
 

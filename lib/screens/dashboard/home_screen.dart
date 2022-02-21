@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                              padding: const EdgeInsets.only(left: 13.0,right: 13.0),
                               child: Row(
                                 children: [
                                   //users[index].products![0].image.toString() != null?
@@ -149,9 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              height: 5.0,
-                            ),
+                            // const SizedBox(
+                            //   height: 1.0,
+                            // ),
                             users[index].products!.length > 0 ?
                             SizedBox(
                               height: MediaQuery.of(context).size.height*0.25,

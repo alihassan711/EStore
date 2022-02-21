@@ -14,6 +14,7 @@ class  ImagesPath {
   static String top = 'assets/icons/bes.png';
   static String car = 'assets/icons/carpng.png';
   static String notification = 'assets/icons/notification.png';
+  static String emptyCart = 'assets/icons/emptyCart.png';
   static String jewelery = 'assets/icons/jewleryicon.png';
   static String close = 'assets/icons/close.png';
   static String right = 'assets/icons/right.png';

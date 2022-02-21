@@ -12,7 +12,7 @@ class HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(5.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -35,21 +35,21 @@ class HistoryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                child: AutoSizeText(
-                  createddate!,
-                  style: kBold(kIconColorRed, 14.0),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+              //   child: AutoSizeText(
+              //     createddate!,
+              //     style: kBold(kIconColorRed, 14.0),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 12,
+              // ),
               Row(
                 children: [
                   const Icon(
                     Icons.person,
-                    size: 25,
+                    size: 28,
                     color: blackColor,
                   ),
                   const SizedBox(
@@ -62,18 +62,18 @@ class HistoryCard extends StatelessWidget {
                   const Spacer(),
                   AutoSizeText(
                     "\$$price",
-                    style: kBold(kGrey, 16.0),
+                    style: kBold(blackColor, 14.0),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 12,
+                height: 10,
               ),
               Row(
                 children: [
                   const Icon(
                     Icons.calendar_today,
-                    size: 25,
+                    size: 20,
                     color: blackColor,
                   ),
                   const SizedBox(
@@ -81,7 +81,7 @@ class HistoryCard extends StatelessWidget {
                   ),
                   Text(
                     getTranslated(context, "payment_status").toString(),
-                    style: kBold(kGrey, 12.0),
+                    style:kNormalBlack(blackColor),
                   ),
                   const SizedBox(
                     width: 12,
@@ -94,13 +94,13 @@ class HistoryCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 12,
+                height: 10,
               ),
               Row(
                 children: [
                   const Icon(
                     Icons.add_to_drive,
-                    size: 25,
+                    size: 20,
                     color: blackColor,
                   ),
                   const SizedBox(
@@ -108,7 +108,12 @@ class HistoryCard extends StatelessWidget {
                   ),
                   AutoSizeText(
                     getTranslated(context, "delivery_status").toString(),
-                    style: kBold(kGrey, 12.0),
+                    style: kNormalBlack(blackColor),
+                  ),
+                  const Spacer(),
+                  AutoSizeText(
+                    createddate!,
+                    style: kBold(kIconColorRed, 14.0),
                   ),
                 ],
               ),

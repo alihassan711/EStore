@@ -346,9 +346,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   color: blackColor,
                 ),
                 onPress: () {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(
+                      context,
                       MaterialPageRoute(
-                          builder: (ctx) => const NotificationScreen()));
+                          builder: (_) => BlocProvider(
+                              create: (BuildContext context) =>
+                                  CategoryCubit(
+                                      repository: _apiServices),
+                              child: MainScreen(
+                                index: 1,
+                                // form: args.toString(),
+                              ))));
                 },
                 color: blackColor,
               ),

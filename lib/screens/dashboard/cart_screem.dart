@@ -5,6 +5,12 @@ import 'package:estore/localization/language_constants.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/utils/elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/category/category_cubit.dart';
+import '../../constants/image_path.dart';
+import '../../utils/no_notification.dart';
+import 'main_page.dart';
 
 class MyCartScreen extends StatefulWidget {
   const MyCartScreen({Key? key}) : super(key: key);
@@ -22,13 +28,43 @@ class _MyCartScreenState extends State<MyCartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
+        body: cart.cartItem.isEmpty
+            ? Center(
+            child: Column(
+              children: [
+                Expanded(child: SizedBox(),),
+                Expanded(
+                  flex: 2,
+                  child: NoNotificationContainer(
+                    onPress: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => BlocProvider(
+                                  create: (BuildContext context) =>
+                                      CategoryCubit(
+                                          repository: _apiServices),
+                                  child: MainScreen(
+                                    index: 0,
+                                    // form: args.toString(),
+                                  ))));
+                    },
+                    icon: ImagesPath.emptyCart,
+                    btnText: getTranslated(context, "continue_shopping").toString(),
+                    txt:getTranslated(context, "your_cart_empty").toString(),
+                  ),
+                ),
+                Expanded(child: SizedBox(),),
+              ],
+            ))
+            :
+        Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 5),
       child: Column(
         children: [
-          if (cart.cartItem.isEmpty)
-            const Center(child: Text("Noting added in cart"))
-          else
+          // if (cart.cartItem.isEmpty)
+          //   const Center(child: Text("Noting added in cart"))
+          // else
             Expanded(
               flex: 5,
               child: ListView.builder(
@@ -211,6 +247,75 @@ class _MyCartScreenState extends State<MyCartScreen> {
         ],
       ),
     ));
+    /*
+      Column(
+        children: [
+          Expanded(
+            flex: 5,
+            child: ListView.builder(
+                itemCount: 2,
+                itemBuilder: (BuildContext context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 10.0,right: 10.0,bottom: 5.0,top: 5.0),
+                    child: CartCard(
+                      img: ImagesPath.p5,
+                      itemPrice: itemPrice,
+                      quantity: totalItems,
+                      onPressDecrease: () {
+                        setState(() {
+                          if(totalItems > 0) {
+                            totalItems = totalItems - 1;
+                          }
+                          else{
+                            totalItems = totalItems;
+                          }
+                        });
+                      },
+                      onPressIncrease: () {
+                          setState(() {
+                            totalItems = totalItems + 1;
+                        });
+                      },
+                      orderProceedDate: "5 Aug 2021",
+                      titleText: "Chickn Burger",
+                    ),
+                  );
+                }),
+          ),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              child: Column(
+                children: [
+                  _container(getTranslated(context, "sub_total").toString(), subTotal,14.0),
+                  _container(getTranslated(context, "discount").toString(), disCount,14.0),
+                  _container(getTranslated(context, "delivery_charges").toString(), deliveryCharges,14.0),
+                  _container(getTranslated(context, "order_total").toString(), orderTotal,14.0),
+                ],
+              ),
+            ),
+          ),
+          ElevatedBtn(
+            btnHeight: 45,
+            btnWidth: 300,
+            color: kIconColorRed,
+            btnTxtSize: 14,
+            text:getTranslated(context, "order_proceed").toString(),
+            circularSize: 8,
+            txtColor: whiteColor,
+            onPress: () {
+              setState(() {});
+             // Navigator.push(context, MaterialPageRoute(builder: (builder)=>MyLocation()));
+              print("proceed order");
+            },
+          //  btnWidth: 200,
+          ),
+          SizedBox(height: 5,),
+        ],
+      ),
+
+           */
   }
 
   Widget _container(

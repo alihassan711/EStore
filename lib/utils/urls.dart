@@ -1,4 +1,5 @@
 import 'package:estore/model/favourite_model.dart';
+import 'package:estore/model/notifications_model.dart';
 import 'package:estore/model/order_history_model.dart';
 import 'package:estore/model/user_log_in_model.dart';
 
@@ -13,6 +14,7 @@ class Urls {
   static const String userRegister = "$baseUrl/api/customer/register";
   static const String userLogIn = "$baseUrl/api/login";
   static const String favourites = "$baseUrl/api/favourites";
+  static const String notifications = "$baseUrl/api/notifications";
   static const String updateProfile = "$baseUrl/api/profile/edit";
 // static const String invoice = "$baseUrl/Invoice/INVOICE_BY_CUS_CODE?cus_code=610";
  // static const String oderlist = "$baseUrl/OrderTakerData/ORDER_TAKER_DATA?ORDER_TAKER_ID=2";
@@ -20,3 +22,4 @@ class Urls {
 UserLogInModel globalUserData = UserLogInModel();
 List<OrderHistoryModel> globalCategoryModel = [];
 List<FavouriteModel> globalFavouriteModel = [];
+List<NotifcationsModel> globalNotificationModel = [];

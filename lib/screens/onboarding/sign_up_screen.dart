@@ -1,3 +1,4 @@
+/*
 import 'dart:typed_data';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
@@ -464,5 +465,477 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       imgError = false;
     });
+  }
+}
+*/
+import 'package:estore/constants/color.dart';
+import 'package:estore/constants/text_style.dart';
+import 'package:estore/localization/language_constants.dart';
+import 'package:estore/model/language.dart';
+import 'package:estore/screens/onboarding/sign_in_screen.dart';
+import 'package:estore/services/apis_services.dart';
+import 'package:estore/services/auth_services.dart';
+import 'package:flutter/material.dart';
+import '../../main.dart';
+
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController firstName = TextEditingController();
+  TextEditingController lastName = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
+  bool? _passwordVisible = false;
+  bool? _passwordVisiblec = false;
+  //bool? _passwordVisible = false;
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  ApiServices _repository = ApiServices();
+  void _changeLanguage(Language language) async {
+    Locale _locale = await setLocale(language.languageCode);
+    MyApp.setLocale(context, _locale);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: const Color.fromRGBO(59, 105, 120, 1.0),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: DropdownButton<Language>(
+              underline: const SizedBox(),
+              icon: const Icon(
+                Icons.language,
+                color: whiteColor,
+              ),
+              onChanged: (Language? language) {
+                _changeLanguage(language!);
+                print(language.name);
+              },
+              items: Language.languageList()
+                  .map<DropdownMenuItem<Language>>(
+                    (e) => DropdownMenuItem<Language>(
+                      value: e,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(
+                            e.flag,
+                            style: const TextStyle(fontSize: 30.0),
+                          ),
+                          Text(e.name)
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+      body: Form(
+        key: _key,
+        child: ListView(
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                ClipPath(
+                    clipper: WaveClipper2(),
+                    child: Container(
+                      child: Column(),
+                      width: MediaQuery.of(context).size.width,
+                      height: 260,
+                      decoration: const BoxDecoration(
+                          color: Color.fromRGBO(132, 169, 172, 1.0)),
+                    )),
+                ClipPath(
+                  clipper: WaveClipper3(),
+                  child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 35,
+                        ),
+                        const Icon(
+                          Icons.shopping_cart,
+                          color: Colors.white,
+                          size: 60.0,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          getTranslated(context, "shop_here").toString(),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 30.0),
+                        ),
+                      ],
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    height: 260,
+                    decoration: const BoxDecoration(
+                        color: Color.fromRGBO(59, 105, 120, 1.0)),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                controller: firstName,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "first_name_required");
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
+                  hintText: getTranslated(context, "first_name").toString(),
+                  prefixIcon: const Icon(
+                    Icons.person,size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  //border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                obscureText: false,
+                controller: lastName,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "last_name_required");
+                  }
+
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
+                  hintText: getTranslated(context, "last_name").toString(),
+                  prefixIcon: const Icon(
+                    Icons.person,size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  // border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                keyboardType:TextInputType.phone,
+                controller: phone,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "phone_required");
+                  }
+                  if (!RegExp(phone_RegExp).hasMatch(val)) {
+                    return getTranslated(context, "valid_phone");
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
+                  hintText: getTranslated(context, "phone").toString(),
+                  prefixIcon: const Icon(
+                    Icons.phone,size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  //border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                keyboardType:TextInputType.emailAddress,
+                controller: email,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "required_email");
+                  }
+                  if (!RegExp(email_RegExp).hasMatch(val)) {
+                    return getTranslated(context, "valid_email");
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
+                  hintText: getTranslated(context, "email").toString(),
+                  prefixIcon: const Icon(
+                    Icons.email,size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  //border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                obscureText: !_passwordVisible!,
+                controller: password,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "required_password");
+                  }
+                  if (val.length < 5) {
+                    return getTranslated(context, "valid_password");
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
+                  hintText: getTranslated(context, "password").toString(),
+                  prefixIcon: const Icon(
+                    Icons.lock,size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  // border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisible!
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      size:20,
+                      color: blackColor,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisible = !_passwordVisible!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                obscureText: !_passwordVisiblec!,
+                controller: confirmPassword,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "required_confirm_password");
+                  }
+                  if (password.text != confirmPassword.text) {
+                    return getTranslated(context, "confirm_password_notmatch");
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
+                  hintText:
+                      getTranslated(context, "confirm_password").toString(),
+                  prefixIcon: const Icon(
+                    Icons.lock,size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  // border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisiblec!
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      size:20,
+                      color: blackColor,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisiblec = !_passwordVisiblec!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  child: TextButton(
+                    child: Text(
+                      getTranslated(context, "register").toString(),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18.0),
+                    ),
+                    onPressed: () async {
+                      if (_key.currentState!.validate()) {
+                        await AuthServices.registerUser(
+                          email: email.text,
+                          password: password.text,
+                          firstName: firstName.text,
+                          lastName: lastName.text,
+                          phone: phone.text,
+                        ).then((value) {
+                          if (value) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => SignInScreen(
+                                        // form: args.toString(),
+                                        )));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                    backgroundColor: kIconColorRed,
+                                    content: Text(
+                                      "Failed to register",
+                                      style: TextStyle(color: whiteColor),
+                                    )));
+                          }
+                        });
+                        setState(() {
+                          //_isPost = true;
+                        });
+                        firstName.clear();
+                        lastName.clear();
+                        phone.clear();
+                        email.clear();
+                        password.clear();
+                        // confirmPassword.clear();
+                        setState(() {
+                          //  _isPost = false;
+                        });
+                      }
+                    },
+                  ),
+                )),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class WaveClipper2 extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(0.0, size.height - 50);
+
+    var firstEndPoint = Offset(size.width * .7, size.height - 40);
+    var firstControlPoint = Offset(size.width * .25, size.height);
+    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
+        firstEndPoint.dx, firstEndPoint.dy);
+
+    var secondEndPoint = Offset(size.width, size.height - 45);
+    var secondControlPoint = Offset(size.width * 0.84, size.height - 50);
+    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
+        secondEndPoint.dx, secondEndPoint.dy);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
+}
+
+class WaveClipper3 extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(0.0, size.height - 50);
+
+    var firstEndPoint = Offset(size.width * 0.49, size.height - 15 - 50);
+    var firstControlPoint = Offset(size.width * .25, size.height - 60 - 50);
+    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
+        firstEndPoint.dx, firstEndPoint.dy);
+
+    var secondEndPoint = Offset(size.width, size.height - 40);
+    var secondControlPoint = Offset(size.width * 0.84, size.height);
+    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
+        secondEndPoint.dx, secondEndPoint.dy);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }

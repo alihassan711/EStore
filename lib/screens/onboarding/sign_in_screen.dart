@@ -142,7 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "email").toString(),
                   prefixIcon: const Icon(
-                    Icons.email,
+                    Icons.email, size:20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   //border: InputBorder.none,
@@ -176,7 +176,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "password").toString(),
                   prefixIcon: const Icon(
-                    Icons.lock,
+                    Icons.lock, size:20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   // border: InputBorder.none,
@@ -187,6 +187,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       _passwordVisible!
                           ? Icons.visibility
                           : Icons.visibility_off,
+                      size:20,
                       color: blackColor,
                     ),
                     onPressed: () {
@@ -205,7 +206,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: Container(
                   decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   child: TextButton(
@@ -278,7 +279,7 @@ class _SignInScreenState extends State<SignInScreen> {
              onTap: () {
                Navigator.push(
                    context,
-                   MaterialPageRoute(builder: (_) => const SignUpScreen()
+                   MaterialPageRoute(builder: (_) =>  SignUpScreen()
                      // form: args.toString(),
                    ));
              },

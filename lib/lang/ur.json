@@ -159,6 +159,7 @@
   "urdu": "اردو",
   "languages": "زبانیں",
   "arabic": "عربی",
+  "use_language": "اردو",
   "app_settings": "ایپ کی ترتیب",
   "english": "انگریزی",
   "app_language": "ایپ کی زبان",
@@ -195,5 +196,8 @@
   "first_name_required": "پہلا نام درکار ہے۔",
   "last_name_required": "آخری نام درکار ہے۔",
   "phone_required": "فون درکار ہے",
-  "edit_profile": "پروفائل میں ترمیم کریں"
+  "edit_profile": "پروفائل میں ترمیم کریں",
+  "valid_phone": "درست فون نمبر درج کریں",
+  "continue_shopping": "خریداری جاری رکھیں",
+  "your_cart_empty": "آپ کی ٹوکری خالی ہے"
 }

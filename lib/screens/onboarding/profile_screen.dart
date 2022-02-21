@@ -14,8 +14,10 @@ import 'package:estore/widgets/my_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'chat_screens/conversation_page.dart';
-import 'drawer/my_order_screen.dart';
+import '../../bloc/category/category_cubit.dart';
+import '../dashboard/chat_screens/conversation_page.dart';
+import '../dashboard/drawer/my_order_screen.dart';
+import '../dashboard/main_page.dart';
 class UserProfile extends StatefulWidget {
    UserProfile({Key? key}) : super(key: key);
 
@@ -32,6 +34,12 @@ class _UserProfileState extends State<UserProfile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          //globalUserData.userProfile== null ||
+          //     globalUserData.userProfile!.avatar.toString() == null?
+          // CircleAvatar(
+          //   radius: 50,
+          //   backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
+          // ):
           CircleAvatar(
             radius: 50,
             backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
@@ -41,20 +49,38 @@ class _UserProfileState extends State<UserProfile> {
           const  SizedBox(height: 8,),
           AutoSizeText(globalUserData.user == null ? "email" : globalUserData.user!.email.toString()),
           const  SizedBox(height: 14,),
-          ElevatedBtn(
-            onPress: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile( user: globalUserData,
-                  callback: () {
-                    setState(() {});
-                  })));
-            },
-            text: getTranslated(context, "edit_profile").toString(),
-            color: kIconColorGreen,
-            btnTxtSize: 12,
-            circularSize: 10.0,
-            txtColor: whiteColor,
-            btnWidth: 175,
-            btnHeight: 40,
+          Row(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                  border:Border.all(color: kGrey),
+                ),
+                child: ElevatedBtn(
+                  onPress: (){
+                    print("image data ===> ${globalUserData.userProfile!.avatar.toString()}");
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile( user: globalUserData,
+                        callback: () {
+                          setState(() {});
+                        })));
+                  },
+                  text: getTranslated(context, "edit_profile").toString(),
+                  color: whiteColor,
+                  btnTxtSize: 12,
+                  circularSize: 10.0,
+                  txtColor: blackColor,
+                  btnWidth: 175,
+                  btnHeight: 40,
+                ),
+              ),
+              SizedBox(width: 5,),
+              Container(
+                height: 40,width: 60,
+                decoration: BoxDecoration(color: whiteColor,borderRadius: BorderRadius.circular(8.0),
+                  border:Border.all(color: kGrey),
+                ),
+                child: Icon(Icons.favorite,color: kGrey,),)
+            ],
           ),
           const SizedBox(height: 14,),
           Row(
@@ -106,8 +132,11 @@ class _UserProfileState extends State<UserProfile> {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (ctx) => const MyOrderScreen()));
+                        Navigator.push(context,  MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                                create: (BuildContext context) =>
+                                    OrderHistoryCubit(repository: _repository),
+                                child: const PurchaseHistory())));
                        },
                       child: MyProfileContainer(
                         txt:getTranslated(context, "order").toString(),
@@ -130,12 +159,21 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                     InkWell(
                       onTap: (){
-                        // Navigator.pushReplacement(context,
-                        //     MaterialPageRoute(builder: (ctx) => const ConversationPage()));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => BlocProvider(
+                                    create: (BuildContext context) =>
+                                        CategoryCubit(
+                                            repository: _repository),
+                                    child: MainScreen(
+                                      index: 1,
+                                      // form: args.toString(),
+                                    ))));
                         print("Message");},
                       child: MyProfileContainer(
-                        txt: getTranslated(context, "message").toString(),
-                        icon:const Icon(Icons.message,size:28,color: kIconColorGreen,),
+                        txt: getTranslated(context, "notification").toString(),
+                        icon:const Icon(Icons.notification_important,size:28,color: kIconColorGreen,),
                       ),
                     ),
                   ],
@@ -146,8 +184,17 @@ class _UserProfileState extends State<UserProfile> {
          // SizedBox(height: 12,),
            ListTile(
              onTap: (){
-               Navigator.push(context,
-                   MaterialPageRoute(builder: (ctx) => const NotificationScreen()));
+               Navigator.pushReplacement(
+                   context,
+                   MaterialPageRoute(
+                       builder: (_) => BlocProvider(
+                           create: (BuildContext context) =>
+                               CategoryCubit(
+                                   repository: _repository),
+                           child: MainScreen(
+                             index: 1,
+                             // form: args.toString(),
+                           ))));
              },
             title: AutoSizeText(getTranslated(context, "notification").toString(),style: kBold(blackColor,12.0),),
             leading: const CircleAvatar(

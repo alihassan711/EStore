@@ -10,6 +10,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../utils/urls.dart';
+import '../../onboarding/edit_profile.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
@@ -48,14 +51,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
-                          "Abdul Manan",
+                    getTranslated(context, "name").toString(),
                           style: kBold(blackColor, 16.0),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
                         AutoSizeText(
-                          "bushra12@gmail.com",
+                          globalUserData.user!.email.toString() == null? "email" :globalUserData.user!.email.toString(),
                           style: kNormalBlack(blackColor),
                         ),
                       ],
@@ -102,7 +105,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Row(
+                        Row(crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             const Icon(Icons.person),
                             const SizedBox(
@@ -113,9 +116,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               style: kBold(blackColor, 14.0),
                             ),
                             const Spacer(),
-                            AutoSizeText(
-                              getTranslated(context, "edit").toString(),
-                              style: kBold(blackColor, 14.0),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile( user: globalUserData,
+                                    callback: () {
+                                      setState(() {});
+                                    })));
+                              },
+                              child: AutoSizeText(
+                                getTranslated(context, "edit").toString(),
+                                style: kBold(blackColor, 14.0),
+                              ),
                             )
                           ],
                         ),
@@ -125,12 +136,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              getTranslated(context, "name").toString(),
+                              globalUserData.userProfile!.firstName.toString() == null ?"name" :globalUserData.userProfile!.firstName.toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
-                              "Abdul Mana",
+                              globalUserData.userProfile!.firstName.toString(),
                               style: kNormalBlack(blackColor),
                             )
                           ],
@@ -141,12 +152,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              getTranslated(context, "email").toString(),
+                              getTranslated(context, "email").toString() == null? "email" :  getTranslated(context, "email").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
-                              "abdul1234@xyz.com",
+                              globalUserData.user!.email.toString() == null? "email" :globalUserData.user!.email.toString(),
                               style: kNormalBlack(blackColor),
                             )
                           ],
@@ -162,7 +173,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             const Spacer(),
                             AutoSizeText(
-                              "+9123323442",
+                              globalUserData.userProfile!.phone.toString() == null? "phone":globalUserData.userProfile!.phone.toString(),
                               style: kNormalBlack(blackColor),
                             )
                           ],
@@ -178,7 +189,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             const Spacer(),
                             AutoSizeText(
-                              "289 carporaings s1",
+                                globalUserData.user!.address.toString() == null? "address": globalUserData.user!.address.toString() ,
                               style: kNormalBlack(blackColor),
                             )
                           ],
@@ -258,7 +269,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                               const Spacer(),
                               AutoSizeText(
-                                getTranslated(context, "english").toString(),
+                                getTranslated(context, "use_language").toString(),
                                 style: kNormalBlack(blackColor),
                               )
                             ],

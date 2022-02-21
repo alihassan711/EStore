@@ -13,6 +13,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   getCategories() async {
     final category = await repository!.getAllCategories();
     final product = await repository!.getFavouriteProducts();
-    emit(LoadedState(category,product));
+    final notifications = await repository!.getNotifications();
+    emit(LoadedState(category,product,notifications));
   }
 }

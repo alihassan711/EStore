@@ -1,15 +1,18 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/chat_screen.dart';
 import 'package:estore/screens/components/my_drawer.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/home_screen.dart';
-import 'package:estore/screens/dashboard/profile_screen.dart';
+import 'package:estore/screens/onboarding/profile_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/widgets/iconbtn.dart';
 import 'package:estore/widgets/shoping_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/orderhistory/order_history_cubit.dart';
 import 'cart_screem.dart';
 import 'favourite_screen.dart';
 
@@ -35,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
   // }
   final pages = [
     const HomeScreen(),
-    const ChatScreen(),
+    const NotificationScreen(),
     const FavouriteScreen(),
     const MyCartScreen(),
      UserProfile(),
@@ -51,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: whiteColor,
       appBar: AppBar(
         backgroundColor: whiteColor,
         elevation: 0.0,
@@ -86,19 +89,29 @@ class _MainScreenState extends State<MainScreen> {
               color: blackColor,
             ),
             onPress: () {
-              Navigator.push(context,
+              Navigator.pushReplacement(
+                  context,
                   MaterialPageRoute(
-                      builder: (ctx) => const NotificationScreen()));
+                      builder: (_) => BlocProvider(
+                          create: (BuildContext context) =>
+                              CategoryCubit(
+                                  repository: _repository),
+                          child: MainScreen(
+                            index: 1,
+                            // form: args.toString(),
+                          ))));
             },
             color: blackColor,
           ),
           ShoppingCartWidget(item:cart.cartItem.length.toString(),
             onPress: (){
               setState(() {
+                widget.index == 3;
                 cart.cartItem.length;
               });
             },
           ),
+          SizedBox(width: 8.0,),
         ],
         iconTheme: const IconThemeData(color: blackColor),
       ),

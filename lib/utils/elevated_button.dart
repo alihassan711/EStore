@@ -39,7 +39,7 @@ class ElevatedBtn extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Text(
               text!,
-              style: const TextStyle(fontSize: 14.0, color: whiteColor),
+              style:  TextStyle(fontSize: 14.0, color: txtColor!),
             ),
           )),
     );

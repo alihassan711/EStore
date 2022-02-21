@@ -17,7 +17,9 @@ import 'package:estore/utils/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../bloc/category/category_cubit.dart';
 import '../../main.dart';
+import '../dashboard/main_page.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -70,24 +72,33 @@ class _MyDrawerState extends State<MyDrawer> {
               backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
             ),
           ),
-          ListTile(
-              title: AutoSizeText(getTranslated(context, "order").toString(), style: kSemiBold(blackColor)),
-              leading: const Icon(Icons.add_shopping_cart),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyOrderScreen()));
-              }
-              //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
-              ),
+          // ListTile(
+          //     title: AutoSizeText(getTranslated(context, "order").toString(), style: kSemiBold(blackColor)),
+          //     leading: const Icon(Icons.add_shopping_cart),
+          //     onTap: () {
+          //       Navigator.push(context,
+          //           MaterialPageRoute(builder: (context) => MyOrderScreen()));
+          //     }
+          //     //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
+          //     ),
           ListTile(
             title: AutoSizeText(getTranslated(context, "notification").toString(), style: kSemiBold(blackColor)),
             leading: const Icon(Icons.notifications_active_outlined),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => NotificationScreen())),
+            onTap: () =>       Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                        create: (BuildContext context) =>
+                            CategoryCubit(
+                                repository: _repository),
+                        child: MainScreen(
+                          index: 1,
+                          // form: args.toString(),
+                        ))))
             //    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: AutoSizeText(getTranslated(context, "history").toString(), style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "order").toString(), style: kSemiBold(blackColor)),
             leading: const Icon(Icons.history),
             onTap: () =>  Navigator.push(context,  MaterialPageRoute(
                 builder: (_) => BlocProvider(
@@ -136,7 +147,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 });
                 prefs.setString("themeMode", _isdark.toString());
                 MyApp.of(context)!
-                    .changeTheme(themeMode ?? ThemeMode.light );
+                    .changeTheme( _isdark ==false?ThemeMode.dark:ThemeMode.light );
               }
               //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
               ),
@@ -212,6 +223,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   .toString(),
               style: kBold(blackColor, 14.0),
             ),
+            leading: const Icon(Icons.logout),
           ),
           // ListTile(
           //     title: AutoSizeText(getTranslated(context, "sign_out").toString(), style: kSemiBold(blackColor)),

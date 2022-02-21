@@ -356,6 +356,8 @@ import 'package:flutter_cart/flutter_cart.dart';
 import 'package:http/http.dart' as http;
 import 'package:estore/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../model/notifications_model.dart';
 var cart = FlutterCart();
 class ApiServices {
   static var authtoken =
@@ -451,6 +453,20 @@ class ApiServices {
       category =
           orderHistoryModelFromJson(json.decode(response.body)["orders"]);
 
+      return category;
+    } else {
+      return [];
+    }
+  }
+  Future<List<NotifcationsModel>> getNotifications() async {
+    List<NotifcationsModel> category = [];
+    final response = await http.get(Uri.parse(Urls.notifications), headers: _setHeaders(),);
+    if (response.statusCode == 200) {
+      print("status code notifications===> ${response.statusCode}");
+      print("notifications body ===> ${response.body}");
+      category =
+          notificationModelFromJson(json.decode(response.body)["notifications"]);
+      globalNotificationModel = category;
       return category;
     } else {
       return [];

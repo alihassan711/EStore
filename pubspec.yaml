@@ -50,7 +50,7 @@ dependencies:
   double_back_to_close_app: ^2.1.0
   #introduction_screen: ^2.1.0
   intro_slider: ^3.0.3
-  google_sign_in: ^5.2.3
+  google_sign_in:
   firebase: ^9.0.2
   flutter_sms: ^2.3.2
   firebase_dynamic_links: ^4.0.5
@@ -59,7 +59,8 @@ dependencies:
   equatable: ^2.0.3
   url_launcher: ^6.0.9
   pull_to_refresh: ^2.0.0
-  flutter_native_splash:
+  #flutter_native_splash:
+  quiver: ^2.0.0+1
  # color: "#42a5f5"
  # image: assets/light.png
  # branding: assets/dart.png
@@ -86,6 +87,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.0.4
+  # run: flutter clean && flutter pub get && flutter pub run flutter_native_splash:create
+flutter_native_splash:
+  color: "#32b3a4"
+  image: assets/icons/intro_cart_icon.png
+  android: true
+  ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

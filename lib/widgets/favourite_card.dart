@@ -40,7 +40,7 @@ class FavouriteCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 78,width: 70,
+            height: 81,width: 70,
            // height: MediaQuery.of(context).size.height * 0.125,
            // width: MediaQuery.of(context).size.width * 0.2,
             decoration: BoxDecoration(
@@ -56,13 +56,13 @@ class FavouriteCard extends StatelessWidget {
                     image: ExactAssetImage(img!), fit: BoxFit.fill)),
           ),
           const SizedBox(
-            width: 20,
+            width: 18,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 10.0,),
+              SizedBox(height: 8.0,),
               Text(
                 titleText!,
                 style: kBold(blackColor, 12.0),
@@ -92,7 +92,7 @@ class FavouriteCard extends StatelessWidget {
                "\$$itemPrice",
                 style: kBold(blackColor, 13.0),
               ),
-              SizedBox(height: 2.0,),
+              SizedBox(height: 8.0,),
             ],
           ),
           const Spacer(),

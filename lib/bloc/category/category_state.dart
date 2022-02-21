@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:estore/model/all_categories_model.dart';
 import 'package:estore/model/favourite_model.dart';
+import 'package:estore/model/notifications_model.dart';
 import 'package:estore/model/product_model.dart';
 
 abstract class CategoryState extends Equatable {}
@@ -9,6 +10,7 @@ class InitialState extends CategoryState {
   @override
   List<CategoryModel> get props => [];
   List<FavouriteModel> get propss => [];
+  List<NotifcationsModel> get propsss => [];
 }
 
 class LoadingState extends CategoryState {
@@ -18,10 +20,11 @@ class LoadingState extends CategoryState {
 }
 
 class LoadedState extends CategoryState {
-  LoadedState(this.order,this.favProduct);
+  LoadedState(this.order,this.favProduct,this.notifications);
 
   final List<CategoryModel> order;
   final List<FavouriteModel> favProduct;
+  final List<NotifcationsModel> notifications;
 
   @override
   List<Object> get props => [order];

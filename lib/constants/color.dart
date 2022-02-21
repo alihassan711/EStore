@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 const blackColor = Color(0xff000000);
 const whiteColor = Color(0xffFFFFFF);
