@@ -1,8 +1,10 @@
+import 'dart:async';
+import 'package:connectivity/connectivity.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/localization/language_constants.dart';
-import 'package:estore/screens/chat_screen.dart';
+import 'package:estore/model/getx_networkmanager_class.dart';
 import 'package:estore/screens/components/my_drawer.dart';
 import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/home_screen.dart';
@@ -12,7 +14,9 @@ import 'package:estore/widgets/iconbtn.dart';
 import 'package:estore/widgets/shoping_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../bloc/orderhistory/order_history_cubit.dart';
+//import 'package:get/get.dart';
+//import 'package:get/get_core/src/get_main.dart';
+import '../../widgets/no_internet_widget.dart';
 import 'cart_screem.dart';
 import 'favourite_screen.dart';
 
@@ -38,20 +42,40 @@ class _MainScreenState extends State<MainScreen> {
   // }
   final pages = [
     const HomeScreen(),
-    const NotificationScreen(),
+     NotificationScreen(),
     const FavouriteScreen(),
     const MyCartScreen(),
      UserProfile(),
   ];
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   print("index  ==== > ${widget.index}");
+  //   setState(() {
+  //     cart.cartItem.length;
+  //   });
+  //   super.initState();
+  // }
+  // Platform messages are asynchronous, so we initialize in an async method.
+  ApiServices apiServices = ApiServices();
+
+  String _connectionStatus = 'Unknown';
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  ApiServices _apiServices = ApiServices();
   @override
   void initState() {
-    // TODO: implement initState
-    print("index  ==== > ${widget.index}");
+    super.initState();
     setState(() {
       cart.cartItem.length;
     });
-    super.initState();
   }
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+ // final GetXNetworkManager _networkManager = Get.find<GetXNetworkManager>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: whiteColor,
@@ -97,7 +121,7 @@ class _MainScreenState extends State<MainScreen> {
                               CategoryCubit(
                                   repository: _repository),
                           child: MainScreen(
-                            index: 1,
+                            index: 3,
                             // form: args.toString(),
                           ))));
             },
@@ -105,22 +129,39 @@ class _MainScreenState extends State<MainScreen> {
           ),
           ShoppingCartWidget(item:cart.cartItem.length.toString(),
             onPress: (){
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => BlocProvider(
+                          create: (BuildContext context) =>
+                              CategoryCubit(
+                                  repository: _apiServices),
+                          child: MainScreen(
+                            index: 1,
+                            // form: args.toString(),
+                          ))));
               setState(() {
                 widget.index == 3;
                 cart.cartItem.length;
               });
             },
           ),
-          SizedBox(width: 8.0,),
+          SizedBox(width: 5.0,),
         ],
         iconTheme: const IconThemeData(color: blackColor),
       ),
       drawer: MyDrawer(),
-      body: DoubleBackToCloseApp(
-          snackBar: SnackBar(
-            content: Text(getTranslated(context, 'exit_app').toString(),),
-          ),
-          child: pages[widget.index]),
+      body:
+      // _networkManager.connectionType == 0 ? const NoInternetWidget()
+      //     :
+      Padding(
+        padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+        child: DoubleBackToCloseApp(
+            snackBar: SnackBar(
+              content: Text(getTranslated(context, 'exit_app').toString(),),
+            ),
+            child: pages[widget.index]),
+      ),
       bottomNavigationBar: buildMyNavBar(context),
     );
   }

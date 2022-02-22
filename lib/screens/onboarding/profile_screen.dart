@@ -5,7 +5,6 @@ import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/screens/dashboard/drawer/history_screen.dart';
-import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/onboarding/edit_profile.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/utils/elevated_button.dart';
@@ -15,8 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/category/category_cubit.dart';
-import '../dashboard/chat_screens/conversation_page.dart';
-import '../dashboard/drawer/my_order_screen.dart';
 import '../dashboard/main_page.dart';
 class UserProfile extends StatefulWidget {
    UserProfile({Key? key}) : super(key: key);
@@ -69,17 +66,32 @@ class _UserProfileState extends State<UserProfile> {
                   btnTxtSize: 12,
                   circularSize: 10.0,
                   txtColor: blackColor,
-                  btnWidth: 175,
+                  btnWidth: 150,
                   btnHeight: 40,
                 ),
               ),
               SizedBox(width: 5,),
-              Container(
-                height: 40,width: 60,
-                decoration: BoxDecoration(color: whiteColor,borderRadius: BorderRadius.circular(8.0),
-                  border:Border.all(color: kGrey),
-                ),
-                child: Icon(Icons.favorite,color: kGrey,),)
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => BlocProvider(
+                              create: (BuildContext context) =>
+                                  CategoryCubit(
+                                      repository: _repository),
+                              child: MainScreen(
+                                index: 2,
+                                // form: args.toString(),
+                              ))));
+                },
+                child: Container(
+                  height: 40,width: 60,
+                  decoration: BoxDecoration(color: whiteColor,borderRadius: BorderRadius.circular(8.0),
+                    border:Border.all(color: kGrey),
+                  ),
+                  child: Icon(Icons.favorite,color: kGrey,),),
+              )
             ],
           ),
           const SizedBox(height: 14,),
@@ -95,89 +107,86 @@ class _UserProfileState extends State<UserProfile> {
               ),
               Column(
                 children: [
-                  Text("12",style: kBold(blackColor, 14.0),),
+                  Text(globalFavouriteModel.length.toString(),style: kBold(blackColor, 14.0),),
                   const SizedBox(height: 5,),
                   Text(getTranslated(context, "in_your_wish_list").toString(),style: kNormalBlack(blackColor),),
                 ],
               ),
               Column(
                 children: [
-                  AutoSizeText(globalCategoryModel.length.toString(),style: kBold(blackColor, 14.0),),
+                  AutoSizeText(globalHistoryModel.length.toString(),style: kBold(blackColor, 14.0),),
                   const SizedBox(height: 5,),
                   AutoSizeText(getTranslated(context, "ordered").toString(),style: kNormalBlack(blackColor),),
                 ],
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 12.0,right: 12.0,top: 10,bottom: 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5.0),
-              child: Container(
-               // height: 100.0,
-                margin: const EdgeInsets.only(bottom: 6.0,top: 6.0), //Same as `blurRadius` i guess
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0.0, 1.0), //(x,y)
-                      blurRadius: 1.0,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(5.0),
+            child: Container(
+             // height: 100.0,
+              margin: const EdgeInsets.only(bottom: 6.0,top: 6.0), //Same as `blurRadius` i guess
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.0),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 1.0,
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context,  MaterialPageRoute(
+                          builder: (_) => BlocProvider(
+                              create: (BuildContext context) =>
+                                  OrderHistoryCubit(repository: _repository),
+                              child: const PurchaseHistory())));
+                     },
+                    child: MyProfileContainer(
+                      txt:getTranslated(context, "order").toString(),
+                      icon: const Icon(Icons.list,size:28,color:kIconColorRed ,),
                     ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context,  MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                                create: (BuildContext context) =>
-                                    OrderHistoryCubit(repository: _repository),
-                                child: const PurchaseHistory())));
-                       },
-                      child: MyProfileContainer(
-                        txt:getTranslated(context, "order").toString(),
-                        icon: const Icon(Icons.list,size:28,color:kIconColorRed ,),
-                      ),
+                  ),
+                  InkWell(
+                    onTap: (){print("Profile");},
+                    child: MyProfileContainer(
+                      txt:getTranslated(context, "profile").toString(),
+                      icon:const Icon(Icons.person,size:28,color: kIconColorBlue,),
                     ),
-                    InkWell(
-                      onTap: (){print("Profile");},
-                      child: MyProfileContainer(
-                        txt:getTranslated(context, "profile").toString(),
-                        icon:const Icon(Icons.person,size:28,color: kIconColorBlue,),
-                      ),
+                  ),
+                  InkWell(
+                    onTap: (){print("Address");},
+                    child: MyProfileContainer(
+                      txt: getTranslated(context, "address").toString(),
+                      icon:const Icon(Icons.location_on,size:28,color: kIconColorYellow,),
                     ),
-                    InkWell(
-                      onTap: (){print("Address");},
-                      child: MyProfileContainer(
-                        txt: getTranslated(context, "address").toString(),
-                        icon:const Icon(Icons.location_on,size:28,color: kIconColorYellow,),
-                      ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => BlocProvider(
+                                  create: (BuildContext context) =>
+                                      CategoryCubit(
+                                          repository: _repository),
+                                  child: MainScreen(
+                                    index: 1,
+                                    // form: args.toString(),
+                                  ))));
+                      print("Message");},
+                    child: MyProfileContainer(
+                      txt: getTranslated(context, "notification").toString(),
+                      icon:const Icon(Icons.notification_important,size:28,color: kIconColorGreen,),
                     ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => BlocProvider(
-                                    create: (BuildContext context) =>
-                                        CategoryCubit(
-                                            repository: _repository),
-                                    child: MainScreen(
-                                      index: 1,
-                                      // form: args.toString(),
-                                    ))));
-                        print("Message");},
-                      child: MyProfileContainer(
-                        txt: getTranslated(context, "notification").toString(),
-                        icon:const Icon(Icons.notification_important,size:28,color: kIconColorGreen,),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

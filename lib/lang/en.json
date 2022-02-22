@@ -93,7 +93,7 @@
   "price": "Price",
   "please_select_color": "Please Select Color",
   "please_select_size": "Please Select Size",
-  "application_preferences": "Please Select Size",
+  "application_preferences": "Application Preferences",
   "ok": "Ok",
   "quantity": "Quantity",
   "first_name": "First Name",
@@ -106,6 +106,7 @@
   "continue_shopping": "continue shopping",
   "your_cart_empty": "your cart is empty",
   "save": "save",
-  "log_out": "Sign Out"
+  "log_out": "Sign Out",
+  "required_address": "العنوان المطلوب"
 }
 

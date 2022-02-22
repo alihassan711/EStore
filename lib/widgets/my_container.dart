@@ -138,59 +138,65 @@ class MyProductContainerg extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Card(
-      elevation: 2,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          //image: DecorationImage(image: ExactAssetImage(img!),fit: BoxFit.fill)
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 100,
-                width: 120,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
-                    image: DecorationImage(
-                        image: NetworkImage(img!), fit: BoxFit.fill)),
-                // child: Image.asset(img!),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-                child: AutoSizeText(
-                  txt!,
-                  style: kNormalBlack(blackColor),
-                ),
-              ),
-              // const SizedBox(
-              //   height: 5,
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-              //   child: AutoSizeText(
-              //       txt!,
-              //     style: kNormalBlack(blackColor),
-              //   ),
-              // ),
-              const SizedBox(
-                height: 5,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0,right: 8.0,bottom: 5.0),
-                child: AutoSizeText(
-                  "$price",
-                  style: kNormalBlack(kIconColorRed),
-                ),
-              ),
-            ],
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black45,
           ),
+          BoxShadow(
+            color: whiteColor,
+            spreadRadius: 7.0,
+            blurRadius: 8.0,
+          ),
+        ],
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 100,
+              width: 110,
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
+                  image: DecorationImage(
+                      image: NetworkImage(img!), fit: BoxFit.fill)),
+              // child: Image.asset(img!),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              child: AutoSizeText(
+                txt!,
+                style: kNormalBlack(blackColor),
+              ),
+            ),
+            // const SizedBox(
+            //   height: 5,
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+            //   child: AutoSizeText(
+            //       txt!,
+            //     style: kNormalBlack(blackColor),
+            //   ),
+            // ),
+            const SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0,bottom: 5.0),
+              child: AutoSizeText(
+                "$price",
+                style: kNormalBlack(kIconColorRed),
+              ),
+            ),
+          ],
         ),
       ),
     );

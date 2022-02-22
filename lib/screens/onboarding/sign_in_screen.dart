@@ -1,17 +1,24 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
+import 'package:estore/model/getx_networkmanager_class.dart';
 import 'package:estore/model/language.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/screens/onboarding/sign_up_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/services/auth_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+//import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../main.dart';
+import '../../widgets/no_internet_widget.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -28,7 +35,44 @@ class _SignInScreenState extends State<SignInScreen> {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
   }
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
 
+    return _updateConnectionStatus(result);
+  }
+
+  ApiServices apiServices = ApiServices();
+
+  String _connectionStatus = 'Unknown';
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  ApiServices _apiServices = ApiServices();
+  @override
+  void initState() {
+    super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+ // final GetXNetworkManager _networkManager = Get.find<GetXNetworkManager>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +114,10 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ],
       ),
-      body: Form(
+      body:
+      // _networkManager.connectionType == 0 ? const NoInternetWidget()
+      //     :
+      Form(
         key: _key,
         child: ListView(
           children: <Widget>[
@@ -165,9 +212,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   if (val!.isEmpty) {
                     return getTranslated(context, "required_password");
                   }
-                  if (val.length < 5) {
-                    return getTranslated(context, "valid_password");
-                  }
+                  // if (val.length < 5) {
+                  //   return getTranslated(context, "valid_password");
+                  // }
                   return null;
                 },
                 decoration: InputDecoration(
@@ -295,6 +342,20 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+      case ConnectivityResult.mobile:
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = result.toString());
+        print(_connectionStatus);
+        break;
+      default:
+        setState(() => _connectionStatus = 'Failed to get connectivity.');
+        break;
+    }
   }
 }
 

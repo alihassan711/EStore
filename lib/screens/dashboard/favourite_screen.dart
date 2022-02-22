@@ -6,6 +6,8 @@ import 'package:estore/widgets/favourite_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../services/apis_services.dart';
+
 class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
   @override
@@ -19,7 +21,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   double? disCount = 0;
   double? deliveryCharges = 0;
   double? orderTotal = 0;
-
+ApiServices _apiServices =ApiServices();
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<CategoryCubit>(context).getCategories();
@@ -46,10 +48,22 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                     padding: const EdgeInsets.only(
                         top: 5.0, bottom: 5.0, right: 10.0, left: 10.0),
                     child: FavouriteCard(
-                      img: ImagesPath.burger,
+                      img: users[index].productData!.image.toString(),
                       itemPrice: users[index].productData!.breakingPrices![0].price,
                       titleText: users[index].productData!.name.toString(),
                       brandName: users[index].productData!.breakingPrices![0].shopName.toString(),
+                      onPress: (){
+                        ApiServices.removeFavouriteProduct(
+                            productId: users[index].productId).then((value) {
+                          if (value) {
+                            _apiServices.successToast("Product removed from favourite");
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                _apiServices.failToast("Failed to removed from favourite"));
+                          }
+                        });
+                      },
+                      //onPress: ,
                     ),
                   );
                 });

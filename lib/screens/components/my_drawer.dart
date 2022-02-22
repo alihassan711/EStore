@@ -72,17 +72,8 @@ class _MyDrawerState extends State<MyDrawer> {
               backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
             ),
           ),
-          // ListTile(
-          //     title: AutoSizeText(getTranslated(context, "order").toString(), style: kSemiBold(blackColor)),
-          //     leading: const Icon(Icons.add_shopping_cart),
-          //     onTap: () {
-          //       Navigator.push(context,
-          //           MaterialPageRoute(builder: (context) => MyOrderScreen()));
-          //     }
-          //     //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
-          //     ),
           ListTile(
-            title: AutoSizeText(getTranslated(context, "notification").toString(), style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "notification").toString(), style: kDrawerStyle()),
             leading: const Icon(Icons.notifications_active_outlined),
             onTap: () =>       Navigator.pushReplacement(
                 context,
@@ -98,7 +89,7 @@ class _MyDrawerState extends State<MyDrawer> {
             //    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: AutoSizeText(getTranslated(context, "order").toString(), style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "order").toString(), style: kDrawerStyle()),
             leading: const Icon(Icons.history),
             onTap: () =>  Navigator.push(context,  MaterialPageRoute(
                 builder: (_) => BlocProvider(
@@ -109,10 +100,10 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
             title: AutoSizeText(getTranslated(context, "application_preferences").toString(),
-                style: kBold(blackColor, 16.0)),
+                style: drawerPreferences()),
           ),
           ListTile(
-            title: AutoSizeText(getTranslated(context, "help_support").toString(), style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "help_support").toString(), style: kDrawerStyle()),
             leading: const Icon(Icons.help_outline),
             onTap: () => Navigator.push(
                 context,
@@ -121,14 +112,14 @@ class _MyDrawerState extends State<MyDrawer> {
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
           ListTile(
-            title: AutoSizeText(getTranslated(context, "settings").toString(), style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "settings").toString(), style: kDrawerStyle()),
             leading: const Icon(Icons.settings),
             //  onTap: () => Navigator.pushNamed(context, '/Settings'),
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => SettingsScreen())),
           ),
           ListTile(
-            title: AutoSizeText(getTranslated(context, "language").toString(), style: kSemiBold(blackColor)),
+            title: AutoSizeText(getTranslated(context, "language").toString(), style: kDrawerStyle()),
             leading: const Icon(Icons.language),
             onTap: () => Navigator.push(
                 context,
@@ -138,7 +129,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
               title:
-                 AutoSizeText(getTranslated(context, "dark_mode").toString(), style: kSemiBold(blackColor)),
+                 AutoSizeText(getTranslated(context, "dark_mode").toString(), style: kDrawerStyle()),
               leading: const Icon(Icons.track_changes),
               onTap: () async{
                 SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -221,7 +212,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Text(
               getTranslated(context, "log_out")
                   .toString(),
-              style: kBold(blackColor, 14.0),
+              style: kDrawerStyle(),
             ),
             leading: const Icon(Icons.logout),
           ),

@@ -489,6 +489,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController phone = TextEditingController();
+  TextEditingController address = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   bool? _passwordVisible = false;
   bool? _passwordVisiblec = false;
@@ -686,6 +687,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                keyboardType:TextInputType.text,
+                controller: address,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "required_address");
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  errorBorder: errorBorder(),
+                  hintText: getTranslated(context, "address").toString(),
+                  prefixIcon: const Icon(
+                    Icons.account_balance_rounded,size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  //border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                ),
+              ),
+            ),
+            const SizedBox(
               height: 25,
             ),
             Padding(
@@ -842,6 +874,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           firstName: firstName.text,
                           lastName: lastName.text,
                           phone: phone.text,
+                          address:address.text
                         ).then((value) {
                           if (value) {
                             Navigator.pushReplacement(

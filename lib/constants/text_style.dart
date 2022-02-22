@@ -8,11 +8,17 @@ const String email_RegExp =
 TextStyle kSemiBold(Color color) {
   return  TextStyle(fontSize: 14, color: color,fontWeight: FontWeight.w500);
 }
+TextStyle kDrawerStyle() {
+  return  TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
+}
 TextStyle kNormalBlack(Color color) {
   return  TextStyle(fontSize: 14, color: color,fontWeight: FontWeight.normal);
 }
 TextStyle kBold(Color color,size) {
   return  TextStyle(fontSize: size, color: color,fontWeight: FontWeight.bold);
+}
+TextStyle drawerPreferences() {
+  return  TextStyle(fontSize: 14,fontWeight: FontWeight.bold);
 }
 EdgeInsetsGeometry screenMargin() =>
     const EdgeInsets.symmetric(horizontal: 15.0);

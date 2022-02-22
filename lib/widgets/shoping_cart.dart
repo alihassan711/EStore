@@ -9,7 +9,7 @@ class ShoppingCartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
       return Badge(
-        position: BadgePosition.topEnd(top: 4, end: 5),
+        position: BadgePosition.topEnd(top: MediaQuery.of(context).size.height*0.01, end: MediaQuery.of(context).size.height*0.01),
         animationDuration: const Duration(milliseconds: 300),
         animationType: BadgeAnimationType.scale,
         badgeContent: Text(

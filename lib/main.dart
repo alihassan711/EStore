@@ -1,39 +1,36 @@
+import 'dart:io';
 import 'package:estore/localization/demo_localization.dart';
 import 'package:estore/screens/walkthrough/intro_screens.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+//import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'localization/language_constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'services/connectivity_service.dart';
 
 var token,firstName,lastName,email,password,phone,themeMode;
 var deviceToken;
+void _enablePlatformOverrideForDesktop() {
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
+    debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  }
+}
 void main() async{
+  _enablePlatformOverrideForDesktop();
  // FlutterNativeSplash.removeAfter(initialization);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   FirebaseMessaging.instance.getToken().then((value) {
     deviceToken = value;
   });
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(MyApp());
-}
-void initialization(BuildContext context) async {
-  // This is where you can initialize the resources needed by your app while
-  // the splash screen is displayed.  Remove the following example because
-  // delaying the user experience is a bad design practice!
-  // ignore_for_file: avoid_print
-  print('ready in 3...');
-  await Future.delayed(const Duration(seconds: 1));
-  print('ready in 2...');
-  await Future.delayed(const Duration(seconds: 1));
-  print('ready in 1...');
-  await Future.delayed(const Duration(seconds: 1));
-  print('go!');
 }
 class MyApp extends StatefulWidget {
   static void setLocale(BuildContext context, Locale newLocale) {
@@ -83,6 +80,7 @@ class _MyAppState extends State<MyApp> {
                 child: CircularProgressIndicator(),
               )
             : MaterialApp(
+          //initialBinding:  NetworkBinding(),
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(),
                 darkTheme: ThemeData.dark(),
@@ -145,4 +143,19 @@ class _MyAppState extends State<MyApp> {
     print("deviceToken is in my app ====>  $deviceToken");
     print("themeMode is in my app ====>  $themeMode");
   }
+}
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('Handling a background message ${message.data}');
+
+  showNotification(message.data["timetable_id"], message.data["course"],
+      message.data["message"]);
+}
+showNotification(String timetable_id, String course, String message) async {
+  var android = AndroidNotificationDetails('id', 'channel ',
+      priority: Priority.high, importance: Importance.max);
+  var iOS = IOSNotificationDetails();
+  var platform = new NotificationDetails(android: android, iOS: iOS);
+  await FlutterLocalNotificationsPlugin()
+      .show(0, '$course', '$message', platform, payload: '$timetable_id');
 }

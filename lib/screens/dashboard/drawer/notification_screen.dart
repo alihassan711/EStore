@@ -93,6 +93,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 */
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/bloc/category/category_state.dart';
+import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/model/favourite_model.dart';
 import 'package:estore/model/notifications_model.dart';
@@ -118,12 +119,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     BlocProvider.of<CategoryCubit>(context).getCategories();
     return Scaffold(
-      body: globalNotificationModel.length == null
+      body: globalNotificationModel.length == 0
           ? Center(
           child: Column(
             children: [
               Expanded(child: SizedBox()),
               Expanded(
+                flex: 2,
                 child: NoNotificationContainer(
                   onPress: () {
                     Navigator.pushReplacement(
@@ -185,7 +187,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     Text(
                       'Loading....',
                       style: TextStyle(
-                          fontWeight: FontWeight.w100, fontSize: 20),
+                          fontWeight: FontWeight.w100, fontSize: 20,),
                     ),
                     Text(
                       'check your internet connection!....',

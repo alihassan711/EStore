@@ -374,6 +374,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   });
                 },
               ),
+              SizedBox(width: 5.0,)
             ],
             iconTheme: const IconThemeData(color: blackColor),
           ),
@@ -407,18 +408,34 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         ),
                         Positioned(
-                          bottom: 20,
-                          right: 20,
+                          bottom: 12,
+                          right: 14,
                           child: GestureDetector(
-                            child: const Icon(
-                              Icons.favorite_outlined,
-                              color: kIconColorRed,
-                            ),
                             onTap: () {
                               print("id ===> ${widget.id}");
                               ApiServices.addFavouriteProduct(
-                                  productId: widget.id);
+                                  productId: widget.id).then((value) {
+                                if (value) {
+                                 _apiServices.successToast("Product added as favourite");
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      _apiServices.failToast("Failed to add as favourite"));
+                                }
+                              });
                             },
+                            child: Container(
+                              decoration: BoxDecoration( color: Colors.grey[100],
+                                shape: BoxShape.circle,
+                               // borderRadius: BorderRadius.circular(5),
+                              ),
+                              height: 25,width: 25,
+                              child: Center(
+                                child: const Icon(
+                                  Icons.favorite_outlined,size: 18,
+                                  color: kIconColorRed,
+                                ),
+                              ),
+                            ),
                           ),
                           // AutoSizeText(
                           //   "\$ ${widget.price}",

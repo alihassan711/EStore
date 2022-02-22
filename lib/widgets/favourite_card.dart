@@ -40,7 +40,7 @@ class FavouriteCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 81,width: 70,
+            height: 75,width: 70,
            // height: MediaQuery.of(context).size.height * 0.125,
            // width: MediaQuery.of(context).size.width * 0.2,
             decoration: BoxDecoration(
@@ -53,7 +53,7 @@ class FavouriteCard extends StatelessWidget {
                   Radius.circular(5.0),
                 ),
                 image: DecorationImage(
-                    image: ExactAssetImage(img!), fit: BoxFit.fill)),
+                    image: NetworkImage(img!), fit: BoxFit.fill)),
           ),
           const SizedBox(
             width: 18,
@@ -80,7 +80,7 @@ class FavouriteCard extends StatelessWidget {
               const IconTheme(
                 data: IconThemeData(
                   color: Colors.amber,
-                  size: 20,
+                  size: 14,
                 ),
                 child: StarDisplay(value: 3),
               ),
@@ -99,9 +99,9 @@ class FavouriteCard extends StatelessWidget {
           Column(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: onPress,
                 color: Colors.red,
-                icon: const Icon(Icons.favorite),
+                icon: const Icon(Icons.favorite,color: kIconColorRed,),
                 iconSize: 25.0,
               ),
             ],

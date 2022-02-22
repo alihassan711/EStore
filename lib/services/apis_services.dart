@@ -347,12 +347,14 @@
 //   }
 // }
 import 'dart:convert';
+import 'package:estore/constants/color.dart';
 import 'package:estore/model/all_categories_model.dart';
 import 'package:estore/model/favourite_model.dart';
 import 'package:estore/model/order_history_model.dart';
 import 'package:estore/utils/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cart/flutter_cart.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:estore/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -452,7 +454,7 @@ class ApiServices {
        print("category body ===> ${response.body}");
       category =
           orderHistoryModelFromJson(json.decode(response.body)["orders"]);
-
+       globalHistoryModel = category;
       return category;
     } else {
       return [];
@@ -576,9 +578,8 @@ class ApiServices {
     }
 
   }
-
   static Future<bool> addFavouriteProduct({productId}) async {
-    final response = await http.post(Uri.parse(Urls.favourites),
+    final response = await http.post(Uri.parse(Urls.addFavourites),
         body: json.encode({
           "product_id": productId,
         }),
@@ -592,6 +593,22 @@ class ApiServices {
       return false;
     }
   }
+
+
+  static Future<bool> removeFavouriteProduct({productId}) async {
+     var url = "https://phpstack-508481-2092187.cloudwaysapps.com/api/removefavourite?id=$productId";
+    final response = await http.get(Uri.parse(url),
+        headers: _setHeaders());
+    print(response.body);
+    if (response.statusCode == 200) {
+      print("Product Added as favourite");
+      return true;
+    } else {
+      print("favourite  ===> ${response.statusCode}");
+      return false;
+    }
+  }
+
   static Future<bool> updateProfile({
     firstName,lastName,picture,phone
 
@@ -629,6 +646,27 @@ class ApiServices {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(title),
     ));
+  }
+
+  successToast(titlemsg){
+    return  Fluttertoast.showToast(
+        msg: titlemsg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 6,
+        backgroundColor: kIconColorGreen,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+  failToast(titlemsg){
+    return  Fluttertoast.showToast(
+        msg: titlemsg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 6,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 
 }

@@ -1,4 +1,5 @@
-class  ImagesPath {
+class ImagesPath {
+  static String nointernet = 'assets/images/nointernet.png';
   static String p3 = 'assets/productimages/p3.jpg';
   static String p5 = 'assets/productimages/p5.jpg';
   static String accountPicture = 'assets/images/account.jpg';
