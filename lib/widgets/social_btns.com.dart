@@ -10,7 +10,8 @@ class CustomWidgets {
         height: 50,
         //margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         decoration: BoxDecoration(
-            color: color, borderRadius: const BorderRadius.all(Radius.circular(10))),
+            color: color,
+            borderRadius: const BorderRadius.all(Radius.circular(10))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -19,7 +20,7 @@ class CustomWidgets {
               color: Colors.white,
             ),
             Container(
-              margin: const EdgeInsets.only(left: 20,right: 20.0),
+              margin: const EdgeInsets.only(left: 20, right: 20.0),
               child: Text(title,
                   style: const TextStyle(
                       color: Colors.white,
@@ -38,13 +39,13 @@ class CustomWidgets {
         onTap!();
       },
       child: CircleAvatar(
-        backgroundColor: color,
-        radius: 30,
-         // padding: const EdgeInsets.all(20.0),
-         //  decoration:  BoxDecoration(
-         //    shape: BoxShape.circle,
-         //    color: color,
-         //  ),
+          backgroundColor: color,
+          radius: 30,
+          // padding: const EdgeInsets.all(20.0),
+          //  decoration:  BoxDecoration(
+          //    shape: BoxShape.circle,
+          //    color: color,
+          //  ),
           child: Icon(
             icon,
             color: iconColor,

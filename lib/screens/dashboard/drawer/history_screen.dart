@@ -9,29 +9,30 @@ import 'package:estore/services/apis_services.dart';
 import 'package:estore/widgets/history_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 //import 'package:get/get.dart';
 
 import '../../../bloc/category/category_cubit.dart';
 import '../../../constants/image_path.dart';
-import '../../../model/getx_networkmanager_class.dart';
 import '../../../utils/no_notification.dart';
 import '../../../utils/urls.dart';
-import '../../../widgets/no_internet_widget.dart';
 import '../main_page.dart';
 
 class PurchaseHistory extends StatefulWidget {
   const PurchaseHistory({Key? key}) : super(key: key);
+
   @override
   _PurchaseHistoryState createState() => _PurchaseHistoryState();
 }
 
 class _PurchaseHistoryState extends State<PurchaseHistory> {
- // final GetXNetworkManager _networkManager = Get.find<GetXNetworkManager>();
+  // final GetXNetworkManager _networkManager = Get.find<GetXNetworkManager>();
   @override
   Widget build(BuildContext context) {
-   BlocProvider.of<OrderHistoryCubit>(context).getOrderHistory();
-   ApiServices _apiServices = ApiServices();
-    return Scaffold(backgroundColor: whiteColor,
+    BlocProvider.of<OrderHistoryCubit>(context).getOrderHistory();
+    ApiServices _apiServices = ApiServices();
+    return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -44,82 +45,85 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
       ),
       body: globalHistoryModel.isEmpty
           ? Center(
-          child: Column(
-            children: [
-              Expanded(child: SizedBox(),),
-              Expanded(
-                flex: 2,
-                child: NoNotificationContainer(
-                  onPress: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                                create: (BuildContext context) =>
-                                    CategoryCubit(
-                                        repository: _apiServices),
-                                child: MainScreen(
-                                  index: 0,
-                                  // form: args.toString(),
-                                ))));
-                  },
-                  icon: ImagesPath.emptyCart,
-                  btnText: getTranslated(context, "continue_shopping").toString(),
-                  txt:getTranslated(context, "your_cart_empty").toString(),
+              child: Column(
+              children: [
+                Expanded(
+                  child: SizedBox(),
                 ),
-              ),
-              Expanded(child: SizedBox(),),
-            ],
-          ))
-          :
-      BlocBuilder<OrderHistoryCubit, OrderHistoryState>(
-        builder: (context, state) {
-          if (state is InitialState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is LoadingState) {
-            return const Center(
-              child: Text("Loading..."),
-            );
-          } else if (state is ErrorState) {
-            return const Center(
-              child: Text("Something went wrong"),
-            );
-          } else if (state is LoadedState) {
-            final List<OrderHistoryModel> users = state.order;
-            return ListView.builder(
-                itemCount: users.length,
-                itemBuilder: (BuildContext context, index) {
-                  String date =  users[index].createdAt.toString();
-                  final dateList = date.split(" ");
-                  final createddate = dateList[0];
-                  print("split " + dateList[0]);
-                  return  HistoryCard(
-                    name: users[index].customerName.toString(),
-                    price: users[index].totalAmount.toString(),
-                    createddate: createddate.toString(),
+                Expanded(
+                  flex: 2,
+                  child: NoNotificationContainer(
+                    onPress: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => BlocProvider(
+                                  create: (BuildContext context) =>
+                                      CategoryCubit(repository: _apiServices),
+                                  child: MainScreen(
+                                    index: 0,
+                                    // form: args.toString(),
+                                  ))));
+                    },
+                    icon: ImagesPath.emptyCart,
+                    btnText:
+                        getTranslated(context, "continue_shopping").toString(),
+                    txt: getTranslated(context, "your_cart_empty").toString(),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(),
+                ),
+              ],
+            ))
+          : BlocBuilder<OrderHistoryCubit, OrderHistoryState>(
+              builder: (context, state) {
+                if (state is InitialState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
-                });
-          } else {
-            return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      'Loading....',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w100, fontSize: 20),
-                    ),
-                    Text(
-                      'check your internet connection!....',
-                      style: TextStyle(color: Colors.redAccent, fontSize: 10),
-                    )
-                  ],
-                ));
-          }
-        },
-      ),
+                } else if (state is LoadingState) {
+                  return const Center(
+                    child: Text("Loading..."),
+                  );
+                } else if (state is ErrorState) {
+                  return const Center(
+                    child: Text("Something went wrong"),
+                  );
+                } else if (state is LoadedState) {
+                  final List<OrderHistoryModel> users = state.order;
+                  return ListView.builder(
+                      itemCount: users.length,
+                      itemBuilder: (BuildContext context, index) {
+                        String date = users[index].createdAt.toString();
+                        final dateList = date.split(" ");
+                        final createddate = dateList[0];
+                        print("split " + dateList[0]);
+                        return HistoryCard(
+                          name: users[index].customerName.toString(),
+                          price: users[index].totalAmount.toString(),
+                          createddate: createddate.toString(),
+                        );
+                      });
+                } else {
+                  return Center(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Loading....',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w100, fontSize: 20),
+                      ),
+                      Text(
+                        'check your internet connection!....',
+                        style: TextStyle(color: Colors.redAccent, fontSize: 10),
+                      )
+                    ],
+                  ));
+                }
+              },
+            ),
     );
   }
 }

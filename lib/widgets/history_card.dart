@@ -6,8 +6,10 @@ import 'package:estore/localization/language_constants.dart';
 import 'package:flutter/material.dart';
 
 class HistoryCard extends StatelessWidget {
-  String? name,createddate,price;
-   HistoryCard({this.name,this.createddate,this.price,Key? key}) : super(key: key);
+  String? name, createddate, price;
+
+  HistoryCard({this.name, this.createddate, this.price, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class HistoryCard extends StatelessWidget {
                 children: [
                   const Icon(
                     Icons.person,
-                    size: 28,
+                    size: 25,
                     color: blackColor,
                   ),
                   const SizedBox(
@@ -73,7 +75,7 @@ class HistoryCard extends StatelessWidget {
                 children: [
                   const Icon(
                     Icons.calendar_today,
-                    size: 20,
+                    size: 25,
                     color: blackColor,
                   ),
                   const SizedBox(
@@ -81,7 +83,7 @@ class HistoryCard extends StatelessWidget {
                   ),
                   Text(
                     getTranslated(context, "payment_status").toString(),
-                    style:kNormalBlack(blackColor),
+                    style: kNormalBlack(blackColor),
                   ),
                   const SizedBox(
                     width: 12,
@@ -100,7 +102,7 @@ class HistoryCard extends StatelessWidget {
                 children: [
                   const Icon(
                     Icons.add_to_drive,
-                    size: 20,
+                    size: 25,
                     color: blackColor,
                   ),
                   const SizedBox(

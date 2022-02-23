@@ -1,7 +1,6 @@
 List<CategoryModel> categoryModelFromJson(List<dynamic> str) =>
     List<CategoryModel>.from((str).map((x) => CategoryModel.fromJson(x)));
 
-
 class CategoryModel {
   CategoryModel({
     this.id,
@@ -16,11 +15,14 @@ class CategoryModel {
   List<Product>? products;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
-    id: json["id"] == null ? null : json["id"],
-    name: json["name"] == null ? null : json["name"],
-    banner: json["banner"] == null ? null : json["banner"],
-    products: json["products"] == null ? null : List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
-  );
+        id: json["id"] == null ? null : json["id"],
+        name: json["name"] == null ? null : json["name"],
+        banner: json["banner"] == null ? null : json["banner"],
+        products: json["products"] == null
+            ? null
+            : List<Product>.from(
+                json["products"].map((x) => Product.fromJson(x))),
+      );
 }
 
 class Product {
@@ -42,9 +44,11 @@ class Product {
     this.createdAt,
     this.updatedAt,
     this.pivot,
+    required this.qty,
     this.breakingPrices,
   });
 
+  int qty;
   int? id;
   String? name;
   String? image;
@@ -65,26 +69,34 @@ class Product {
   List<BreakingPrice>? breakingPrices;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-    id: json["id"] == null ? null : json["id"],
-    name: json["name"] == null ? null : json["name"],
-    image: json["image"] == null ? null : json["image"],
-    partnumber: json["partnumber"] == null ? null : json["partnumber"],
-    uniqname: json["uniqname"] == null ? null : json["uniqname"],
-    status: json["status"] == null ? null : json["status"],
-    description: json["description"] == null ? null : json["description"],
-    feature: json["feature"] == null ? null : json["feature"],
-    price: json["price"] == null ? null : json["price"],
-    manufacturer: json["manufacturer"] == null ? null : json["manufacturer"],
-    availableF: json["available_f"] == null ? null : json["available_f"],
-    barcode: json["barcode"] == null ? null : json["barcode"],
-    numberOfU: json["number_of_u"] == null ? null : json["number_of_u"],
-    createdBy: json["created_by"] == null ? null : json["created_by"],
-    createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    pivot: json["pivot"] == null ? null : Pivot.fromJson(json["pivot"]),
-    breakingPrices: json["breaking_prices"] == null ? null : List<BreakingPrice>.from(json["breaking_prices"].map((x) => BreakingPrice.fromJson(x))),
-  );
-
+        qty: 1,
+        id: json["id"] == null ? null : json["id"],
+        name: json["name"] == null ? null : json["name"],
+        image: json["image"] == null ? null : json["image"],
+        partnumber: json["partnumber"] == null ? null : json["partnumber"],
+        uniqname: json["uniqname"] == null ? null : json["uniqname"],
+        status: json["status"] == null ? null : json["status"],
+        description: json["description"] == null ? null : json["description"],
+        feature: json["feature"] == null ? null : json["feature"],
+        price: json["price"] == null ? null : json["price"],
+        manufacturer:
+            json["manufacturer"] == null ? null : json["manufacturer"],
+        availableF: json["available_f"] == null ? null : json["available_f"],
+        barcode: json["barcode"] == null ? null : json["barcode"],
+        numberOfU: json["number_of_u"] == null ? null : json["number_of_u"],
+        createdBy: json["created_by"] == null ? null : json["created_by"],
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+        pivot: json["pivot"] == null ? null : Pivot.fromJson(json["pivot"]),
+        breakingPrices: json["breaking_prices"] == null
+            ? null
+            : List<BreakingPrice>.from(
+                json["breaking_prices"].map((x) => BreakingPrice.fromJson(x))),
+      );
 }
 
 class BreakingPrice {
@@ -105,13 +117,17 @@ class BreakingPrice {
   DateTime? updatedAt;
 
   factory BreakingPrice.fromJson(Map<String, dynamic> json) => BreakingPrice(
-    id: json["id"] == null ? null : json["id"],
-    productId: json["product_id"] == null ? null : json["product_id"],
-    price: json["price"] == null ? null : json["price"],
-    shopName: json["shop_name"] == null ? null : json["shop_name"],
-    createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-  );
+        id: json["id"] == null ? null : json["id"],
+        productId: json["product_id"] == null ? null : json["product_id"],
+        price: json["price"] == null ? null : json["price"],
+        shopName: json["shop_name"] == null ? null : json["shop_name"],
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+      );
 }
 
 class Pivot {
@@ -124,7 +140,7 @@ class Pivot {
   int? productId;
 
   factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
-    categoryId: json["category_id"] == null ? null : json["category_id"],
-    productId: json["product_id"] == null ? null : json["product_id"],
-  );
+        categoryId: json["category_id"] == null ? null : json["category_id"],
+        productId: json["product_id"] == null ? null : json["product_id"],
+      );
 }

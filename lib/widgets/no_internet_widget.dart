@@ -1,16 +1,16 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:flutter/material.dart';
+
 class NoInternetWidget extends StatelessWidget {
   const NoInternetWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return    Center(child:
-    Container(
+    return Center(
+        child: Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: ExactAssetImage(ImagesPath.nointernet))
-      ),
+          image:
+              DecorationImage(image: ExactAssetImage(ImagesPath.nointernet))),
       // Column(mainAxisAlignment: MainAxisAlignment.center,
       //   children: [
       //     Center(
@@ -25,7 +25,6 @@ class NoInternetWidget extends StatelessWidget {
       //     ),),
       //   ],
       // ),
-    )
-    );
+    ));
   }
 }

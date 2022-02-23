@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class MyCarouselSlider extends StatelessWidget {
   const MyCarouselSlider({Key? key}) : super(key: key);
+
   Widget carouselContainer(img) {
     return Container(
       //margin: const EdgeInsets.all(6.0),

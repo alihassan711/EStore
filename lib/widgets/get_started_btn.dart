@@ -12,13 +12,13 @@ class GetStartedBtn extends StatelessWidget {
 
   GetStartedBtn(
       {Key? key,
-        required this.onPress,
-        required this.textStyle,
-        required this.height,
-        required this.width,
-        required this.borderRadius,
-        required this.btnColor,
-        required this.text})
+      required this.onPress,
+      required this.textStyle,
+      required this.height,
+      required this.width,
+      required this.borderRadius,
+      required this.btnColor,
+      required this.text})
       : super(key: key);
 
   @override

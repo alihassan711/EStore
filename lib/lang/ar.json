@@ -96,7 +96,6 @@
   "application_preferences": "يرجى تحديد حجم",
   "ok": "موافق",
   "quantity": "كمية",
-
   "first_name": "الاسم الاول",
   "last_name": "الكنية",
   "first_name_required": "الاسم الأول مطلوب",
@@ -108,7 +107,8 @@
   "your_cart_empty": "عربة التسوق الخاصة بك فارغة",
   "save": "حفظ",
   "log_out": "خروج",
-  "required_address": "العنوان المطلوب"
-
+  "required_address": "العنوان المطلوب",
+  "no_fav_found": "لم يتم العثور على منتج مفضل",
+  "no_noti": "ليس لديك إشعار"
 }
 

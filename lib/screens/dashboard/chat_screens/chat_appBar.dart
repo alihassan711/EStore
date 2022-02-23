@@ -1,6 +1,5 @@
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
-import 'package:estore/screens/dashboard/drawer/notification_screen.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import '../../../bloc/category/category_cubit.dart';
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   ApiServices _repository = ApiServices();
   final double height = 100;
+
   @override
   Widget build(BuildContext context) {
     var textHeading =
@@ -32,8 +32,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                   MaterialPageRoute(
                       builder: (_) => BlocProvider(
                           create: (BuildContext context) =>
-                              CategoryCubit(
-                                  repository: _repository),
+                              CategoryCubit(repository: _repository),
                           child: MainScreen(
                             index: 1,
                             // form: args.toString(),

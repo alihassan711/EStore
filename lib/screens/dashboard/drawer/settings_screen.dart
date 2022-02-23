@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
@@ -25,9 +26,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   XFile? image;
   XFile _file = XFile("");
   Uint8List? webImage;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: whiteColor,
+    return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         title: AutoSizeText(
           getTranslated(context, "settings").toString(),
@@ -51,14 +54,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
-                          globalUserData.userProfile!.firstName.toString() == null? "name" :globalUserData.userProfile!.firstName.toString(),
+                          globalUserData.userProfile!.firstName.toString() ==
+                                  null
+                              ? "name"
+                              : globalUserData.userProfile!.firstName
+                                  .toString(),
                           style: kBold(blackColor, 16.0),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
                         AutoSizeText(
-                          globalUserData.user!.email.toString() == null? "email" :globalUserData.user!.email.toString(),
+                          globalUserData.user!.email.toString() == null
+                              ? "email"
+                              : globalUserData.user!.email.toString(),
                           style: kNormalBlack(blackColor),
                         ),
                       ],
@@ -105,23 +114,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Row(crossAxisAlignment: CrossAxisAlignment.end,
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             const Icon(Icons.person),
                             const SizedBox(
                               width: 12,
                             ),
                             AutoSizeText(
-                                getTranslated(context, "profile_settings").toString(),
+                              getTranslated(context, "profile_settings")
+                                  .toString(),
                               style: kBold(blackColor, 14.0),
                             ),
                             const Spacer(),
                             GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile( user: globalUserData,
-                                    callback: () {
-                                      setState(() {});
-                                    })));
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EditProfile(
+                                            user: globalUserData,
+                                            callback: () {
+                                              setState(() {});
+                                            })));
                               },
                               child: AutoSizeText(
                                 getTranslated(context, "edit").toString(),
@@ -136,7 +151,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              globalUserData.userProfile!.firstName.toString() == null ?"name" :globalUserData.userProfile!.firstName.toString(),
+                              globalUserData.userProfile!.firstName
+                                          .toString() ==
+                                      null
+                                  ? "name"
+                                  : globalUserData.userProfile!.firstName
+                                      .toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
@@ -152,12 +172,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              getTranslated(context, "email").toString() == null? "email" :  getTranslated(context, "email").toString(),
+                              getTranslated(context, "email").toString() == null
+                                  ? "email"
+                                  : getTranslated(context, "email").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
-                              globalUserData.user!.email.toString() == null? "email" :globalUserData.user!.email.toString(),
+                              globalUserData.user!.email.toString() == null
+                                  ? "email"
+                                  : globalUserData.user!.email.toString(),
                               style: kNormalBlack(blackColor),
                             )
                           ],
@@ -168,12 +192,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                            getTranslated(context, "phone").toString(),
+                              getTranslated(context, "phone").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
                             AutoSizeText(
-                              globalUserData.userProfile!.phone.toString() == null? "phone":globalUserData.userProfile!.phone.toString(),
+                              globalUserData.userProfile!.phone.toString() ==
+                                      null
+                                  ? "phone"
+                                  : globalUserData.userProfile!.phone
+                                      .toString(),
                               style: kNormalBlack(blackColor),
                             )
                           ],
@@ -189,7 +217,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             const Spacer(),
                             AutoSizeText(
-                                globalUserData.user!.address.toString() == null? "address": globalUserData.user!.address.toString() ,
+                              globalUserData.user!.address.toString() == null
+                                  ? "address"
+                                  : globalUserData.user!.address.toString(),
                               style: kNormalBlack(blackColor),
                             )
                           ],
@@ -254,8 +284,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           height: 12,
                         ),
                         InkWell(
-                          onTap: (){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LanguageScreen()));
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const LanguageScreen()));
                           },
                           child: Row(
                             children: [
@@ -264,12 +298,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 width: 12,
                               ),
                               AutoSizeText(
-                                  getTranslated(context, "language").toString(),
+                                getTranslated(context, "language").toString(),
                                 style: kBold(blackColor, 13.0),
                               ),
                               const Spacer(),
                               AutoSizeText(
-                                getTranslated(context, "use_language").toString(),
+                                getTranslated(context, "use_language")
+                                    .toString(),
                                 style: kNormalBlack(blackColor),
                               )
                             ],
@@ -279,8 +314,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           height: 12,
                         ),
                         InkWell(
-                          onTap: (){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HelpScreen()));
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HelpScreen()));
                           },
                           child: Row(
                             children: [
@@ -289,7 +327,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 width: 12,
                               ),
                               AutoSizeText(
-                                getTranslated(context, "help_support").toString(),
+                                getTranslated(context, "help_support")
+                                    .toString(),
                                 style: kBold(blackColor, 13.0),
                               ),
                             ],

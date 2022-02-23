@@ -14,7 +14,9 @@ class LoadingState extends FavouriteState {
 }
 
 class LoadedState extends FavouriteState {
-  LoadedState(this.order,);
+  LoadedState(
+    this.order,
+  );
 
   final List<FavouriteModel> order;
 

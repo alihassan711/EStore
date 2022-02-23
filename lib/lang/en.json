@@ -12,8 +12,8 @@
   "order_total": "Order Total",
   "proceed_cart": "Proceed Cart",
   "check_Balance": "Check Balance",
-  "in_your_cart": "In your cart ",
-  "in_your_wish_list": "In your wish list",
+  "in_your_cart": "Cart",
+  "in_your_wish_list": "Favourite",
   "ordered": "Ordered",
   "order": "Order",
   "profile": "Profile",
@@ -37,7 +37,7 @@
   "select_own_language": "Select your own preferred language",
   "contact_us": "Contact Us",
   "question_need_help": "Questions? Need Help?",
-  "terms_privacy": "Terms and privacy policy",
+  "terms_privacy": "Terms & Privacy Policy",
   "app_info": "App info",
   "profile_settings": "Profile Settings",
   "edit": "Edit",
@@ -103,10 +103,12 @@
   "phone_required": "Phone Required",
   "edit_profile": "Edit Profile",
   "valid_phone": "Please Enter Valid Phone Number",
-  "continue_shopping": "continue shopping",
-  "your_cart_empty": "your cart is empty",
+  "continue_shopping": "Continue Shopping",
+  "your_cart_empty": "Your cart is empty",
   "save": "save",
   "log_out": "Sign Out",
-  "required_address": "العنوان المطلوب"
+  "required_address": "Address Required",
+  "no_fav_found": "No favorite items found",
+  "no_noti": "You have no notification"
 }
 

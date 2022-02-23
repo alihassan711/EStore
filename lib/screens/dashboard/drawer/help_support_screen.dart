@@ -9,10 +9,11 @@ class HelpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: whiteColor,
+    return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         title: AutoSizeText(
-            getTranslated(context, "help").toString(),
+          getTranslated(context, "help").toString(),
           style: kBold(kIconColorGreen, 20.0),
         ),
         // centerTitle: true,
@@ -23,8 +24,12 @@ class HelpScreen extends StatelessWidget {
       body: Column(
         children: [
           ListTile(
-            title:
-                AutoSizeText(getTranslated(context, "help_centre",).toString(),),
+            title: AutoSizeText(
+              getTranslated(
+                context,
+                "help_centre",
+              ).toString(),
+            ),
             leading: const Icon(Icons.help_outline),
           ),
           ListTile(

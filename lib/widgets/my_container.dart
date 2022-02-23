@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 
 class MyContainer extends StatelessWidget {
   String? txt, img;
+
   MyContainer({this.txt, this.img, Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,11 +24,11 @@ class MyContainer extends StatelessWidget {
               backgroundColor: Colors.grey[200],
               radius: MediaQuery.of(context).size.height * 0.035,
               child: Container(
-               // height:40,
-               // width: 40,
+                // height:40,
+                // width: 40,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: ExactAssetImage(img!),fit: BoxFit.fill)
-                ),
+                    image: DecorationImage(
+                        image: ExactAssetImage(img!), fit: BoxFit.fill)),
                 // child: Image.asset(
                 //   img!,
                 //   fit: BoxFit.fill,
@@ -35,7 +37,7 @@ class MyContainer extends StatelessWidget {
             ),
             //SizedBox(height: 8,),
             Padding(
-              padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
               child: Text(
                 txt!,
                 style: kNormalBlack(blackColor),
@@ -51,7 +53,9 @@ class MyContainer extends StatelessWidget {
 class MyProfileContainer extends StatelessWidget {
   String? txt;
   Icon? icon;
+
   MyProfileContainer({this.txt, this.icon, Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -88,8 +92,9 @@ class MyProfileContainer extends StatelessWidget {
 }
 
 class MyProductContainer extends StatelessWidget {
-  String? txt,id, img;
-  MyProductContainer({this.txt,this.id, this.img, Key? key}) : super(key: key);
+  String? txt, id, img;
+
+  MyProductContainer({this.txt, this.id, this.img, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +106,7 @@ class MyProductContainer extends StatelessWidget {
           Image.asset(
             img!,
             height: 110,
-            width:  110,
+            width: 110,
             fit: BoxFit.cover,
           ),
           // Container(
@@ -114,11 +119,13 @@ class MyProductContainer extends StatelessWidget {
           //  // child: Image.asset(img!),
           // ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 6.0,left: 6.0,right: 6.0),
+            padding: const EdgeInsets.only(bottom: 6.0, left: 6.0, right: 6.0),
             child: Column(
               children: [
                 AutoSizeText("Name: $txt"),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 AutoSizeText("Id: $id"),
               ],
             ),
@@ -131,7 +138,8 @@ class MyProductContainer extends StatelessWidget {
 
 class MyProductContainerg extends StatelessWidget {
   String? txt, img, price;
-  MyProductContainerg({this.txt, this.img,this.price, Key? key})
+
+  MyProductContainerg({this.txt, this.img, this.price, Key? key})
       : super(key: key);
 
   @override
@@ -161,7 +169,9 @@ class MyProductContainerg extends StatelessWidget {
               height: 100,
               width: 110,
               decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
                   image: DecorationImage(
                       image: NetworkImage(img!), fit: BoxFit.fill)),
               // child: Image.asset(img!),
@@ -170,7 +180,7 @@ class MyProductContainerg extends StatelessWidget {
               height: 5,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
               child: AutoSizeText(
                 txt!,
                 style: kNormalBlack(blackColor),
@@ -190,7 +200,8 @@ class MyProductContainerg extends StatelessWidget {
               height: 5,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0,bottom: 5.0),
+              padding:
+                  const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 5.0),
               child: AutoSizeText(
                 "$price",
                 style: kNormalBlack(kIconColorRed),

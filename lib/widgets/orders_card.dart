@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class OrderCard extends StatelessWidget {
   String? titleText, orderProceedDate, price, img;
   Function()? onPress;
+
   OrderCard(
       {this.titleText,
       this.orderProceedDate,
@@ -42,16 +43,16 @@ class OrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 8.0,right: 8.0,top: 8.0),
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
                 child: Container(
-                  height: 90,width: 90,
+                  height: 90,
+                  width: 90,
                   decoration: BoxDecoration(
                       color: blackColor,
                       shape: BoxShape.rectangle,
-                      borderRadius:  BorderRadius.circular(
-                       10.0
-                       // bottomLeft: Radius.circular(10.0),
-                      ),
+                      borderRadius: BorderRadius.circular(10.0
+                          // bottomLeft: Radius.circular(10.0),
+                          ),
                       image: DecorationImage(
                           image: ExactAssetImage(img!), fit: BoxFit.fill)),
                 ),
@@ -70,7 +71,7 @@ class OrderCard extends StatelessWidget {
                     height: 8,
                   ),
                   AutoSizeText(
-    getTranslated(context, "order_proceed").toString(),
+                    getTranslated(context, "order_proceed").toString(),
                     style: kNormalBlack(
                       blackColor,
                     ),
@@ -99,8 +100,7 @@ class OrderCard extends StatelessWidget {
                 circularSize: 5,
                 text: getTranslated(context, "re_order").toString(),
                 btnTxtSize: 12,
-               // btnWidth: 140,
-
+                // btnWidth: 140,
               ),
               ElevatedBtn(
                 onPress: onPress,
@@ -113,7 +113,9 @@ class OrderCard extends StatelessWidget {
               ),
             ],
           ),
-         const SizedBox(height: 5.0,),
+          const SizedBox(
+            height: 5.0,
+          ),
         ],
       ),
     );

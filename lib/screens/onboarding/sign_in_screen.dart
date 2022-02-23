@@ -6,9 +6,9 @@ import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
-import 'package:estore/model/getx_networkmanager_class.dart';
 import 'package:estore/model/language.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
+import 'package:estore/screens/onboarding/forgotten_screen.dart';
 import 'package:estore/screens/onboarding/sign_up_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/services/auth_services.dart';
@@ -17,8 +17,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../main.dart';
-import '../../widgets/no_internet_widget.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -32,6 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   ApiServices _repository = ApiServices();
+
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
@@ -61,6 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   ApiServices _apiServices = ApiServices();
+
   @override
   void initState() {
     super.initState();
@@ -189,7 +191,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   }
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
+                  enabledBorder: border(),
                   focusedBorder: focusBorder(),
                   border: border(),
                   errorBorder: errorBorder(),
@@ -224,9 +229,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   // }
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
                   focusedBorder: focusBorder(),
                   border: border(),
+                  enabledBorder: border(),
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "password").toString(),
                   prefixIcon: const Icon(
@@ -333,7 +341,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                   //  textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ResetPasswordScreen()
+                          // form: args.toString(),
+                        ));
+                  },
                 ),
               ),
             ),

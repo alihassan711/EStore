@@ -1,4 +1,3 @@
-import 'package:estore/constants/color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +38,7 @@ class ElevatedBtn extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Text(
               text!,
-              style:  TextStyle(fontSize: 14.0, color: txtColor!),
+              style: TextStyle(fontSize: 14.0, color: txtColor!),
             ),
           )),
     );

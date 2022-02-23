@@ -347,23 +347,23 @@
 //   }
 // }
 import 'dart:convert';
+
 import 'package:estore/constants/color.dart';
 import 'package:estore/model/all_categories_model.dart';
 import 'package:estore/model/favourite_model.dart';
 import 'package:estore/model/order_history_model.dart';
 import 'package:estore/utils/urls.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cart/flutter_cart.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:estore/model/product_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../main.dart';
 import '../model/notifications_model.dart';
-var cart = FlutterCart();
+
 class ApiServices {
   static var authtoken =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjUzNTdhYzM1MTZhNTZhMDI1ZGQ4MDRlYTVkZDg2OTk4ZTgxNjg4MjFhMzFhYjU5YzcwZThlODI5MTQxYjIzODg5NWRjYTY3OTVjY2Q1NTAwIn0.eyJhdWQiOiIzIiwianRpIjoiNTM1N2FjMzUxNmE1NmEwMjVkZDgwNGVhNWRkODY5OThlODE2ODgyMWEzMWFiNTljNzBlOGU4MjkxNDFiMjM4ODk1ZGNhNjc5NWNjZDU1MDAiLCJpYXQiOjE2NDUwMzA0NTQsIm5iZiI6MTY0NTAzMDQ1NCwiZXhwIjoxNjc2NTY2NDU0LCJzdWIiOiIyMyIsInNjb3BlcyI6W119.lw0vONMaPWixPrTj618eGpJdW-92g0ZuURNCnFZcH5daijqVZROY-62qI6M9yBV_l0hSr9NEXqBWmGHITUD4MjbXza1-mEB1enpChPvzI9lOtdUkqr1fpcX4NRDlVrT7TRoLJX3-UcvIXp2CelbygY_8n717uYq-Q6OUhCBRHm-5N5pqKKeUBWLIlsXU72rWBsWucAXy5CqQhF5euj9lN3cZCSmSBo2DCQWg7QruDCKDD13mR6Narrzs7C6FkQwc7bVYxV048IkulIm2J35rEkc1WhHfXcuAcRhyGwZA-hUnZVvvo5WKVVKgfISQhhOfzAqs6xJqj6Zof0ZdWuHciFW6OaOsv27AnxZO24OqU7RxQfJWSvYmDLGWlu8Ya6h0rKNt4uaq-XI8jeN0W2K0t_4iFOx93SpYxKpZcY7rnVLU_uILKJsrTCBKoHsUfuiK-RfXDxLphXzPq8QGHb6GTe_n3dnvZ50Cl02hcqE9Ig9xruc0_G2m1R1H5Yr0ilH1-sDZg1vbaWnJ2Hv9NhCzAwYJTjMeXl1rdMHITbqZeg9SAHB8RueUwseYGcxRaOdynWaKC17a9GKejVhV0BKu2VWmlE1JTRSzfxKNXQdtxzPGrsnzMbRCnPixS6xpuaUsHSzLFudb33lXyupZF6x_e6DKFbTPIt_O3ZfWPEo3qsY";
+
   //   static Future<List<dynamic>> getAllProducts() async {
 // //final uri = Uri.http(authority, '/user/getSingleUser', queryParameters);
 //     final response = await http.get(Uri.parse(Urls.allProducts));
@@ -416,20 +416,20 @@ class ApiServices {
   //     return [];
   //   }
   // }
-  Future<List<ProductModel>> getAllProducts() async {
-
-    List<ProductModel> products = [];
-    final response = await http.get(Uri.parse(Urls.allProducts));
-    if (response.statusCode == 200) {
-      //  print("status code ===> ${response.statusCode}");
-      // print("product body ===> ${response.body}");
-      products = productModelFromJson(
-          json.decode(response.body)["ret_view_array"]["products"]["data"]);
-      return products;
-    } else {
-      return [];
-    }
-  }
+  // Future<List<ProductModel>> getAllProducts() async {
+  //
+  //   List<ProductModel> products = [];
+  //   final response = await http.get(Uri.parse(Urls.allProducts));
+  //   if (response.statusCode == 200) {
+  //     //  print("status code ===> ${response.statusCode}");
+  //     // print("product body ===> ${response.body}");
+  //     products = productModelFromJson(
+  //         json.decode(response.body)["ret_view_array"]["products"]["data"]);
+  //     return products;
+  //   } else {
+  //     return [];
+  //   }
+  // }
 
 //products
   Future<List<CategoryModel>> getAllCategories() async {
@@ -448,38 +448,46 @@ class ApiServices {
 
   Future<List<OrderHistoryModel>> getOrderHistory() async {
     List<OrderHistoryModel> category = [];
-    final response = await http.get(Uri.parse(Urls.orderHistory), headers: _setHeaders(),);
+    final response = await http.get(
+      Uri.parse(Urls.orderHistory),
+      headers: _setHeaders(),
+    );
     if (response.statusCode == 200) {
-       print("status code ===> ${response.statusCode}");
-       print("category body ===> ${response.body}");
+      print("status code ===> ${response.statusCode}");
+      print("category body ===> ${response.body}");
       category =
           orderHistoryModelFromJson(json.decode(response.body)["orders"]);
-       globalHistoryModel = category;
+      globalHistoryModel = category;
       return category;
     } else {
       return [];
     }
   }
+
   Future<List<NotifcationsModel>> getNotifications() async {
     List<NotifcationsModel> category = [];
-    final response = await http.get(Uri.parse(Urls.notifications), headers: _setHeaders(),);
+    final response = await http.get(
+      Uri.parse(Urls.notifications),
+      headers: _setHeaders(),
+    );
     if (response.statusCode == 200) {
-      print("status code notifications===> ${response.statusCode}");
-      print("notifications body ===> ${response.body}");
-      category =
-          notificationModelFromJson(json.decode(response.body)["notifications"]);
+      category = notificationModelFromJson(
+          json.decode(response.body)["notifications"]);
       globalNotificationModel = category;
       return category;
     } else {
       return [];
     }
   }
+
   Future<List<FavouriteModel>> getFavouriteProducts() async {
     List<FavouriteModel> category = [];
-    final response = await http.get(Uri.parse(Urls.favourites), headers: _setHeaders(),);
+    final response = await http.get(
+      Uri.parse(Urls.favourites),
+      headers: _setHeaders(),
+    );
+    print(response.body);
     if (response.statusCode == 200) {
-      print("status code favourite===> ${response.statusCode}");
-      print("favourite body ===> ${response.body}");
       category =
           favouriteModelFromJson(json.decode(response.body)["favourites"]);
       globalFavouriteModel = category;
@@ -545,29 +553,23 @@ class ApiServices {
   }
 */
 
-   Future<bool> postProduct({
-      List? products,totalPrice}) async {
-
+  Future<bool> postProduct({List? products, totalPrice}) async {
     var productData = {
-        "payment_method": "Cash",
-        "note": "how",
-        "phone": "0237069975",
-        "city": "Lahore",
-        "country": "Pakistan",
-        "state": "Punjab",
-        "address": "caw-b",
-        "total_amount": totalPrice,
-        "orderItems": products
-      };
+      "payment_method": "Cash",
+      "note": "how",
+      "phone": "0237069975",
+      "city": "Lahore",
+      "country": "Pakistan",
+      "state": "Punjab",
+      "address": "caw-b",
+      "total_amount": totalPrice,
+      "orderItems": products
+    };
     var jsonString = json.encode(productData);
     print(jsonString);
 
-
-    final response = await http.post(
-        Uri.parse(Urls.addOrder),
-        body: jsonString,
-        headers: _setHeaders()
-    );
+    final response = await http.post(Uri.parse(Urls.addOrder),
+        body: jsonString, headers: _setHeaders());
     print(response.statusCode);
 
     if (response.statusCode == 200) {
@@ -576,8 +578,8 @@ class ApiServices {
     } else {
       return false;
     }
-
   }
+
   static Future<bool> addFavouriteProduct({productId}) async {
     final response = await http.post(Uri.parse(Urls.addFavourites),
         body: json.encode({
@@ -594,11 +596,10 @@ class ApiServices {
     }
   }
 
-
   static Future<bool> removeFavouriteProduct({productId}) async {
-     var url = "https://phpstack-508481-2092187.cloudwaysapps.com/api/removefavourite?id=$productId";
-    final response = await http.get(Uri.parse(url),
-        headers: _setHeaders());
+    var url =
+        "https://phpstack-508481-2092187.cloudwaysapps.com/api/removefavourite?id=$productId";
+    final response = await http.get(Uri.parse(url), headers: _setHeaders());
     print(response.body);
     if (response.statusCode == 200) {
       print("Product Added as favourite");
@@ -609,10 +610,8 @@ class ApiServices {
     }
   }
 
-  static Future<bool> updateProfile({
-    firstName,lastName,picture,phone
-
-  }) async {
+  static Future<bool> updateProfile(
+      {firstName, lastName, picture, phone}) async {
     final response = await http.post(Uri.parse(Urls.updateProfile),
         body: json.encode({
           "first_name": firstName,
@@ -631,25 +630,26 @@ class ApiServices {
     }
   }
 
-
   static _setHeaders() => {
         "Accept": "application/json",
         "content-type": "application/json",
-        'Authorization': 'Bearer ${globalUserData.user!.token}',
+        'Authorization': 'Bearer $UserToken',
       };
+
   static _setHeaderss() => {
-    "Accept": "application/json",
-    "content-type": "application/json",
-    //'Authorization': 'Bearer ${authtoken}',
-  };
+        "Accept": "application/json",
+        "content-type": "application/json",
+        //'Authorization': 'Bearer ${authtoken}',
+      };
+
   static showSnackBar(context, String title) {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(title),
     ));
   }
 
-  successToast(titlemsg){
-    return  Fluttertoast.showToast(
+  successToast(titlemsg) {
+    return Fluttertoast.showToast(
         msg: titlemsg,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
@@ -658,8 +658,9 @@ class ApiServices {
         textColor: Colors.white,
         fontSize: 16.0);
   }
-  failToast(titlemsg){
-    return  Fluttertoast.showToast(
+
+  failToast(titlemsg) {
+    return Fluttertoast.showToast(
         msg: titlemsg,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
@@ -668,5 +669,4 @@ class ApiServices {
         textColor: Colors.white,
         fontSize: 16.0);
   }
-
 }

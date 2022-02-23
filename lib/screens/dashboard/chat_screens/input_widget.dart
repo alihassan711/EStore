@@ -2,10 +2,10 @@ import 'package:estore/constants/color.dart';
 import 'package:flutter/material.dart';
 
 class InputWidget extends StatelessWidget {
+  final TextEditingController textEditingController =
+      new TextEditingController();
 
-  final TextEditingController textEditingController = new TextEditingController();
-
-   InputWidget({Key? key}) : super(key: key);
+  InputWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,11 @@ class InputWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Material(
-            child:  Container(
-              margin:  const EdgeInsets.symmetric(horizontal: 1.0),
-              child:  IconButton(
-                onPressed: () {  },
-                icon:  const Icon(Icons.face),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 1.0),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.face),
                 color: kIconColorWhite,
               ),
             ),
@@ -33,7 +33,9 @@ class InputWidget extends StatelessWidget {
                 controller: textEditingController,
                 decoration: const InputDecoration.collapsed(
                   hintText: 'Type a message',
-                  hintStyle: TextStyle(color: blackColor,),
+                  hintStyle: TextStyle(
+                    color: blackColor,
+                  ),
                 ),
               ),
             ),
@@ -41,10 +43,10 @@ class InputWidget extends StatelessWidget {
 
           // Send Message Button
           Material(
-            child:  Container(
-              margin:  const EdgeInsets.symmetric(horizontal: 8.0),
-              child:  IconButton(
-                icon:  const Icon(Icons.send),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: IconButton(
+                icon: const Icon(Icons.send),
                 onPressed: () => {
                   textEditingController.clear(),
                 },
@@ -57,9 +59,8 @@ class InputWidget extends StatelessWidget {
       ),
       width: double.infinity,
       height: 50.0,
-      decoration:  const BoxDecoration(
-          border:  Border(
-              top:  BorderSide(color: kGrey, width: 0.5)),
+      decoration: const BoxDecoration(
+          border: Border(top: BorderSide(color: kGrey, width: 0.5)),
           color: Colors.white),
     );
   }

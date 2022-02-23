@@ -476,6 +476,7 @@ import 'package:estore/screens/onboarding/sign_in_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/services/auth_services.dart';
 import 'package:flutter/material.dart';
+
 import '../../main.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -493,10 +494,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController confirmPassword = TextEditingController();
   bool? _passwordVisible = false;
   bool? _passwordVisiblec = false;
+
   //bool? _passwordVisible = false;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   ApiServices _repository = ApiServices();
   bool? loading = false;
+
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
@@ -614,9 +617,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
+
                   focusedBorder: focusBorder(),
                   border: border(),
+                  enabledBorder: border(),
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "first_name").toString(),
                   prefixIcon: const Icon(
@@ -647,7 +654,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
+                  enabledBorder: border(),
                   focusedBorder: focusBorder(),
                   border: border(),
                   errorBorder: errorBorder(),
@@ -682,7 +692,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
+                  enabledBorder: border(),
                   focusedBorder: focusBorder(),
                   border: border(),
                   errorBorder: errorBorder(),
@@ -714,9 +727,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
                   focusedBorder: focusBorder(),
                   border: border(),
+                  enabledBorder: border(),
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "address").toString(),
                   prefixIcon: const Icon(
@@ -749,9 +765,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
                   focusedBorder: focusBorder(),
                   border: border(),
+                  enabledBorder: border(),
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "email").toString(),
                   prefixIcon: const Icon(
@@ -784,9 +803,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
                   focusedBorder: focusBorder(),
                   border: border(),
+                  enabledBorder: border(),
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "password").toString(),
                   prefixIcon: const Icon(
@@ -833,9 +855,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }
                   return null;
                 },
+                style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
                   focusedBorder: focusBorder(),
                   border: border(),
+                  enabledBorder: border(),
                   errorBorder: errorBorder(),
                   hintText:
                       getTranslated(context, "confirm_password").toString(),

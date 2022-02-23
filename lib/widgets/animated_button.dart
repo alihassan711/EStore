@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class MyBlinkingButton extends StatefulWidget {
   Function()? onPress;
-   MyBlinkingButton({this.onPress,Key? key}) : super(key: key);
+
+  MyBlinkingButton({this.onPress, Key? key}) : super(key: key);
 
   @override
   _MyBlinkingButtonState createState() => _MyBlinkingButtonState();
@@ -15,6 +16,7 @@ class MyBlinkingButton extends StatefulWidget {
 class _MyBlinkingButtonState extends State<MyBlinkingButton>
     with SingleTickerProviderStateMixin {
   AnimationController? _animationController;
+
   @override
   void initState() {
     _animationController =
@@ -29,7 +31,7 @@ class _MyBlinkingButtonState extends State<MyBlinkingButton>
       opacity: _animationController!,
       child: MaterialButton(
         onPressed: widget.onPress,
-        child:  AutoSizeText(Constants.addNewProduct),
+        child: AutoSizeText(Constants.addNewProduct),
         color: Colors.green,
       ),
     );

@@ -38,7 +38,6 @@
   "location": "مقام",
   "set_availability_schedule": "دستیابی کا نظام الاوقات مرتب کریں",
   "home": "ہوم",
-
   "prayer": "نماز",
   "mode": "موڈ",
   "time": "وقت",
@@ -76,7 +75,6 @@
   "prayer_name": "نمازوں کے نام",
   "iqamah_time": "اقامت کا وقت",
   "azan": "اذان کا وقت",
-
   "login_as_imam": "امام کے طور پر لاگ ان کریں۔",
   "fajir": "فجر",
   "dhuhar": "ظہر",
@@ -94,7 +92,6 @@
   "exit_app": "ایپ سے باہر نکلنے کے لیے دوبارہ ٹیپ کریں۔",
   "active_mosques": "فعال مساجد",
   "inactive_mosques": "غیر فعال مساجد",
-
   "country": "ملک",
   "required_country": "ملک کا نام درکار ہے۔",
   "state": "ریاست ",
@@ -121,10 +118,6 @@
   "sign_up_user": "صارف ",
   "one_field_required": "درست وقت درج کریں۔",
   "mosque_not_active": "مسجد فعال نہیں ہے۔",
-
-
-
-
   "top_categories": "اعلی زمرے",
   "brand": "برانڈ",
   "top_sellers": "ٹاپ سیلرز",
@@ -137,7 +130,6 @@
   "delivery_charges": "ڈیلیوری چارجز",
   "order_total": "آرڈر ٹوٹل",
   "proceed_cart": "کارٹ کو آگے بڑھائیں",
-
   "check_Balance": "بیلنس چیک کریں",
   "in_your_cart": "اپنی ٹوکری میں",
   "in_your_wish_list": "خواہش کی فہرست",
@@ -150,7 +142,6 @@
   "purchase_history": "تاریخ خریداری",
   "history": "تاریخ",
   "help_support": "مدد/سپورٹ",
-
   "settings": "ترتیبات",
   "language": "زبان",
   "dark_mode": "ڈارک موڈ",
@@ -178,7 +169,6 @@
   "payment_status": "ادائیگی کی حیثیت",
   "delivery_status": "ترسیل کی حیثیت",
   "help_centre": "امدادی مرکز",
-
   "facebook_sign_in": "فیس بک کے ساتھ سائن ان کریں",
   "google_sign_in": "گوگل کے ساتھ سائن ان کریں",
   "apple_sign_in": "ایپل کے ساتھ سائن ان کریں",
@@ -200,5 +190,7 @@
   "valid_phone": "درست فون نمبر درج کریں",
   "continue_shopping": "خریداری جاری رکھیں",
   "your_cart_empty": "آپ کی ٹوکری خالی ہے",
-  "required_address": "مطلوبہ پتہ"
+  "required_address": "مطلوبہ پتہ",
+  "no_fav_found": "کوئی پسندیدہ پروڈکٹ نہیں",
+  "no_noti": "آپ کو کوئی اطلاع نہیں ہے۔"
 }

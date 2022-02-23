@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:overlay_support/overlay_support.dart';
 
-class FireBaseServices{
+class FireBaseServices {
   static var user_not_found = "user-not-found";
   static var wrong_password = "wrong-password";
   static var user_not_found_c = "User Not Found";
@@ -19,11 +19,13 @@ class FireBaseServices{
 
   static FirebaseAuth auth = FirebaseAuth.instance;
   static var stamp = Timestamp.now();
+
   static Future<Map<String, dynamic>?> signUpWithEmailPassword() async {
     try {
       late Map<String, dynamic> data;
       await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: "email@xyz.com", password: "password")
+          .createUserWithEmailAndPassword(
+              email: "email@xyz.com", password: "password")
           .then((user) async {
         await FirebaseFirestore.instance
             .collection("User")
@@ -43,28 +45,28 @@ class FireBaseServices{
       showSimpleNotification(
         e.code == user_not_found
             ? Text(
-          user_not_found_c,
-          style: kBold(whiteColor, 14.0),
-        )
+                user_not_found_c,
+                style: kBold(whiteColor, 14.0),
+              )
             : e.code == wrong_password
-            ? Text(
-          wrong_password_c,
-          style: kBold(whiteColor, 14.0),
-        )
-            : e.code == email_already_used
-            ? Text(
-          email_already_used_c,
-          style: kBold(whiteColor, 14.0),
-        )
-            : e.code == no_net
-            ? Text(
-          no_net_c,
-          style: kBold(whiteColor, 14.0),
-        )
-            : Text(
-          " Failed ${e.code}",
-          style: kBold(whiteColor, 14.0),
-        ),
+                ? Text(
+                    wrong_password_c,
+                    style: kBold(whiteColor, 14.0),
+                  )
+                : e.code == email_already_used
+                    ? Text(
+                        email_already_used_c,
+                        style: kBold(whiteColor, 14.0),
+                      )
+                    : e.code == no_net
+                        ? Text(
+                            no_net_c,
+                            style: kBold(whiteColor, 14.0),
+                          )
+                        : Text(
+                            " Failed ${e.code}",
+                            style: kBold(whiteColor, 14.0),
+                          ),
         position: NotificationPosition.bottom,
         background: kIconColorRed,
       );
@@ -74,10 +76,11 @@ class FireBaseServices{
 
   Future<void> signup(BuildContext context) async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount.authentication;
+          await googleSignInAccount.authentication;
       final AuthCredential authCredential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
           accessToken: googleSignInAuthentication.accessToken);
@@ -86,7 +89,11 @@ class FireBaseServices{
       User? user = result.user;
       if (result != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MainScreen(index: 0,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => MainScreen(
+                      index: 0,
+                    )));
       } // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }
@@ -128,6 +135,5 @@ class FireBaseServices{
     _smsVerificationCode = verificationId;
   }
 */
-
 
 }

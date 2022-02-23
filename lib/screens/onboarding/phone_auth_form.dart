@@ -32,18 +32,23 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
       this.otpCode.text = authCredential.smsCode!;
     });
     if (authCredential.smsCode != null) {
-      try{
+      try {
         UserCredential credential =
-        await user!.linkWithCredential(authCredential);
-      }on FirebaseAuthException catch(e){
-        if(e.code == 'provider-already-linked'){
+            await user!.linkWithCredential(authCredential);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'provider-already-linked') {
           await _auth.signInWithCredential(authCredential);
         }
       }
       setState(() {
         isLoading = false;
       });
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MainScreen(index: 0,)));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreen(
+                    index: 0,
+                  )));
     }
   }
 
@@ -100,9 +105,7 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
         // appBar: AppBar(
         //   elevation: 0.0,
@@ -114,67 +117,66 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
         //       statusBarColor: Colors.blue),),
         // backgroundColor: whiteColor,
         body: Center(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: size.width * 0.8,
-                  child: TextFormField(
-                      keyboardType: TextInputType.phone,
-                      controller: phoneNumber,
-                      decoration: InputDecoration(
-                        labelText: "Enter Phone",
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 10.0),
-                        border: border,
-                      )),
-                ),
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                SizedBox(
-                  width: size.width * 0.8,
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    controller: otpCode,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: "Enter Otp",
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 15.0, horizontal: 10.0),
-                      border: border,
-                      suffixIcon: const Padding(
-                        child: FaIcon(
-                          FontAwesomeIcons.eye,
-                          size: 15,
-                        ),
-                        padding: EdgeInsets.only(top: 15, left: 15),
-                      ),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: size.width * 0.8,
+              child: TextFormField(
+                  keyboardType: TextInputType.phone,
+                  controller: phoneNumber,
+                  decoration: InputDecoration(
+                    labelText: "Enter Phone",
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 15.0, horizontal: 10.0),
+                    border: border,
+                  )),
+            ),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+            SizedBox(
+              width: size.width * 0.8,
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                controller: otpCode,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: "Enter Otp",
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 15.0, horizontal: 10.0),
+                  border: border,
+                  suffixIcon: const Padding(
+                    child: FaIcon(
+                      FontAwesomeIcons.eye,
+                      size: 15,
                     ),
+                    padding: EdgeInsets.only(top: 15, left: 15),
                   ),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: size.height * 0.10)),
-                !isLoading
-                    ?
-                ElevatedBtn(
-                  btnWidth: 270,
-                  btnTxtSize: 16.0,
-                  text: getTranslated(context, "sign_in").toString(),
-                  txtColor: whiteColor,
-                  btnHeight: 45,
-                  circularSize: 12.0,
-                  color: phoneColor,
-                  onPress: ()async{
-                    if (_formKey.currentState!.validate()) {
-                      setState(() {
-                       // isLoading = true;
-                      });
-                      await phoneSignIn(phoneNumber: phoneNumber.text);
-                    }
-                  },
-                )
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(bottom: size.height * 0.10)),
+            !isLoading
+                ? ElevatedBtn(
+                    btnWidth: 270,
+                    btnTxtSize: 16.0,
+                    text: getTranslated(context, "sign_in").toString(),
+                    txtColor: whiteColor,
+                    btnHeight: 45,
+                    circularSize: 12.0,
+                    color: phoneColor,
+                    onPress: () async {
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          // isLoading = true;
+                        });
+                        await phoneSignIn(phoneNumber: phoneNumber.text);
+                      }
+                    },
+                  )
                 // SizedBox(
                 //   width: size.width * 0.8,
                 //   child: OutlinedButton(
@@ -197,10 +199,10 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
                 //             BorderSide.none)),
                 //   ),
                 // )
-                    : const CircularProgressIndicator(),
-              ],
-            ),
-          ),
-        ));
+                : const CircularProgressIndicator(),
+          ],
+        ),
+      ),
+    ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class MyTextField extends StatelessWidget {
   Widget widget;
   var labelText;
@@ -10,13 +11,13 @@ class MyTextField extends StatelessWidget {
   //bool numpad;
 
   MyTextField(
-      this.widget, {
-        this.labelText,
-        required this.obscure,
-        required this.textEditingController,
-        this.textInputType,
-        this.enabled,
-      });
+    this.widget, {
+    this.labelText,
+    required this.obscure,
+    required this.textEditingController,
+    this.textInputType,
+    this.enabled,
+  });
 
   // String hintText;
   // String labelText;
@@ -34,7 +35,8 @@ class MyTextField extends StatelessWidget {
           controller: textEditingController,
           keyboardType: textInputType,
           enabled: enabled,
-          style: const TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
+          style:
+              const TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
           decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: labelText,

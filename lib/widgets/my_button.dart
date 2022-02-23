@@ -1,5 +1,6 @@
 import 'package:estore/constants/color.dart';
 import 'package:flutter/material.dart';
+
 class MyButton extends StatelessWidget {
   String lable;
 
@@ -30,7 +31,7 @@ class MyButton extends StatelessWidget {
           height: 50,
           textColor: Colors.white,
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),
     );

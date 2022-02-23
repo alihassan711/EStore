@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/widgets/star_display_widget.dart';
@@ -8,6 +7,7 @@ class FavouriteCard extends StatelessWidget {
   String? titleText, img, brandName;
   int? itemPrice;
   Function()? onPress;
+
   FavouriteCard(
       {this.titleText,
       this.itemPrice,
@@ -40,17 +40,15 @@ class FavouriteCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 75,width: 70,
-           // height: MediaQuery.of(context).size.height * 0.125,
-           // width: MediaQuery.of(context).size.width * 0.2,
+            height: 75, width: 70,
+            // height: MediaQuery.of(context).size.height * 0.125,
+            // width: MediaQuery.of(context).size.width * 0.2,
             decoration: BoxDecoration(
                 color: whiteColor,
                 shape: BoxShape.rectangle,
-                borderRadius:
-                const BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(5.0),
-                  bottomLeft:
-                  Radius.circular(5.0),
+                  bottomLeft: Radius.circular(5.0),
                 ),
                 image: DecorationImage(
                     image: NetworkImage(img!), fit: BoxFit.fill)),
@@ -62,7 +60,9 @@ class FavouriteCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 8.0,),
+              SizedBox(
+                height: 8.0,
+              ),
               Text(
                 titleText!,
                 style: kBold(blackColor, 12.0),
@@ -84,15 +84,17 @@ class FavouriteCard extends StatelessWidget {
                 ),
                 child: StarDisplay(value: 3),
               ),
-             // StarDisplay(),
+              // StarDisplay(),
               const SizedBox(
                 height: 2,
               ),
               Text(
-               "\$$itemPrice",
+                "\$$itemPrice",
                 style: kBold(blackColor, 13.0),
               ),
-              SizedBox(height: 8.0,),
+              SizedBox(
+                height: 8.0,
+              ),
             ],
           ),
           const Spacer(),
@@ -101,7 +103,10 @@ class FavouriteCard extends StatelessWidget {
               IconButton(
                 onPressed: onPress,
                 color: Colors.red,
-                icon: const Icon(Icons.favorite,color: kIconColorRed,),
+                icon: const Icon(
+                  Icons.favorite,
+                  color: kIconColorRed,
+                ),
                 iconSize: 25.0,
               ),
             ],

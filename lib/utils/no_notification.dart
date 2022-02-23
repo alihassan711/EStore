@@ -16,46 +16,44 @@ class NoNotificationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Expanded(
-        child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.26,
-              width: MediaQuery.of(context).size.width * 0.45,
-              decoration: BoxDecoration(
-                image: DecorationImage(image: ExactAssetImage(icon!),fit: BoxFit.fill)
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height:100,
+            width: 100,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: ExactAssetImage(icon!), fit: BoxFit.fill)),
+            // backgroundColor: whiteColor,
+            // height,: MediaQuery.of(context).size.height * 0.12,
+            //  child: SizedBox(
+            //    height: MediaQuery.of(context).size.height * 0.9,
+            //   // child: Image.asset(icon!,fit: BoxFit.fill,),
+            //  ),
+          ),
+          const SizedBox(
+              height: 8,
               ),
-             // backgroundColor: whiteColor,
-             // height,: MediaQuery.of(context).size.height * 0.12,
-             //  child: SizedBox(
-             //    height: MediaQuery.of(context).size.height * 0.9,
-             //   // child: Image.asset(icon!,fit: BoxFit.fill,),
-             //  ),
-            ),
-            const SizedBox(
-              //height: 8,
-            ),
-            AutoSizeText(
-              txt!,
-              style: kSemiBold(blackColor),
-              maxLines: 2,
-            ),
-            const SizedBox(
-            //  height: 10,
-            ),
-            ElevatedBtn(
-              color: kIconColorGreen,
-              onPress: onPress,
-              txtColor: blackColor,
-              circularSize: 10.0,
-              btnTxtSize: 12,
-              text: btnText,
-              btnWidth: 200,
-            )
-          ],
-        ),
+          AutoSizeText(
+            txt!,
+            style: kSemiBold(blackColor),
+            maxLines: 2,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          ElevatedBtn(
+            color: kIconColorGreen,
+            onPress: onPress,
+            txtColor: blackColor,
+            circularSize: 10.0,
+            btnTxtSize: 12,
+            text: btnText,
+            btnWidth: 200,
+          )
+        ],
       ),
     );
   }
 }
-

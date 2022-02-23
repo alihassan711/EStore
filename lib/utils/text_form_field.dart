@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class TextFormPassFieldCustom extends StatelessWidget {
   FormFieldValidator? valid;
   IconButton? icon;
@@ -36,11 +35,12 @@ class TextFormPassFieldCustom extends StatelessWidget {
           labelText: labelText,
           hintText: hintText,
           labelStyle: kBold(blackColor, 16.0),
-          hintStyle:  kBold(kGrey,14.0)),
-      style:kBold(blackColor, 16.0),
+          hintStyle: kBold(kGrey, 14.0)),
+      style: kBold(blackColor, 16.0),
     );
   }
 }
+
 class TextFormFieldTime extends StatelessWidget {
   FormFieldValidator? valid;
   IconButton? icon;
@@ -50,18 +50,18 @@ class TextFormFieldTime extends StatelessWidget {
 
   TextFormFieldTime(
       {this.icon,
-        this.valid,
-        this.labelText,
-        this.hintText,
-        this.controller,
-        this.isPass,
-        this.isEmail,
-        this.isPhone});
+      this.valid,
+      this.labelText,
+      this.hintText,
+      this.controller,
+      this.isPass,
+      this.isEmail,
+      this.isPhone});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-     // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       maxLength: 12,
       obscureText: false,
       controller: controller,
@@ -70,22 +70,24 @@ class TextFormFieldTime extends StatelessWidget {
       keyboardType: isEmail!
           ? TextInputType.emailAddress
           : isPhone!
-          ? TextInputType.phone
-          : TextInputType.name,
+              ? TextInputType.phone
+              : TextInputType.name,
       decoration: InputDecoration(
-          counter: SizedBox.shrink(),
-          suffixIcon: icon,
-          focusedBorder: focusBorder(),
-          border: border(),
-          errorBorder: errorBorder(),
-          labelText: labelText,
-          hintText: hintText,
-          labelStyle: kBold(blackColor,16.0),
-          hintStyle:kBold(blackColor,16.0),),
-      style: kBold(blackColor,16.0),
+        counter: SizedBox.shrink(),
+        suffixIcon: icon,
+        focusedBorder: focusBorder(),
+        border: border(),
+        errorBorder: errorBorder(),
+        labelText: labelText,
+        hintText: hintText,
+        labelStyle: kBold(blackColor, 16.0),
+        hintStyle: kBold(blackColor, 16.0),
+      ),
+      style: kBold(blackColor, 16.0),
     );
   }
 }
+
 class TextFormFieldCustom extends StatelessWidget {
   FormFieldValidator? valid;
   IconButton? icon;
@@ -95,13 +97,13 @@ class TextFormFieldCustom extends StatelessWidget {
 
   TextFormFieldCustom(
       {this.icon,
-        this.valid,
-        this.labelText,
-        this.hintText,
-        this.controller,
-        this.isPass,
-        this.isEmail,
-        this.isPhone});
+      this.valid,
+      this.labelText,
+      this.hintText,
+      this.controller,
+      this.isPass,
+      this.isEmail,
+      this.isPhone});
 
   @override
   Widget build(BuildContext context) {
@@ -113,8 +115,8 @@ class TextFormFieldCustom extends StatelessWidget {
       keyboardType: isEmail!
           ? TextInputType.emailAddress
           : isPhone!
-          ? TextInputType.phone
-          : TextInputType.name,
+              ? TextInputType.phone
+              : TextInputType.name,
       decoration: InputDecoration(
           suffixIcon: icon,
           focusedBorder: focusBorder(),
@@ -122,9 +124,9 @@ class TextFormFieldCustom extends StatelessWidget {
           errorBorder: errorBorder(),
           labelText: labelText,
           hintText: hintText,
-          labelStyle: kBold(blackColor,16.0),
-          hintStyle:  kBold(kGrey,14.0)),
-      style: kBold(blackColor,16.0),
+          labelStyle: kBold(blackColor, 16.0),
+          hintStyle: kBold(kGrey, 14.0)),
+      style: kBold(blackColor, 16.0),
     );
   }
 }

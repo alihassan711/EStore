@@ -6,6 +6,7 @@ import 'package:estore/localization/language_constants.dart';
 import 'package:estore/model/language.dart';
 import 'package:estore/widgets/iconbtn.dart';
 import 'package:flutter/material.dart';
+
 import '../../../main.dart';
 
 class LanguageScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class LanguageScreen extends StatefulWidget {
 
 class _LanguageScreenState extends State<LanguageScreen> {
   Language? language;
+
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
@@ -24,10 +26,11 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: whiteColor,
+    return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         title: AutoSizeText(
-            getTranslated(context, "languages").toString(),
+          getTranslated(context, "languages").toString(),
           style: kBold(kIconColorGreen, 20.0),
         ),
         centerTitle: true,
@@ -39,9 +42,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               Icons.notifications_active_outlined,
               color: blackColor,
             ),
-            onPress: () {
-
-            },
+            onPress: () {},
             color: blackColor,
           ),
           /*
@@ -107,7 +108,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         height: 10,
                       ),
                       AutoSizeText(
-                        getTranslated(context, "select_own_language").toString(),
+                        getTranslated(context, "select_own_language")
+                            .toString(),
                         style: kNormalBlack(blackColor),
                       )
                     ],
@@ -119,8 +121,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
               height: 14,
             ),
             GestureDetector(
-              onTap: (){
-                _changeLanguage( Language(2, "🇵🇰", "اردو", "ur"));
+              onTap: () {
+                _changeLanguage(Language(2, "🇵🇰", "اردو", "ur"));
               },
               child: Card(
                 elevation: 1.0,
@@ -159,8 +161,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
               ),
             ),
             GestureDetector(
-              onTap: (){
-                _changeLanguage(Language(3, "🇸🇦", "اَلْعَرَبِيَّةُ‎", "ar"),);
+              onTap: () {
+                _changeLanguage(
+                  Language(3, "🇸🇦", "اَلْعَرَبِيَّةُ‎", "ar"),
+                );
               },
               child: Card(
                 elevation: 1.0,
@@ -199,8 +203,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
               ),
             ),
             GestureDetector(
-              onTap: (){
-                _changeLanguage(Language(1, "🇺🇸", "English", "en"),);
+              onTap: () {
+                _changeLanguage(
+                  Language(1, "🇺🇸", "English", "en"),
+                );
               },
               child: Card(
                 elevation: 1.0,

@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:estore/model/all_categories_model.dart';
 import 'package:estore/model/order_history_model.dart';
-import 'package:estore/model/product_model.dart';
 
 abstract class OrderHistoryState extends Equatable {}
 
@@ -16,7 +14,9 @@ class LoadingState extends OrderHistoryState {
 }
 
 class LoadedState extends OrderHistoryState {
-  LoadedState(this.order,);
+  LoadedState(
+    this.order,
+  );
 
   final List<OrderHistoryModel> order;
 

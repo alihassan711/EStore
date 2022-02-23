@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/strings.dart';
@@ -34,9 +35,11 @@ class _EditProfileState extends State<EditProfile> {
   var email;
   var password;
   bool _loader = false;
- // late bool emailVerified, phoneVerified;
+
+  // late bool emailVerified, phoneVerified;
   final ImagePicker _picker = ImagePicker();
   dynamic image;
+
   // final UserAccountProvider userAccountProvider =
   // Get.put(UserAccountProvider());
   int count = 0;
@@ -55,29 +58,26 @@ class _EditProfileState extends State<EditProfile> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-         // height: Get.height,
-         // width: Get.width,
+          // height: Get.height,
+          // width: Get.width,
           margin: screenMargin(),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: defaultMargin),
+                  padding: EdgeInsets.symmetric(vertical: defaultMargin),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
                         onTap: () => Navigator.pop(context),
                         child: const SizedBox(
-                          height: 15,
-                          width: 20,
-                          child: Icon(Icons.arrow_back_ios)
-                        ),
+                            height: 15,
+                            width: 20,
+                            child: Icon(Icons.arrow_back_ios)),
                       ),
-                      Text(
-                          getTranslated(context, "edit_profile").toString(),
-                        style: kBold(blackColor, 16.0)
-                      ),
+                      Text(getTranslated(context, "edit_profile").toString(),
+                          style: kBold(blackColor, 16.0)),
                       const SizedBox(),
                     ],
                   ),
@@ -89,40 +89,40 @@ class _EditProfileState extends State<EditProfile> {
                   onTap: () => showBottomSheet(),
                   child: image != ""
                       ? image.toString().startsWith("http")
-                      ? Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: kIconColorGreen.withOpacity(0.7),
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: NetworkImage(image),
-                              fit: BoxFit.cover)))
+                          ? Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: kIconColorGreen.withOpacity(0.7),
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: NetworkImage(image),
+                                      fit: BoxFit.cover)))
+                          : Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: kIconColorGreen.withOpacity(0.7),
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: FileImage(
+                                        File(
+                                          image!,
+                                        ),
+                                      ),
+                                      fit: BoxFit.cover)))
                       : Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: kIconColorGreen.withOpacity(0.7),
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: FileImage(
-                                File(
-                                  image!,
-                                ),
-                              ),
-                              fit: BoxFit.cover)))
-                      : Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                        color: kIconColorGreen.withOpacity(0.7),
-                        shape: BoxShape.circle),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Image.asset(ImagesPath.watch),
-                      //image.asset(ImagesPath.accountPicture),
-                    ),
-                  ),
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              color: kIconColorGreen.withOpacity(0.7),
+                              shape: BoxShape.circle),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Image.asset(ImagesPath.watch),
+                            //image.asset(ImagesPath.accountPicture),
+                          ),
+                        ),
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
@@ -131,20 +131,20 @@ class _EditProfileState extends State<EditProfile> {
                   decoration: InputDecoration(
                       hintText: widget.user.user!.email,
                       contentPadding:
-                      const EdgeInsets.only(left: 10, right: 10),
+                          const EdgeInsets.only(left: 10, right: 10),
                       focusedBorder: focusBorder(),
                       border: border(),
-                      hintStyle:  kSemiBold(blackColor),
+                      hintStyle: kSemiBold(blackColor),
                       errorBorder: errorBorder()),
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
                   controller: firstNameController,
-                  style:  kSemiBold(blackColor),
+                  style: kSemiBold(blackColor),
                   decoration: InputDecoration(
                       hintText: "First Name",
                       contentPadding:
-                      const EdgeInsets.only(left: 10, right: 10),
+                          const EdgeInsets.only(left: 10, right: 10),
                       focusedBorder: focusBorder(),
                       border: border(),
                       errorBorder: errorBorder()),
@@ -163,7 +163,7 @@ class _EditProfileState extends State<EditProfile> {
                   decoration: InputDecoration(
                       hintText: "Last Name",
                       contentPadding:
-                      const EdgeInsets.only(left: 10, right: 10),
+                          const EdgeInsets.only(left: 10, right: 10),
                       focusedBorder: focusBorder(),
                       border: border(),
                       errorBorder: errorBorder()),
@@ -182,7 +182,7 @@ class _EditProfileState extends State<EditProfile> {
                   decoration: InputDecoration(
                       hintText: "phone",
                       contentPadding:
-                      const EdgeInsets.only(left: 10, right: 10),
+                          const EdgeInsets.only(left: 10, right: 10),
                       focusedBorder: focusBorder(),
                       border: border(),
                       errorBorder: errorBorder()),
@@ -197,46 +197,49 @@ class _EditProfileState extends State<EditProfile> {
                 _loader
                     ? const Loader()
                     : GetStartedBtn(
-                  onPress: () async {
-                    if (image != "") {
-                      setState(() {
-                        _loader = true;
-                      });
-                      ApiServices.updateProfile(
-                        lastName: lastNameController.text,
-                        firstName: firstNameController.text,
-                        phone: phoneController.text,
-                        picture: image,
-                      );
-                      AuthServices.logInUser(email: email,password: password);
-                      print("email  =====> $email");
-                      print("password  =====> $password");
-                      // await FirebaseServices.updateUser(
-                      //     widget.user.data!.id!,
-                      //     firstNameController.text.toString(),
-                      //     lastNameController.text.toString(),
-                      //     image)
-                      //     .then((value) =>
-                      //     userAccountProvider.getUserInfo(
-                      //         userAccountProvider.userInfo.data!.uid!));
-                      // setState(() {
-                      //   widget.callback();
-                      // });
-                      Navigator.pop(context);
-                      setState(() {
-                        _loader = false;
-                      });
-                    } else {
-                      ApiServices.showSnackBar(context, "Pick an Image");
-                    }
-                  },
-                  width: MediaQuery.of(context).size.width,
-                  height: 45,
-                  text: getTranslated(context, 'save').toString() == null? "save":getTranslated(context, 'save').toString(),
-                  borderRadius: 5,
-                  textStyle: kBold(whiteColor, 14.0),
-                  btnColor: kIconColorGreen,
-                ),
+                        onPress: () async {
+                          if (image != "") {
+                            setState(() {
+                              _loader = true;
+                            });
+                            ApiServices.updateProfile(
+                              lastName: lastNameController.text,
+                              firstName: firstNameController.text,
+                              phone: phoneController.text,
+                              picture: image,
+                            );
+                            AuthServices.logInUser(
+                                email: email, password: password);
+                            print("email  =====> $email");
+                            print("password  =====> $password");
+                            // await FirebaseServices.updateUser(
+                            //     widget.user.data!.id!,
+                            //     firstNameController.text.toString(),
+                            //     lastNameController.text.toString(),
+                            //     image)
+                            //     .then((value) =>
+                            //     userAccountProvider.getUserInfo(
+                            //         userAccountProvider.userInfo.data!.uid!));
+                            // setState(() {
+                            //   widget.callback();
+                            // });
+                            Navigator.pop(context);
+                            setState(() {
+                              _loader = false;
+                            });
+                          } else {
+                            ApiServices.showSnackBar(context, "Pick an Image");
+                          }
+                        },
+                        width: MediaQuery.of(context).size.width,
+                        height: 45,
+                        text: getTranslated(context, 'save').toString() == null
+                            ? "save"
+                            : getTranslated(context, 'save').toString(),
+                        borderRadius: 5,
+                        textStyle: kBold(whiteColor, 14.0),
+                        btnColor: kIconColorGreen,
+                      ),
               ],
             ),
           ),
@@ -302,6 +305,7 @@ class _EditProfileState extends State<EditProfile> {
     // TODO: implement dispose
     super.dispose();
   }
+
   void getPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     email = prefs.getString('email');

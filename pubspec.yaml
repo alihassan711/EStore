@@ -61,29 +61,28 @@ dependencies:
   pull_to_refresh: ^2.0.0
   #flutter_native_splash:
   quiver: ^2.0.0+1
- # color: "#42a5f5"
- # image: assets/light.png
- # branding: assets/dart.png
- # branding_mode: bottom
- # color_dark: "#042a49"
- # image_dark: assets/dark.png
- # android_gravity: center
- # fullscreen: true
+  # color: "#42a5f5"
+  # image: assets/light.png
+  # branding: assets/dart.png
+  # branding_mode: bottom
+  # color_dark: "#042a49"
+  # image_dark: assets/dark.png
+  # android_gravity: center
+  # fullscreen: true
   flutter_svg: ^0.22.0
   firebase_messaging: ^11.2.0
- # location: ^4.3.0
- # geocoder: ^0.2.1
- # google_maps_flutter: ^2.1.1
- # intl: ^0.17.0
+  # location: ^4.3.0
+  # geocoder: ^0.2.1
+  # google_maps_flutter: ^2.1.1
+  # intl: ^0.17.0
   #flutter_login_facebook: ^1.2.0
   #flutter_facebook_auth: ^4.0.1
   font_awesome_flutter:
-  flutter_cart:
   connectivity:
   badges:
   flutter_local_notifications:
   fluttertoast:
-#get: ^4.6.1
+  #get: ^4.6.1
   flutter_localizations:
     sdk: flutter
 

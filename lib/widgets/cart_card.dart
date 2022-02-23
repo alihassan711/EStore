@@ -9,6 +9,7 @@ class CartCard extends StatelessWidget {
   Function()? onPress;
   Function()? onPressIncrease;
   Function()? onPressDecrease;
+
   CartCard(
       {this.titleText,
       this.orderProceedDate,
@@ -40,21 +41,21 @@ class CartCard extends StatelessWidget {
       // height: 240,
       width: MediaQuery.of(context).size.width,
       child: Column(
-         mainAxisAlignment: MainAxisAlignment.spaceEvenly,crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                height: 75,width: 70,
+                height: 75,
+                width: 70,
                 decoration: BoxDecoration(
                     color: blackColor,
                     shape: BoxShape.rectangle,
-                    borderRadius:
-                    const BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(4.0),
-                      bottomLeft:
-                      Radius.circular(4.0),
+                      bottomLeft: Radius.circular(4.0),
                     ),
                     image: DecorationImage(
                         image: ExactAssetImage(img!), fit: BoxFit.fill)),
@@ -87,8 +88,7 @@ class CartCard extends StatelessWidget {
                               height: 17,
                               width: 17,
                               decoration: const BoxDecoration(
-                                  color: kIconColorRed,
-                                  shape: BoxShape.circle),
+                                  color: kIconColorRed, shape: BoxShape.circle),
                               child: const Icon(
                                 Icons.remove,
                                 color: whiteColor,
@@ -114,7 +114,8 @@ class CartCard extends StatelessWidget {
                                   color: kIconColorGreen,
                                   shape: BoxShape.circle),
                               child: const Icon(
-                                Icons.add,size: 14,
+                                Icons.add,
+                                size: 14,
                                 color: whiteColor,
                               )),
                         ),

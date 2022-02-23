@@ -8,7 +8,8 @@ class Constants {
       "http://ec2-3-141-200-54.us-east-2.compute.amazonaws.com:5000/";
   static const urlPopulation =
       "https://datausa.io/api/data?drilldowns=Nation&measures=Population";
-  static const urlUniversities = "http://universities.hipolabs.com/search?country=United+States";
+  static const urlUniversities =
+      "http://universities.hipolabs.com/search?country=United+States";
   static const String email_RegExp =
       "^[a-zA-Z0-9.!#%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:/.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*.[a-zA-Z0-9]";
 
@@ -31,7 +32,8 @@ class Constants {
   static String productDescription = "Description";
   static String productImage = "Image";
   static String productPrice = "Price";
- // static String? slugNation = "SlugNation";
+
+  // static String? slugNation = "SlugNation";
 
   static String labelPass = "Password";
   static String hintPass = "Password";
@@ -44,4 +46,5 @@ class Constants {
   static String firstNameRequired = "First Name Required";
   static String validemailRequired = "Enter Valid Email";
 }
+
 const defaultMargin = 20.0;

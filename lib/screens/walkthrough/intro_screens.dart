@@ -1,6 +1,5 @@
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
-import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/screens/onboarding/sign_in_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -215,7 +214,7 @@ class IntroScreenState extends State<IntroScreen> {
     slides.add(
       Slide(
         title:
-        "A VERY Tasty Burger and pizza. You Only order the meal we bring it in a moment.",
+            "A VERY Tasty Burger and pizza. You Only order the meal we bring it in a moment.",
         maxLineTitle: 2,
         styleTitle: const TextStyle(
           color: Colors.white,
@@ -224,7 +223,7 @@ class IntroScreenState extends State<IntroScreen> {
           fontFamily: 'RobotoMono',
         ),
         description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,",
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,",
         styleDescription: const TextStyle(
           color: Color(0xff7FFFD4),
           fontSize: 20.0,
@@ -244,7 +243,7 @@ class IntroScreenState extends State<IntroScreen> {
     slides.add(
       Slide(
         title:
-        "A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE",
+            "A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE",
         maxLineTitle: 2,
         styleTitle: const TextStyle(
           color: Colors.white,
@@ -253,7 +252,7 @@ class IntroScreenState extends State<IntroScreen> {
           fontFamily: 'RobotoMono',
         ),
         description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,",
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,",
         styleDescription: const TextStyle(
           color: Color(0xffFFDAB9),
           fontSize: 20.0,
@@ -276,7 +275,7 @@ class IntroScreenState extends State<IntroScreen> {
     // Do what you want
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) =>  SignInScreen()),
+      MaterialPageRoute(builder: (context) => SignInScreen()),
     );
   }
 
@@ -311,8 +310,7 @@ class IntroScreenState extends State<IntroScreen> {
   ButtonStyle myButtonStyle() {
     return ButtonStyle(
       shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
-      backgroundColor:
-          MaterialStateProperty.all(kIconColorGreen),
+      backgroundColor: MaterialStateProperty.all(kIconColorGreen),
       overlayColor: MaterialStateProperty.all<Color>(const Color(0x33FFA8B0)),
     );
   }
