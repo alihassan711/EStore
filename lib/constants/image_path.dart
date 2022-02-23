@@ -25,6 +25,7 @@ class ImagesPath {
   static String introCarttIcon = 'assets/icons/intro_cart_icon.png';
   static String favourite = 'assets/icons/favouritepng.png';
   static String home = 'assets/icons/homeicon.png';
+  static String placeHolder = 'assets/icons/placeholder.png';
   static String message = 'assets/icons/msgpng.png';
   static String profile = 'assets/icons/profilepng.png';
   static String cart = 'assets/icons/cartpng.png';

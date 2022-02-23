@@ -9,7 +9,7 @@ class HelpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: whiteColor,
       appBar: AppBar(
         title: AutoSizeText(
             getTranslated(context, "help").toString(),
@@ -24,7 +24,7 @@ class HelpScreen extends StatelessWidget {
         children: [
           ListTile(
             title:
-                AutoSizeText(getTranslated(context, "help_centre").toString()),
+                AutoSizeText(getTranslated(context, "help_centre",).toString(),),
             leading: const Icon(Icons.help_outline),
           ),
           ListTile(

@@ -118,7 +118,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<CategoryCubit>(context).getCategories();
-    return Scaffold(
+    return Scaffold(backgroundColor: whiteColor,
       body: globalNotificationModel.length == 0
           ? Center(
           child: Column(

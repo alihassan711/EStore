@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "122212942455",
-    "project_id": "estore-5b850",
-    "storage_bucket": "estore-5b850.appspot.com"
+    "project_number": "313596919697",
+    "project_id": "allergy-9f5e8",
+    "storage_bucket": "allergy-9f5e8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:122212942455:android:d1b14b2de33dc1d3e7bc72",
+        "mobilesdk_app_id": "1:313596919697:android:3e0a05f2870fd91d34a430",
         "android_client_info": {
-          "package_name": "com.example.estore"
+          "package_name": "com.alburraq.allergy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "122212942455-2teahaci3u5dts49hpm6d8gi3j3kk6nf.apps.googleusercontent.com",
+          "client_id": "313596919697-vqcek8drv9ppooe5heu8kupl0sl4i4v8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.estore",
+            "package_name": "com.alburraq.allergy",
             "certificate_hash": "723ef48556ea24ab6e15b19ef07b12a9d020b432"
           }
         },
         {
-          "client_id": "122212942455-rf99gqi72896r665lbsbh3q59t60ck0u.apps.googleusercontent.com",
+          "client_id": "313596919697-f11c4dc2ckv263jaeqv2omvm9cec1ur6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAMI022-7pnIFYLgcJziQDO2PrU8fneaOs"
+          "current_key": "AIzaSyBjIZ1fEI72cUQ79q4yPed9G4iU8PF0V8Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "122212942455-rf99gqi72896r665lbsbh3q59t60ck0u.apps.googleusercontent.com",
+              "client_id": "313596919697-f11c4dc2ckv263jaeqv2omvm9cec1ur6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

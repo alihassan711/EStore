@@ -27,6 +27,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   bool? _passwordVisible = false;
+  bool? loading = false;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -35,6 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
   }
+
   Future<void> initConnectivity() async {
     ConnectivityResult result = ConnectivityResult.none;
     // Platform messages may fail, so we use a try/catch PlatformException.
@@ -65,6 +67,9 @@ class _SignInScreenState extends State<SignInScreen> {
     initConnectivity();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -72,7 +77,8 @@ class _SignInScreenState extends State<SignInScreen> {
     _connectivitySubscription.cancel();
     super.dispose();
   }
- // final GetXNetworkManager _networkManager = Get.find<GetXNetworkManager>();
+
+  // final GetXNetworkManager _networkManager = Get.find<GetXNetworkManager>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,9 +121,9 @@ class _SignInScreenState extends State<SignInScreen> {
         ],
       ),
       body:
-      // _networkManager.connectionType == 0 ? const NoInternetWidget()
-      //     :
-      Form(
+          // _networkManager.connectionType == 0 ? const NoInternetWidget()
+          //     :
+          Form(
         key: _key,
         child: ListView(
           children: <Widget>[
@@ -189,7 +195,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "email").toString(),
                   prefixIcon: const Icon(
-                    Icons.email, size:20,
+                    Icons.email,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   //border: InputBorder.none,
@@ -223,7 +230,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "password").toString(),
                   prefixIcon: const Icon(
-                    Icons.lock, size:20,
+                    Icons.lock,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   // border: InputBorder.none,
@@ -234,7 +242,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       _passwordVisible!
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      size:20,
+                      size: 20,
                       color: blackColor,
                     ),
                     onPressed: () {
@@ -249,64 +257,71 @@ class _SignInScreenState extends State<SignInScreen> {
             const SizedBox(
               height: 20,
             ),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Color.fromRGBO(32, 64, 81, 1.0),
-                  ),
-                  child: TextButton(
-                    child: Text(
-                      getTranslated(context, "sign_in").toString(),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18.0),
-                    ),
-                    onPressed: () async {
-                      if (_key.currentState!.validate()) {
-                        SharedPreferences _pref =
-                            await SharedPreferences.getInstance();
-                        // Navigator.pushReplacement(context,  MaterialPageRoute(
-                        //     builder: (_) => BlocProvider(
-                        //         create: (BuildContext context) =>
-                        //             CategoryCubit(repository: _repository),
-                        //         child:  MainScreen(index: 0,
-                        //           // form: args.toString(),
-                        //         ))));
-                        print(email.text);
-                        print(password.text);
-                        Map<String, dynamic>? resp =
-                            await AuthServices.logInUser(
-                          email: email.text,
-                          password: password.text,
-                        ).then((value) {
-                          if (value) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => BlocProvider(
-                                        create: (BuildContext context) =>
-                                            CategoryCubit(
-                                                repository: _repository),
-                                        child: MainScreen(
-                                          index: 0,
-                                          // form: args.toString(),
-                                        ))));
-                            _pref.setString("email", email.text);
-                            _pref.setString("password", password.text);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(backgroundColor: kIconColorRed,
-                                    content:
-                                        Text("Invalid email or password",style: TextStyle(color: whiteColor),)));
+            loading == false
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color.fromRGBO(32, 64, 81, 1.0),
+                      ),
+                      child: TextButton(
+                        child: Text(
+                          getTranslated(context, "sign_in").toString(),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18.0),
+                        ),
+                        onPressed: () async {
+                          if (_key.currentState!.validate()) {
+                            SharedPreferences _pref =
+                                await SharedPreferences.getInstance();
+                            setState(() {
+                              loading = true;
+                            });
+                            print(email.text);
+                            print(password.text);
+                            Map<String, dynamic>? resp =
+                                await AuthServices.logInUser(
+                              email: email.text,
+                              password: password.text,
+                            ).then((value) {
+                              if (value) {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => BlocProvider(
+                                            create: (BuildContext context) =>
+                                                CategoryCubit(
+                                                    repository: _repository),
+                                            child: MainScreen(
+                                              index: 0,
+                                              // form: args.toString(),
+                                            ))));
+                                _pref.setString("email", email.text);
+                                _pref.setString("password", password.text);
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                        backgroundColor: kIconColorRed,
+                                        content: Text(
+                                          "Invalid email or password",
+                                          style: TextStyle(color: whiteColor),
+                                        )));
+                                setState(() {
+                                  loading = false;
+                                });
+                              }
+                            });
                           }
-                        });
-                      }
-                    },
-                  ),
-                )),
+                          setState(() {
+                            loading = false;
+                          });
+                        },
+                      ),
+                    ))
+                : Center(child: CircularProgressIndicator()),
             const SizedBox(height: 5),
             Center(
               child: Container(
@@ -322,22 +337,24 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
             ),
-           Center(child:  GestureDetector(
-             onTap: () {
-               Navigator.push(
-                   context,
-                   MaterialPageRoute(builder: (_) =>  SignUpScreen()
-                     // form: args.toString(),
-                   ));
-             },
-             child: AutoSizeText(
-               getTranslated(context, "create_newAccount").toString(),
-               style: const TextStyle(
-                   color: Colors.black,
-                   fontSize: 12,
-                   fontWeight: FontWeight.normal),
-             ),
-           ),),
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => SignUpScreen()
+                          // form: args.toString(),
+                          ));
+                },
+                child: AutoSizeText(
+                  getTranslated(context, "create_newAccount").toString(),
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -39,8 +39,8 @@ class NotificationCard extends StatelessWidget {
             const SizedBox(width: 10),
              Expanded(
               child: ListTile(
-                title: AutoSizeText(orderId == null ? "message":orderId!.toString()),
-                subtitle: AutoSizeText(created_date!.toString() == null ? "message":created_date!.toString()),
+                title: AutoSizeText(orderId == null ? "User Id":"User Id ${orderId!.toString()}"),
+                subtitle: AutoSizeText(created_date!.toString() == null ? "message":"Created Date ${created_date!.toString()}"),
               ),
             ),
             //const Icon(Icons.arrow_forward_ios, color: Colors.blue),

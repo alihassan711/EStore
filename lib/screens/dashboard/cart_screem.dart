@@ -27,7 +27,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: whiteColor,
         body: cart.cartItem.isEmpty
             ? Center(
             child: Column(

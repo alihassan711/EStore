@@ -311,7 +311,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return Material(
       child: DefaultTabController(
         length: 2,
-        child: Scaffold(
+        child: Scaffold(backgroundColor: whiteColor,
           appBar: AppBar(
             backgroundColor: whiteColor,
             elevation: 0.0,

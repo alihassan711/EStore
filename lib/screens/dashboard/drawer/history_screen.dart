@@ -31,7 +31,7 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
   Widget build(BuildContext context) {
    BlocProvider.of<OrderHistoryCubit>(context).getOrderHistory();
    ApiServices _apiServices = ApiServices();
-    return Scaffold(
+    return Scaffold(backgroundColor: whiteColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,

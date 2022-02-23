@@ -13,7 +13,7 @@ const kIconColorWhite = Color(0xffc7c7c7);
 const kDeepBlue = Color(0xff2224BB);
 const kBlackLight = Color(0xff272528);
 const kGrey = Color(0xffc5c5c5);
-
+const borderColor = Color(0xffB9B9B9);
 const Color facebookColor = Color(0xff39579A);
 const Color twitterColor = Color(0xff00ABEA);
 const Color instaColor = Color(0xffBE2289);

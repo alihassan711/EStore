@@ -24,7 +24,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: whiteColor,
       appBar: AppBar(
         title: AutoSizeText(
             getTranslated(context, "languages").toString(),

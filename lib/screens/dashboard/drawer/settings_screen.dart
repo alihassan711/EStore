@@ -27,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Uint8List? webImage;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: whiteColor,
       appBar: AppBar(
         title: AutoSizeText(
           getTranslated(context, "settings").toString(),
@@ -51,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
-                    getTranslated(context, "name").toString(),
+                          globalUserData.userProfile!.firstName.toString() == null? "name" :globalUserData.userProfile!.firstName.toString(),
                           style: kBold(blackColor, 16.0),
                         ),
                         const SizedBox(

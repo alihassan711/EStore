@@ -496,9 +496,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //bool? _passwordVisible = false;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   ApiServices _repository = ApiServices();
+  bool? loading = false;
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -611,7 +620,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "first_name").toString(),
                   prefixIcon: const Icon(
-                    Icons.person,size: 20,
+                    Icons.person,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   //border: InputBorder.none,
@@ -643,7 +653,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "last_name").toString(),
                   prefixIcon: const Icon(
-                    Icons.person,size: 20,
+                    Icons.person,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   // border: InputBorder.none,
@@ -658,7 +669,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: TextFormField(
-                keyboardType:TextInputType.phone,
+                keyboardType: TextInputType.phone,
                 controller: phone,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
@@ -677,7 +688,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "phone").toString(),
                   prefixIcon: const Icon(
-                    Icons.phone,size: 20,
+                    Icons.phone,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   //border: InputBorder.none,
@@ -692,7 +704,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: TextFormField(
-                keyboardType:TextInputType.text,
+                keyboardType: TextInputType.text,
                 controller: address,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
@@ -708,7 +720,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "address").toString(),
                   prefixIcon: const Icon(
-                    Icons.account_balance_rounded,size: 20,
+                    Icons.account_balance_rounded,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   //border: InputBorder.none,
@@ -723,7 +736,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: TextFormField(
-                keyboardType:TextInputType.emailAddress,
+                keyboardType: TextInputType.emailAddress,
                 controller: email,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
@@ -742,7 +755,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "email").toString(),
                   prefixIcon: const Icon(
-                    Icons.email,size: 20,
+                    Icons.email,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   //border: InputBorder.none,
@@ -776,7 +790,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   errorBorder: errorBorder(),
                   hintText: getTranslated(context, "password").toString(),
                   prefixIcon: const Icon(
-                    Icons.lock,size: 20,
+                    Icons.lock,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   // border: InputBorder.none,
@@ -787,7 +802,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       _passwordVisible!
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      size:20,
+                      size: 20,
                       color: blackColor,
                     ),
                     onPressed: () {
@@ -825,7 +840,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   hintText:
                       getTranslated(context, "confirm_password").toString(),
                   prefixIcon: const Icon(
-                    Icons.lock,size: 20,
+                    Icons.lock,
+                    size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
                   // border: InputBorder.none,
@@ -836,7 +852,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       _passwordVisiblec!
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      size:20,
+                      size: 20,
                       color: blackColor,
                     ),
                     onPressed: () {
@@ -851,64 +867,75 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(
               height: 20,
             ),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Color.fromRGBO(32, 64, 81, 1.0),
-                  ),
-                  child: TextButton(
-                    child: Text(
-                      getTranslated(context, "register").toString(),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18.0),
-                    ),
-                    onPressed: () async {
-                      if (_key.currentState!.validate()) {
-                        await AuthServices.registerUser(
-                          email: email.text,
-                          password: password.text,
-                          firstName: firstName.text,
-                          lastName: lastName.text,
-                          phone: phone.text,
-                          address:address.text
-                        ).then((value) {
-                          if (value) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => SignInScreen(
-                                        // form: args.toString(),
+            loading == false
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color.fromRGBO(32, 64, 81, 1.0),
+                      ),
+                      child: TextButton(
+                        child: Text(
+                          getTranslated(context, "register").toString(),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18.0),
+                        ),
+                        onPressed: () async {
+                          if (_key.currentState!.validate()) {
+                            setState(() {
+                              loading = true;
+                            });
+                            await AuthServices.registerUser(
+                                    email: email.text,
+                                    password: password.text,
+                                    firstName: firstName.text,
+                                    lastName: lastName.text,
+                                    phone: phone.text,
+                                    address: address.text)
+                                .then((value) {
+                              if (value) {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => SignInScreen(
+                                            // form: args.toString(),
+                                            )));
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                        backgroundColor: kIconColorRed,
+                                        content: Text(
+                                          "Failed to register",
+                                          style: TextStyle(color: whiteColor),
                                         )));
-                          } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                                    backgroundColor: kIconColorRed,
-                                    content: Text(
-                                      "Failed to register",
-                                      style: TextStyle(color: whiteColor),
-                                    )));
+                                setState(() {
+                                  loading = false;
+                                });
+                              }
+                            });
+                            setState(() {
+                              //_isPost = true;
+                            });
+                            firstName.clear();
+                            lastName.clear();
+                            phone.clear();
+                            email.clear();
+                            password.clear();
+                            // confirmPassword.clear();
+                            setState(() {
+                              //  _isPost = false;
+                            });
                           }
-                        });
-                        setState(() {
-                          //_isPost = true;
-                        });
-                        firstName.clear();
-                        lastName.clear();
-                        phone.clear();
-                        email.clear();
-                        password.clear();
-                        // confirmPassword.clear();
-                        setState(() {
-                          //  _isPost = false;
-                        });
-                      }
-                    },
-                  ),
-                )),
+                          setState(() {
+                            loading = false;
+                          });
+                        },
+                      ),
+                    ))
+                : Center(child: CircularProgressIndicator()),
             const SizedBox(
               height: 20,
             ),
