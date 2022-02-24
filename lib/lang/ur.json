@@ -192,5 +192,6 @@
   "your_cart_empty": "آپ کی ٹوکری خالی ہے",
   "required_address": "مطلوبہ پتہ",
   "no_fav_found": "کوئی پسندیدہ پروڈکٹ نہیں",
-  "no_noti": "آپ کو کوئی اطلاع نہیں ہے۔"
+  "no_noti": "آپ کو کوئی اطلاع نہیں ہے۔",
+  "confirm_password_notmatch": "Confirm Password Not Match"
 }

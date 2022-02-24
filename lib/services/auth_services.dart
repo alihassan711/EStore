@@ -70,6 +70,28 @@ class AuthServices {
     }
   }
 
+  static Future<bool> sendNotifications({order_id, status}) async {
+    final response = await http.post(Uri.parse(Urls.userLogIn),
+        body: json.encode({
+          "order_id": order_id,
+          "status": status,
+        }),
+        headers: _setHeaderss());
+    print(response.body);
+    if (response.statusCode == 200) {
+      UserLogInModel userModel =
+      UserLogInModel.fromJson(json.decode(response.body));
+      globalUserData = userModel;
+      SharedPreferences _pref = await SharedPreferences.getInstance();
+      _pref.setString("token", userModel.user!.token.toString());
+      await getUserProfile(userModel.user!.token.toString());
+      return true;
+    } else {
+      print("User LogIn status  ===> ${response.statusCode}");
+      return false;
+    }
+  }
+
   static Future<UserLogInModel> getUserProfile(String userToken) async {
     UserLogInModel userModel = UserLogInModel();
     final response = await http.get(

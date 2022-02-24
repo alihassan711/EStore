@@ -243,6 +243,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                     builder: (_) => SignInScreen(
                                       // form: args.toString(),
                                     )));
+                            apiServices.successToast("check your email");
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(

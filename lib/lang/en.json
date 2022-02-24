@@ -109,6 +109,7 @@
   "log_out": "Sign Out",
   "required_address": "Address Required",
   "no_fav_found": "No favorite items found",
-  "no_noti": "You have no notification"
+  "no_noti": "You have no notification",
+  "confirm_password_notmatch": "Confirm Password Not Match"
 }
 
