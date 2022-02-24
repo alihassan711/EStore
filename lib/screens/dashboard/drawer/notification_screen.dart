@@ -85,7 +85,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           children: [
             Expanded(child: SizedBox()),
             Expanded(
-
               child: NoNotificationContainer(
                 onPress: () {
                   Navigator.pushReplacement(

@@ -80,7 +80,7 @@ class HistoryCard extends StatelessWidget {
                         height: 10,
                       ),
                       AutoSizeText(
-                        "Total Bill: \$${order.totalAmount}",
+                        "${getTranslated(context, "order_total").toString()} \$${order.totalAmount}",
                         style: kBold(kTitleColorBlack, 14.0),
                       ),
                     ],
@@ -96,7 +96,7 @@ class HistoryCard extends StatelessWidget {
                                 .toString(),
                             style: kNormalBlack(blackColor),
                           ),
-                          Text(": ${getStatus(order.status)}"),
+                          Text(": ${getStatus(order.status,context)}"),
                         ],
                       ),
                       const SizedBox(
@@ -105,7 +105,7 @@ class HistoryCard extends StatelessWidget {
                       Row(
 
                         children: [
-                          Text("Date: "),
+                          Text(getTranslated(context, "date").toString()),
                           AutoSizeText(
                             order.updatedAt!.split(" ")[0],
                           ),
@@ -125,20 +125,20 @@ class HistoryCard extends StatelessWidget {
     );
   }
 
-  String getStatus(orderStatus) {
+  String getStatus(orderStatus,context) {
     switch (orderStatus) {
       case 1:
-        return "Pending";
+        return getTranslated(context, "Pending").toString();
       case 2:
-        return "Accepted";
+        return getTranslated(context, "Accepted").toString();
       case 3:
-        return "Rejected";
+        return getTranslated(context, "Rejected").toString();
       case 4:
-        return "On the Way";
+        return getTranslated(context, "On the Way").toString();
       case 5:
-        return "Delivered";
+        return getTranslated(context, "Delivered").toString();
       default:
-        return "Pending";
+        return getTranslated(context, "Pending").toString();
     }
   }
 }

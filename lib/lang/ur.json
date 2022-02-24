@@ -194,5 +194,14 @@
   "no_fav_found": "کوئی پسندیدہ پروڈکٹ نہیں",
   "no_noti": "آپ کو کوئی اطلاع نہیں ہے۔",
   "confirm_password_notmatch": "تصدیق کریں کہ پاس ورڈ میچ نہیں ہے",
-  "change_password": "پاس ورڈ تبدیل کریں"
+  "change_password": "پاس ورڈ تبدیل کریں",
+  "date": "تاريخ",
+  "unit_price": "اکائی قیمت",
+  "total_price": "کل قیمت",
+  "delivered": "پہنچایا",
+  "On_the_Way": "راستے میں",
+  "rejected": "مسترد",
+  "accepted": "قبول کر لیا",
+  "pending": "زیر التواء",
+  "cash": "نقد"
 }

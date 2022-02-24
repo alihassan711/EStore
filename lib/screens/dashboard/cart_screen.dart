@@ -149,11 +149,11 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                   Text(cart.basketItems[index].name.toString()),
                               //CircleAvatar(//  backgroundImage: NetworkImage(asyncSnapshot.data[index].picture + asyncSnapshot.data[index].index.toString() + ".jpg"),),
                               subtitle: Text(
-                                "unit price: \$" +
+                                "${getTranslated(context, "unit_price").toString()}: \$" +
                                     cart.basketItems[index].breakingPrices![0]
                                         .price
                                         .toString() +
-                                    "\ntotal price: \$" +
+                                    "\n${getTranslated(context, "total_price").toString()}: \$" +
                                     (cart.basketItems[index].breakingPrices![0]
                                                 .price! *
                                             cart.basketItems[index].qty)

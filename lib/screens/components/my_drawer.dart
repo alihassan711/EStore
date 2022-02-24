@@ -39,7 +39,6 @@ class _MyDrawerState extends State<MyDrawer> {
   void initState() {
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -139,15 +138,13 @@ class _MyDrawerState extends State<MyDrawer> {
               leading: const Icon(Icons.track_changes),
               onTap: () async {
                 setState(() {
-                  _isdark = !_isdark!;
+                  _isdark = !_isdark;
                 });
-                print(_isdark);
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-
-                prefs.setString("themeMode", _isdark.toString());
+              //  print(_isdark);
+              //  SharedPreferences prefs = await SharedPreferences.getInstance();
+               // prefs.setString("themeMode", _isdark.toString());
                 MyApp.of(context)!.changeTheme(
-                    _isdark  ? ThemeMode.dark : ThemeMode.light);
-
+                    _isdark  ? ThemeMode.light : ThemeMode.dark);
               }),
           ListTile(
             onTap: () async {

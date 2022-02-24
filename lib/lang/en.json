@@ -112,7 +112,16 @@
   "no_noti": "You have no notification",
   "confirm_password_notmatch": "Confirm Password Not Match",
   "change_password": "Change Password",
-  "old_password": "Old Password"
+  "old_password": "Old Password",
+  "date": "Date",
+  "unit_price": "unit price",
+  "total_price": "total price",
+  "delivered": "Delivered",
+  "On_the_Way": "On the Way",
+  "rejected": "Rejected",
+  "accepted": "Accepted",
+  "pending": "Pending",
+  "cash": "Cash"
 
 
 }

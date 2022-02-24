@@ -7,6 +7,8 @@ import 'package:estore/model/user_log_in_model.dart';
 class Urls {
   static const String baseUrl =
       "https://phpstack-508481-2092187.cloudwaysapps.com";
+  static const String imageBaseUrl =
+      "https://phpstack-508481-2092187.cloudwaysapps.com/";
   static const String allProducts = "$baseUrl/api/all_products";
   static const String addOrder = "$baseUrl/api/shopcheckout";
   static const String allCategories = "$baseUrl/api/all_categories";

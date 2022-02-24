@@ -112,6 +112,15 @@
   "no_noti": "ليس لديك إشعار",
   "change_password": "تغيير كلمة المرور",
   "confirm_password_notmatch": "تأكيد كلمة المرور غير مطابق",
-  "old_password": "كلمة المرور القديمة"
+  "old_password": "كلمة المرور القديمة",
+  "date": "تاريخ",
+  "unit_price": "سعر الوحده",
+  "total_price": "السعر الكلي",
+  "delivered": "تم التوصيل",
+  "On_the_Way": "فى الطريق",
+  "rejected": "مرفوض",
+  "accepted": "وافقت",
+  "pending": "ريثما",
+  "cash": "السيولة النقدية"
 }
 

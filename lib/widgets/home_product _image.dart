@@ -8,13 +8,12 @@ class HomeCategoriesImage extends StatelessWidget {
 
   HomeCategoriesImage({Key? key, required this.img}) : super(key: key);
 
-  // final DBInsert _dbInsert = DBInsert();
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: AspectRatio(
-        aspectRatio: 1.2,
+        aspectRatio: 1.0,
         child: Container(
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,

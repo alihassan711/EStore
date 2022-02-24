@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/bloc/category/category_state.dart';
 import 'package:estore/constants/color.dart';
+import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/model/all_categories_model.dart';
 import 'package:estore/screens/components/my_carousel.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/widgets/shoping_cart.dart';
 import 'package:estore/screens/components/my_drawer.dart';
+import '../../utils/urls.dart';
 import '../../widgets/home_product _image.dart';
 import '../../widgets/iconbtn.dart';
 import '../components/my_drawer.dart';
@@ -134,8 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                                 image: NetworkImage(
-                                                    users[index].banner ??
-                                                        ""))),
+                                                    Urls.imageBaseUrl+users[index].banner.toString()
+                                                        ))),
                                       ),
                                       const SizedBox(
                                         width: 10,
@@ -155,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             users[index].products!.isEmpty
                                 ? SizedBox()
                                 : SizedBox(
-                                    height: 150,
+                                    height: 120,
                                     child: ListView.builder(
                                         //inner builder
                                         scrollDirection: Axis.horizontal,
