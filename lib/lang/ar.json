@@ -109,6 +109,9 @@
   "log_out": "خروج",
   "required_address": "العنوان المطلوب",
   "no_fav_found": "لم يتم العثور على منتج مفضل",
-  "no_noti": "ليس لديك إشعار"
+  "no_noti": "ليس لديك إشعار",
+  "change_password": "تغيير كلمة المرور",
+  "confirm_password_notmatch": "تأكيد كلمة المرور غير مطابق",
+  "old_password": "كلمة المرور القديمة"
 }
 

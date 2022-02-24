@@ -193,5 +193,6 @@
   "required_address": "مطلوبہ پتہ",
   "no_fav_found": "کوئی پسندیدہ پروڈکٹ نہیں",
   "no_noti": "آپ کو کوئی اطلاع نہیں ہے۔",
-  "confirm_password_notmatch": "Confirm Password Not Match"
+  "confirm_password_notmatch": "تصدیق کریں کہ پاس ورڈ میچ نہیں ہے",
+  "change_password": "پاس ورڈ تبدیل کریں"
 }

@@ -47,6 +47,23 @@ class AuthServices {
     }
   }
 
+  static Future<bool> changePassword({old_password,password}) async {
+     final response = await http.post(Uri.parse(Urls.changePassword),
+        body: json.encode({
+          "old_password": old_password,
+          "password": password,
+          "password": password,
+        }),
+        headers: _setHeaders());
+    print(response.body);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print("reset password status  ===> ${response.statusCode}");
+      return false;
+    }
+  }
+
   static Future<bool> logInUser({email, password}) async {
     final response = await http.post(Uri.parse(Urls.userLogIn),
         body: json.encode({

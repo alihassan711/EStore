@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../utils/urls.dart';
+import '../../onboarding/change_password.dart';
 import '../../onboarding/edit_profile.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -279,6 +280,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               style: kBold(blackColor, 13.0),
                             ),
                           ],
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>  ChangePassword()));
+                          },
+                          child: Row(
+                            children: [
+                              const Icon(Icons.lock),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              AutoSizeText(
+                                getTranslated(context, "change_password").toString(),
+                                style: kBold(blackColor, 13.0),
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 12,

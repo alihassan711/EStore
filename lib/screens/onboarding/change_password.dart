@@ -1,35 +1,31 @@
 import 'dart:async';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:estore/model/language.dart';
-import 'package:estore/screens/dashboard/main_page.dart';
 import 'package:estore/screens/onboarding/sign_in_screen.dart';
-import 'package:estore/screens/onboarding/sign_up_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../main.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
+class ChangePassword extends StatefulWidget {
   @override
-  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+  _ChangePasswordState createState() => _ChangePasswordState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
- // bool? _passwordVisible = false;
+class _ChangePasswordState extends State<ChangePassword> {
+   bool? _passwordVisible = false;
+   bool? _passwordVisiblec = false;
   bool? loading = false;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  TextEditingController email = TextEditingController();
- // TextEditingController password = TextEditingController();
+ // TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+   TextEditingController confirmPassword = TextEditingController();
+   TextEditingController oldPassword = TextEditingController();
   ApiServices _repository = ApiServices();
 
   void _changeLanguage(Language language) async {
@@ -156,7 +152,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           height: 20,
                         ),
                         Text(
-                          getTranslated(context, "shop_here").toString(),
+                          getTranslated(context, "change_password").toString(),
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
@@ -178,35 +174,151 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                controller: email,
+                obscureText: !_passwordVisiblec!,
+                controller: oldPassword,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
                 validator: (val) {
                   if (val!.isEmpty) {
-                    return getTranslated(context, "required_email");
-                  }
-                  if (!RegExp(email_RegExp).hasMatch(val)) {
-                    return getTranslated(context, "valid_email");
+                    return getTranslated(context, "required_password");
                   }
                   return null;
                 },
                 style: kNormalBlack(kBlackLight),
                 decoration: InputDecoration(
                   hintStyle: kNormalBlack(kBlackLight),
-                  enabledBorder: border(),
                   focusedBorder: focusBorder(),
                   border: border(),
+                  enabledBorder: border(),
                   errorBorder: errorBorder(),
-                  hintText: getTranslated(context, "email").toString(),
+                  hintText: getTranslated(context, "old_password").toString(),
                   prefixIcon: const Icon(
-                    Icons.email,
+                    Icons.lock,
                     size: 20,
                     color: Color.fromRGBO(32, 64, 81, 1.0),
                   ),
-                  //border: InputBorder.none,
+                  // border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 25.0, vertical: 13.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisiblec!
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      size: 20,
+                      color: blackColor,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisiblec = !_passwordVisiblec!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                obscureText: !_passwordVisible!,
+                controller: password,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "required_password");
+                  }
+                  if (val.length < 5) {
+                    return getTranslated(context, "valid_password");
+                  }
+                  return null;
+                },
+                style: kNormalBlack(kBlackLight),
+                decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  enabledBorder: border(),
+                  errorBorder: errorBorder(),
+                  hintText: getTranslated(context, "password").toString(),
+                  prefixIcon: const Icon(
+                    Icons.lock,
+                    size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  // border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisible!
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      size: 20,
+                      color: blackColor,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisible = !_passwordVisible!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextFormField(
+                obscureText: !_passwordVisible!,
+                controller: confirmPassword,
+                onChanged: (String value) {},
+                cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return getTranslated(context, "required_confirm_password");
+                  }
+                  if (password.text != confirmPassword.text) {
+                    return getTranslated(context, "confirm_password_notmatch");
+                  }
+                  return null;
+                },
+                style: kNormalBlack(kBlackLight),
+                decoration: InputDecoration(
+                  hintStyle: kNormalBlack(kBlackLight),
+                  focusedBorder: focusBorder(),
+                  border: border(),
+                  enabledBorder: border(),
+                  errorBorder: errorBorder(),
+                  hintText:
+                  getTranslated(context, "confirm_password").toString(),
+                  prefixIcon: const Icon(
+                    Icons.lock,
+                    size: 20,
+                    color: Color.fromRGBO(32, 64, 81, 1.0),
+                  ),
+                  // border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 13.0),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisible!
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      size: 20,
+                      color: blackColor,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisible = !_passwordVisible!;
+                      });
+                    },
+                  ),
                 ),
               ),
             ),
@@ -223,7 +335,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                   child: TextButton(
                     child: Text(
-                      getTranslated(context, "sign_in").toString(),
+                      getTranslated(context, "ok").toString(),
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
@@ -234,8 +346,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         setState(() {
                           loading = true;
                         });
-                        await AuthServices.resetPassword(
-                          email: email.text,
+                        await AuthServices.changePassword(
+                          old_password: oldPassword.text,
+                          password: password.text,
                         ).then((value) {
                           if (value) {
                             Navigator.pushReplacement(
@@ -244,13 +357,22 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                     builder: (_) => SignInScreen(
                                       // form: args.toString(),
                                     )));
-                            apiServices.successToast("check your email");
+                            apiServices.successToast("Password Changed Successfully");
+                            SharedPreferences.getInstance().then((pref) {
+                              pref.clear();
+                              pref.remove('email');
+                              pref.remove('password');
+                              pref.remove('token');
+                              pref.remove('firstName');
+                              pref.remove('phone');
+                              pref.remove('lastName');
+                            });
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                                 backgroundColor: kIconColorRed,
                                 content: Text(
-                                  "Invalid email",
+                                  "Invalid email or password",
                                   style: TextStyle(color: whiteColor),
                                 )));
                             setState(() {

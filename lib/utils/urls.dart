@@ -17,6 +17,7 @@ class Urls {
       "$baseUrl/api/category/Breakfast Muffins/2";
   static const String userRegister = "$baseUrl/api/customer/register";
   static const String userLogIn = "$baseUrl/api/login";
+  static const String changePassword = "$baseUrl/api/change-password";
   static const String favourites = "$baseUrl/api/favourites";
   static const String userProfile = "$baseUrl/api/userprofile";
   static const String removeFavourites = "$baseUrl/api/removefavourite";

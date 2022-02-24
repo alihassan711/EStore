@@ -87,7 +87,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ],
               iconTheme: const IconThemeData(color: blackColor),
             ),
-            drawer: MyDrawer(),
+
             body:
                 //TabBarView(
                 //children: [
@@ -102,7 +102,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     children: [
                       Container(
                         height: MediaQuery.of(context).size.height * 0.35,
-                        // width: 300,
                         child: Center(
                           child: Container(
                             height: MediaQuery.of(context).size.height,
@@ -140,8 +139,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               shape: BoxShape.circle,
                               // borderRadius: BorderRadius.circular(5),
                             ),
-                            height: 25,
-                            width: 25,
+                            height: 35,
+                            width: 35,
                             child: Center(
                               child: const Icon(
                                 Icons.favorite_outlined,

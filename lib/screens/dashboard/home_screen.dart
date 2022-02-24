@@ -44,8 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     BlocProvider.of<CategoryCubit>(context).getCategories();
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar:
-      AppBar(
+      appBar: AppBar(
         backgroundColor: whiteColor,
         elevation: 0.0,
         toolbarHeight: 60.0,
@@ -124,35 +123,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                //users[index].products![0].image.toString() != null?
-                                Container(
-                                  height: 40,
-                                  width: 30,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(users[index]
-                                              .products![0]
-                                              .image
-                                              .toString()))),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  child: Text(users[index].name.toString(),
-                                      //  getTranslated(context, "featured_product").toString(),
-                                      style: kBold(blackColor, 14.0)),
-                                ),
-                              ],
-                            ),
-                            // const SizedBox(
-                            //   height: 1.0,
-                            // ),
-                            users[index].products!.length > 0
-                                ? SizedBox(
-                                    height: 156,
+                            users[index].products!.isEmpty
+                                ? SizedBox()
+                                : Row(
+                                    children: [
+                                      //users[index].products![0].image.toString() != null?
+                                      Container(
+                                        height: 40,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    users[index].banner ??
+                                                        ""))),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      users[index].products!.isEmpty
+                                          ? SizedBox()
+                                          : Container(
+                                              child: Text(
+                                                  users[index].name.toString(),
+                                                  //  getTranslated(context, "featured_product").toString(),
+                                                  style:
+                                                      kBold(blackColor, 14.0)),
+                                            ),
+                                    ],
+                                  ),
+
+                            users[index].products!.isEmpty
+                                ? SizedBox()
+                                : SizedBox(
+                                    height: 150,
                                     child: ListView.builder(
                                         //inner builder
                                         scrollDirection: Axis.horizontal,
@@ -185,62 +188,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   // form: args.toString(),
                                                                 ))));
                                               },
-                                              child: HomeCategoriesImage(
-                                                img: users[index]
-                                                    .products![rdx]
-                                                    .image
-                                                    .toString(),
-                                              )
-                                              // MyProductContainerg(
-                                              //   img: users[index]
-                                              //       .products![rdx]
-                                              //       .image
-                                              //       .toString(),
-                                              //   txt: users[index].products![rdx].name,
-                                              //   price:
-                                              //       "${getTranslated(context, 'price').toString()}: ${users[index].products![rdx].breakingPrices![0].price}",
-                                              // ),
-                                              );
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 8.0),
+                                                child: HomeCategoriesImage(
+                                                  img: users[index]
+                                                      .products![rdx]
+                                                      .image
+                                                      .toString(),
+                                                ),
+                                              ));
                                         }),
-                                  )
-                                : const SizedBox(
-                                    child: Center(
-                                      child: AutoSizeText("No Product Found"),
-                                    ),
                                   ),
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     Navigator.push(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //             builder: (context) =>
-                            //                 ProductDetailScreen(
-                            //                   name: users[2]
-                            //                       .products![0]
-                            //                       .name
-                            //                       .toString(),
-                            //                   price: users[2]
-                            //                       .products![0]
-                            //                       .breakingPrices![0]
-                            //                       .price
-                            //                       .toString(),
-                            //                   description: users[2]
-                            //                       .products![0]
-                            //                       .description
-                            //                       .toString(),
-                            //                   img: users[2]
-                            //                       .products![0]
-                            //                       .image
-                            //                       .toString(),
-                            //                 )));
-                            //   },
-                            //   child: MyProductContainerg(
-                            //     img: users[2].products![0].image.toString(),
-                            //     txt: users[2].products![0].name,
-                            //     price:
-                            //         "${getTranslated(context, 'price').toString()}: ${users[2].products![0].breakingPrices![0].price}",
-                            //   ),
-                            // ),
+                            users[index].products!.isEmpty
+                                ? SizedBox()
+                                : SizedBox(
+                                height: 10
+                            ),
                           ],
                         );
                       });

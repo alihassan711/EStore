@@ -179,6 +179,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
                 controller: email,
                 onChanged: (String value) {},
                 cursorColor: const Color.fromRGBO(32, 64, 81, 1.0),

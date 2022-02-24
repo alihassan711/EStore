@@ -110,6 +110,10 @@
   "required_address": "Address Required",
   "no_fav_found": "No favorite items found",
   "no_noti": "You have no notification",
-  "confirm_password_notmatch": "Confirm Password Not Match"
+  "confirm_password_notmatch": "Confirm Password Not Match",
+  "change_password": "Change Password",
+  "old_password": "Old Password"
+
+
 }
 
