@@ -5,11 +5,12 @@ import 'package:estore/constants/text_style.dart';
 import 'package:estore/localization/language_constants.dart';
 import 'package:flutter/material.dart';
 
-class HistoryCard extends StatelessWidget {
-  String? name, createddate, price;
+import '../model/order_history_model.dart';
 
-  HistoryCard({this.name, this.createddate, this.price, Key? key})
-      : super(key: key);
+class HistoryCard extends StatelessWidget {
+  OrderHistoryModel order;
+
+  HistoryCard({required this.order, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,34 +38,19 @@ class HistoryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-              //   child: AutoSizeText(
-              //     createddate!,
-              //     style: kBold(kIconColorRed, 14.0),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 12,
-              // ),
               Row(
                 children: [
                   const Icon(
                     Icons.person,
                     size: 25,
-                    color: blackColor,
+                    color: kTitleColorBlack,
                   ),
                   const SizedBox(
                     width: 16,
                   ),
                   AutoSizeText(
-                    name!,
-                    style: kBold(blackColor, 12.0),
-                  ),
-                  const Spacer(),
-                  AutoSizeText(
-                    "\$$price",
-                    style: kBold(blackColor, 14.0),
+                    order.customerName!,
+                    style: kBold(kTitleColorBlack, 16.0),
                   ),
                 ],
               ),
@@ -72,57 +58,87 @@ class HistoryCard extends StatelessWidget {
                 height: 10,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(
-                    Icons.calendar_today,
-                    size: 25,
-                    color: blackColor,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            getTranslated(context, "payment_status").toString(),
+                            style: kNormalBlack(blackColor),
+                          ),
+                          Text(
+                            ": ${order.paymentMethod}",
+                            style: kNormalBlack(blackColor),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      AutoSizeText(
+                        "Total Bill: \$${order.totalAmount}",
+                        style: kBold(kTitleColorBlack, 14.0),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Text(
-                    getTranslated(context, "payment_status").toString(),
-                    style: kNormalBlack(blackColor),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  CircleAvatar(
-                    radius: 8.0,
-                    backgroundColor: whiteColor,
-                    backgroundImage: ExactAssetImage(ImagesPath.right),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          AutoSizeText(
+                            getTranslated(context, "delivery_status")
+                                .toString(),
+                            style: kNormalBlack(blackColor),
+                          ),
+                          Text(": ${getStatus(order.status)}"),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+
+                        children: [
+                          Text("Date: "),
+                          AutoSizeText(
+                            order.updatedAt!.split(" ")[0],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
               const SizedBox(
                 height: 10,
-              ),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.add_to_drive,
-                    size: 25,
-                    color: blackColor,
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  AutoSizeText(
-                    getTranslated(context, "delivery_status").toString(),
-                    style: kNormalBlack(blackColor),
-                  ),
-                  const Spacer(),
-                  AutoSizeText(
-                    createddate!,
-                    style: kBold(kIconColorRed, 14.0),
-                  ),
-                ],
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  String getStatus(orderStatus) {
+    switch (orderStatus) {
+      case 1:
+        return "Pending";
+      case 2:
+        return "Accepted";
+      case 3:
+        return "Rejected";
+      case 4:
+        return "On the Way";
+      case 5:
+        return "Delivered";
+      default:
+        return "Pending";
+    }
   }
 }

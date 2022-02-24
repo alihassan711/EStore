@@ -32,19 +32,11 @@ class _MyDrawerState extends State<MyDrawer> {
   Timer? timer;
   bool? flag = false;
   String? userName = "";
-  bool? _isdark = false;
+  bool _isdark = false;
   SharedPreferences? _preferences;
 
   @override
   void initState() {
-    SharedPreferences.getInstance().then((prefs) {
-      setState(() {
-        _preferences = prefs;
-        userName = prefs.getString('email');
-        print("name is : $userName");
-        // portNoController = TextEditingController(text: prefs.getString('port'));
-      });
-    });
     super.initState();
   }
 
@@ -146,16 +138,17 @@ class _MyDrawerState extends State<MyDrawer> {
                   style: kDrawerStyle()),
               leading: const Icon(Icons.track_changes),
               onTap: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
                 setState(() {
                   _isdark = !_isdark!;
                 });
+                print(_isdark);
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+
                 prefs.setString("themeMode", _isdark.toString());
                 MyApp.of(context)!.changeTheme(
-                    _isdark == false ? ThemeMode.dark : ThemeMode.light);
-              }
-              //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
-              ),
+                    _isdark  ? ThemeMode.dark : ThemeMode.light);
+
+              }),
           ListTile(
             onTap: () async {
               await showDialog(
@@ -183,12 +176,6 @@ class _MyDrawerState extends State<MyDrawer> {
                                 });
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
-                                prefs.remove('email');
-                                prefs.remove('password');
-                                prefs.remove('token');
-                                prefs.remove('firstName');
-                                prefs.remove('phone');
-                                prefs.remove('lastName');
                                 prefs.clear();
                                 Navigator.pushReplacement(
                                     context,

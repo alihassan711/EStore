@@ -57,7 +57,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                             create: (BuildContext context) =>
                                 CategoryCubit(repository: _repository),
                             child: MainScreen(
-                              index: 3,
+                              index: 1,
                               // form: args.toString(),
                             ))));
               },
@@ -72,7 +72,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                             create: (BuildContext context) =>
                                 CategoryCubit(repository: _apiServices),
                             child: MainScreen(
-                              index: 1,
+                              index: 3,
                               // form: args.toString(),
                             ))));
               },
@@ -255,38 +255,35 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       circularSize: 8,
                       txtColor: whiteColor,
                       onPress: () async {
+
+                        List products = [];
+                        for (final i in cart.basketItems) {
+                          var productMap = {
+                            'product_id': i.id,
+                            'name': i.name,
+                            'unitPrice': i.price,
+                            'qty': i.qty,
+                          };
+
+                          products.add(productMap);
+                        }
+                       await _apiServices
+                            .postProduct(
+                                totalPrice: totalBill.toString(),
+                                products: products)
+                            .then((value) {
+                          if (value) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("Order Posted Successfully")));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Order Fail to Post ")));
+                          }
+                        });
                         cart.basketItems.clear();
                         cart.clear();
                         totalBill == 0.0;
                         setState(() {});
-                        // List products = [];
-                        // for (final i in cart.basketItems) {
-                        //   var productMap = {
-                        //     'product_id': i.id,
-                        //     'name': i.name,
-                        //     'unitPrice': i.price,
-                        //     'qty': i.qty,
-                        //   };
-                        //
-                        //   products.add(productMap);
-                        // }
-                        // _apiServices
-                        //     .postProduct(
-                        //         totalPrice: totalBill.toString(),
-                        //         products: products)
-                        //     .then((value) {
-                        //   cart.clear();
-                        //   totalBill == 0.0;
-                        //   setState(() {});
-                        //   if (value) {
-                        //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //         content: Text("Order Posted Successfully")));
-                        //   } else {
-                        //     ScaffoldMessenger.of(context).showSnackBar(
-                        //         SnackBar(content: Text("Order Fail to Post ")));
-                        //   }
-                        // });
-                        //
 
                         // Navigator.push(context, MaterialPageRoute(builder: (builder)=>MyLocation()));
                       },

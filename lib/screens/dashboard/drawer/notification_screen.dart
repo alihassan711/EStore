@@ -53,7 +53,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           create: (BuildContext context) =>
                               CategoryCubit(repository: _repository),
                           child: MainScreen(
-                            index: 3,
+                            index: 1,
                             // form: args.toString(),
                           ))));
             },
@@ -68,7 +68,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           create: (BuildContext context) =>
                               CategoryCubit(repository: _apiServices),
                           child: MainScreen(
-                            index: 1,
+                            index: 3,
                             // form: args.toString(),
                           ))));
             },

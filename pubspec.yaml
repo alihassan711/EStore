@@ -78,6 +78,7 @@ dependencies:
   #flutter_login_facebook: ^1.2.0
   #flutter_facebook_auth: ^4.0.1
   font_awesome_flutter:
+  intl: ^0.17.0
   connectivity:
   badges:
   flutter_local_notifications:

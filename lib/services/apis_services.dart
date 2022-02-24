@@ -436,8 +436,7 @@ class ApiServices {
     List<CategoryModel> category = [];
     final response = await http.get(Uri.parse(Urls.allCategories));
     if (response.statusCode == 200) {
-      //  print("status code ===> ${response.statusCode}");
-      //  print("category body ===> ${response.body}");
+
       category =
           categoryModelFromJson(json.decode(response.body)["categories"]);
       return category;
@@ -453,8 +452,7 @@ class ApiServices {
       headers: _setHeaders(),
     );
     if (response.statusCode == 200) {
-      print("status code ===> ${response.statusCode}");
-      print("category body ===> ${response.body}");
+
       category =
           orderHistoryModelFromJson(json.decode(response.body)["orders"]);
       globalHistoryModel = category;
@@ -486,7 +484,6 @@ class ApiServices {
       Uri.parse(Urls.favourites),
       headers: _setHeaders(),
     );
-    print(response.body);
     if (response.statusCode == 200) {
       category =
           favouriteModelFromJson(json.decode(response.body)["favourites"]);
@@ -497,61 +494,7 @@ class ApiServices {
     }
   }
 
-  // Future<SingleCategoryModel> fetchAlbum() async {
-  //   final response = await http
-  //       .get(Uri.parse(Urls.singleCategories));
-  //   if (response.statusCode == 200) {
-  //     // If the server did return a 200 OK response,
-  //     // then parse the JSON.
-  //     return SingleCategoryModel.fromJson(jsonDecode(response.body));
-  //   } else {
-  //     // If the server did not return a 200 OK response,
-  //     // then throw an exception.
-  //     throw Exception('Failed to load album');
-  //   }
-  // }
-  /*
-  Future<bool> addOrder(
-  {
-    List<dynamic>? productImages,
-  productId,productName,unitPrice,quantity,totalPrice
-}
-      ) async {
-    var body = jsonEncode({
-      "payment_method": "paypal",
-      "note": "how",
-      "phone": "0237069975",
-      "city": "Lahore",
-      "country": "Pakistan",
-      "state": "Punjab",
-      "address": "caw-b",
-      "total_amount": totalPrice,
-      "orderItems":
-      [
-        {"product_id": productId, "name": productName, "unitPrice": unitPrice, "qty": quantity}
-      ]
-    });
-    //  print(body);
-    final response = await http.post(
-      (Uri.parse(Urls.addOrder)),
-      headers: _setHeaders(),
-      body: body,
-    );
-    try {print(authtoken);
-    print("post order heasders ===>   ${response.headers}");
-      if (response.statusCode == 200) {
-        print(response.body);
-        print('Successfully order posted');
-        return true;
-      } else {
-        print("post order Response ===>   ${response.statusCode}");
-        return false;
-      }
-    } catch (e) {
-      throw Exception('Failed to add data');
-    }
-  }
-*/
+
 
   Future<bool> postProduct({List? products, totalPrice}) async {
     var productData = {
@@ -570,10 +513,9 @@ class ApiServices {
 
     final response = await http.post(Uri.parse(Urls.addOrder),
         body: jsonString, headers: _setHeaders());
-    print(response.statusCode);
+
 
     if (response.statusCode == 200) {
-      print(response.body);
       return true;
     } else {
       return false;

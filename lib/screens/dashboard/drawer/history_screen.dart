@@ -95,14 +95,9 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
                   return ListView.builder(
                       itemCount: users.length,
                       itemBuilder: (BuildContext context, index) {
-                        String date = users[index].createdAt.toString();
-                        final dateList = date.split(" ");
-                        final createddate = dateList[0];
-                        print("split " + dateList[0]);
+
                         return HistoryCard(
-                          name: users[index].customerName.toString(),
-                          price: users[index].totalAmount.toString(),
-                          createddate: createddate.toString(),
+                          order: users[index]
                         );
                       });
                 } else {
