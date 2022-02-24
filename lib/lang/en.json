@@ -117,12 +117,10 @@
   "unit_price": "unit price",
   "total_price": "total price",
   "delivered": "Delivered",
-  "On_the_Way": "On the Way",
+  "on_the_Way": "On the Way",
   "rejected": "Rejected",
   "accepted": "Accepted",
   "pending": "Pending",
   "cash": "Cash"
-
-
 }
 

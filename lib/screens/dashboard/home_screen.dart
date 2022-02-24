@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/widgets/shoping_cart.dart';
 import 'package:estore/screens/components/my_drawer.dart';
+import '../../constants/strings.dart';
 import '../../utils/urls.dart';
 import '../../widgets/home_product _image.dart';
 import '../../widgets/iconbtn.dart';
@@ -93,143 +94,146 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: MyDrawer(),
       body: SingleChildScrollView(
         // shrinkWrap: true,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const MyCarouselSlider(),
-            const SizedBox(
-              height: 10,
-            ),
-            BlocBuilder<CategoryCubit, CategoryState>(
-              builder: (context, state) {
-                if (state is InitialState) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is LoadingState) {
-                  return const Center(
-                    child: Text("Loading..."),
-                  );
-                } else if (state is ErrorState) {
-                  return const Center(
-                    child: Text("Something went wrong"),
-                  );
-                } else if (state is LoadedState) {
-                  final List<CategoryModel> users = state.order;
-                  return ListView.builder(
-                      //outer builder
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: users.length,
-                      itemBuilder: (BuildContext ctx, index) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            users[index].products!.isEmpty
-                                ? SizedBox()
-                                : Row(
-                                    children: [
-                                      //users[index].products![0].image.toString() != null?
-                                      Container(
-                                        height: 40,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                    Urls.imageBaseUrl+users[index].banner.toString()
-                                                        ))),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      users[index].products!.isEmpty
-                                          ? SizedBox()
-                                          : Container(
-                                              child: Text(
-                                                  users[index].name.toString(),
-                                                  //  getTranslated(context, "featured_product").toString(),
-                                                  style:
-                                                      kBold(blackColor, 14.0)),
-                                            ),
-                                    ],
-                                  ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const MyCarouselSlider(),
+              const SizedBox(
+                height: 10,
+              ),
+              BlocBuilder<CategoryCubit, CategoryState>(
+                builder: (context, state) {
+                  if (state is InitialState) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is LoadingState) {
+                    return const Center(
+                      child: Text("Loading..."),
+                    );
+                  } else if (state is ErrorState) {
+                    return const Center(
+                      child: Text("Something went wrong"),
+                    );
+                  } else if (state is LoadedState) {
+                    final List<CategoryModel> users = state.order;
+                    return ListView.builder(
+                        //outer builder
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: users.length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              users[index].products!.isEmpty
+                                  ? SizedBox()
+                                  : Row(
+                                      children: [
+                                        //users[index].products![0].image.toString() != null?
+                                        Container(
+                                          height: 40,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      Urls.imageBaseUrl+users[index].banner.toString()
+                                                          ))),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        users[index].products!.isEmpty
+                                            ? SizedBox()
+                                            : Container(
+                                                child: Text(
+                                                    users[index].name.toString(),
+                                                    //  getTranslated(context, "featured_product").toString(),
+                                                    style:
+                                                        kBold(blackColor, 14.0)),
+                                              ),
+                                      ],
+                                    ),
 
-                            users[index].products!.isEmpty
-                                ? SizedBox()
-                                : SizedBox(
-                                    height: 120,
-                                    child: ListView.builder(
-                                        //inner builder
-                                        scrollDirection: Axis.horizontal,
-                                        shrinkWrap: true,
-                                        // 1st add
-                                        physics: const ClampingScrollPhysics(),
-                                        // 2nd add
-                                        itemCount:
-                                            users[index].products!.length,
-                                        itemBuilder: (BuildContext ctx, rdx) {
-                                          return GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            BlocProvider(
-                                                                create: (BuildContext
-                                                                        context) =>
-                                                                    CategoryCubit(
-                                                                        repository:
-                                                                            _repository),
-                                                                child:
-                                                                    ProductDetailScreen(
-                                                                  product_model:
-                                                                      users[index]
-                                                                              .products![
-                                                                          rdx],
+                              users[index].products!.isEmpty
+                                  ? SizedBox()
+                                  : SizedBox(
+                                      height: 120,
+                                      child: ListView.builder(
+                                          //inner builder
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          // 1st add
+                                          physics: const ClampingScrollPhysics(),
+                                          // 2nd add
+                                          itemCount:
+                                              users[index].products!.length,
+                                          itemBuilder: (BuildContext ctx, rdx) {
+                                            return GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              BlocProvider(
+                                                                  create: (BuildContext
+                                                                          context) =>
+                                                                      CategoryCubit(
+                                                                          repository:
+                                                                              _repository),
+                                                                  child:
+                                                                      ProductDetailScreen(
+                                                                    product_model:
+                                                                        users[index]
+                                                                                .products![
+                                                                            rdx],
 
-                                                                  // form: args.toString(),
-                                                                ))));
-                                              },
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: HomeCategoriesImage(
-                                                  img: users[index]
-                                                      .products![rdx]
-                                                      .image
-                                                      .toString(),
-                                                ),
-                                              ));
-                                        }),
-                                  ),
-                            users[index].products!.isEmpty
-                                ? SizedBox()
-                                : SizedBox(
-                                height: 10
-                            ),
-                          ],
-                        );
-                      });
-                } else {
-                  return Center(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Loading....',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w100, fontSize: 20),
-                      ),
-                      Text(
-                        'check your internet connection!....',
-                        style: TextStyle(color: Colors.redAccent, fontSize: 10),
-                      )
-                    ],
-                  ));
-                }
-              },
-            ),
-          ],
+                                                                    // form: args.toString(),
+                                                                  ))));
+                                                },
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      right: 8.0),
+                                                  child: HomeCategoriesImage(
+                                                    img: users[index]
+                                                        .products![rdx]
+                                                        .image
+                                                        .toString(),
+                                                  ),
+                                                ));
+                                          }),
+                                    ),
+                              users[index].products!.isEmpty
+                                  ? SizedBox()
+                                  : SizedBox(
+                                  height: 10
+                              ),
+                            ],
+                          );
+                        });
+                  } else {
+                    return Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Loading....',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w100, fontSize: 20),
+                        ),
+                        Text(
+                          'check your internet connection!....',
+                          style: TextStyle(color: Colors.redAccent, fontSize: 10),
+                        )
+                      ],
+                    ));
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

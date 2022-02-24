@@ -19,18 +19,20 @@ class NoNotificationContainer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height:100,
-            width: 100,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: ExactAssetImage(icon!), fit: BoxFit.fill)),
-            // backgroundColor: whiteColor,
-            // height,: MediaQuery.of(context).size.height * 0.12,
-            //  child: SizedBox(
-            //    height: MediaQuery.of(context).size.height * 0.9,
-            //   // child: Image.asset(icon!,fit: BoxFit.fill,),
-            //  ),
+          Expanded(
+            child: Container(
+            //  height:MediaQuery.of(context).size.height*0.2,
+             // width: MediaQuery.of,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: ExactAssetImage(icon!), )),
+              // backgroundColor: whiteColor,
+              // height,: MediaQuery.of(context).size.height * 0.12,
+              //  child: SizedBox(
+              //    height: MediaQuery.of(context).size.height * 0.9,
+              //   // child: Image.asset(icon!,fit: BoxFit.fill,),
+              //  ),
+            ),
           ),
           const SizedBox(
               height: 8,

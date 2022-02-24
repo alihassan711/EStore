@@ -33,7 +33,7 @@ class HistoryCard extends StatelessWidget {
         // height: 240,
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,17 +128,17 @@ class HistoryCard extends StatelessWidget {
   String getStatus(orderStatus,context) {
     switch (orderStatus) {
       case 1:
-        return getTranslated(context, "Pending").toString();
+        return getTranslated(context, "pending").toString();
       case 2:
-        return getTranslated(context, "Accepted").toString();
+        return getTranslated(context, "accepted").toString();
       case 3:
-        return getTranslated(context, "Rejected").toString();
+        return getTranslated(context, "rejected").toString();
       case 4:
-        return getTranslated(context, "On the Way").toString();
+        return getTranslated(context, "on the Way").toString();
       case 5:
-        return getTranslated(context, "Delivered").toString();
+        return getTranslated(context, "delivered").toString();
       default:
-        return getTranslated(context, "Pending").toString();
+        return getTranslated(context, "pending").toString();
     }
   }
 }

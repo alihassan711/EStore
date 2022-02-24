@@ -12,6 +12,7 @@ import 'package:estore/widgets/shoping_cart.dart';
 import 'package:estore/screens/components/my_drawer.dart';
 import '../../constants/color.dart';
 import '../../constants/image_path.dart';
+import '../../constants/strings.dart';
 import '../../localization/language_constants.dart';
 import '../../services/apis_services.dart';
 import '../../utils/no_notification.dart';
@@ -86,55 +87,54 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         iconTheme: const IconThemeData(color: blackColor),
       ),
       drawer: MyDrawer(),
-      body: BlocBuilder<CategoryCubit, CategoryState>(
-        builder: (context, state) {
-          if (state is InitialState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is LoadingState) {
-            return const Center(
-              child: Text("Loading..."),
-            );
-          } else if (state is ErrorState) {
-            return const Center(
-              child: Text("Something went wrong"),
-            );
-          } else if (state is LoadedState) {
-            final List<FavouriteModel> users = state.favProduct;
-            return users.isEmpty?Column(
-              children: [
-                Expanded(child: SizedBox()),
-                Expanded(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+        child: BlocBuilder<CategoryCubit, CategoryState>(
+          builder: (context, state) {
+            if (state is InitialState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is LoadingState) {
+              return const Center(
+                child: Text("Loading..."),
+              );
+            } else if (state is ErrorState) {
+              return const Center(
+                child: Text("Something went wrong"),
+              );
+            } else if (state is LoadedState) {
+              final List<FavouriteModel> users = state.favProduct;
+              return users.isEmpty?Column(
+                children: [
+                  Expanded(child: SizedBox()),
+                  Expanded(
 
-                  child: NoNotificationContainer(
-                    onPress: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => BlocProvider(
-                                  create: (BuildContext context) =>
-                                      CategoryCubit(repository: _apiServices),
-                                  child: MainScreen(
-                                    index: 0,
-                                    // form: args.toString(),
-                                  ))));
-                    },
-                    icon: ImagesPath.favourite,
-                    btnText:  getTranslated(context, "continue_shopping").toString(),
-                    txt: getTranslated(context, "no_fav_found").toString(),
+                    child: NoNotificationContainer(
+                      onPress: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => BlocProvider(
+                                    create: (BuildContext context) =>
+                                        CategoryCubit(repository: _apiServices),
+                                    child: MainScreen(
+                                      index: 0,
+                                      // form: args.toString(),
+                                    ))));
+                      },
+                      icon: ImagesPath.favourite,
+                      btnText:  getTranslated(context, "continue_shopping").toString(),
+                      txt: getTranslated(context, "no_fav_found").toString(),
+                    ),
                   ),
-                ),
-                Expanded(child: SizedBox()),
-              ],
-            ):
-            ListView.builder(
-                itemCount: users.length,
-                itemBuilder: (BuildContext context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                        top: 5.0, bottom: 5.0, right: 10.0, left: 10.0),
-                    child: users[index].productData!=null?FavouriteCard(
+                  Expanded(child: SizedBox()),
+                ],
+              ):
+              ListView.builder(
+                  itemCount: users.length,
+                  itemBuilder: (BuildContext context, index) {
+                    return users[index].productData!=null?FavouriteCard(
                       img: users[index].productData!.image.toString(),
                       itemPrice:
                           users[index].productData!.breakingPrices![0].price,
@@ -162,44 +162,44 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                         });
                       },
                       //onPress: ,
-                    ):SizedBox(),
-                  );
-                });
-          } else {
-            return Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'Loading....',
-                  style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20),
-                ),
-                Text(
-                  'check your internet connection!....',
-                  style: TextStyle(color: Colors.redAccent, fontSize: 10),
-                )
-              ],
-            ));
-          }
-        },
+                    ):SizedBox();
+                  });
+            } else {
+              return Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    'Loading....',
+                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20),
+                  ),
+                  Text(
+                    'check your internet connection!....',
+                    style: TextStyle(color: Colors.redAccent, fontSize: 10),
+                  )
+                ],
+              ));
+            }
+          },
 
-        /*
-        ListView.builder(
-            itemCount: 20,
-            itemBuilder: (BuildContext context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(
-                    top: 5.0, bottom: 5.0, right: 10.0, left: 10.0),
-                child: FavouriteCard(
-                  img: ImagesPath.burger,
-                  itemPrice: itemPrice,
-                  titleText: "Chickn Burger",
-                  brandName: "Mcdonald",
-                ),
-              );
-            }),
+          /*
+          ListView.builder(
+              itemCount: 20,
+              itemBuilder: (BuildContext context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                      top: 5.0, bottom: 5.0, right: 10.0, left: 10.0),
+                  child: FavouriteCard(
+                    img: ImagesPath.burger,
+                    itemPrice: itemPrice,
+                    titleText: "Chickn Burger",
+                    brandName: "Mcdonald",
+                  ),
+                );
+              }),
 
-             */
+               */
+        ),
       ),
     );
   }

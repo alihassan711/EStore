@@ -47,4 +47,4 @@ class Constants {
   static String validemailRequired = "Enter Valid Email";
 }
 
-const defaultMargin = 20.0;
+const defaultMargin = 16.0;

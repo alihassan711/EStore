@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/widgets/shoping_cart.dart';
 import 'package:estore/screens/components/my_drawer.dart';
+import '../../../constants/strings.dart';
 import '../../../localization/language_constants.dart';
 import '../../../utils/no_notification.dart';
 import '../../../widgets/iconbtn.dart';
@@ -81,31 +82,34 @@ class _NotificationScreenState extends State<NotificationScreen> {
       ),
       drawer: MyDrawer(),
       body: globalNotificationModel.length == 0
-          ? Column(
-          children: [
-            Expanded(child: SizedBox()),
-            Expanded(
-              child: NoNotificationContainer(
-                onPress: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => BlocProvider(
-                              create: (BuildContext context) =>
-                                  CategoryCubit(repository: _apiServices),
-                              child: MainScreen(
-                                index: 0,
-                                // form: args.toString(),
-                              ))));
-                },
-                icon: ImagesPath.notification,
-                btnText:  getTranslated(context, "continue_shopping").toString(),
-                txt: getTranslated(context, "no_noti").toString(),
+          ? Padding(
+        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+            child: Column(
+            children: [
+              Expanded(child: SizedBox()),
+              Expanded(
+                child: NoNotificationContainer(
+                  onPress: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                                create: (BuildContext context) =>
+                                    CategoryCubit(repository: _apiServices),
+                                child: MainScreen(
+                                  index: 0,
+                                  // form: args.toString(),
+                                ))));
+                  },
+                  icon: ImagesPath.notification,
+                  btnText:  getTranslated(context, "continue_shopping").toString(),
+                  txt: getTranslated(context, "no_noti").toString(),
+                ),
               ),
-            ),
-            Expanded(child: SizedBox()),
-          ],
-            )
+              Expanded(child: SizedBox()),
+            ],
+              ),
+          )
           : BlocBuilder<CategoryCubit, CategoryState>(
               builder: (context, state) {
                 if (state is InitialState) {
@@ -129,14 +133,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         final dateList = date.split(" ");
                         final createddate = dateList[0];
                         print("split " + dateList[0]);
-                        return Padding(
-                            padding: const EdgeInsets.only(
-                                top: 2.0, bottom: 2.0, right: 10.0, left: 10.0),
-                            child: NotificationCard(
-                              fromChatPage: true,
-                              created_date: createddate.toString(),
-                              orderId: users[index].orderId.toString(),
-                            ));
+                        return NotificationCard(
+                          fromChatPage: true,
+                          created_date: createddate.toString(),
+                          orderId: users[index].orderId.toString(),
+                        );
                       });
                 } else {
                   return Center(

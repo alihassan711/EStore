@@ -14,6 +14,7 @@ import 'package:estore/widgets/shoping_cart.dart';
 import 'package:estore/screens/components/my_drawer.dart';
 import '../../bloc/category/category_cubit.dart';
 import '../../constants/image_path.dart';
+import '../../constants/strings.dart';
 import '../../model/all_categories_model.dart';
 import '../../provider/cart.dart';
 import '../../utils/no_notification.dart';
@@ -121,106 +122,107 @@ class _MyCartScreenState extends State<MyCartScreen> {
                     ),
                   ],
                 ))
-              : Column(
-                  children: [
-                    Expanded(
-                      flex: 5,
-                      child: ListView.builder(
-                        itemCount: cart.basketItems.length.toInt(),
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.only(top: 5.0, bottom: 5.0),
-                            child: ListTile(
-                              contentPadding: EdgeInsets.all(0.0),
-                              leading: Container(
-                                height: 145,
-                                width: 90,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  image: DecorationImage(
-                                      image: NetworkImage(cart
-                                          .basketItems[index].image
-                                          .toString()),
-                                      fit: BoxFit.fill),
+              : Padding(
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+                child: Column(
+                    children: [
+                      Expanded(
+                       // flex: 5,
+                        child: ListView.builder(
+                          itemCount: cart.basketItems.length.toInt(),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                              child: ListTile(
+                                contentPadding: EdgeInsets.all(0.0),
+                                leading: Container(
+                                  height: 145,
+                                  width: 90,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    image: DecorationImage(
+                                        image: NetworkImage(cart
+                                            .basketItems[index].image
+                                            .toString()),
+                                        fit: BoxFit.fill),
+                                  ),
                                 ),
-                              ),
-                              title:
-                                  Text(cart.basketItems[index].name.toString()),
-                              //CircleAvatar(//  backgroundImage: NetworkImage(asyncSnapshot.data[index].picture + asyncSnapshot.data[index].index.toString() + ".jpg"),),
-                              subtitle: Text(
-                                "${getTranslated(context, "unit_price").toString()}: \$" +
-                                    cart.basketItems[index].breakingPrices![0]
-                                        .price
-                                        .toString() +
-                                    "\n${getTranslated(context, "total_price").toString()}: \$" +
-                                    (cart.basketItems[index].breakingPrices![0]
-                                                .price! *
-                                            cart.basketItems[index].qty)
-                                        .toString(),
-                              ),
-                              trailing: Container(
-                                height: 30,
-                                width: 80,
-                                child: Row(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        if (cart.basketItems[index].qty == 1) {
-                                          cart.remove(cart.basketItems[index]);
-                                        } else {
-                                          cart.basketItems[index].qty -= 1;
-                                          setState(() {});
-                                        }
-                                      },
-                                      child: Container(
-                                          height: 18,
-                                          width: 18,
-                                          decoration: const BoxDecoration(
-                                              color: kIconColorRed,
-                                              shape: BoxShape.circle),
-                                          child: const Icon(
-                                            Icons.remove,
-                                            color: whiteColor,
-                                            size: 14,
-                                          )),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    AutoSizeText(
-                                        cart.basketItems[index].qty.toString()),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        cart.basketItems[index].qty += 1;
+                                title:
+                                    Text(cart.basketItems[index].name.toString()),
+                                //CircleAvatar(//  backgroundImage: NetworkImage(asyncSnapshot.data[index].picture + asyncSnapshot.data[index].index.toString() + ".jpg"),),
+                                subtitle: Text(
+                                  "${getTranslated(context, "unit_price").toString()}: \$" +
+                                      cart.basketItems[index].breakingPrices![0]
+                                          .price
+                                          .toString() +
+                                      "\n${getTranslated(context, "total_price").toString()}: \$" +
+                                      (cart.basketItems[index].breakingPrices![0]
+                                                  .price! *
+                                              cart.basketItems[index].qty)
+                                          .toString(),
+                                ),
+                                trailing: Container(
+                                  height: 30,
+                                  width: 80,
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          if (cart.basketItems[index].qty == 1) {
+                                            cart.remove(cart.basketItems[index]);
+                                          } else {
+                                            cart.basketItems[index].qty -= 1;
+                                            setState(() {});
+                                          }
+                                        },
+                                        child: Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: const BoxDecoration(
+                                                color: kIconColorRed,
+                                                shape: BoxShape.circle),
+                                            child: const Icon(
+                                              Icons.remove,
+                                              color: whiteColor,
+                                              size: 14,
+                                            )),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      AutoSizeText(
+                                          cart.basketItems[index].qty.toString()),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          cart.basketItems[index].qty += 1;
 
-                                        setState(() {});
-                                      },
-                                      child: Container(
-                                          height: 18,
-                                          width: 18,
-                                          decoration: const BoxDecoration(
-                                              color: kIconColorGreen,
-                                              shape: BoxShape.circle),
-                                          child: const Icon(
-                                            Icons.add,
-                                            size: 14,
-                                            color: whiteColor,
-                                          )),
-                                    ),
-                                  ],
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: const BoxDecoration(
+                                                color: kIconColorGreen,
+                                                shape: BoxShape.circle),
+                                            child: const Icon(
+                                              Icons.add,
+                                              size: 14,
+                                              color: whiteColor,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(
+                      Padding(
                         padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                         child: Column(
                           children: [
@@ -242,58 +244,63 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                     .toString(),
                                 totalBill.toString(),
                                 14.0),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            ElevatedBtn(
+                              btnHeight: 45,
+                              btnWidth: 300,
+                              color: kIconColorRed,
+                              btnTxtSize: 14,
+                              text: getTranslated(context, "order_proceed").toString(),
+                              circularSize: 8,
+                              txtColor: whiteColor,
+                              onPress: () async {
+
+                                List products = [];
+                                for (final i in cart.basketItems) {
+                                  var productMap = {
+                                    'product_id': i.id,
+                                    'name': i.name,
+                                    'unitPrice': i.price,
+                                    'qty': i.qty,
+                                  };
+
+                                  products.add(productMap);
+                                }
+                                await _apiServices
+                                    .postProduct(
+                                    totalPrice: totalBill.toString(),
+                                    products: products)
+                                    .then((value) {
+                                  if (value) {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                        content: Text("Order Posted Successfully")));
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("Order Fail to Post ")));
+                                  }
+                                });
+                                cart.basketItems.clear();
+                                cart.clear();
+                                totalBill == 0.0;
+                                setState(() {});
+
+                                // Navigator.push(context, MaterialPageRoute(builder: (builder)=>MyLocation()));
+                              },
+                              //  btnWidth: 200,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
                           ],
                         ),
                       ),
-                    ),
-                    ElevatedBtn(
-                      btnHeight: 45,
-                      btnWidth: 300,
-                      color: kIconColorRed,
-                      btnTxtSize: 14,
-                      text: getTranslated(context, "order_proceed").toString(),
-                      circularSize: 8,
-                      txtColor: whiteColor,
-                      onPress: () async {
 
-                        List products = [];
-                        for (final i in cart.basketItems) {
-                          var productMap = {
-                            'product_id': i.id,
-                            'name': i.name,
-                            'unitPrice': i.price,
-                            'qty': i.qty,
-                          };
 
-                          products.add(productMap);
-                        }
-                       await _apiServices
-                            .postProduct(
-                                totalPrice: totalBill.toString(),
-                                products: products)
-                            .then((value) {
-                          if (value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text("Order Posted Successfully")));
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Order Fail to Post ")));
-                          }
-                        });
-                        cart.basketItems.clear();
-                        cart.clear();
-                        totalBill == 0.0;
-                        setState(() {});
-
-                        // Navigator.push(context, MaterialPageRoute(builder: (builder)=>MyLocation()));
-                      },
-                      //  btnWidth: 200,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                );
+                    ],
+                  ),
+              );
         }));
   }
 

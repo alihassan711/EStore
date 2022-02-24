@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/bloc/orderhistory/order_history_cubit.dart';
 import 'package:estore/constants/color.dart';

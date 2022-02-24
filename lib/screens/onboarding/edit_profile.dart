@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:estore/constants/color.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:estore/constants/strings.dart';
@@ -14,36 +13,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../localization/language_constants.dart';
 
 class EditProfile extends StatefulWidget {
   final UserLogInModel user;
   VoidCallback callback;
-
   EditProfile({Key? key, required this.user, required this.callback})
       : super(key: key);
-
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+ // TextEditingController rmailController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   var email;
   var password;
   bool _loader = false;
-
   // late bool emailVerified, phoneVerified;
   final ImagePicker _picker = ImagePicker();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   dynamic image;
-
   // final UserAccountProvider userAccountProvider =
   // Get.put(UserAccountProvider());
   int count = 0;
-
   @override
   void initState() {
     image = "";
@@ -52,7 +47,6 @@ class _EditProfileState extends State<EditProfile> {
     phoneController.text = widget.user.userProfile!.phone ?? "";
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,8 +63,10 @@ class _EditProfileState extends State<EditProfile> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      InkWell(
-                        onTap: () => Navigator.pop(context),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          },
                         child: const SizedBox(
                             height: 15,
                             width: 20,
@@ -124,81 +120,101 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ),
                 ),
-                const SizedBox(height: 20.0),
-                TextFormField(
-                  readOnly: true,
-                  enabled: false,
-                  decoration: InputDecoration(
-                      hintText: widget.user.user!.email,
-                      contentPadding:
-                          const EdgeInsets.only(left: 10, right: 10),
-                      focusedBorder: focusBorder(),
-                      border: border(),
-                      hintStyle: kSemiBold(blackColor),
-                      errorBorder: errorBorder()),
-                ),
-                const SizedBox(height: 20.0),
-                TextFormField(
-                  controller: firstNameController,
-                  style: kSemiBold(blackColor),
-                  decoration: InputDecoration(
-                      hintText: "First Name",
-                      contentPadding:
-                          const EdgeInsets.only(left: 10, right: 10),
-                      focusedBorder: focusBorder(),
-                      border: border(),
-                      errorBorder: errorBorder()),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your first name';
-                    }
+                Form(
+                  key: _key,
+                  child: Column(
+                    children: [
+                      // const SizedBox(height: 20.0),
+                      // TextFormField(
+                      //   controller: email,
+                      //   readOnly: true,
+                      //   enabled: false,
+                      //   decoration: InputDecoration(
+                      //       hintText: widget.user.user!.email,
+                      //       contentPadding:
+                      //       const EdgeInsets.only(left: 10, right: 10),
+                      //       focusedBorder: focusBorder(),
+                      //       border: border(),
+                      //       hintStyle: kSemiBold(blackColor),
+                      //
+                      //       errorBorder: errorBorder()),
+                      //   validator: (val) {
+                      //     if (val!.isEmpty) {
+                      //       return getTranslated(context, "required_email");
+                      //     }
+                      //     if (!RegExp(email_RegExp).hasMatch(val)) {
+                      //       return getTranslated(context, "valid_email");
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        controller: firstNameController,
+                        style: kSemiBold(blackColor),
+                        decoration: InputDecoration(
+                            hintText: "First Name",
+                            contentPadding:
+                            const EdgeInsets.only(left: 10, right: 10),
+                            focusedBorder: focusBorder(),
+                            border: border(),
+                            errorBorder: errorBorder()),
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return getTranslated(context, "first_name_required");
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        style: kSemiBold(blackColor),
+                        controller: lastNameController,
+                        decoration: InputDecoration(
+                            hintText: "Last Name",
+                            contentPadding:
+                            const EdgeInsets.only(left: 10, right: 10),
+                            focusedBorder: focusBorder(),
+                            border: border(),
+                            errorBorder: errorBorder()),
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return getTranslated(context, "last_name_required");
+                          }
 
-                    return null;
-                  },
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        style: kSemiBold(blackColor),
+                        controller: phoneController,
+                        decoration: InputDecoration(
+                            hintText: "phone",
+                            contentPadding:
+                            const EdgeInsets.only(left: 10, right: 10),
+                            focusedBorder: focusBorder(),
+                            border: border(),
+                            errorBorder: errorBorder()),
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return getTranslated(context, "phone_required");
+                          }
+                          if (!RegExp(phone_RegExp).hasMatch(val)) {
+                            return getTranslated(context, "valid_phone");
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: defaultMargin * 2),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 20.0),
-                TextFormField(
-                  style: kSemiBold(blackColor),
-                  controller: lastNameController,
-                  decoration: InputDecoration(
-                      hintText: "Last Name",
-                      contentPadding:
-                          const EdgeInsets.only(left: 10, right: 10),
-                      focusedBorder: focusBorder(),
-                      border: border(),
-                      errorBorder: errorBorder()),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your last name';
-                    }
-
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 20.0),
-                TextFormField(
-                  style: kSemiBold(blackColor),
-                  controller: phoneController,
-                  decoration: InputDecoration(
-                      hintText: "phone",
-                      contentPadding:
-                          const EdgeInsets.only(left: 10, right: 10),
-                      focusedBorder: focusBorder(),
-                      border: border(),
-                      errorBorder: errorBorder()),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your Phone Number';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: defaultMargin * 2),
                 _loader
                     ? const Loader()
                     : GetStartedBtn(
                         onPress: () async {
-                          if (image != "") {
+                          if (image != ""&&_key.currentState!.validate()) {
                             setState(() {
                               _loader = true;
                             });
@@ -275,7 +291,6 @@ class _EditProfileState extends State<EditProfile> {
           );
         });
   }
-
   cameraImage() async {
     XFile? cameraImage = await _picker.pickImage(
       source: ImageSource.camera,
