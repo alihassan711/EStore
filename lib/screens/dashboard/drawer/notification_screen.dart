@@ -8,9 +8,6 @@ import 'package:estore/services/apis_services.dart';
 import 'package:estore/utils/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/widgets/shoping_cart.dart';
 import 'package:estore/screens/components/my_drawer.dart';
 import '../../../constants/strings.dart';

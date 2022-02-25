@@ -36,7 +36,7 @@ class NotificationCard extends StatelessWidget {
                     bottomLeft: Radius.circular(4.0),
                   ),
                   image: DecorationImage(
-                      image: ExactAssetImage(ImagesPath.accountPicture),
+                      image: ExactAssetImage(ImagesPath.avatar),
                       fit: BoxFit.cover)),
             ),
             const SizedBox(width: 10),

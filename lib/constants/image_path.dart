@@ -22,6 +22,7 @@ class ImagesPath {
   static String pak = 'assets/icons/paf.png';
   static String saudia = 'assets/icons/saudia.png';
   static String usa = 'assets/icons/usa.png';
+  static String avatar = 'assets/icons/avt.png';
   static String introCarttIcon = 'assets/icons/intro_cart_icon.png';
   static String favourite = 'assets/icons/favouritepng.png';
   static String home = 'assets/icons/homeicon.png';
@@ -29,7 +30,7 @@ class ImagesPath {
   static String message = 'assets/icons/msgpng.png';
   static String profile = 'assets/icons/profilepng.png';
   static String cart = 'assets/icons/cartpng.png';
-
+  static String profilePlace = 'assets/icons/profilePlaceHolder.png';
   static String intro1 = 'assets/introimages/intro1.jpg';
   static String intro2 = 'assets/introimages/intro2.png';
   static String intro3 = 'assets/introimages/intro3.png';

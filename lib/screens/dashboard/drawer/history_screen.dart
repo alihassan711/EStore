@@ -9,9 +9,7 @@ import 'package:estore/services/apis_services.dart';
 import 'package:estore/widgets/history_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 //import 'package:get/get.dart';
-
 import '../../../bloc/category/category_cubit.dart';
 import '../../../constants/image_path.dart';
 import '../../../utils/no_notification.dart';

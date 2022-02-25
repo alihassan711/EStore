@@ -2,12 +2,10 @@ import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/bloc/category/category_state.dart';
 import 'package:estore/model/favourite_model.dart';
 import 'package:estore/screens/dashboard/main_page.dart';
+import 'package:estore/screens/dashboard/products/product_detail_screen.dart';
 import 'package:estore/widgets/favourite_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/widgets/shoping_cart.dart';
 import 'package:estore/screens/components/my_drawer.dart';
 import '../../constants/color.dart';
@@ -20,21 +18,11 @@ import '../../widgets/iconbtn.dart';
 
 class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
-
   @override
   _FavouriteScreenState createState() => _FavouriteScreenState();
 }
-
 class _FavouriteScreenState extends State<FavouriteScreen> {
-  int itemPrice = 0;
-  int totalItems = 0;
-  double? subTotal = 0;
-  double? disCount = 0;
-  double? deliveryCharges = 0;
-  double? orderTotal = 0;
-  ApiServices _apiServices = ApiServices();
   ApiServices _repository = ApiServices();
-
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<CategoryCubit>(context).getCategories();
@@ -72,7 +60,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   MaterialPageRoute(
                       builder: (_) => BlocProvider(
                           create: (BuildContext context) =>
-                              CategoryCubit(repository: _apiServices),
+                              CategoryCubit(repository: _repository),
                           child: MainScreen(
                             index: 1,
                             // form: args.toString(),
@@ -88,7 +76,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       ),
       drawer: MyDrawer(),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+        padding: EdgeInsets.symmetric(horizontal: defaultMargin,vertical: defaultMargin),
         child: BlocBuilder<CategoryCubit, CategoryState>(
           builder: (context, state) {
             if (state is InitialState) {
@@ -109,7 +97,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 children: [
                   Expanded(child: SizedBox()),
                   Expanded(
-
                     child: NoNotificationContainer(
                       onPress: () {
                         Navigator.pushReplacement(
@@ -117,7 +104,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                             MaterialPageRoute(
                                 builder: (_) => BlocProvider(
                                     create: (BuildContext context) =>
-                                        CategoryCubit(repository: _apiServices),
+                                        CategoryCubit(repository: _repository),
                                     child: MainScreen(
                                       index: 0,
                                       // form: args.toString(),
@@ -135,6 +122,24 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   itemCount: users.length,
                   itemBuilder: (BuildContext context, index) {
                     return users[index].productData!=null?FavouriteCard(
+                      onpressCard: (){
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (_) =>
+                        //             BlocProvider(
+                        //                 create: (BuildContext
+                        //                 context) =>
+                        //                     CategoryCubit(
+                        //                         repository:
+                        //                         _repository),
+                        //                 child:
+                        //                 ProductDetailScreen(
+                        //                   product_model:
+                        //                   users[index].productData![0],
+                        //                   // form: args.toString(),
+                        //                 ))));
+                      },
                       img: users[index].productData!.image.toString(),
                       itemPrice:
                           users[index].productData!.breakingPrices![0].price,
@@ -145,18 +150,17 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                           .shopName
                           .toString(),
                       onPress: () {
-
                         ApiServices.removeFavouriteProduct(
                                 productId: users[index].productId)
                             .then((value) {
                           if (value) {
                             BlocProvider.of<CategoryCubit>(context).getCategories();
-                            _apiServices
+                            _repository
                                 .successToast("Product removed from favourite");
 
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                _apiServices.failToast(
+                                _repository.failToast(
                                     "Failed to removed from favourite"));
                           }
                         });
@@ -181,7 +185,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               ));
             }
           },
-
           /*
           ListView.builder(
               itemCount: 20,

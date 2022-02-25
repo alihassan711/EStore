@@ -29,7 +29,6 @@ class Urls {
 // static const String invoice = "$baseUrl/Invoice/INVOICE_BY_CUS_CODE?cus_code=610";
 // static const String oderlist = "$baseUrl/OrderTakerData/ORDER_TAKER_DATA?ORDER_TAKER_ID=2";
 }
-
 UserLogInModel globalUserData = UserLogInModel();
 List<CategoryModel> globalCategoryModel = [];
 List<FavouriteModel> globalFavouriteModel = [];

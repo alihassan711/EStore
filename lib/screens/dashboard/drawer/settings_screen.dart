@@ -152,12 +152,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              globalUserData.userProfile!.firstName
-                                          .toString() ==
-                                      null
-                                  ? "name"
-                                  : globalUserData.userProfile!.firstName
-                                      .toString(),
+                              getTranslated(context, "name")
+                                  .toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),

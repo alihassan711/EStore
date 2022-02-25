@@ -9,12 +9,15 @@ class UserLogInModel {
     this.status,
     this.user,
     this.userProfile,
+    this.userImage
   });
 
   String? message;
   int? status;
   User? user;
   UserProfile? userProfile;
+  UserImage? userImage;
+
 
   factory UserLogInModel.fromJson(Map<String, dynamic> json) => UserLogInModel(
         message: json["message"] == null ? null : json["message"],
@@ -23,9 +26,10 @@ class UserLogInModel {
         userProfile: json["userProfile"] == null
             ? null
             : UserProfile.fromJson(json["userProfile"]),
-      );
-}
+    userImage: json["userImage"] == null ? null : UserImage.fromJson(json["userImage"]),
 
+  );
+}
 class User {
   User({
     this.id,
@@ -154,4 +158,48 @@ class UserProfile {
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
       );
+}
+
+class UserImage {
+  UserImage({
+    this.id,
+    this.userId,
+    this.fileType,
+    this.fileName,
+    this.fileSize,
+    this.path,
+    this.date,
+    this.time,
+    this.createdBy,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int ?id;
+  int? userId;
+  String? fileType;
+  String? fileName;
+  String ?fileSize;
+  String? path;
+  DateTime ?date;
+  String? time;
+  int? createdBy;
+  dynamic createdAt;
+  dynamic updatedAt;
+
+  factory UserImage.fromJson(Map<String, dynamic> json) => UserImage(
+    id: json["ID"] == null ? null : json["ID"],
+    userId: json["UserID"] == null ? null : json["UserID"],
+    fileType: json["FileType"] == null ? null : json["FileType"],
+    fileName: json["FileName"] == null ? null : json["FileName"],
+    fileSize: json["FileSize"] == null ? null : json["FileSize"],
+    path: json["Path"] == null ? null : json["Path"],
+    date: json["Date"] == null ? null : DateTime.parse(json["Date"]),
+    time: json["Time"] == null ? null : json["Time"],
+    createdBy: json["CreatedBy"] == null ? null : json["CreatedBy"],
+    createdAt: json["created_at"],
+    updatedAt: json["updated_at"],
+  );
+
+
 }

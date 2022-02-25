@@ -121,6 +121,7 @@
   "rejected": "Rejected",
   "accepted": "Accepted",
   "pending": "Pending",
-  "cash": "Cash"
+  "cash": "Cash",
+  "next": "Next"
 }
 

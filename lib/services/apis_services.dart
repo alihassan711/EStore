@@ -551,27 +551,6 @@ class ApiServices {
       return false;
     }
   }
-
-  static Future<bool> updateProfile(
-      {firstName, lastName, picture, phone}) async {
-    final response = await http.post(Uri.parse(Urls.updateProfile),
-        body: json.encode({
-          "first_name": firstName,
-          "last_name": lastName,
-          "picture": picture,
-          "Phone": phone,
-        }),
-        headers: _setHeaders());
-    print(response.body);
-    if (response.statusCode == 200) {
-      print("User Data updated");
-      return true;
-    } else {
-      print("user updated response  ===> ${response.statusCode}");
-      return false;
-    }
-  }
-
   static _setHeaders() => {
         "Accept": "application/json",
         "content-type": "application/json",

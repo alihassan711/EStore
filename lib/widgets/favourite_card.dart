@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class FavouriteCard extends StatelessWidget {
   String? titleText, img, brandName;
   int? itemPrice;
-  Function()? onPress;
+  Function()? onPress,onpressCard;
 
   FavouriteCard(
       {this.titleText,
@@ -14,104 +14,108 @@ class FavouriteCard extends StatelessWidget {
       this.img,
       this.onPress,
       this.brandName,
+        this.onpressCard,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black45,
-          ),
-          BoxShadow(
-            color: whiteColor,
-            spreadRadius: 7.0,
-            blurRadius: 8.0,
-          ),
-        ],
-      ),
-      // height: 240,
-      width: MediaQuery.of(context).size.width,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 75, width: 70,
-            // height: MediaQuery.of(context).size.height * 0.125,
-            // width: MediaQuery.of(context).size.width * 0.2,
-            decoration: BoxDecoration(
-                color: whiteColor,
-                shape: BoxShape.rectangle,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(5.0),
-                  bottomLeft: Radius.circular(5.0),
+    return GestureDetector(
+      onTap: onpressCard,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black45,
+            ),
+            BoxShadow(
+              color: whiteColor,
+              spreadRadius: 7.0,
+              blurRadius: 8.0,
+            ),
+          ],
+        ),
+        // height: 240,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 75, width: 70,
+              // height: MediaQuery.of(context).size.height * 0.125,
+              // width: MediaQuery.of(context).size.width * 0.2,
+              decoration: BoxDecoration(
+                  color: whiteColor,
+                  shape: BoxShape.rectangle,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(5.0),
+                    bottomLeft: Radius.circular(5.0),
+                  ),
+                  image: DecorationImage(
+                      image: NetworkImage(img!), fit: BoxFit.fill)),
+            ),
+            const SizedBox(
+              width: 18,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 8.0,
                 ),
-                image: DecorationImage(
-                    image: NetworkImage(img!), fit: BoxFit.fill)),
-          ),
-          const SizedBox(
-            width: 18,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 8.0,
-              ),
-              Text(
-                titleText!,
-                style: kBold(blackColor, 12.0),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Text(
-                brandName!,
-                style: kBold(kGrey, 10.0),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              const IconTheme(
-                data: IconThemeData(
-                  color: Colors.amber,
-                  size: 14,
+                Text(
+                  titleText!,
+                  style: kBold(blackColor, 12.0),
                 ),
-                child: StarDisplay(value: 3),
-              ),
-              // StarDisplay(),
-              const SizedBox(
-                height: 2,
-              ),
-              Text(
-                "\$$itemPrice",
-                style: kBold(blackColor, 13.0),
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-            ],
-          ),
-          const Spacer(),
-          Column(
-            children: [
-              IconButton(
-                onPressed: onPress,
-                color: Colors.red,
-                icon: const Icon(
-                  Icons.favorite,
-                  color: kIconColorRed,
+                const SizedBox(
+                  height: 2,
                 ),
-                iconSize: 25.0,
-              ),
-            ],
-          ),
-        ],
+                Text(
+                  brandName!,
+                  style: kBold(kGrey, 10.0),
+                ),
+                const SizedBox(
+                  height: 2,
+                ),
+                const IconTheme(
+                  data: IconThemeData(
+                    color: Colors.amber,
+                    size: 14,
+                  ),
+                  child: StarDisplay(value: 3),
+                ),
+                // StarDisplay(),
+                const SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  "\$$itemPrice",
+                  style: kBold(blackColor, 13.0),
+                ),
+                SizedBox(
+                  height: 8.0,
+                ),
+              ],
+            ),
+            const Spacer(),
+            Column(
+              children: [
+                IconButton(
+                  onPressed: onPress,
+                  color: Colors.red,
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: kIconColorRed,
+                  ),
+                  iconSize: 25.0,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

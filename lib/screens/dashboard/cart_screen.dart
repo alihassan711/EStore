@@ -88,40 +88,31 @@ class _MyCartScreenState extends State<MyCartScreen> {
         body: Consumer<Cart>(builder: (context, cart, child) {
           calculateBill(cart.basketItems);
           return cart.basketItems.isEmpty
-              ? Center(
-                  child: Column(
-                  children: [
-                    Expanded(
-                      child: SizedBox(),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: NoNotificationContainer(
-                        onPress: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => BlocProvider(
-                                      create: (BuildContext context) =>
-                                          CategoryCubit(
-                                              repository: _apiServices),
-                                      child: MainScreen(
-                                        index: 0,
-                                        // form: args.toString(),
-                                      ))));
-                        },
-                        icon: ImagesPath.emptyCart,
-                        btnText: getTranslated(context, "continue_shopping")
-                            .toString(),
-                        txt: getTranslated(context, "your_cart_empty")
-                            .toString(),
-                      ),
-                    ),
-                    Expanded(
-                      child: SizedBox(),
-                    ),
-                  ],
-                ))
+              ? Column(
+            children: [
+              Expanded(child: SizedBox()),
+              Expanded(
+                child: NoNotificationContainer(
+                  onPress: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                                create: (BuildContext context) =>
+                                    CategoryCubit(repository: _repository),
+                                child: MainScreen(
+                                  index: 0,
+                                  // form: args.toString(),
+                                ))));
+                  },
+                  icon: ImagesPath.emptyCart,
+                  btnText:  getTranslated(context, "continue_shopping").toString(),
+                  txt: getTranslated(context, "your_cart_empty").toString(),
+                ),
+              ),
+              Expanded(child: SizedBox()),
+            ],
+          )
               : Padding(
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
                 child: Column(

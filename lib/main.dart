@@ -33,6 +33,7 @@ void _enablePlatformOverrideForDesktop() {
 }
 
 void main() async {
+  ApiServices _repository = ApiServices();
   _enablePlatformOverrideForDesktop();
   // FlutterNativeSplash.removeAfter(initialization);
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +54,11 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(ChangeNotifierProvider(
     create: (context) => Cart(),
-    child: MyApp(),
+    child: BlocProvider(
+        create: (BuildContext context) =>
+            CategoryCubit(
+                repository: _repository),
+        child:MyApp()),
   ));
 }
 
@@ -101,6 +106,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<CategoryCubit>(context).getCategories();
     return _loader
         ? Container()
         : OverlaySupport.global(
@@ -173,7 +179,6 @@ class _MyAppState extends State<MyApp> {
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('Handling a background message ${message.data}');
-
   showNotification(message.data["timetable_id"], message.data["course"],
       message.data["message"]);
 }
@@ -188,5 +193,5 @@ showNotification(String timetable_id, String course, String message) async {
 }
 
 void onSelectNotification(String? payload) {
-  print("navigate to notification page");
+  print("=================================================>>>>>>>>>>>>>>>>  navigate to notification page");
 }

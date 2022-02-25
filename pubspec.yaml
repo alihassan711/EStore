@@ -82,11 +82,12 @@ dependencies:
   connectivity:
   badges:
   flutter_local_notifications:
+  cached_network_image: ^3.2.0
+  dio: ^4.0.4
   fluttertoast:
   #get: ^4.6.1
   flutter_localizations:
     sdk: flutter
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

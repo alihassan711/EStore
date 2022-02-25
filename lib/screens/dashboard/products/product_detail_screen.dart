@@ -19,7 +19,6 @@ import '../../../provider/cart.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   Product product_model;
-
   ProductDetailScreen({required this.product_model, Key? key})
       : super(key: key);
 
@@ -30,6 +29,7 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   ApiServices _apiServices = ApiServices();
   final quantaty = TextEditingController();
+  bool? _red = false;
   final Col = Colors.grey;
   int _counter = 0;
   int? item = 0, unitprice;
@@ -120,18 +120,29 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         right: 14,
                         child: GestureDetector(
                           onTap: () {
+                            !_red!?
                             ApiServices.addFavouriteProduct(
                                     productId: widget.product_model.id)
                                 .then((value) {
                               if (value) {
                                 _apiServices
                                     .successToast("Product added as favourite");
+                                BlocProvider.of<CategoryCubit>(context).getCategories();
+                                setState(() {
+                                  _red = !_red!;
+                                });
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    _apiServices.failToast(
-                                        "Failed to add as favourite"));
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                    backgroundColor: kIconColorRed,
+                                    content: Text(
+                                      "Invalid email or password",
+                                      style: TextStyle(color: whiteColor),
+                                    )));
                               }
-                            });
+                            })
+                            : _apiServices
+                                .failToast("Product already added as favourite");;
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -142,10 +153,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             height: 35,
                             width: 35,
                             child: Center(
-                              child: const Icon(
+                              child:_red!? const Icon(
                                 Icons.favorite_outlined,
                                 size: 18,
                                 color: kIconColorRed,
+                              ):
+                               Icon(
+                                Icons.favorite_outlined,
+                                size: 18,
+                                color: blackColor.withOpacity(0.3),
                               ),
                             ),
                           ),

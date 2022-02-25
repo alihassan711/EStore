@@ -223,7 +223,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                   child: TextButton(
                     child: Text(
-                      getTranslated(context, "sign_in").toString(),
+                      getTranslated(context, "next").toString(),
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,

@@ -63,9 +63,16 @@ class _MyDrawerState extends State<MyDrawer> {
                 // }}),
               ],
             ),
-            currentAccountPicture: CircleAvatar(
-              radius: 50,
-              backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
+            currentAccountPicture:globalUserData.userImage != null && globalUserData.userImage!.path!.isNotEmpty?
+            CircleAvatar(
+              backgroundColor: Colors.grey[100],
+              radius: 60,
+              backgroundImage: NetworkImage(Urls.imageBaseUrl+globalUserData.userImage!.path!.toString()),
+            ):
+            CircleAvatar(
+              backgroundColor: Colors.grey[100],
+              radius: 60,
+              backgroundImage: ExactAssetImage(ImagesPath.avatar,),
             ),
           ),
           ListTile(

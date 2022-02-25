@@ -21,6 +21,7 @@ import 'package:estore/screens/components/my_drawer.dart';
 import '../../bloc/category/category_cubit.dart';
 import '../../provider/cart.dart';
 import '../../widgets/cart_item_count.dart';
+import '../../widgets/home_product _image.dart';
 import '../../widgets/iconbtn.dart';
 import '../dashboard/main_page.dart';
 
@@ -95,9 +96,19 @@ class _UserProfileState extends State<UserProfile> {
             //   radius: 50,
             //   backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
             // ):
+            globalUserData.userImage != null &&globalUserData.userImage!.path!.isNotEmpty?
+            profileCategoriesImage(img: Urls.imageBaseUrl+globalUserData.userImage!.path!.toString(),)
+
+            // CircleAvatar(
+            //   backgroundColor: Colors.grey[100],
+            //   radius: 60,
+            //   backgroundImage: NetworkImage(Urls.imageBaseUrl+globalUserData.userImage!.path!.toString()),
+            // )
+                :
             CircleAvatar(
-              radius: 50,
-              backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
+              backgroundColor: Colors.grey[100],
+              radius: 60,
+              backgroundImage: ExactAssetImage(ImagesPath.avatar,),
             ),
             const SizedBox(
               height: 14,
@@ -173,7 +184,7 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                     child: Icon(
                       Icons.favorite,
-                      color: kGrey,
+                      color: kIconColorRed,
                     ),
                   ),
                 )
@@ -271,7 +282,7 @@ class _UserProfileState extends State<UserProfile> {
                 ),
               ),
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (_) => BlocProvider(
