@@ -135,8 +135,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => EditProfile(
                                             user: globalUserData,
-                                            callback: () {
-                                              setState(() {});
+                                            callback: () async {
+                                              print("call back");
+                                              await Future.delayed(
+                                                  const Duration(seconds: 3), () {
+                                                setState(() {});
+                                              });
                                             })));
                               },
                               child: AutoSizeText(

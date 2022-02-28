@@ -9,7 +9,9 @@ import 'package:estore/screens/onboarding/profile_screen.dart';
 import 'package:estore/services/apis_services.dart';
 import 'package:estore/widgets/iconbtn.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../main.dart';
+import '../../services/auth_services.dart';
 import '../../utils/urls.dart';
 import 'cart_screen.dart';
 import 'favourite_screen.dart';
@@ -42,6 +44,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    getPref();
     super.initState();
   }
 
@@ -213,4 +216,17 @@ class _MainScreenState extends State<MainScreen> {
   }
 
    */
+  void getPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    UserToken = prefs.getString('token') ?? "";
+    print("user token is: $UserToken");
+    if (UserToken.isNotEmpty || UserToken != "") {
+      AuthServices.getUserProfile(UserToken);
+    }
+
+    setState(() {
+
+    });
+  }
 }

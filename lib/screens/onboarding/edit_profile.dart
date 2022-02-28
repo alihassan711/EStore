@@ -12,12 +12,15 @@ import 'package:estore/widgets/get_started_btn.dart';
 import 'package:estore/widgets/loader_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../bloc/category/category_cubit.dart';
 import '../../localization/language_constants.dart';
 import '../../utils/urls.dart';
 import '../../widgets/home_product _image.dart';
+import '../dashboard/main_page.dart';
 
 class EditProfile extends StatefulWidget {
   final UserLogInModel user;
@@ -44,6 +47,8 @@ class _EditProfileState extends State<EditProfile> {
   // final UserAccountProvider userAccountProvider =
   // Get.put(UserAccountProvider());
   int count = 0;
+  ApiServices _repository = ApiServices();
+
   @override
   void initState() {
     networkImage =
@@ -99,14 +104,16 @@ class _EditProfileState extends State<EditProfile> {
                             ),
                           )
                         : networkImage != ""
-                            ? profileCategoriesImage(img:  Urls.imageBaseUrl +
-                                        widget.user.userImage!.path.toString(),)
-                    // CircleAvatar(
-                    //             radius: 50,
-                    //             backgroundImage: NetworkImage(
-                    //                 Urls.imageBaseUrl +
-                    //                     widget.user.userImage!.path.toString()),
-                    //           )
+                            ? profileCategoriesImage(
+                                img: Urls.imageBaseUrl +
+                                    widget.user.userImage!.path.toString(),
+                              )
+                            // CircleAvatar(
+                            //             radius: 50,
+                            //             backgroundImage: NetworkImage(
+                            //                 Urls.imageBaseUrl +
+                            //                     widget.user.userImage!.path.toString()),
+                            //           )
                             : CircleAvatar(
                                 backgroundColor: Colors.grey[100],
                                 radius: 60,
@@ -211,33 +218,26 @@ class _EditProfileState extends State<EditProfile> {
                       ? const Loader()
                       : GetStartedBtn(
                           onPress: () async {
-                            if (image != "" && _key.currentState!.validate()) {
+                            if (_key.currentState!.validate()) {
                               setState(() {
                                 _loader = true;
                               });
                               AuthServices.updateProfile(
-                                firstNameController.text,
-                                lastNameController.text,
-                                phoneController.text,
-                                File(image!.path),
-                              );
-                              await AuthServices.getUserProfile(UserToken);
-
-                              // await FirebaseServices.updateUser(
-                              //     widget.user.data!.id!,
-                              //     firstNameController.text.toString(),
-                              //     lastNameController.text.toString(),
-                              //     image)
-                              //     .then((value) =>
-                              //     userAccountProvider.getUserInfo(
-                              //         userAccountProvider.userInfo.data!.uid!));
-                              // setState(() {
-                              //   widget.callback();
-                              // });
+                                  firstNameController.text,
+                                  lastNameController.text,
+                                  phoneController.text,
+                                  image?.path != null
+                                      ? File(
+                                          image!.path,
+                                        )
+                                      : File(""),
+                                  image?.path != null ? true : false);
                               setState(() {
                                 _loader = false;
                               });
-                              Navigator.pop(context);
+                              widget.callback();
+                             Navigator.pop(context);
+
                             } else {
                               ApiServices.showSnackBar(
                                   context, "All field are required");

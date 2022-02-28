@@ -118,8 +118,8 @@ class _MyAppState extends State<MyApp> {
                     //initialBinding:  NetworkBinding(),
                     debugShowCheckedModeBanner: false,
                     theme: ThemeData(),
-                    darkTheme: ThemeData.dark(),
-                    themeMode: _themeMode,
+                    darkTheme: ThemeData.light(),
+                    // themeMode: _themeMode,
                     title: "Flutter Localization Demo",
                     locale: _locale,
                     supportedLocales: const [

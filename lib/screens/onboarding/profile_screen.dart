@@ -40,8 +40,7 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar:
-      AppBar(
+      appBar: AppBar(
         backgroundColor: whiteColor,
         elevation: 0.0,
         toolbarHeight: 60.0,
@@ -96,20 +95,25 @@ class _UserProfileState extends State<UserProfile> {
             //   radius: 50,
             //   backgroundImage: ExactAssetImage(ImagesPath.accountPicture),
             // ):
-            globalUserData.userImage != null &&globalUserData.userImage!.path!.isNotEmpty?
-            profileCategoriesImage(img: Urls.imageBaseUrl+globalUserData.userImage!.path!.toString(),)
+            globalUserData.userImage != null &&
+                    globalUserData.userImage!.path!.isNotEmpty
+                ? profileCategoriesImage(
+                    img: Urls.imageBaseUrl +
+                        globalUserData.userImage!.path!.toString(),
+                  )
 
-            // CircleAvatar(
-            //   backgroundColor: Colors.grey[100],
-            //   radius: 60,
-            //   backgroundImage: NetworkImage(Urls.imageBaseUrl+globalUserData.userImage!.path!.toString()),
-            // )
-                :
-            CircleAvatar(
-              backgroundColor: Colors.grey[100],
-              radius: 60,
-              backgroundImage: ExactAssetImage(ImagesPath.avatar,),
-            ),
+                // CircleAvatar(
+                //   backgroundColor: Colors.grey[100],
+                //   radius: 60,
+                //   backgroundImage: NetworkImage(Urls.imageBaseUrl+globalUserData.userImage!.path!.toString()),
+                // )
+                : CircleAvatar(
+                    backgroundColor: Colors.grey[100],
+                    radius: 60,
+                    backgroundImage: ExactAssetImage(
+                      ImagesPath.avatar,
+                    ),
+                  ),
             const SizedBox(
               height: 14,
             ),
@@ -145,8 +149,12 @@ class _UserProfileState extends State<UserProfile> {
                           MaterialPageRoute(
                               builder: (context) => EditProfile(
                                   user: globalUserData,
-                                  callback: () {
-                                    setState(() {});
+                                  callback: () async {
+                                    print("call back");
+                                    await Future.delayed(
+                                        const Duration(seconds: 3), () {
+                                      setState(() {});
+                                    });
                                   })));
                     },
                     text: getTranslated(context, "edit_profile").toString(),
@@ -202,8 +210,8 @@ class _UserProfileState extends State<UserProfile> {
                         .length
                         .toString(),
                     "in_your_cart"),
-                cardWidget(
-                    globalFavouriteModel.length.toString(), "in_your_wish_list"),
+                cardWidget(globalFavouriteModel.length.toString(),
+                    "in_your_wish_list"),
                 cardWidget(globalHistoryModel.length.toString(), "ordered"),
               ],
             ),
@@ -300,7 +308,6 @@ class _UserProfileState extends State<UserProfile> {
   Widget cardWidget(String value, String title) {
     return Card(
       child: SizedBox(
-
         width: MediaQuery.of(context).size.width * 0.25,
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 15),

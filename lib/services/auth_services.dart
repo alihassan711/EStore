@@ -56,29 +56,44 @@ class AuthServices {
   //   }
   // }
 
-static  Future<bool> updateProfile(firstName, lastName, phone,File file) async {
-    String fileName = file.path.split('/').last;
-    FormData formData = FormData.fromMap({
-      "first_name": firstName,
-      "last_name": lastName,
-      "Phone": phone,
+  static Future<bool> updateProfile(
+      firstName, lastName, phone, File file, bool updateImage) async {
+    FormData formData;
+    if (updateImage) {
+      String fileName = file.path.split('/').last;
 
-    "picture": await MultipartFile.fromFile(file.path, filename:fileName),
-    });
-    final response = await Dio().post(Urls.updateProfile, data: formData,options:Options(headers:  {
-      'Authorization': 'Bearer $UserToken',
-      "Accept": "application/json",
-      "content-type": "application/json",
-    }));
+      formData = FormData.fromMap({
+        "first_name": firstName,
+        "last_name": lastName,
+        "Phone": phone,
+        "picture": await MultipartFile.fromFile(file.path, filename: fileName),
+      });
+    } else {
+      formData = FormData.fromMap({
+        "first_name": firstName,
+        "last_name": lastName,
+        "Phone": phone,
+      });
+    }
+
+    final response = await Dio().post(Urls.updateProfile,
+        data: formData,
+        options: Options(headers: {
+          'Authorization': 'Bearer $UserToken',
+          "Accept": "application/json",
+          "content-type": "application/json",
+        }));
     if (response.statusCode == 200) {
       print("User Data updated");
+      await getUserProfile(UserToken);
+
       return true;
     } else {
       print("user updated response  ===> ${response.statusCode}");
       return false;
     }
   }
-  
+
   static Future<bool> resetPassword({email}) async {
     var url =
         "https://phpstack-508481-2092187.cloudwaysapps.com/api/reset-password?email=$email";
@@ -96,8 +111,8 @@ static  Future<bool> updateProfile(firstName, lastName, phone,File file) async {
     }
   }
 
-  static Future<bool> changePassword({old_password,password}) async {
-     final response = await http.post(Uri.parse(Urls.changePassword),
+  static Future<bool> changePassword({old_password, password}) async {
+    final response = await http.post(Uri.parse(Urls.changePassword),
         body: json.encode({
           "old_password": old_password,
           "password": password,
@@ -146,7 +161,7 @@ static  Future<bool> updateProfile(firstName, lastName, phone,File file) async {
     print(response.body);
     if (response.statusCode == 200) {
       UserLogInModel userModel =
-      UserLogInModel.fromJson(json.decode(response.body));
+          UserLogInModel.fromJson(json.decode(response.body));
       SharedPreferences _pref = await SharedPreferences.getInstance();
       _pref.setString("token", userModel.user!.token.toString());
       await getUserProfile(userModel.user!.token.toString());

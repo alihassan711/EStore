@@ -136,7 +136,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     .showSnackBar(const SnackBar(
                                     backgroundColor: kIconColorRed,
                                     content: Text(
-                                      "Invalid email or password",
+                                      "Product fail to add as favourite",
                                       style: TextStyle(color: whiteColor),
                                     )));
                               }

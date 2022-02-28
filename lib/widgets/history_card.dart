@@ -38,21 +38,9 @@ class HistoryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  const Icon(
-                    Icons.person,
-                    size: 25,
-                    color: kTitleColorBlack,
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  AutoSizeText(
-                    order.customerName!,
-                    style: kBold(kTitleColorBlack, 16.0),
-                  ),
-                ],
+              AutoSizeText(
+                 "Order#: ${order.id!}",
+                style: kBold(kTitleColorBlack, 16.0),
               ),
               const SizedBox(
                 height: 10,
@@ -107,7 +95,7 @@ class HistoryCard extends StatelessWidget {
                         children: [
                           Text(getTranslated(context, "date").toString()),
                           AutoSizeText(
-                            order.updatedAt!.split(" ")[0],
+                            ": ${order.updatedAt!.split(" ")[0]}",
                           ),
                         ],
                       ),

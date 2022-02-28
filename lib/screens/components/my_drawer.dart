@@ -18,6 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bloc/category/category_cubit.dart';
 import '../../main.dart';
+import '../../model/user_log_in_model.dart';
 import '../dashboard/main_page.dart';
 import '../onboarding/change_password.dart';
 
@@ -38,6 +39,7 @@ class _MyDrawerState extends State<MyDrawer> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -63,17 +65,21 @@ class _MyDrawerState extends State<MyDrawer> {
                 // }}),
               ],
             ),
-            currentAccountPicture:globalUserData.userImage != null && globalUserData.userImage!.path!.isNotEmpty?
-            CircleAvatar(
-              backgroundColor: Colors.grey[100],
-              radius: 60,
-              backgroundImage: NetworkImage(Urls.imageBaseUrl+globalUserData.userImage!.path!.toString()),
-            ):
-            CircleAvatar(
-              backgroundColor: Colors.grey[100],
-              radius: 60,
-              backgroundImage: ExactAssetImage(ImagesPath.avatar,),
-            ),
+            currentAccountPicture: globalUserData.userImage != null &&
+                    globalUserData.userImage!.path!.isNotEmpty
+                ? CircleAvatar(
+                    backgroundColor: Colors.grey[100],
+                    radius: 60,
+                    backgroundImage: NetworkImage(Urls.imageBaseUrl +
+                        globalUserData.userImage!.path!.toString()),
+                  )
+                : CircleAvatar(
+                    backgroundColor: Colors.grey[100],
+                    radius: 60,
+                    backgroundImage: ExactAssetImage(
+                      ImagesPath.avatar,
+                    ),
+                  ),
           ),
           ListTile(
               title: AutoSizeText(
@@ -137,21 +143,21 @@ class _MyDrawerState extends State<MyDrawer> {
                     builder: (context) => const LanguageScreen())),
             //   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile())),
           ),
-          ListTile(
-              title: AutoSizeText(
-                  getTranslated(context, "dark_mode").toString(),
-                  style: kDrawerStyle()),
-              leading: const Icon(Icons.track_changes),
-              onTap: () async {
-                setState(() {
-                  _isdark = !_isdark;
-                });
-              //  print(_isdark);
-              //  SharedPreferences prefs = await SharedPreferences.getInstance();
-               // prefs.setString("themeMode", _isdark.toString());
-                MyApp.of(context)!.changeTheme(
-                    _isdark  ? ThemeMode.light : ThemeMode.dark);
-              }),
+          // ListTile(
+          //     title: AutoSizeText(
+          //         getTranslated(context, "dark_mode").toString(),
+          //         style: kDrawerStyle()),
+          //     leading: const Icon(Icons.track_changes),
+          //     onTap: () async {
+          //       setState(() {
+          //         _isdark = !_isdark;
+          //       });
+          //       //  print(_isdark);
+          //       //  SharedPreferences prefs = await SharedPreferences.getInstance();
+          //       // prefs.setString("themeMode", _isdark.toString());
+          //       MyApp.of(context)!
+          //           .changeTheme(_isdark ? ThemeMode.light : ThemeMode.dark);
+          //     }),
           ListTile(
             onTap: () async {
               await showDialog(
@@ -176,6 +182,9 @@ class _MyDrawerState extends State<MyDrawer> {
                                 Navigator.of(context).pop();
                                 SharedPreferences.getInstance().then((pref) {
                                   pref.clear();
+                                  UserLogInModel userData = UserLogInModel();
+
+                                  globalUserData = userData;
                                 });
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
