@@ -275,30 +275,30 @@ class _UserProfileState extends State<UserProfile> {
                 ),
               ),
             ),
-            ListTile(
-              title: AutoSizeText(
-                getTranslated(context, "purchase_history").toString(),
-                style: kBold(blackColor, 12.0),
-              ),
-              leading: const CircleAvatar(
-                radius: 17,
-                backgroundColor: kIconColorGreen,
-                child: Icon(
-                  Icons.ballot,
-                  color: whiteColor,
-                  size: 20,
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => BlocProvider(
-                            create: (BuildContext context) =>
-                                OrderHistoryCubit(repository: _repository),
-                            child: const PurchaseHistory())));
-              },
-            ),
+            // ListTile(
+            //   title: AutoSizeText(
+            //     getTranslated(context, "purchase_history").toString(),
+            //     style: kBold(blackColor, 12.0),
+            //   ),
+            //   leading: const CircleAvatar(
+            //     radius: 17,
+            //     backgroundColor: kIconColorGreen,
+            //     child: Icon(
+            //       Icons.ballot,
+            //       color: whiteColor,
+            //       size: 20,
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (_) => BlocProvider(
+            //                 create: (BuildContext context) =>
+            //                     OrderHistoryCubit(repository: _repository),
+            //                 child: const PurchaseHistory())));
+            //   },
+            // ),
           ],
         ),
       ),

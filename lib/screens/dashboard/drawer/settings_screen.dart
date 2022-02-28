@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../utils/urls.dart';
+import '../../../widgets/home_product _image.dart';
 import '../../onboarding/change_password.dart';
 import '../../onboarding/edit_profile.dart';
 
@@ -56,8 +57,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         AutoSizeText(
                           globalUserData.userProfile!.firstName.toString() ==
-                                  null
-                              ? "name"
+                                  null|| globalUserData.userProfile == null
+
+        ? "name"
                               : globalUserData.userProfile!.firstName
                                   .toString(),
                           style: kBold(blackColor, 16.0),
@@ -66,7 +68,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           height: 5,
                         ),
                         AutoSizeText(
-                          globalUserData.user!.email.toString() == null
+                          globalUserData.user!.email.toString() == null|| globalUserData.userProfile == null
                               ? "email"
                               : globalUserData.user!.email.toString(),
                           style: kNormalBlack(blackColor),
@@ -74,21 +76,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ],
                     ),
                     const Spacer(),
-                    GestureDetector(
-                      onTap: () => showBottomSheet(),
-                      child: Container(
-                          height: 70,
-                          width: 70,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                //borderRadius: BorderRadius.circular(60),
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: ExactAssetImage(
-                                      ImagesPath.accountPicture,
-                                    ),
-                                    fit: BoxFit.cover)),
-                          )),
+                   globalUserData.userImage != null &&
+                        globalUserData.userImage!.path!.isNotEmpty
+                        ? CircleAvatar(
+                      backgroundColor: Colors.grey[100],
+                      radius: 40,
+                      backgroundImage: NetworkImage(Urls.imageBaseUrl +
+                          globalUserData.userImage!.path!.toString()),
+                    )
+                        : CircleAvatar(
+                      backgroundColor: Colors.grey[100],
+                      radius: 40,
+                      backgroundImage: ExactAssetImage(
+                        ImagesPath.avatar,
+                      ),
                     ),
                   ],
                 ),
@@ -138,7 +139,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                             callback: () async {
                                               print("call back");
                                               await Future.delayed(
-                                                  const Duration(seconds: 3), () {
+                                                  const Duration(seconds: 3),
+                                                  () {
                                                 setState(() {});
                                               });
                                             })));
@@ -156,8 +158,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Row(
                           children: [
                             AutoSizeText(
-                              getTranslated(context, "name")
-                                  .toString(),
+                              getTranslated(context, "name").toString(),
                               style: kBold(blackColor, 12.0),
                             ),
                             const Spacer(),
@@ -285,11 +286,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           height: 12,
                         ),
                         InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>  ChangePassword()));
+                                    builder: (context) => ChangePassword()));
                           },
                           child: Row(
                             children: [
@@ -298,7 +299,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 width: 12,
                               ),
                               AutoSizeText(
-                                getTranslated(context, "change_password").toString(),
+                                getTranslated(context, "change_password")
+                                    .toString(),
                                 style: kBold(blackColor, 13.0),
                               ),
                             ],
