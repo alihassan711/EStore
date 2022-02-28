@@ -130,10 +130,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         final dateList = date.split(" ");
                         final createddate = dateList[0];
                         print("split " + dateList[0]);
+                        print("createddate " +createddate);
                         return NotificationCard(
                           fromChatPage: true,
-                          created_date: createddate.toString(),
+                          created_date:createddate ==null ? "Date:" :createddate.toString(),
                           orderId: users[index].orderId.toString(),
+                       message: users[index].message.toString(),
                         );
                       });
                 } else {

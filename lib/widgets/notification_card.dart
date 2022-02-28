@@ -2,12 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estore/constants/image_path.dart';
 import 'package:flutter/material.dart';
 
+import '../localization/language_constants.dart';
+
 class NotificationCard extends StatelessWidget {
   bool? fromChatPage;
-  String? orderId, created_date;
+  String? orderId, created_date,message;
 
   NotificationCard(
-      {Key? key, this.fromChatPage, this.created_date, this.orderId})
+      {Key? key, this.fromChatPage, this.created_date, this.orderId,this.message})
       : super(key: key);
 
   @override
@@ -24,30 +26,33 @@ class NotificationCard extends StatelessWidget {
         //color: Colors.blue.shade100,
         child: Row(
           children: <Widget>[
-            Container(
-              height: 75,
-              width: 70,
-              margin: const EdgeInsets.all(0),
-              decoration: BoxDecoration(
-                  // color: Colors.blue.shade200,
-                  shape: BoxShape.rectangle,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(4.0),
-                    bottomLeft: Radius.circular(4.0),
-                  ),
-                  image: DecorationImage(
-                      image: ExactAssetImage(ImagesPath.avatar),
-                      fit: BoxFit.cover)),
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Container(
+                height: 40,
+                width: 40,
+                margin: const EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                    // color: Colors.blue.shade200,
+                    shape: BoxShape.rectangle,
+                    // borderRadius: const BorderRadius.only(
+                    //   topLeft: Radius.circular(4.0),
+                    //   bottomLeft: Radius.circular(4.0),
+                    // ),
+                    image: DecorationImage(
+                        image: ExactAssetImage(ImagesPath.notification),
+                        fit: BoxFit.fill)),
+              ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: ListTile(
                 title: AutoSizeText(orderId == null
-                    ? "User Id"
-                    : "User Id ${orderId!.toString()}"),
+                    ? "Order Id"
+                    : "${getTranslated(context, "order_id").toString()}:${orderId!.toString()}"),
                 subtitle: AutoSizeText(created_date!.toString() == null
-                    ? "message"
-                    : "Created Date ${created_date!.toString()}"),
+                    ? "date"
+                    : "$message \n${getTranslated(context, "date").toString()}: ${created_date!.toString()}"),
               ),
             ),
             //const Icon(Icons.arrow_forward_ios, color: Colors.blue),

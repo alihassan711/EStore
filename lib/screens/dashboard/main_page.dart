@@ -47,13 +47,11 @@ class _MainScreenState extends State<MainScreen> {
     getPref();
     super.initState();
   }
-
   @override
   void dispose() {
     _connectivitySubscription.cancel();
     super.dispose();
   }
-
   // final GetXNetworkManager _networkManager = Get.find<GetXNetworkManager>();
   @override
   Widget build(BuildContext context) {
@@ -74,15 +72,9 @@ class _MainScreenState extends State<MainScreen> {
   }
   Container buildMyNavBar(BuildContext context) {
     return Container(
+      height: 60,
       //height: MediaQuery.of(context).size.height*0.14,
-      decoration: const BoxDecoration(
-          // color: Colors.black87,
-          // color: Theme.of(context).primaryColor,
-          // borderRadius: BorderRadius.only(
-          //topLeft: Radius.circular(20),
-          //topRight: Radius.circular(20),
-          //  ),
-          ),
+      decoration: const BoxDecoration(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -201,21 +193,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-/*
-  onSearchTextChanged(String text) async {
-    if (text.length == 0) {
-      userSearch = false;
-    } else {
-      userSearch = true;
-      _userSearchList = await _list
-          .where((element) =>
-          element.uniqname!.toLowerCase().startsWith(text.toLowerCase()))
-          .toList();
-    }
-    setState(() {});
-  }
-
-   */
   void getPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 

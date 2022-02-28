@@ -93,7 +93,6 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
                   return ListView.builder(
                       itemCount: users.length,
                       itemBuilder: (BuildContext context, index) {
-
                         return HistoryCard(
                           order: users[index]
                         );

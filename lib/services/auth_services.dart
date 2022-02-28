@@ -144,6 +144,7 @@ class AuthServices {
       SharedPreferences _pref = await SharedPreferences.getInstance();
       _pref.setString("token", userModel.user!.token.toString());
       await getUserProfile(userModel.user!.token.toString());
+      print("User LogIn status  ===> ${userModel.user!.token.toString()}");
       return true;
     } else {
       print("User LogIn status  ===> ${response.statusCode}");

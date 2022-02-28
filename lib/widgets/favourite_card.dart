@@ -23,6 +23,7 @@ class FavouriteCard extends StatelessWidget {
     return GestureDetector(
       onTap: onpressCard,
       child: Container(
+        height: 72,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           boxShadow: const [
@@ -43,7 +44,8 @@ class FavouriteCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 75, width: 70,
+            //  height: 70,
+              width: 80,
               // height: MediaQuery.of(context).size.height * 0.125,
               // width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
@@ -64,7 +66,7 @@ class FavouriteCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 8.0,
+                  height: 2.0,
                 ),
                 Text(
                   titleText!,
@@ -96,7 +98,7 @@ class FavouriteCard extends StatelessWidget {
                   style: kBold(blackColor, 13.0),
                 ),
                 SizedBox(
-                  height: 8.0,
+                  height: 2.0,
                 ),
               ],
             ),

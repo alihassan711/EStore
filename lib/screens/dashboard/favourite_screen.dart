@@ -121,51 +121,55 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               ListView.builder(
                   itemCount: users.length,
                   itemBuilder: (BuildContext context, index) {
-                    return users[index].productData!=null?FavouriteCard(
-                      onpressCard: (){
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (_) =>
-                        //             BlocProvider(
-                        //                 create: (BuildContext
-                        //                 context) =>
-                        //                     CategoryCubit(
-                        //                         repository:
-                        //                         _repository),
-                        //                 child:
-                        //                 ProductDetailScreen(
-                        //                   product_model:
-                        //                   users[index].productData![0],
-                        //                   // form: args.toString(),
-                        //                 ))));
-                      },
-                      img: users[index].productData!.image.toString(),
-                      itemPrice:
-                          users[index].productData!.breakingPrices![0].price,
-                      titleText: users[index].productData!.name.toString(),
-                      brandName: users[index]
-                          .productData!
-                          .breakingPrices![0]
-                          .shopName
-                          .toString(),
-                      onPress: () {
-                        ApiServices.removeFavouriteProduct(
-                                productId: users[index].productId)
-                            .then((value) {
-                          if (value) {
-                            BlocProvider.of<CategoryCubit>(context).getCategories();
-                            _repository
-                                .successToast("Product removed from favourite");
+                    return users[index].productData!=null?
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0,bottom: 5.0),
+                      child: FavouriteCard(
+                        onpressCard: (){
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (_) =>
+                          //             BlocProvider(
+                          //                 create: (BuildContext
+                          //                 context) =>
+                          //                     CategoryCubit(
+                          //                         repository:
+                          //                         _repository),
+                          //                 child:
+                          //                 ProductDetailScreen(
+                          //                   product_model:
+                          //                   users[index].productData![0],
+                          //                   // form: args.toString(),
+                          //                 ))));
+                        },
+                        img: users[index].productData!.image.toString(),
+                        itemPrice:
+                            users[index].productData!.breakingPrices![0].price,
+                        titleText: users[index].productData!.name.toString(),
+                        brandName: users[index]
+                            .productData!
+                            .breakingPrices![0]
+                            .shopName
+                            .toString(),
+                        onPress: () {
+                          ApiServices.removeFavouriteProduct(
+                                  productId: users[index].productId)
+                              .then((value) {
+                            if (value) {
+                              BlocProvider.of<CategoryCubit>(context).getCategories();
+                              _repository
+                                  .successToast("Product removed from favourite");
 
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                _repository.failToast(
-                                    "Failed to removed from favourite"));
-                          }
-                        });
-                      },
-                      //onPress: ,
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  _repository.failToast(
+                                      "Failed to removed from favourite"));
+                            }
+                          });
+                        },
+                        //onPress: ,
+                      ),
                     ):SizedBox();
                   });
             } else {

@@ -22,11 +22,12 @@ class MyCarouselSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       items: [
+        carouselContainer(ImagesPath.p6),
         carouselContainer(ImagesPath.p2),
         carouselContainer(ImagesPath.p3),
         carouselContainer(ImagesPath.p5),
         carouselContainer(ImagesPath.p2),
-        carouselContainer(ImagesPath.p5)
+        carouselContainer(ImagesPath.p3)
       ],
 
       //Slider Container properties

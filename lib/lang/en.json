@@ -59,7 +59,7 @@
   "register": "Sign up",
   "change_language": "Change Language",
   "create_newAccount": "Don't have an account yet? Sign up?",
-  "forget_password": "Forgotten Password?",
+  "forget_password": "Forgot Password?",
   "search": "Search with name ",
   "sign_in": "Sign in",
   "sign_up": "Sign up",
@@ -122,6 +122,9 @@
   "accepted": "Accepted",
   "pending": "Pending",
   "cash": "Cash",
-  "next": "Next"
+  "next": "Next",
+  "order_processed": "Order Processed Successfully",
+  "order_not_processed": "Order Failed to Processed",
+  "order_id": "Order Id"
 }
 

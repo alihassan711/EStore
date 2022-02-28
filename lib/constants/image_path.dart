@@ -1,7 +1,10 @@
 class ImagesPath {
   static String nointernet = 'assets/images/nointernet.png';
   static String p3 = 'assets/productimages/p3.jpg';
-  static String p5 = 'assets/productimages/p5.jpg';
+  static String p5 = 'assets/productimages/p7.jpg';
+  static String p6 = 'assets/productimages/p6.jpg';
+  static String p7 = 'assets/productimages/p8.jfif';
+  static String p8 = 'assets/productimages/p9.jfif';
   static String accountPicture = 'assets/images/account.jpg';
   static String burgerMeal = 'assets/productimages/burger.jpg';
   static String iconOrder = 'assets/icons/catgoriespng.png';

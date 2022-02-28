@@ -7,7 +7,6 @@ import 'package:estore/utils/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:estore/bloc/category/category_cubit.dart';
 import 'package:estore/widgets/shoping_cart.dart';
@@ -128,8 +127,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                               child: ListTile(
                                 contentPadding: EdgeInsets.all(0.0),
                                 leading: Container(
-                                  height: 145,
-                                  width: 90,
+                                //  height: 145,
+                                  width: 75,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5.0),
                                     image: DecorationImage(
@@ -266,10 +265,10 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                     .then((value) {
                                   if (value) {
                                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                        content: Text("Order Posted Successfully")));
+                                        content: Text(getTranslated(context, "order_processed").toString(),)));
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Order Fail to Post ")));
+                                        SnackBar(content: Text(getTranslated(context, "order_not_processed").toString(),)));
                                   }
                                 });
                                 cart.basketItems.clear();
