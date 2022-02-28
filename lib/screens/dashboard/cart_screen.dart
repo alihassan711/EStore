@@ -124,90 +124,197 @@ class _MyCartScreenState extends State<MyCartScreen> {
                             return Padding(
                               padding:
                                   const EdgeInsets.only(top: 5.0, bottom: 5.0),
-                              child: ListTile(
-                                contentPadding: EdgeInsets.all(0.0),
-                                leading: Container(
-                                //  height: 145,
-                                  width: 75,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    image: DecorationImage(
-                                        image: NetworkImage(cart
-                                            .basketItems[index].image
-                                            .toString()),
-                                        fit: BoxFit.fill),
-                                  ),
+                              child:
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.black45,
+                                    ),
+                                    BoxShadow(
+                                      color: whiteColor,
+                                      spreadRadius: 7.0,
+                                      blurRadius: 8.0,
+                                    ),
+                                  ],
                                 ),
-                                title:
-                                    Text(cart.basketItems[index].name.toString()),
-                                //CircleAvatar(//  backgroundImage: NetworkImage(asyncSnapshot.data[index].picture + asyncSnapshot.data[index].index.toString() + ".jpg"),),
-                                subtitle: Text(
-                                  "${getTranslated(context, "unit_price").toString()}: \$" +
-                                      cart.basketItems[index].breakingPrices![0]
-                                          .price
-                                          .toString() +
-                                      "\n${getTranslated(context, "total_price").toString()}: \$" +
-                                      (cart.basketItems[index].breakingPrices![0]
+                                child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                     height: 72,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        image: DecorationImage(
+                                            image: NetworkImage(cart
+                                                .basketItems[index].image
+                                                .toString()),
+                                            fit: BoxFit.fill),
+                                      ),
+                                    ),
+                                    SizedBox(width: 18.0,),
+                                    Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(cart.basketItems[index].name.toString()),
+                                        SizedBox(height: 5,),
+                                        Text(
+                                          "${getTranslated(context, "unit_price").toString()}: \$" +
+                                              cart.basketItems[index].breakingPrices![0]
+                                                  .price
+                                                  .toString() +
+                                              "\n${getTranslated(context, "total_price").toString()}: \$" +
+                                              (cart.basketItems[index].breakingPrices![0]
                                                   .price! *
-                                              cart.basketItems[index].qty)
-                                          .toString(),
-                                ),
-                                trailing: Container(
-                                  height: 30,
-                                  width: 80,
-                                  child: Row(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          if (cart.basketItems[index].qty == 1) {
-                                            cart.remove(cart.basketItems[index]);
-                                          } else {
-                                            cart.basketItems[index].qty -= 1;
-                                            setState(() {});
-                                          }
-                                        },
-                                        child: Container(
-                                            height: 18,
-                                            width: 18,
-                                            decoration: const BoxDecoration(
-                                                color: kIconColorRed,
-                                                shape: BoxShape.circle),
-                                            child: const Icon(
-                                              Icons.remove,
-                                              color: whiteColor,
-                                              size: 14,
-                                            )),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      AutoSizeText(
-                                          cart.basketItems[index].qty.toString()),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          cart.basketItems[index].qty += 1;
+                                                  cart.basketItems[index].qty)
+                                                  .toString(),
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      height: 30,
+                                      width: 80,
+                                      child: Row(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              if (cart.basketItems[index].qty == 1) {
+                                                cart.remove(cart.basketItems[index]);
+                                              } else {
+                                                cart.basketItems[index].qty -= 1;
+                                                setState(() {});
+                                              }
+                                            },
+                                            child: Container(
+                                                height: 18,
+                                                width: 18,
+                                                decoration: const BoxDecoration(
+                                                    color: kIconColorRed,
+                                                    shape: BoxShape.circle),
+                                                child: const Icon(
+                                                  Icons.remove,
+                                                  color: whiteColor,
+                                                  size: 14,
+                                                )),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          AutoSizeText(
+                                              cart.basketItems[index].qty.toString()),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              cart.basketItems[index].qty += 1;
 
-                                          setState(() {});
-                                        },
-                                        child: Container(
-                                            height: 18,
-                                            width: 18,
-                                            decoration: const BoxDecoration(
-                                                color: kIconColorGreen,
-                                                shape: BoxShape.circle),
-                                            child: const Icon(
-                                              Icons.add,
-                                              size: 14,
-                                              color: whiteColor,
-                                            )),
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                                height: 18,
+                                                width: 18,
+                                                decoration: const BoxDecoration(
+                                                    color: kIconColorGreen,
+                                                    shape: BoxShape.circle),
+                                                child: const Icon(
+                                                  Icons.add,
+                                                  size: 14,
+                                                  color: whiteColor,
+                                                )),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ),
+                              )
+                            //   ListTile(
+                            //     contentPadding: EdgeInsets.all(0.0),
+                            //     leading: Container(
+                            //     //  height: 145,
+                            //       width: 75,
+                            //       decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(5.0),
+                            //         image: DecorationImage(
+                            //             image: NetworkImage(cart
+                            //                 .basketItems[index].image
+                            //                 .toString()),
+                            //             fit: BoxFit.fill),
+                            //       ),
+                            //     ),
+                            //     title:
+                            //         Text(cart.basketItems[index].name.toString()),
+                            //     //CircleAvatar(//  backgroundImage: NetworkImage(asyncSnapshot.data[index].picture + asyncSnapshot.data[index].index.toString() + ".jpg"),),
+                            //     subtitle: Text(
+                            //       "${getTranslated(context, "unit_price").toString()}: \$" +
+                            //           cart.basketItems[index].breakingPrices![0]
+                            //               .price
+                            //               .toString() +
+                            //           "\n${getTranslated(context, "total_price").toString()}: \$" +
+                            //           (cart.basketItems[index].breakingPrices![0]
+                            //                       .price! *
+                            //                   cart.basketItems[index].qty)
+                            //               .toString(),
+                            //     ),
+                            //     trailing:
+                            // Container(
+                            //       height: 30,
+                            //       width: 80,
+                            //       child: Row(
+                            //         children: [
+                            //           GestureDetector(
+                            //             onTap: () {
+                            //               if (cart.basketItems[index].qty == 1) {
+                            //                 cart.remove(cart.basketItems[index]);
+                            //               } else {
+                            //                 cart.basketItems[index].qty -= 1;
+                            //                 setState(() {});
+                            //               }
+                            //             },
+                            //             child: Container(
+                            //                 height: 18,
+                            //                 width: 18,
+                            //                 decoration: const BoxDecoration(
+                            //                     color: kIconColorRed,
+                            //                     shape: BoxShape.circle),
+                            //                 child: const Icon(
+                            //                   Icons.remove,
+                            //                   color: whiteColor,
+                            //                   size: 14,
+                            //                 )),
+                            //           ),
+                            //           const SizedBox(
+                            //             width: 10,
+                            //           ),
+                            //           AutoSizeText(
+                            //               cart.basketItems[index].qty.toString()),
+                            //           const SizedBox(
+                            //             width: 10,
+                            //           ),
+                            //           GestureDetector(
+                            //             onTap: () {
+                            //               cart.basketItems[index].qty += 1;
+                            //
+                            //               setState(() {});
+                            //             },
+                            //             child: Container(
+                            //                 height: 18,
+                            //                 width: 18,
+                            //                 decoration: const BoxDecoration(
+                            //                     color: kIconColorGreen,
+                            //                     shape: BoxShape.circle),
+                            //                 child: const Icon(
+                            //                   Icons.add,
+                            //                   size: 14,
+                            //                   color: whiteColor,
+                            //                 )),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
                             );
                           },
                         ),

@@ -89,12 +89,12 @@ class _MainScreenState extends State<MainScreen> {
                 ? const Icon(
                     Icons.notification_important,
                     color: kIconColorGreen,
-                    size: 30,
+                    size: 33,
                   )
                 : const Icon(
                     Icons.notification_important,
                     color: kGrey,
-                    size: 30,
+                    size: 33,
                   ),
           ),
           // InkWell(
@@ -124,12 +124,12 @@ class _MainScreenState extends State<MainScreen> {
                 ? const Icon(
                     Icons.favorite,
                     color: kIconColorRed,
-                    size: 30,
+                    size: 33,
                   )
                 : const Icon(
                     Icons.favorite_border,
                     color: kGrey,
-                    size: 30,
+                    size: 33,
                   ),
           ),
           IconBtn(
@@ -143,12 +143,12 @@ class _MainScreenState extends State<MainScreen> {
                 ? const Icon(
                     Icons.home,
                     color: kIconColorRed,
-                    size: 30,
+                    size: 33,
                   )
                 : const Icon(
                     Icons.home,
                     color: kGrey,
-                    size: 30,
+                    size: 33,
                   ),
           ),
           IconBtn(
@@ -162,12 +162,12 @@ class _MainScreenState extends State<MainScreen> {
                 ? const Icon(
                     Icons.shopping_cart,
                     color: blackColor,
-                    size: 30,
+                    size: 33,
                   )
                 : const Icon(
                     Icons.shopping_cart,
                     color: kGrey,
-                    size: 30,
+                    size: 33,
                   ),
           ),
           IconBtn(
@@ -181,12 +181,12 @@ class _MainScreenState extends State<MainScreen> {
                 ? const Icon(
                     Icons.person,
                     color: kIconColorBlue,
-                    size: 30,
+                    size: 33,
                   )
                 : const Icon(
                     Icons.person,
                     color: kGrey,
-                    size: 30,
+                    size: 33,
                   ),
           ),
         ],
