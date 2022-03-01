@@ -39,7 +39,7 @@ class HistoryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AutoSizeText(
-                 "${ getTranslated(context, "payment_status").toString()}#: ${order.id!}",
+                 "${ getTranslated(context, "order").toString()}#: ${order.id!}",
                 style: kBold(kTitleColorBlack, 16.0),
               ),
               const SizedBox(
